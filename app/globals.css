@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fcfcfc;
+  --foreground: #171717;
+
+  /* Add your custom color here */
+  --secondary: #e5d2ab;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #e5d2ab;
+    --foreground: #ededed;
+
+    /* Add your custom color here */
+    --secondary: #e5d2ab;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans, Arial, sans-serif);
+}

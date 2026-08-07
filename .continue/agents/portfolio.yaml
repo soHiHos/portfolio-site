@@ -1,0 +1,61 @@
+name: Portfolio Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: Qwen (Chat)
+    provider: lmstudio
+    model: AUTODETECT
+    apiBase: http://127.0.0.1:1234/v1
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: Qwen (Autocomplete)
+    provider: lmstudio
+    model: AUTODETECT
+    apiBase: http://127.0.0.1:1234/v1
+    roles:
+      - autocomplete
+    defaultCompletionOptions:
+      maxTokens: 512
+
+tabAutocompleteOptions:
+  enable: true
+  debounceDelay: 500
+  maxPromptTokens: 1024
+  prefixPercentage: 0.85
+  useLlmFormatting: false
+
+context:
+  - provider: code
+  - provider: currentFile
+  - provider: problems
+  - provider: terminal
+
+rules:
+  - You are a helpful coding assistant. Only call tools when explicitly needed to complete the task — otherwise answer directly.
+
+slashCommands:
+  - name: edit
+    description: Edit selected code
+  - name: comment
+    description: Add comments to code
+  - name: cmd
+    description: Generate a terminal command
+
+mcpServers:
+  - name: websearch        # match FastMCP name exactly
+    command: D:/projects/python/localllm-internet/venv/Scripts/python.exe
+    args:
+      - D:/projects/python/localllm-internet/search_server.py
+    env: {}
+
+  - name: file-tools
+    command: D:/projects/python/localllm-internet/venv/Scripts/python.exe
+    args:
+      - D:/projects/python/localllm-internet/file_server.py
+    env: {}
