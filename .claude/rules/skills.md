@@ -5,6 +5,11 @@ CLAUDE.md says how to work; this file says what exists so the agent doesn't rein
 
 Stack: Next.js (TypeScript only, no separate backend), deployed on Vercel.
 
+Status of the ask bar: the component (app/components/ask-tower/ask-tower.tsx) and its route
+(app/api/ask/route.ts) are built, but the ask bar is NOT currently rendered on any page — it will be
+re-added below the hero later. Keep both working and the rules below still apply to them, but don't
+assume the ask bar is on the page (sections 5 and 6 describe how it behaves once it is mounted).
+
 ## 1. API surface — single route handler
 
 - All model calls go through one place: app/api/ask/route.ts. It proxies to OpenAI.

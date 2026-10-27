@@ -1,0 +1,8 @@
+[
+  { "label": "Hobby", "title": "Placeholder hobby", "detail": "Something you do outside of work.", "image": null, "placeholder": true },
+  { "label": "Photo", "title": "Placeholder photo", "detail": "A picture that shows who you are. Add the file to public/images/off-duty and set its path in image.", "image": null, "placeholder": true },
+  { "label": "Favourite place", "title": "Placeholder place", "detail": "A spot, city or trip that stuck with you.", "image": null, "placeholder": true },
+  { "label": "Photo", "title": "Placeholder photo", "detail": "Another picture, a project in progress, or your desk setup.", "image": null, "placeholder": true },
+  { "label": "On repeat", "title": "Placeholder pick", "detail": "A book, album, game or show you keep coming back to.", "image": null, "placeholder": true },
+  { "label": "Side quest", "title": "Placeholder side quest", "detail": "A thing you tinker with just for fun.", "image": null, "placeholder": true }
+]

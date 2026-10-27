@@ -2,58 +2,109 @@
 "use client"
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, BookOpenIcon, Contact, Network } from "lucide-react";
-import { ContactMenu } from "../ui/menu/contact-menu";
+import { Mail } from "lucide-react";
+import ContactCard from "./contact-card";
+import ThemeToggle from "../effects/theme-toggle";
+import { EASTER_EVENT } from "../effects/easter-jet";
+import services from "../../content/services.json";
+import { useActiveSection } from "../use-active-section";
+import ScrollProgress from "./scroll-progress";
 
-const sectionIds = ["work", "about", "research"];
+// Page navigation; in-page section navigation lives in the floating side nav on the home page
+const PAGES = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/services", label: "Services" },
+]
 
-function useActiveSection(ids: string[]): string | null {
-    const [activeId, setActiveId] = useState<string | null>(null);
+type NavProps = { pathname: string; hidden: boolean }
 
-    useEffect(() => {
-        const elements = ids
-            .map((id) => document.getElementById(id))
-            .filter((el): el is HTMLElement => el !== null);
+const isActive = (href: string, pathname: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
-        const offset = 120; // px from the top of the viewport, roughly the header's height
+// Floating frosted nav bar: name (accent), page links (the current page sits on an accent block and hovered links
+// fade one in), availability and the theme toggle.
+function TopNav({ pathname, hidden }: NavProps) {
+  const taps = useRef<number[]>([])
 
-        function updateActiveId() {
-            let current: string | null = null;
-            for (const el of elements) {
-                if (el.getBoundingClientRect().top <= offset) {
-                    current = el.id;
-                }
-            }
-            setActiveId(current);
-        }
+  // Easter egg: 5 quick taps on the name launch the jet (the Konami code also works)
+  function handleBadgeClick() {
+    const now = Date.now()
+    taps.current = [...taps.current.filter((t) => now - t < 2000), now]
+    if (taps.current.length >= 5) {
+      taps.current = []
+      window.dispatchEvent(new Event(EASTER_EVENT))
+    }
+  }
 
-        updateActiveId();
-        window.addEventListener('scroll', updateActiveId, { passive: true });
-        window.addEventListener('resize', updateActiveId);
-        return () => {
-            window.removeEventListener('scroll', updateActiveId);
-            window.removeEventListener('resize', updateActiveId);
-        };
-    }, [ids]);
-
-    return activeId;
+  return (
+    <header
+      aria-hidden={hidden}
+      inert={hidden}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(68rem,calc(100%-1.5rem))] border border-line bg-bg/60 backdrop-blur-xl transition-all duration-500 ${
+        hidden ? "-translate-y-[150%] opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+      }`}
+    >
+      <div className="flex items-center gap-2 sm:gap-4 px-2 sm:pr-3 py-2">
+        <Link
+          href="/"
+          onClick={handleBadgeClick}
+          className="hidden sm:block shrink-0 pl-3 text-sm font-semibold text-accent-ink transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-accent"
+          aria-label="Soham Kar, home"
+        >
+          Soham Kar
+        </Link>
+        <nav className="flex items-center gap-0.5 sm:gap-1 flex-1 justify-center">
+          {PAGES.map((item) => {
+            const active = isActive(item.href, pathname)
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`whitespace-nowrap px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent ${
+                  active ? "bg-accent text-on-accent" : "text-muted hover:text-fg hover:bg-fg/5"
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
+        </nav>
+        <span className="hidden md:flex items-center gap-2 text-xs font-medium text-muted whitespace-nowrap">
+          <span className={`w-1.5 h-1.5 rounded-full ${services.availability.accepting ? "bg-emerald-500 motion-safe:animate-pulse" : "bg-fg/30"}`} aria-hidden="true" />
+          {services.availability.accepting ? "Available for work" : "Fully booked"}
+        </span>
+        <ThemeToggle />
+      </div>
+      {/* Phones/tablets: page progress line along the bottom edge (desktop has the side nav) */}
+      <ScrollProgress />
+    </header>
+  )
 }
-
-const navLinkClasses = "flex items-center justify-center h-8 text-black font-medium hover:text-white hover:bg-black transition-colors px-2 rounded-xl group";
-const navIconClasses = "shrink-0 overflow-hidden transition-[width,margin,opacity] duration-200 group-hover:animate-pulse group-hover:w-5 group-hover:mr-2 group-hover:opacity-100";
-const navLinkActiveClasses = "text-white bg-black rounded-xl";
 
 export default function Header() {
     const [isContactOpen, setIsContactOpen] = useState(false);
     const contactRef = useRef<HTMLDivElement>(null);
-    const activeSection = useActiveSection(sectionIds);
+    const activeSection = useActiveSection();
+    const pathname = usePathname();
 
     const isPastHero = activeSection !== null;
 
-    useEffect(() => {
+    // Close the contact card when scrolling back up to the hero (adjusting state during render,
+    // per React's "you might not need an effect" guidance, instead of a sync effect)
+    const [wasPastHero, setWasPastHero] = useState(isPastHero);
+    if (isPastHero !== wasPastHero) {
+        setWasPastHero(isPastHero);
         if (!isPastHero) setIsContactOpen(false);
-    }, [isPastHero]);
+    }
+
+    // Lets other fixed UI (the side nav) move out of the contact card's way while it's open
+    useEffect(() => {
+        document.documentElement.toggleAttribute("data-contact-open", isContactOpen);
+    }, [isContactOpen]);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -61,69 +112,37 @@ export default function Header() {
                 setIsContactOpen(false);
             }
         }
+        function handleEscape(event: KeyboardEvent) {
+            if (event.key === "Escape") setIsContactOpen(false);
+        }
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleEscape);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEscape);
+        };
     }, []);
 
     return (
         <>
-        <header className="fixed top-7 left-1/2 -translate-x-1/2 z-50 bg-white/50 backdrop-blur-lg shadow-md rounded-xl">
-            <div className="flex items-center justify-center max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
-                {/* Navigation */}
-                <nav className="flex items-center space-x-1 sm:space-x-4">
-                    <Link
-                        href="#work"
-                        aria-current={activeSection === "work" ? "true" : undefined}
-                        className={`${navLinkClasses} ${activeSection === "work" ? navLinkActiveClasses : ""}`}
-                    >
-                        <Network
-                            className={`${navIconClasses} ${activeSection === "work" ? "w-5 mr-2 opacity-100" : "w-0 mr-0 opacity-0"}`}
-                        />
-                        Work
-
-                    </Link>
-
-                    <Link
-                        href="#about"
-                        aria-current={activeSection === "about" ? "true" : undefined}
-                        className={`${navLinkClasses} ${activeSection === "about" ? navLinkActiveClasses : ""}`}
-                    >
-                        <Contact
-                            className={`${navIconClasses} ${activeSection === "about" ? "w-5 mr-2 opacity-100" : "w-0 mr-0 opacity-0"}`}
-                        />
-                        About
-                    </Link>
-
-                    <Link
-                        href="#research"
-                        aria-current={activeSection === "research" ? "true" : undefined}
-                        className={`${navLinkClasses} ${activeSection === "research" ? navLinkActiveClasses : ""}`}
-                    >
-                        <BookOpenIcon
-                            className={`${navIconClasses} ${activeSection === "research" ? "w-5 mr-2 opacity-100" : "w-0 mr-0 opacity-0"}`}
-                        />
-                        Research
-                    </Link>
-                </nav>
-            </div>
-        </header>
+        {/* On the home page the nav stays out of the hero and drops in once Work reaches the top */}
+        <TopNav pathname={pathname} hidden={pathname === "/" && !isPastHero} />
 
         {/* Floating contact button, shown once scrolled past the hero section */}
         {isPastHero && (
-            <div ref={contactRef} className="fixed bottom-7 right-7 z-50">
-                <ContactMenu
+            <div ref={contactRef} className="fixed right-7 z-50" style={{ bottom: "calc(1.75rem + var(--footer-lift, 0px))" }}>
+                <ContactCard
                     open={isContactOpen}
-                    onClose={() => setIsContactOpen(false)}
-                    className="absolute bottom-full right-0 mb-2 origin-bottom-right"
+                    className="absolute bottom-full right-0 mb-3 origin-bottom-right"
                 />
 
                 <button
                     onClick={() => setIsContactOpen((open) => !open)}
                     aria-expanded={isContactOpen}
                     aria-label="Contact"
-                    className="flex items-center justify-center w-14 h-14 rounded-full bg-black text-white sm:bg-white/50 sm:text-black sm:hover:bg-black sm:hover:text-white backdrop-blur-lg shadow-lg hover:shadow-xl transition-shadow hover:cursor-pointer"
+                    className="group flex items-center justify-center w-16 h-16 bg-accent text-on-accent shadow-lg transition-all duration-300 hover:shadow-[0_12px_28px_-10px_var(--accent)] motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent cursor-pointer"
                 >
-                    <Contact className="w-6 h-6" />
+                    <Mail className="w-7 h-7 transition-transform duration-300 motion-safe:group-hover:-rotate-12" />
                 </button>
             </div>
         )}

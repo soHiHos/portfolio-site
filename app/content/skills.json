@@ -1,0 +1,18 @@
+[
+  {
+    "group": "Programming, Data & Frameworks",
+    "items": [
+      "C", "Python", "Dart", "Vue.js", "TypeScript", "SQL", "NoSQL", "FastAPI", "Pydantic", "PostgreSQL", "Redis", "Flutter",
+      "Firebase Firestore", "Docker", "Git", "Linux Server Management", "Nginx", "Pandas", "NumPy", "SciPy", "Matplotlib",
+      "Scikit-Learn", "TensorFlow 2.0", "PyTorch"
+    ]
+  },
+  {
+    "group": "Electronics & Prototyping",
+    "items": ["Arduino", "ESP8266 / ESP32", "Sensors", "IoT Systems", "MQTT", "3D Printing", "CNC", "Laser Cutting", "Soldering & Circuit Assembly"]
+  },
+  {
+    "group": "Design Software, Engineering & Tools",
+    "items": ["AutoCAD", "SolidWorks", "Illustrator", "Figma", "STAAD.Pro", "Android Studio", "GRASS GIS", "Blender"]
+  }
+]

@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services Route Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: a flight-ops sheet. Inventory strip, then route matrix (offering x surface), then the two work lists */
+:root {
+  --bg: #e4e6e8;
+  --fg: #16191d;
+  --muted: #4a515a;
+  --line: rgb(22 25 29 / 0.13);
+  --surface: #f3f4f5;
+  --panel: #2a2f36;
+  --panel-fg: #e6e8eb;
+  --panel-muted: #9aa1aa;
+  --accent: #f59e0b;
+  --accent-ink: #a15c00;
+  --ok: #1f7a4d;
+  --ok-bg: rgb(31 122 77 / 0.12);
+  --part: #8a5a00;
+  --part-bg: rgb(245 158 11 / 0.18);
+  --miss: #b3261e;
+  --miss-bg: rgb(179 38 30 / 0.10);
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111316; --fg: #e6e8eb; --muted: #9aa1aa; --line: rgb(255 255 255 / 0.12);
+    --surface: #1a1d22; --panel: #23272e; --panel-fg: #e6e8eb; --panel-muted: #9aa1aa;
+    --accent: #f59e0b; --accent-ink: #f59e0b;
+    --ok: #5fd39a; --ok-bg: rgb(95 211 154 / 0.12); --part: #f5b544; --part-bg: rgb(245 158 11 / 0.16);
+    --miss: #ff8a80; --miss-bg: rgb(255 138 128 / 0.12);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111316; --fg: #e6e8eb; --muted: #9aa1aa; --line: rgb(255 255 255 / 0.12);
+  --surface: #1a1d22; --panel: #23272e; --panel-fg: #e6e8eb; --panel-muted: #9aa1aa;
+  --accent: #f59e0b; --accent-ink: #f59e0b;
+  --ok: #5fd39a; --ok-bg: rgb(95 211 154 / 0.12); --part: #f5b544; --part-bg: rgb(245 158 11 / 0.16);
+  --miss: #ff8a80; --miss-bg: rgb(255 138 128 / 0.12);
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 40px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 48px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(30px, 5vw, 44px); }
+h2 { font-size: 24px; }
+h3 { font-size: 16px; }
+p { margin: 0; }
+code, .mono { font-family: var(--mono); font-size: 0.86em; }
+code { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; overflow-wrap: anywhere; }
+.eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-ink); }
+.lede { color: var(--muted); max-width: 68ch; }
+section { display: grid; gap: 18px; min-width: 0; }
+.head { display: grid; gap: 6px; }
+
+/* Header */
+header { display: grid; gap: 14px; }
+.source { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); }
+
+/* Inventory strip */
+.inv { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.inv div { padding: 14px 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 -1px -1px 0; }
+.inv b { display: block; font-family: var(--display); font-size: 28px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.inv span { font-size: 12px; color: var(--muted); }
+.inv small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 4px; }
+
+/* Flow */
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; background: var(--panel); color: var(--panel-fg); border-radius: 12px; overflow: hidden; }
+.flow > div { padding: 16px 18px; display: grid; gap: 6px; align-content: start; position: relative; border-left: 1px dashed rgb(255 255 255 / 0.18); min-width: 0; }
+.flow > div:first-child { border-left: 0; }
+.flow .gate { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--accent); }
+.flow h3 { color: var(--panel-fg); }
+.flow p { font-size: 13px; color: var(--panel-muted); }
+.flow code { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.12); color: var(--panel-fg); }
+@media (max-width: 760px) { .flow { grid-template-columns: 1fr; } .flow > div { border-left: 0; border-top: 1px dashed rgb(255 255 255 / 0.18); } .flow > div:first-child { border-top: 0; } }
+
+/* Matrix */
+.legend { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 13px; color: var(--muted); align-items: center; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 13px; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+thead th { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--panel-muted); background: var(--panel); font-weight: 700; position: sticky; top: 0; }
+thead th small { display: block; letter-spacing: 0; text-transform: none; font-weight: 500; color: var(--panel-muted); opacity: 0.8; margin-top: 2px; }
+tbody th { font-weight: 600; white-space: nowrap; }
+tbody th .code { font-family: var(--mono); color: var(--accent-ink); margin-right: 8px; }
+tbody th .grp { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); }
+tr.group td { background: var(--bg); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); padding: 6px 12px; }
+tbody tr:last-child > * { border-bottom: 0; }
+.s { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 2px 9px 2px 7px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.s::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.s.ok { color: var(--ok); background: var(--ok-bg); }
+.s.part { color: var(--part); background: var(--part-bg); }
+.s.part::before { background: linear-gradient(90deg, currentColor 50%, transparent 50%); box-shadow: inset 0 0 0 1.5px currentColor; }
+.s.miss { color: var(--miss); background: var(--miss-bg); }
+.s.miss::before { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+td .note { display: block; font-size: 11.5px; color: var(--muted); margin-top: 4px; max-width: 22ch; }
+
+/* Work lists */
+.lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+@media (max-width: 860px) { .lists { grid-template-columns: 1fr; } }
+.list { display: grid; gap: 12px; min-width: 0; }
+.list-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.count { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.item input { grid-row: 1 / span 3; margin-top: 3px; width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+.item input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.item label { font-weight: 600; cursor: pointer; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+.item p { font-size: 13.5px; color: var(--muted); }
+.item .files { font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; }
+.item.done { opacity: 0.55; }
+.item.done label > span:first-child { text-decoration: line-through; }
+.pri { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.14em; padding: 1px 6px; border-radius: 4px; }
+.pri.p1 { background: var(--accent); color: #16191d; }
+.pri.p2 { border: 1px solid var(--accent-ink); color: var(--accent-ink); }
+.pri.p3 { border: 1px solid var(--line); color: var(--muted); }
+.pri.q { border: 1px dashed var(--muted); color: var(--muted); }
+
+/* Notes */
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.notes > div { border-top: 2px solid var(--fg); padding-top: 12px; display: grid; gap: 6px; }
+.notes p { font-size: 13.5px; color: var(--muted); }
+footer { font-size: 12px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 16px; }
+@media (prefers-reduced-motion: no-preference) { .item { transition: opacity .2s; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Ops sheet · sohamkar portfolio · services</div>
+  <h1>Services route map</h1>
+  <p class="lede">Every offering in <code>app/content/services.json</code>, traced through each place a visitor can meet it: the home Charter strip, the <code>/services</code> page, the contact brief, and the "Ask the tower" assistant. Gaps on the map turn into the two work lists below.</p>
+  <div class="source"><span>Snapshot of the working tree, 20 Oct 2026</span><span>Source of truth: <code>app/content/services.json</code></span></div>
+</header>
+
+<section aria-labelledby="inv-h">
+  <div class="head"><div class="eyebrow">Inventory</div><h2 id="inv-h">What's in the hangar</h2></div>
+  <div class="inv">
+    <div><b>3</b><span>Website classes</span><small>launch · growth · signature</small></div>
+    <div><b>3</b><span>Custom builds</span><small>mvp · erp · aix</small></div>
+    <div><b>1</b><span>Lease plan</span><small>lease</small></div>
+    <div><b>3</b><span>Engagement models</span><small>charter · lease · retainer</small></div>
+    <div><b>4</b><span>Process steps</span><small>scoping → support</small></div>
+    <div><b>8</b><span>FAQ entries</span><small>faq[]</small></div>
+  </div>
+</section>
+
+<section aria-labelledby="flow-h">
+  <div class="head"><div class="eyebrow">Passenger flow</div><h2 id="flow-h">How a visitor reaches a brief</h2></div>
+  <div class="flow">
+    <div><span class="gate">GATE 1 · ENTRY</span><h3>Find the offer</h3><p>Header <code>SERVICES</code> link, home Charter strip (4 tiles), or an Ask-tower service card.</p></div>
+    <div><span class="gate">GATE 2 · /services</span><h3>Pick a flight</h3><p>"Find your flight" quiz, then the Websites / Custom builds / Lease tabs. Deep links like <code>#erp</code> open the right tab.</p></div>
+    <div><span class="gate">GATE 3 · BRIEF</span><h3>Pre-filled form</h3><p><code>/?brief=&lt;id&gt;#contact</code> or the assistant's <code>tower:brief</code> event pre-selects the service.</p></div>
+    <div><span class="gate">GATE 4 · TRANSMIT</span><h3>Mail app opens</h3><p>The brief goes out as a <code>mailto:</code>. No backend, so there's no record of briefs that were started but never sent.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="map-h">
+  <div class="head"><div class="eyebrow">Route matrix</div><h2 id="map-h">Where each offering shows up</h2></div>
+  <div class="legend">
+    <span class="s ok">Covered</span><span class="s part">Partial</span><span class="s miss">Missing</span>
+    <span>Scroll sideways on small screens.</span>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Offering</th>
+          <th scope="col">Home strip<small>services-section.tsx</small></th>
+          <th scope="col">Flight finder<small>services-explorer.tsx</small></th>
+          <th scope="col">/services card<small>tab + #deep-link</small></th>
+          <th scope="col">Contact brief<small>contact-section.tsx</small></th>
+          <th scope="col">Tower knows it<small>api/ask/content.ts</small></th>
+          <th scope="col">Tower can card it<small>schema SERVICE_IDS</small></th>
+          <th scope="col">Proof project<small>projects.json</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="group"><td colspan="8">Websites · classes[]</td></tr>
+        <tr>
+          <th scope="row"><span class="code">Y</span>Launch<span class="grp">Economy</span></th>
+          <td><span class="s part">Shared tile</span><span class="note">One hardcoded "WEB" tile links to #launch</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s miss">No</span><span class="note">Only services[] is fed to the prompt</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s miss">None linked</span></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="code">J</span>Growth<span class="grp">Business · recommended</span></th>
+          <td><span class="s part">Shared tile</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s part">Candidate</span><span class="note">Co-Daftar, if it was a site build</span></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="code">F</span>Signature<span class="grp">First</span></th>
+          <td><span class="s part">Shared tile</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s part">Candidate</span><span class="note">This portfolio itself</span></td>
+        </tr>
+        <tr class="group"><td colspan="8">Custom builds · services[]</td></tr>
+        <tr>
+          <th scope="row"><span class="code">MVP</span>MVP &amp; web apps</th>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s part">Candidate</span><span class="note">Local Legends</span></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="code">ERP</span>ERP &amp; internal tools</th>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s part">Candidate</span><span class="note">Rever Life ERP, not linked</span></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="code">AIX</span>AI automation</th>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s miss">None</span><span class="note">The Ask tower is a live demo</span></td>
+        </tr>
+        <tr class="group"><td colspan="8">Engagements</td></tr>
+        <tr>
+          <th scope="row"><span class="code">LSE</span>Lease</th>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s ok">Payment step</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s ok">Yes</span><span class="note">Via engagements + FAQ</span></td>
+          <td><span class="s miss">No</span><span class="note">Assistant brief can't pre-select it</span></td>
+          <td><span class="s miss">n/a</span></td>
+        </tr>
+        <tr>
+          <th scope="row"><span class="code">RTN</span>Retainer</th>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s part">FAQ only</span><span class="note">engagements[] isn't rendered</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s ok">Yes</span></td>
+          <td><span class="s miss">No</span></td>
+          <td><span class="s miss">n/a</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="work-h">
+  <div class="head">
+    <div class="eyebrow">Work lists</div>
+    <h2 id="work-h">What to update, what to add</h2>
+    <p class="lede">P1 to P3 is my suggested order. Items marked DECIDE need your call before anyone builds. Ticks are saved in this browser only.</p>
+  </div>
+  <div class="lists">
+    <div class="list" data-list="update">
+      <div class="list-head"><h3>Update: fix what exists</h3><span class="count" data-count></span></div>
+
+      <div class="item"><input type="checkbox" id="u1">
+        <label for="u1"><span>Let the assistant recommend website classes</span><span class="pri p1">P1</span></label>
+        <p>Websites are the entry offer, but the tower only knows mvp / erp / aix. Someone asking "can you make my café a website?" gets pushed toward MVP. Feed classes[] into the prompt, add their ids to the service enum, and let the service card look them up. The contact form already accepts these ids. This extends the existing <code>service</code> template, so no new template is needed.</p>
+        <div class="files"><code>api/ask/content.ts:29</code><code>api/ask/schema.ts:16</code><code>ask-tower/answer-blocks.tsx:59</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="u2">
+        <label for="u2"><span>Allow "lease" as an assistant brief target</span><span class="pri p2">P2</span></label>
+        <p>The tower describes the lease plan but can't pre-select it on the brief form. Add <code>lease</code> to the brief's serviceId options; the contact dropdown already has it.</p>
+        <div class="files"><code>api/ask/schema.ts</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="u3">
+        <label for="u3"><span>Keep the lease description in one place</span><span class="pri p2">P2</span></label>
+        <p>Lease terms (12-month minimum, buyout, data ownership) are written three times: <code>lease</code>, <code>engagements[lease]</code> and an FAQ answer. Changing one term means editing all three. Derive the engagement and FAQ text from <code>lease.includes</code>, or at least flag them as linked.</p>
+        <div class="files"><code>content/services.json</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="u4">
+        <label for="u4"><span>Show the 30-day bug-fix window up front</span><span class="pri p2">P2</span></label>
+        <p>It's a real selling point, but it only appears in one FAQ answer. Add it to process step 4 ("Launch &amp; support") and the class includes lists.</p>
+        <div class="files"><code>content/services.json</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="u5">
+        <label for="u5"><span>Move the home "Websites" tile into content</span><span class="pri p3">P3</span></label>
+        <p>The WEB tile's title and summary are hardcoded in the section component, which breaks the "content lives in JSON" rule. Add a short <code>websites</code> summary object to services.json.</p>
+        <div class="files"><code>sections/services-section.tsx:11</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="u6">
+        <label for="u6"><span>Match the shape of the "for" field</span><span class="pri p3">P3</span></label>
+        <p>It's a string on classes[] and an array on services[], so the two card types can't share a renderer. Make both arrays when the class cards next change.</p>
+        <div class="files"><code>content/services.json</code><code>services-explorer.tsx</code></div>
+      </div>
+    </div>
+
+    <div class="list" data-list="add">
+      <div class="list-head"><h3>Add: fill the gaps</h3><span class="count" data-count></span></div>
+
+      <div class="item"><input type="checkbox" id="a1">
+        <label for="a1"><span>Proof links from service to project</span><span class="pri p1">P1</span></label>
+        <p>Nothing connects an offering to work you've shipped. Add a <code>services: ["erp"]</code> field to each project and show a "Flown before" line on each service card linking to <code>/projects/[id]</code>. Rever Life ERP → ERP and Local Legends → MVP are the clear matches. The assistant could use the same mapping.</p>
+        <div class="files"><code>content/projects.json</code><code>services-explorer.tsx</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="a2">
+        <label for="a2"><span>Point AIX at the Ask tower as its demo</span><span class="pri p2">P2</span></label>
+        <p>AI automation has no case study, but the site's own assistant is working proof: streamed answers, structured slots, model routing on a fixed budget. One line on the AIX card ("Try it: ask the tower") costs nothing.</p>
+        <div class="files"><code>content/services.json</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="a3">
+        <label for="a3"><span>Give the retainer a visible home</span><span class="pri p2">P2</span></label>
+        <p>Retainer appears in engagements[], an FAQ answer and process step 4, but there's no card for it and it's not a brief option. A small "After launch" strip under the tabs, plus a brief option, would cover it.</p>
+        <div class="files"><code>services/page.tsx</code><code>contact-section.tsx:15</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="a4">
+        <label for="a4"><span>Typical timelines per class</span><span class="pri p3">P3</span></label>
+        <p>The FAQ answers "how long?" with "it depends". A range on each class card (for example "2–3 weeks" for Launch) sets expectations without committing to a quote.</p>
+        <div class="files"><code>content/services.json</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="a5">
+        <label for="a5"><span>Price anchors ("from ₹…")</span><span class="pri q">DECIDE</span></label>
+        <p>Every card says "Quote on request", and the page comment says prices are intentionally hidden "yet". A starting price filters out poor-fit leads, but it's a business call. If you add one, the assistant prompt also has to stop saying pricing isn't published.</p>
+        <div class="files"><code>services-explorer.tsx</code><code>api/ask/content.ts:48</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="a6">
+        <label for="a6"><span>A hardware / IoT route</span><span class="pri q">DECIDE</span></label>
+        <p>Your bio, toolkit and Plinth Scout all cover hardware (Raspberry Pi, LiDAR), but no service offers it. Either add a fourth route or leave it as portfolio-only on purpose.</p>
+        <div class="files"><code>content/services.json</code></div>
+      </div>
+
+      <div class="item"><input type="checkbox" id="a7">
+        <label for="a7"><span>Client quotes</span><span class="pri q">DECIDE</span></label>
+        <p>There's no testimonial anywhere on the services path. Only worth adding once you have real quotes from Rever or Co-Daftar.</p>
+        <div class="files"><code>content/services.json</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="guard-h">
+  <div class="head"><div class="eyebrow">Before changing anything</div><h2 id="guard-h">Guardrails from the repo rules</h2></div>
+  <div class="notes">
+    <div><h3>Content first</h3><p>Most items above only touch <code>services.json</code> or <code>projects.json</code>. The assistant prompt, enums, finder and brief dropdown all read from those files, so they stay in sync without extra wiring.</p></div>
+    <div><h3>No new assistant routes or templates</h3><p>Website classes and lease go into the existing <code>service</code> and <code>brief</code> slots through <code>/api/ask</code>. Adding enum values doesn't change model routing; gpt-4o-mini stays the default.</p></div>
+    <div><h3>Fallback must still render</h3><p>Any change to the tower or schema needs a check that <code>/services</code> and the home Charter strip still render with the ask bar broken or offline.</p></div>
+  </div>
+</section>
+
+<footer>Built from a read of <code>services.json</code>, <code>services/page.tsx</code>, <code>services-explorer.tsx</code>, <code>services-section.tsx</code>, <code>contact-section.tsx</code>, <code>api/ask/content.ts</code> and <code>api/ask/schema.ts</code>. Nothing in the repo was changed.</footer>
+</div>
+
+<script>
+(function () {
+  var KEY = "services-map-ticks";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) {}
+  function refresh() {
+    document.querySelectorAll("[data-list]").forEach(function (list) {
+      var boxes = list.querySelectorAll("input[type=checkbox]");
+      var done = 0;
+      boxes.forEach(function (b) { b.closest(".item").classList.toggle("done", b.checked); if (b.checked) done++; });
+      list.querySelector("[data-count]").textContent = done + " / " + boxes.length + " done";
+    });
+  }
+  document.querySelectorAll(".item input").forEach(function (b) {
+    b.checked = !!saved[b.id];
+    b.addEventListener("change", function () {
+      saved[b.id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+      refresh();
+    });
+  });
+  refresh();
+})();
+</script>
+
+</body>
+</html>

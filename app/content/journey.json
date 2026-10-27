@@ -1,0 +1,9 @@
+[
+  { "code": "CIV", "title": "Civil Engineering", "detail": "The starting point of an interdisciplinary path." },
+  { "code": "ENV", "year": "2019", "title": "First publication", "detail": "A review of Ecological Floating Beds in the Journal of Environmental Management." },
+  { "code": "H2O", "year": "2021–22", "title": "Water research", "detail": "A floating-bed treatment study in SN Applied Sciences and the Hydro Economy chapter in Lecture Notes in Civil Engineering." },
+  { "code": "PGD", "title": "PG Diploma in Entrepreneurship", "detail": "Business and product thinking added to the engineering toolkit." },
+  { "code": "SWE", "title": "Self-taught software", "detail": "Products: Rever Life ERP, Local Legends, and Co-Daftar." },
+  { "code": "AIX", "year": "2026", "title": "AI research", "detail": "Co-authored a chapter on deepfake detection in Innovations in Data Analytics." },
+  { "code": "NOW", "title": "Plinth Scout", "detail": "In development: a low-cost rotating LiDAR scanner for architects and engineers." }
+]

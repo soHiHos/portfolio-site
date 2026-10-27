@@ -1,0 +1,100 @@
+[
+  {
+    "id": "rever-home",
+    "kind": "client",
+    "category": "work",
+    "phase": "servicing",
+    "title": "Rever Life ERP",
+    "tagline": "Full-stack ERP for a wellness distributor business.",
+    "summary": "A full-stack ERP platform built for a wellness and distributor-based business, streamlining inventory, orders, payments, ledger management, and user administration. The project involved designing scalable backend architecture, authentication, cloud deployment, and cost-optimized infrastructure while providing valuable lessons in product development, client management, pricing, and real-world software adoption.",
+    "shortSummary": "A full-stack ERP for a wellness distributor, covering inventory, orders, payments, ledgers and user management, deployed on cost-optimized cloud infrastructure.",
+    "image": "/images/rever-home.png",
+    "link": "https://reverlife.in/home",
+    "stack": [
+      "Firebase Auth",
+      "MSG91 OTP"
+    ]
+  },
+  {
+    "id": "local-legends",
+    "kind": "client",
+    "category": "work",
+    "phase": "deployed",
+    "title": "Local Legends",
+    "tagline": "Community platform for grassroots football.",
+    "summary": "A community-driven football platform designed to connect local players, teams, and organizers through match discovery, event management, and social engagement. The project explored how technology can strengthen grassroots sports by simplifying coordination, encouraging participation, and making local football more accessible for players and organizers.",
+    "shortSummary": "A community platform connecting local football players, teams and organizers through match discovery, event management and social engagement.",
+    "image": "/images/local-legends.png",
+    "link": "https://locallegends.co.in/home",
+    "stack": []
+  },
+  {
+    "id": "co-daftar",
+    "kind": "client",
+    "category": "work",
+    "phase": "servicing",
+    "title": "Co-Daftar",
+    "tagline": "Premium coworking space in Raipur.",
+    "summary": "Co-Daftar is a premium coworking space where Raipur's most driven entrepreneurs, freelancers, startups, and professionals come to do their best work. More than just an office, it is a thoughtfully designed environment that inspires productivity, collaboration, and innovation. With modern infrastructure, high-speed internet, comfortable workspaces, meeting rooms, and a vibrant community, Co-Daftar provides everything ambitious individuals and growing teams need to build, create, and thrive.",
+    "shortSummary": "A premium coworking space in Raipur with modern workspaces, meeting rooms, high-speed internet and a community for entrepreneurs and teams.",
+    "image": "/images/co-daftar.png",
+    "link": "https://codaftar.com/",
+    "stack": []
+  },
+  {
+    "id": "client-4",
+    "kind": "client",
+    "category": "work",
+    "phase": "deployed",
+    "title": "Project name",
+    "tagline": "",
+    "summary": "",
+    "placeholder": true
+  },
+  {
+    "id": "plinth",
+    "kind": "personal",
+    "category": "hardware",
+    "phase": "development",
+    "title": "Plinth Scout",
+    "status": "In development",
+    "tagline": "Low-cost rotating LiDAR scanner for architects and engineers.",
+    "summary": "A long-term hardware concept: a low-cost rotating LiDAR scanner that generates point clouds, floor plans, and DXF exports for architects and engineers.",
+    "visual": "lidar",
+    "stack": [
+      "LiDAR",
+      "Point clouds",
+      "DXF export"
+    ]
+  },
+  {
+    "id": "personal-1",
+    "kind": "personal",
+    "category": "github",
+    "phase": "development",
+    "title": "Project name",
+    "tagline": "",
+    "summary": "",
+    "placeholder": true
+  },
+  {
+    "id": "personal-2",
+    "kind": "personal",
+    "category": "github",
+    "phase": "development",
+    "title": "Project name",
+    "tagline": "",
+    "summary": "",
+    "placeholder": true
+  },
+  {
+    "id": "personal-3",
+    "kind": "personal",
+    "category": "github",
+    "phase": "development",
+    "title": "Project name",
+    "tagline": "",
+    "summary": "",
+    "placeholder": true
+  }
+]

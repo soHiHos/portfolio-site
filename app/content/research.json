@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ai-1",
+    "title": "Enhancing the Integrity of Online Information Through Robust Detection and Authentication of Deepfakes and Synthetic Media",
+    "summary": "Deepfakes, hyper-realistic AI-generated audio, images, and video, amplify misinformation and threaten public trust, political discourse, and reputations. This chapter reviews AI-driven detection using machine learning, deep learning, and media forensics, outlines obstacles like adversarial attacks, data quality, and the need for explainable models, and calls for cooperation between governments, technology providers, and civil society.",
+    "shortSummary": "Deepfakes amplify misinformation and threaten public trust. This chapter reviews AI detection via machine learning, deep learning, and media forensics, its obstacles, and the cooperation needed to protect information integrity.",
+    "field": "AI",
+    "venue": "Innovations in Data Analytics (LNNS)",
+    "year": "2026",
+    "doi": "10.1007/978-3-032-27845-6_6",
+    "links": [
+      {
+        "label": "Link",
+        "href": "https://link.springer.com/chapter/10.1007/978-3-032-27845-6_6"
+      }
+    ]
+  },
+  {
+    "id": "env-3",
+    "title": "Hydro Economy: Environmental Sustainability of Water and Wastewater Resources and Infrastructure",
+    "summary": "Reviews the global water quality crisis driven by climate change, population growth, deforestation, and pollution from pesticides, heavy metals, and wastewater. It shows how inadequate treatment infrastructure, especially in developing countries, leads to disease and environmental damage, and makes the case for economical, sustainable water and wastewater treatment technologies.",
+    "shortSummary": "Reviews the global water quality crisis and how weak treatment infrastructure, especially in developing countries, causes disease and environmental damage, making the case for economical, sustainable water and wastewater treatment.",
+    "field": "Environment",
+    "venue": "Lecture Notes in Civil Engineering",
+    "year": "2022",
+    "doi": "10.1007/978-981-16-7509-6_15",
+    "links": [
+      {
+        "label": "Link",
+        "href": "https://link.springer.com/chapter/10.1007/978-981-16-7509-6_15"
+      }
+    ]
+  },
+  {
+    "id": "env-2",
+    "title": "Assessing the impact of vegetation coverage ratio in a floating water treatment bed of Pistia stratiotes",
+    "summary": "A lab-scale study of how vegetation coverage ratio (VCR) affects pollutant removal in floating treatment beds planted with Pistia stratiotes. Moderate coverage (0.5) gave the best COD removal (96.2%), while VCRs of 0.25–0.75 kept dissolved oxygen sufficient for aquatic life. Full coverage isn't optimal, as it blocks oxygen diffusion.",
+    "shortSummary": "A lab study of vegetation coverage in Pistia stratiotes floating treatment beds. Moderate coverage (0.5) gave the best COD removal (96.2%) while maintaining oxygen; full coverage blocks oxygen diffusion.",
+    "field": "Environment",
+    "venue": "SN Applied Sciences",
+    "year": "2021",
+    "doi": "10.1007/s42452-020-04139-2",
+    "links": [
+      {
+        "label": "Link",
+        "href": "https://link.springer.com/article/10.1007/s42452-020-04139-2?utm_source=researchgate.net&utm_medium=article"
+      }
+    ]
+  },
+  {
+    "id": "env-1",
+    "title": "Ecological floating bed (EFB) for decontamination of polluted water bodies: Design, mechanism and performance",
+    "summary": "A review of Ecological Floating Beds (EFBs), floating mats of aquatic plants that clean polluted water. It covers plant selection, root-biofilm interactions, and how media, depth, buoyancy, and coverage shape performance, along with removal mechanisms for organics, nutrients, and heavy metals. Regular biomass harvesting is essential to prevent nutrient re-release.",
+    "shortSummary": "A review of Ecological Floating Beds, plant mats that clean polluted water, covering design factors and removal mechanisms for organics, nutrients, and heavy metals, plus why regular biomass harvesting matters.",
+    "field": "Environment",
+    "venue": "Journal of Environmental Management",
+    "year": "2019",
+    "doi": "10.1016/j.jenvman.2019.109550",
+    "links": [
+      {
+        "label": "Link",
+        "href": "https://www.sciencedirect.com/science/article/abs/pii/S030147971931268X?via%3Dihub"
+      }
+    ]
+  }
+]

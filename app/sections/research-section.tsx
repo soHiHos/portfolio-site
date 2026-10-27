@@ -1,71 +1,56 @@
-'use client'
-
-// ... existing imports (React, Lucide icons if used) ...
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { GlassCardText } from "../components/ui/cards/glass-card";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import SectionHeading from "../components/section-heading";
+import Reveal from "../components/effects/reveal";
+import ITEMS from "../content/research.json";
 
-const ITEMS = [
-  {
-    id: 'env-3',
-    title: 'Hydro Economy: Environmental Sustainability of Water and Wastewater Resources and Infrastructure',
-    summary: 'This paper reviews the global water quality crisis driven by climate change, population growth, deforestation, and pollution (pesticides, heavy metals, wastewater discharge). It highlights how inadequate treatment infrastructure—especially in developing countries—leads to disease and environmental degradation, and calls for economical, effective, and sustainable technologies to manage water and wastewater treatment.',
-    links: [
-      { label: 'Link', href: 'https://link.springer.com/chapter/10.1007/978-981-16-7509-6_15' },
-    ],
-  },
-  {
-    id: 'env-2',
-    title: 'Assessing the impact of vegetation coverage ratio in a floating water treatment bed of Pistia stratiotes',
-    summary: "This lab-scale study examines how vegetation coverage ratio (VCR) in floating bed (FB) treatment systems affects pollutant removal efficiency. Testing VCRs from 0 to 1.0 using Pistia stratiotes, the study found that moderate coverage (0.5) gave the best COD removal (96.2%), while VCRs of 0.25–0.75 maintained dissolved oxygen levels sufficient for aquatic life. Results show that full vegetation coverage isn't optimal, since it blocks atmospheric oxygen diffusion, and an intermediate coverage balances organic/nutrient removal with oxygen availability.",
-    links: [
-      { label: 'Link', href: 'https://link.springer.com/article/10.1007/s42452-020-04139-2?utm_source=researchgate.net&utm_medium=article' },
-    ],
-  },
-  {
-    id: 'env-1',
-    title: 'Ecological floating bed (EFB) for decontamination of polluted water bodies: Design, mechanism and performance',
-    summary: 'This review paper examines Ecological Floating Beds (EFBs)—floating mats of aquatic plants used to treat polluted water bodies. It covers plant species selection, root-biofilm interactions for organic degradation, and the role of growth media, depth, buoyancy, and vegetation coverage in treatment performance. The paper details pollutant removal mechanisms (organics, nitrogen, phosphorus, heavy metals) and oxygen transfer dynamics, noting that regular biomass harvesting is essential to prevent nutrient re-release. It concludes EFBs are a promising wastewater treatment technology, with recommendations for future research.',
-    links: [
-      { label: 'Link', href: 'https://www.sciencedirect.com/science/article/abs/pii/S030147971931268X?via%3Dihub' },
-    ],
-  },
-]
+// Publications as separate solid cream cards (bg-surface): year, field and venue, title, summary and DOI. On hover
+// the card lifts, its border and title pick up the accent, and the year column fills with the accent.
+// The landing page passes `limit` to show only the newest papers (research.json is newest first) plus a
+// link to the full list on /about; the About page shows them all.
+export function ResearchSection({ id, limit }: { id?: string; limit?: number }) {
+  const items = limit ? ITEMS.slice(0, limit) : ITEMS
 
-export function ResearchSection({ id }: { id?: string }) {
   return (
     <section id={id}>
-      <div className="w-full border-black/20 mt-1 border-t text-left space-y-8 py-12">
-        <div className="space-y-2">
-          <p className="text-sm font-medium tracking-wide uppercase text-black/50">Papers &amp; reading</p>
-          <h1 className="text-4xl font-bold tracking-tight">Research</h1>
-        </div>
+      <div className="w-full text-left space-y-8 py-12">
+        <SectionHeading title="Research" note="Publications and papers" />
 
-        <div className="space-y-6">
-          {ITEMS.map((item) => (
-            <GlassCardText
-              key={item.id}
-              className="group border border-black/10 bg-black/[0.06] backdrop-blur-lg shadow-sm hover:bg-black/[0.09] hover:border-black/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="flex flex-col gap-3 py-4">
-                <h2 className="text-xl font-semibold leading-snug">{item.title}</h2>
-                <p className="text-base text-black/70 leading-relaxed">
-                  {item.summary}
-                </p>
-                <div className="flex flex-wraps gap-4 pt-3 mt-1 border-t border-black/10">
-                  {item.links.map((link) => (
-                    <Link key={link.label} href={link.href}>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-black/80 group-hover:text-black hover:text-blue-500 hover:underline transition-colors">
-                        {link.label}
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </span>
-                    </Link>
-                  ))}
+        <div className="space-y-4">
+          {items.map((item, i) => (
+            <Reveal key={item.id} delay={i * 100}>
+              <a
+                href={item.links[0].href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative grid sm:grid-cols-[6rem_1fr] overflow-hidden border border-line bg-surface transition-[translate,border-color] duration-300 hover:border-accent/50 focus-visible:border-accent/50 motion-safe:hover:-translate-y-1"
+              >
+                {/* Year column: full-height strip (top strip on phones) that fills with the accent on hover */}
+                <span className="px-5 py-3 sm:px-0 sm:py-7 sm:text-center border-b sm:border-b-0 sm:border-r border-line text-sm font-semibold tabular-nums text-muted transition-colors duration-300 group-hover:bg-accent group-hover:text-white group-hover:border-accent group-focus-visible:bg-accent group-focus-visible:text-white group-focus-visible:border-accent">
+                  {item.year}
+                </span>
+                <div className="space-y-2 p-5 sm:p-7">
+                  <span className="block text-xs font-medium text-muted">
+                    <span className="text-accent-ink">{item.field}</span> · {item.venue}
+                  </span>
+                  <h3 className="flex items-start gap-2 text-lg sm:text-xl font-semibold leading-snug text-fg transition-colors duration-300 group-hover:text-accent-ink">
+                    {item.title}
+                    <ArrowUpRight className="mt-1 w-4 h-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </h3>
+                  <p className="text-base text-muted leading-relaxed">{item.shortSummary}</p>
+                  <span className="block font-mono text-xs text-muted break-all">DOI {item.doi}</span>
                 </div>
-              </div>
-            </GlassCardText>
+              </a>
+            </Reveal>
           ))}
         </div>
+
+        {items.length < ITEMS.length && (
+          <Link href="/about#research" className="btn-link text-sm text-fg">
+            View all research ({ITEMS.length})
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        )}
       </div>
     </section>
   )
