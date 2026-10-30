@@ -38,7 +38,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={handleClick}
       aria-label="Toggle dark theme"
-      className="group flex items-center justify-center w-9 h-9 shrink-0 text-muted transition-colors duration-300 hover:text-fg hover:bg-fg/5 focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
+      className="group flex items-center justify-center w-9 h-9 shrink-0 text-muted transition-colors duration-300 hover:text-fg hover:bg-fg/5 focus-visible:outline-2 focus-visible:outline-accent-ink cursor-pointer"
     >
       {/* Icon button: the sun turns and the moon tilts on hover */}
       <Sun className="w-4 h-4 dark:hidden transition-transform duration-500 motion-safe:group-hover:rotate-90" />

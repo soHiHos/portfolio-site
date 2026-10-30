@@ -6,7 +6,6 @@ import Footer from "./components/footers/footer";
 import Backdrop from "./components/effects/backdrop";
 import EasterJet from "./components/effects/easter-jet";
 import BackToTop from "./components/back-to-top";
-import PaletteSwitcher from "./components/effects/palette-switcher";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -19,17 +18,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Soham Kar — Product Engineer",
+  title: "Soham Kar — Engineer",
   description:
-    "Soham Kar is a product engineer in India building at the intersection of AI, software, hardware, and environmental engineering.",
+    "Soham Kar is an engineer in India building at the intersection of AI, software, hardware, and environmental engineering.",
   openGraph: {
-    title: "Soham Kar — Product Engineer",
+    title: "Soham Kar — Engineer",
     description: "Building at the intersection of AI, software, hardware, and sustainability.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Soham Kar — Product Engineer",
+    title: "Soham Kar — Engineer",
     description: "Building at the intersection of AI, software, hardware, and sustainability.",
   },
 };
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
 // Runs before paint: applies the saved theme, or by default the time of day in IST (light 7am-6pm,
 // dark otherwise), with no flash, and marks JS as available
 // so scroll-reveal styles only hide content when they can also reveal it.
-const themeScript = `(function(){try{var pl=localStorage.getItem('palette');if(pl)document.documentElement.dataset.palette=pl;var t=localStorage.getItem('theme');var d=t?t==='dark':(function(){var h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hourCycle:'h23'}).format(new Date());return h<7||h>=18})();if(d)document.documentElement.classList.add('dark')}catch(e){}document.documentElement.classList.add('js')})()`;
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':(function(){var h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hourCycle:'h23'}).format(new Date());return h<7||h>=18})();if(d)document.documentElement.classList.add('dark')}catch(e){}document.documentElement.classList.add('js')})()`;
 
 export default function RootLayout({
   children,
@@ -66,7 +65,6 @@ export default function RootLayout({
         <Footer />
         <EasterJet />
         <BackToTop />
-        <PaletteSwitcher />
       </body>
     </html>
   );

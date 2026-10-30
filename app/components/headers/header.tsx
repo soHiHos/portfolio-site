@@ -43,7 +43,7 @@ function TopNav({ pathname, hidden }: NavProps) {
     <header
       aria-hidden={hidden}
       inert={hidden}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(68rem,calc(100%-1.5rem))] border border-line bg-bg/60 backdrop-blur-xl transition-all duration-500 ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(80rem,calc(100%-1.5rem))] border border-line bg-bg/60 backdrop-blur-xl transition-all duration-500 ${
         hidden ? "-translate-y-[150%] opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
       }`}
     >
@@ -51,7 +51,7 @@ function TopNav({ pathname, hidden }: NavProps) {
         <Link
           href="/"
           onClick={handleBadgeClick}
-          className="hidden sm:block shrink-0 pl-3 text-sm font-semibold text-accent-ink transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-accent"
+          className="hidden sm:block shrink-0 pl-3 text-sm font-semibold text-accent-ink transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-accent-ink"
           aria-label="Soham Kar, home"
         >
           Soham Kar
@@ -64,7 +64,7 @@ function TopNav({ pathname, hidden }: NavProps) {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`whitespace-nowrap px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent ${
+                className={`whitespace-nowrap px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent-ink ${
                   active ? "bg-accent text-on-accent" : "text-muted hover:text-fg hover:bg-fg/5"
                 }`}
               >
@@ -74,7 +74,15 @@ function TopNav({ pathname, hidden }: NavProps) {
           })}
         </nav>
         <span className="hidden md:flex items-center gap-2 text-xs font-medium text-muted whitespace-nowrap">
-          <span className={`w-1.5 h-1.5 rounded-full ${services.availability.accepting ? "bg-emerald-500 motion-safe:animate-pulse" : "bg-fg/30"}`} aria-hidden="true" />
+          {services.availability.accepting ? (
+            // Same "live" beat as the Accepting projects badge (globals.css): the dot breathes, a ring ripples out
+            <span className="relative flex w-1.5 h-1.5" aria-hidden="true">
+              <span className="status-ring absolute inset-0 rounded-full border border-emerald-500" />
+              <span className="status-dot relative w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            </span>
+          ) : (
+            <span className="w-1.5 h-1.5 rounded-full bg-fg/30" aria-hidden="true" />
+          )}
           {services.availability.accepting ? "Available for work" : "Fully booked"}
         </span>
         <ThemeToggle />
@@ -91,7 +99,8 @@ export default function Header() {
     const activeSection = useActiveSection();
     const pathname = usePathname();
 
-    const isPastHero = activeSection !== null;
+    // Only the home page has a hero to stay out of; every other page shows the contact button from the start
+    const isPastHero = pathname !== "/" || activeSection !== null;
 
     // Close the contact card when scrolling back up to the hero (adjusting state during render,
     // per React's "you might not need an effect" guidance, instead of a sync effect)
@@ -128,7 +137,7 @@ export default function Header() {
         {/* On the home page the nav stays out of the hero and drops in once Work reaches the top */}
         <TopNav pathname={pathname} hidden={pathname === "/" && !isPastHero} />
 
-        {/* Floating contact button, shown once scrolled past the hero section */}
+        {/* Floating contact button: on the home page once scrolled past the hero, on other pages always */}
         {isPastHero && (
             <div ref={contactRef} className="fixed right-7 z-50" style={{ bottom: "calc(1.75rem + var(--footer-lift, 0px))" }}>
                 <ContactCard
@@ -140,9 +149,9 @@ export default function Header() {
                     onClick={() => setIsContactOpen((open) => !open)}
                     aria-expanded={isContactOpen}
                     aria-label="Contact"
-                    className="group flex items-center justify-center w-16 h-16 bg-accent text-on-accent shadow-lg transition-all duration-300 hover:shadow-[0_12px_28px_-10px_var(--accent)] motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent cursor-pointer"
+                    className="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-on-accent shadow-lg transition-all duration-300 hover:bg-fg hover:text-bg hover:shadow-[0_12px_28px_-10px_var(--foreground)] motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-ink cursor-pointer"
                 >
-                    <Mail className="w-7 h-7 transition-transform duration-300 motion-safe:group-hover:-rotate-12" />
+                    <Mail className="w-7 h-7" />
                 </button>
             </div>
         )}

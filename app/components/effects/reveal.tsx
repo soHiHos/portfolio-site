@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 
 // Fades/slides children in when scrolled into view. Styles live in globals.css.
-export default function Reveal({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+export default function Reveal({ children, id, className, delay = 0 }: { children: React.ReactNode; id?: string; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Reveal({ children, className, delay = 0 }: { children: R
   }, [])
 
   return (
-    <div ref={ref} data-reveal className={className} style={{ transitionDelay: `${delay}ms` }}>
+    <div ref={ref} id={id} data-reveal className={className} style={{ transitionDelay: `${delay}ms` }}>
       {children}
     </div>
   )

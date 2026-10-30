@@ -6,14 +6,14 @@
 
 import projects from "../../content/projects.json";
 import research from "../../content/research.json";
-import services from "../../content/services.json";
+import { SERVICE_LIST } from "../../content/service-list";
 
 export const TEMPLATE_IDS = ["project", "research", "service", "brief", "skills", "contact", "prose"] as const;
 export type TemplateId = (typeof TEMPLATE_IDS)[number];
 
 export const PROJECT_IDS = projects.filter((p) => !("placeholder" in p)).map((p) => p.id);
 export const PAPER_IDS = research.map((r) => r.id);
-export const SERVICE_IDS = services.categories.map((s) => s.id);
+export const SERVICE_IDS = SERVICE_LIST.map((s) => s.id);
 
 export type AskBlock = {
   template: TemplateId;

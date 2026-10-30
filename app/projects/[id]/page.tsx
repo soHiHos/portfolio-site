@@ -60,15 +60,18 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
         <p className="text-lg sm:text-xl text-accent-ink font-medium">{project.tagline}</p>
       </Reveal>
 
-      <Reveal>
-        <div className="relative aspect-video border border-line overflow-hidden panel">
-          {project.visual === "lidar" ? (
-            <LidarVisual />
-          ) : (
-            <img src={project.image} alt={`${project.title} screenshot`} className="w-full h-full object-contain" />
-          )}
-        </div>
-      </Reveal>
+      {/* No image yet: skip the frame rather than show an empty one */}
+      {(project.visual === "lidar" || project.image) && (
+        <Reveal>
+          <div className="relative aspect-video border border-line overflow-hidden panel">
+            {project.visual === "lidar" ? (
+              <LidarVisual />
+            ) : (
+              <img src={project.image} alt={`${project.title} screenshot`} className="w-full h-full object-contain" />
+            )}
+          </div>
+        </Reveal>
+      )}
 
       {/* Overview + details */}
       <div className="grid lg:grid-cols-[1.6fr_1fr] gap-8">

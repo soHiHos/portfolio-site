@@ -4,7 +4,7 @@
 // and barcode on the ticket; copyright and contact links on the tear-off stub.
 import { useEffect, useRef, useState } from 'react';
 import { Check, Contact, Mail, Plane, PlaneTakeoff, Ticket } from 'lucide-react';
-import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_LINKEDIN, GithubIcon, LinkedinIcon, copyToClipboard } from '../ui/menu/contact-menu';
+import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, GithubIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from '../ui/menu/contact-menu';
 
 const year = new Date().getFullYear();
 
@@ -128,6 +128,10 @@ export default function Footer() {
               <a href={CONTACT_GITHUB} target="_blank" rel="noopener noreferrer" className={linkClasses}>
                 <GithubIcon className="w-4 h-4" />
                 GitHub
+              </a>
+              <a href={CONTACT_INSTAGRAM} target="_blank" rel="noopener noreferrer" className={linkClasses}>
+                <InstagramIcon className="w-4 h-4" />
+                Instagram
               </a>
               <button type="button" onClick={handleCopyEmail} className={linkClasses}>
                 {copied ? <Check className="w-4 h-4" /> : <Mail className="w-4 h-4" />}

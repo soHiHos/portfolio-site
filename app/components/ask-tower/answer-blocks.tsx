@@ -5,9 +5,9 @@ import { ArrowRight, ArrowUpRight, ClipboardEdit, Mail } from "lucide-react"
 import type { AskBlock } from "../../api/ask/schema"
 import { PROJECTS } from "../../content/projects"
 import research from "../../content/research.json"
-import services from "../../content/services.json"
-import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_LINKEDIN } from "../../content/contact"
-import { GithubIcon, LinkedinIcon } from "../ui/menu/contact-menu"
+import { SERVICE_LIST } from "../../content/service-list"
+import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN } from "../../content/contact"
+import { GithubIcon, InstagramIcon, LinkedinIcon } from "../ui/menu/contact-menu"
 
 // Event the contact section listens for to pre-fill its brief form
 export const BRIEF_EVENT = "tower:brief"
@@ -56,12 +56,12 @@ export default function AnswerBlock({ block }: { block: AskBlock }) {
       )
     }
     case "service": {
-      const service = services.categories.find((s) => s.id === block.serviceId)
+      const service = SERVICE_LIST.find((s) => s.id === block.serviceId)
       if (!service) return null
       return (
         <div className={`${card} flex gap-4`}>
           <span className="space-y-2">
-            <Link href={`/services#${service.id}`} className="group flex items-center gap-2 font-semibold hover:text-accent-ink transition-colors">
+            <Link href="/services" className="group flex items-center gap-2 font-semibold hover:text-accent-ink transition-colors">
               {service.title}
               <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-accent-ink transition-colors" />
             </Link>
@@ -108,6 +108,7 @@ export default function AnswerBlock({ block }: { block: AskBlock }) {
             <a href={`mailto:${CONTACT_EMAIL}`} className="inline-flex items-center gap-1.5 hover:text-accent-ink transition-colors"><Mail className="w-4 h-4" /> Email</a>
             <a href={CONTACT_LINKEDIN} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent-ink transition-colors"><LinkedinIcon className="w-4 h-4" /> LinkedIn</a>
             <a href={CONTACT_GITHUB} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent-ink transition-colors"><GithubIcon className="w-4 h-4" /> GitHub</a>
+            <a href={CONTACT_INSTAGRAM} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent-ink transition-colors"><InstagramIcon className="w-4 h-4" /> Instagram</a>
           </div>
         </div>
       )

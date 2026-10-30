@@ -5,19 +5,20 @@
 import projects from "../../content/projects.json";
 import research from "../../content/research.json";
 import services from "../../content/services.json";
-import { inr } from "../../content/inr";
+import { ESTIMATOR_ON } from "../../components/estimator/estimate";
 import organizations from "../../content/organizations.json";
 import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_LINKEDIN } from "../../content/contact";
 
-const BIO = `Soham Kar is a Product Engineer based in India, working across AI, software, hardware and
+const BIO = `Soham Kar is an engineer based in India, working across web, software, AI, hardware and
 environmental engineering. His path: Civil Engineering, environmental research (water and wastewater
 treatment), a Post Graduate Diploma in Entrepreneurship, then self-taught software, hardware and AI.
-He asks of every project: Can this be built? Can it be simplified? Does it solve a genuine problem?
-Can it create long-term value? He favours simple, cost-effective, practical products built with user
-ownership and open source in mind. Toolkit: Python, FastAPI, Next.js, PostgreSQL, Redis, Raspberry Pi,
+He helps businesses and founders turn messy, manual work into clear, reliable systems: custom software,
+ERPs, AI automations, data insights, mobile apps and websites, which businesses use every day to run
+their operations. He builds what's simple, practical and cost-effective, and easy to hand over,
+maintain and grow. Toolkit: Python, FastAPI, Next.js, PostgreSQL, Redis, Raspberry Pi,
 LiDAR, RAG and AI automation.`;
 
-const PHASE = { deployed: "live", servicing: "live, currently being updated", development: "in development" } as const;
+const PHASE = { deployed: "live", servicing: "live, currently being updated", development: "in development", complete: "complete" } as const;
 
 function facts(): string {
   const projectLines = projects.filter((p) => !("placeholder" in p)).map(
@@ -27,13 +28,16 @@ function facts(): string {
       }`
   );
   const paperLines = research.map((r) => `- [paperId: ${r.id}] "${r.title}" (${r.venue}, ${r.year}): ${r.summary}`);
-  const classLines = services.classes.map((c) => `${c.name} plan (${c.summary} For: ${c.for.join(", ")}. Includes: ${c.includes.join("; ")}.)`);
   const serviceLines = services.categories.map(
-    (s) => `- [serviceId: ${s.id}] ${s.title}: ${s.summary} ${s.id === "websites" ? `Three plans: ${classLines.join(" ")}` : `Includes: ${s.includes.join("; ")}.`}`
+    (c) =>
+      `- [serviceId: ${c.id}] ${c.title}: ${c.summary} Includes: ${c.services
+        .map((s) => `${s.title}: ${s.summary}${"for" in s ? ` Best for: ${s.for}.` : ""}`)
+        .join(" ")}${"note" in c ? ` ${c.note}` : ""}`
   );
-  const engagement = services.engagements.map((e) => `${e.title}: ${e.summary}`).join(" ");
   const process = services.process.map((p, i) => `${i + 1}. ${p.step}: ${p.detail}`).join(" ");
-  const pricing = `PRICING: starting prices ${services.categories.map((c) => `${c.title} from ${inr(c.priceFrom)}`).join(", ")}. The final price depends on scope and on how many users it must handle; every project gets a free scoping call, then a fixed quote within 48 hours. Scale tiers: ${services.scale.tiers.map((s) => `${s.label} (${s.users}, care plan from ${inr(s.careFrom)} per month)`).join("; ")}. Do not quote any other figure.`;
+  const pricing = `PRICING: never quote a price, fee or range. For pricing, point the visitor to ${
+    ESTIMATOR_ON ? "the 2-minute price estimator on the services page (it gives a price range as a PDF), or to " : ""
+  }a free 30-minute call; every project gets a fixed quote within 48 hours of that call. A 30-day pilot on one process is available for businesses not ready to commit.`;
   const faq = services.faq.map((f) => `Q: ${f.q} A: ${f.a}`).join("\n");
   const partners = organizations.map((o) => `${o.name}${"role" in o && o.role ? ` (${o.role})` : ""}`).join(", ");
 
@@ -47,15 +51,15 @@ RESEARCH PAPERS:
 ${paperLines.join("\n")}
 
 SERVICES (${services.availability.accepting ? "currently accepting new projects" : "not currently taking new projects"}):
+${services.hero.promise} ${services.categoriesIntro}
 ${serviceLines.join("\n")}
-Engagement: ${engagement}
-Process: ${process}
+Process: ${process} ${services.nda}
 ${pricing}
 
 FAQ:
 ${faq}
 
-ORGANIZATIONS / PARTNERS: ${partners}
+ORGANIZATIONS / COLLABORATORS: ${partners}
 
 CONTACT: email ${CONTACT_EMAIL}, LinkedIn ${CONTACT_LINKEDIN}, GitHub ${CONTACT_GITHUB}, or the brief form on the site.`;
 }

@@ -16,18 +16,22 @@ accent, and a quiet aviation theme kept only at the edges of the site. Content i
 page (work, projects, research, contact) stays plain so visitors read the work, not the costume.
 
 ## Tokens — lock these in, don't reinterpret per component
-- Page background: muted, low-saturation (`--background`: greige #e2ddd5 light, #111316 dark) with
+- Page background: muted, low-saturation (`--background`: misty grey-blue #dce3e8 light, #111316 dark) with
   the faint Raipur map + flight routes behind it (components/effects/backdrop.tsx).
-- Cards: solid `bg-surface` (cream #fffdf9 light) + `border-line`. This is the default container.
+- Cards: solid `bg-surface` (near-white #fafcfd light) + `border-line`. This is the default container.
 - Glass only for floating chrome and text that sits on the map, never for content cards:
   - Floating chrome (top nav, go-to-top button): `bg-bg/60 backdrop-blur-xl` + 1px `border-line`.
   - Text panels on the map (`glass` utility in globals.css): 14% fill + 16px blur + 1px border.
-- One accent (`--accent`: amber light / orange dark), used for: active nav link, the name in the nav,
-  primary buttons, the floating contact button, and hover fills. Never a second accent.
+- One accent (`--accent`: warm amber #e8a33d light / orange dark), used for every fill and highlight: primary
+  buttons, the active nav link, the floating contact button, hover fills and lines, markers, progress fills,
+  flight routes. Text on amber fills is navy (`--on-accent`). Never use amber for text.
+- Accent-coloured text uses `--accent-ink` (steel blue #0f4c81 light / orange dark): links, the rotating hero
+  word, highlighted numbers. `--accent-2` is kept as an alias of the accent. No other colours.
 - Two typefaces: Space Grotesk (display) and Inter (body).
 
 ## Shape
-- Sharp corners everywhere: cards, panels, inputs, buttons, nav bar, floating buttons, dropdowns.
+- Sharp corners everywhere: cards, panels, inputs, buttons, nav bar, dropdowns. The one exception is the
+  floating contact button, which is round.
 - Round only for tiny decorative/status elements: status dots, logo circles, small tech tags,
   chat bubbles.
 
@@ -40,7 +44,8 @@ page (work, projects, research, contact) stays plain so visitors read the work, 
 ## Copy
 - Sentence case for headings, buttons, nav and labels ("Explore work", not "EXPLORE WORK").
 - No aviation wording in content sections. The theme lives only in: the map backdrop, the footer
-  boarding pass, the 404 page, the easter-egg jet and the preflight checklist.
+  boarding pass, the 404 page, the easter-egg jet and the small plane on the "What you can count on"
+  panel (no aviation words there).
 - Never show visitors unfinished content. Placeholders (`"placeholder": true` in content JSON) are
   hidden everywhere except the deliberate project slots on the home page.
 
@@ -51,11 +56,11 @@ page (work, projects, research, contact) stays plain so visitors read the work, 
 3. Check text contrast at the final rendered colours, including on accent fills and over the map.
 4. Light theme `.panel` remaps white/black (globals.css); don't use `.panel` behind photos or dark
    gradients — use a plain dark background instead.
-5. Every interactive element gets a visible accent focus ring.
+5. Every interactive element gets a visible focus ring in `--accent-ink` (amber is too faint on the light page to show focus).
 
 ## Anti-patterns to avoid
 - Rounded cards or buttons (the site is sharp; keep it consistent)
-- A second accent colour, or gradients behind cards as decoration
+- A third colour, amber used for text, or gradients behind cards as decoration
 - Heavy drop-shadows on cards; borders carry the structure
 - All-caps tracked labels in content sections
 - Aviation metaphors in content ("hangar", "flight plan", "boarding") outside the themed edges

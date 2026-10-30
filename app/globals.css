@@ -5,8 +5,8 @@
 
 :root {
   --header-h: 5.5rem; /* fixed cockpit nav + breathing room */
-  --scroll-thumb: rgb(46 32 20 / 0.35);
-  --muted-card: #5a4632; /* muted text on cards and tags (light theme) */
+  --scroll-thumb: rgb(16 42 67 / 0.3);
+  --muted-card: #486078; /* muted text on cards and tags (light theme) */
 }
 
 /* Section snap scrolling on the home page (snap stops are set in app/page.tsx). Anchors and snap
@@ -28,55 +28,33 @@ html {
 ::-webkit-scrollbar-thumb:hover { background-color: var(--accent); }
 
 :root {
-  /* Light theme: "Latte" — muted greige page, cream-white panels and tags, amber accent */
-  --background: #e2ddd5;
-  --foreground: #2e2014;
-  --muted: #4a3a2a; /* near-black: muted text sits on the map, so it needs the contrast */
-  --line: rgb(46 32 20 / 0.14);
-  --surface: #fffdf9;
-  --accent: #f59e0b;
-  --accent-ink: #8f5200; /* amber-brown dark enough for text on light backgrounds */
-  --on-accent: #2e2014; /* text on accent fills */
-  --panel: #fbf5ea; /* light panels are cream-white */
-  --panel-2: #f0e4cf;
-  --panel-accent-ink: #8f5200;
+  /* Light theme: "Harbor" — misty grey-blue page, near-white cards and panels, warm amber accent for every
+     fill and highlight, steel blue for accent-coloured text (amber isn't readable as text on this page) */
+  --background: #dce3e8;
+  --foreground: #102a43;
+  --muted: #364b60; /* dark: muted text sits on the map, so it needs the contrast */
+  --line: rgb(16 42 67 / 0.12);
+  --surface: #fafcfd;
+  --accent: #e8a33d; /* amber: buttons, active states, hover fills and lines, markers, routes; never text */
+  --accent-ink: #0f4c81; /* steel blue: accent-coloured text, links */
+  --on-accent: #102a43; /* navy text on amber fills */
+  --accent-2: var(--accent); /* now the same amber (the primary-button and highlight colour) */
+  --on-accent-2: var(--on-accent);
+  --panel: #f5f8fa; /* light panels are near-white */
+  --panel-2: #dfe9f0;
+  --panel-accent-ink: #0f4c81;
   --name: var(--flap-bg); /* hero name: same dark navy as the flap tiles */
   --panel-dark: #1b2a41; /* navy: nav bar, section signs, dark buttons, flap tiles */
   --flap-bg: var(--panel-dark);
-  --grid: rgb(46 32 20 / 0.05);
+  --grid: rgb(16 42 67 / 0.04);
   --city-ground: var(--background);
-  --street: #f6efe2;
-  --street-major: #fbf7ee;
-  --park: #d9d9bd;
-  --river: #d4d8d6;
-  --river-bank: #c1c7c6;
-  --rail: rgb(46 32 20 / 0.25);
-  --runway: rgb(46 32 20 / 0.38);
-}
-
-/* TEMPORARY light palette preview (components/effects/palette-switcher.tsx); overrides the Latte :root block via <html data-palette> */
-:root[data-palette="navy"]:not(.dark) {
-  --background: #f1ebdd;
-  --foreground: #14213d;
-  --muted: #34415e;
-  --muted-card: #46546f;
-  --line: rgb(20 33 61 / 0.14);
-  --surface: #fffcf5;
-  --accent: #2ec4b6;
-  --accent-ink: #0a6a69;
-  --panel-accent-ink: #0a6a69;
-  --on-accent: #0b1d3a;
-  --panel: #ffffff;
-  --panel-2: #e3f3f1;
-  --grid: rgb(20 33 61 / 0.05);
-  --street: #fffdf8;
+  --street: #f7f9fb;
   --street-major: #ffffff;
-  --park: #dde8de;
-  --river: #cfe6ea;
-  --river-bank: #b9d6dc;
-  --rail: rgb(20 33 61 / 0.25);
-  --runway: rgb(20 33 61 / 0.38);
-  --scroll-thumb: rgb(20 33 61 / 0.35);
+  --park: #d0ddd6;
+  --river: #c8d9e4;
+  --river-bank: #b3c8d7;
+  --rail: rgb(16 42 67 / 0.18);
+  --runway: rgb(16 42 67 / 0.26);
 }
 
 .dark {
@@ -91,6 +69,8 @@ html {
   --accent: #f97316; /* orange */
   --accent-ink: var(--accent);
   --on-accent: #16191d;
+  --accent-2: var(--accent); /* dark theme keeps its single orange accent */
+  --on-accent-2: var(--on-accent);
   --panel: #23272e;
   --panel-2: #2c313a;
   --panel-accent-ink: var(--accent);
@@ -116,6 +96,8 @@ html {
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-on-accent: var(--on-accent);
+  --color-accent-2: var(--accent-2);
+  --color-on-accent-2: var(--on-accent-2);
   --color-panel: var(--panel);
   --color-panel-2: var(--panel-2);
   --font-display: var(--font-space-grotesk), system-ui, sans-serif;
@@ -149,7 +131,7 @@ html {
   border: 1px solid var(--line);
 }
 
-/* Light theme: panels are cream-white, not dark. Components on them are written with
+/* Light theme: panels are near-white, not dark. Components on them are written with
    white-on-dark classes (text-white, border-white/10, bg-white/5, bg-black/30), so inside a panel
    "white" is remapped to the ink colour and "black" to white. Dark theme is untouched. */
 :root:not(.dark) :is(.panel, [class*="bg-panel"]) {
@@ -173,12 +155,61 @@ p {
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
+/* Availability badge "live" signal (components/availability-badge.tsx): on one beat the dot breathes,
+   a ring ripples out from it and the badge's green glow swells. Still under reduced motion. */
+:root { --status-beat: 5.2s; }
+@keyframes status-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes status-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  40%, 100% { transform: scale(3.2); opacity: 0; }
+}
+@keyframes status-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(4 120 87 / 0); }
+  20% { box-shadow: 0 0 0 4px rgb(4 120 87 / 0.25); }
+  45% { box-shadow: 0 0 0 0 rgb(4 120 87 / 0); }
+}
+.status-ring { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .status-dot { animation: status-dot var(--status-beat) ease-in-out infinite; }
+  .status-ring { animation: status-ring var(--status-beat) cubic-bezier(0.2, 0.6, 0.3, 1) infinite; }
+  .status-live { animation: status-glow var(--status-beat) ease-out infinite; }
+}
+
 /* Topographic-map backdrop (see components/effects/backdrop.tsx) */
 .backdrop {
   position: fixed;
   inset: 0;
   z-index: -10;
   pointer-events: none;
+}
+
+/* The map shows almost in full at the top of the page; once you scroll, a veil of the page colour fades in over it so
+   text reads cleanly. On large screens the veil fades out towards the side margins, where the map
+   stays visible. Without scroll-driven animations the veil simply stays on. */
+.backdrop-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--background);
+  opacity: 0.78;
+}
+@media (min-width: 64rem) {
+  .backdrop-veil {
+    -webkit-mask-image: linear-gradient(90deg, transparent 2%, #000 18%, #000 82%, transparent 98%);
+    mask-image: linear-gradient(90deg, transparent 2%, #000 18%, #000 82%, transparent 98%);
+  }
+}
+@keyframes veil-in {
+  from { opacity: 0.35; } /* light at the top, since inner pages have text there too */
+}
+@supports (animation-timeline: scroll()) {
+  .backdrop-veil {
+    animation: veil-in linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 70vh;
+  }
 }
 
 /* Scroll reveal — only hides content once JS has marked the page, so no-JS still renders everything */
@@ -263,7 +294,7 @@ p {
 
 /* Buttons: one system for every action / call-to-action.
    .btn + a variant: .btn-primary (accent fill, a light sheen sweeps across on hover), .btn-secondary
-   (outline, a solid fill wipes in from the left) and .btn-link (text, underline grows in). Sizes:
+   (outline, an accent fill wipes in from the left) and .btn-link (text, underline grows in). Sizes:
    .btn-sm / .btn-lg. On hover icons move with their meaning (arrows slide their way, download dips,
    others pop). Under reduced motion only colours change. In @layer components so utilities win. */
 @keyframes btn-sheen { from { transform: translateX(0) skewX(-20deg); } to { transform: translateX(450%) skewX(-20deg); } }
@@ -287,10 +318,10 @@ p {
   }
   .btn-sm { padding: 0.5rem 0.875rem; font-size: 0.75rem; line-height: 1rem; }
   .btn-lg { padding: 0.875rem 1.5rem; font-size: 1rem; line-height: 1.5rem; }
-  .btn:focus-visible, .btn-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .btn:focus-visible, .btn-link:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .btn-primary { background-color: var(--accent); color: var(--on-accent); }
+  .btn-primary { background-color: var(--accent-2); color: var(--on-accent-2); }
   .btn-primary::after {
     content: "";
     position: absolute;
@@ -300,7 +331,7 @@ p {
     opacity: 0;
     pointer-events: none;
   }
-  .btn-primary:hover:not(:disabled) { box-shadow: 0 10px 24px -12px var(--accent); }
+  .btn-primary:hover:not(:disabled) { box-shadow: 0 10px 24px -12px var(--accent-2); }
 
   .btn-secondary {
     color: var(--foreground);
@@ -312,11 +343,11 @@ p {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-color: var(--foreground);
+    background-color: var(--accent);
     transform: scaleX(0);
     transform-origin: right;
   }
-  .btn-secondary:hover:not(:disabled) { color: var(--background); border-color: var(--foreground); }
+  .btn-secondary:hover:not(:disabled) { color: var(--on-accent); border-color: var(--accent); }
   .btn-secondary:hover:not(:disabled)::before { transform: scaleX(1); transform-origin: left; }
 
   .btn-link {
@@ -335,7 +366,7 @@ p {
     right: 0;
     bottom: -3px;
     height: 1.5px;
-    background-color: currentColor;
+    background-color: var(--accent);
     transform: scaleX(0);
     transform-origin: right;
   }
@@ -359,9 +390,19 @@ p {
   :is(.btn, .btn-link):hover .lucide-rotate-ccw { transform: rotate(-120deg); }
 }
 
-/* Side nav steps left of the open contact card (330px wide, 28px from the edge) when they would overlap;
-   side-nav.tsx measures that and sets data-shifted */
-.side-nav[data-shifted] { transform: translateX(-340px); }
+/* Side nav steps left of the open contact card (560px wide, 28px from the edge) when they would overlap;
+   side-nav.tsx measures that and sets data-shifted. 580px clears the card from either nav position
+   (right-6 or xl:right-12). */
+.side-nav[data-shifted] { transform: translateX(-580px); }
+
+/* FAQ answers (services page) slide open; browsers without ::details-content just open instantly */
+.faq { interpolate-size: allow-keywords; }
+.faq::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height 300ms ease, content-visibility 300ms allow-discrete;
+}
+.faq[open]::details-content { height: auto; }
 
 /* Plinth Scout LiDAR visual */
 @keyframes lidar-sweep {
@@ -398,8 +439,6 @@ p {
   }
 }
 
-/* Projects carousel (sections/projects-section.tsx): the active page indicator fills over one interval */
-@keyframes carousel-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* Skills sliders (components/skills-marquee.tsx): the track holds two copies of the chips and moves one copy's
    width; pauses on hover or keyboard focus */

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 
 // Every section id used across the pages, in page order. The hook only tracks ids present on the
 // current page, and re-scans after client-side navigation (the header persists across pages).
-export const SECTION_IDS = ["work", "services", "about", "partners", "projects", "research", "contact", "all-projects"]
+export const SECTION_IDS = ["work", "services", "about", "collaborators", "research", "contact", "all-projects"]
 
 // Returns the id of the last section whose top has scrolled past the header, or null above them all
 export function useActiveSection(ids: string[] = SECTION_IDS): string | null {

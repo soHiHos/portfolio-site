@@ -3,37 +3,34 @@
 import { useEffect, useRef, useState } from "react"
 import { Check, Mail, Send } from "lucide-react"
 import SectionHeading from "../components/section-heading"
-import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_LINKEDIN, GithubIcon, LinkedinIcon, copyToClipboard } from "../components/ui/menu/contact-menu"
+import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, GithubIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from "../components/ui/menu/contact-menu"
 import { useIndiaTime } from "../components/use-india-time"
 import Reveal from "../components/effects/reveal"
 import { BRIEF_EVENT, type BriefDetail } from "../components/ask-tower/answer-blocks"
 import services from "../content/services.json"
+import { SERVICE_LIST } from "../content/service-list"
 
 const TIMELINES = ["As soon as possible", "Within 1–3 months", "Flexible / exploring"]
 
-// Everything a brief can be about: websites (and their plans), CRM/ERP/SaaS, AIaaS and the lease plan
-const SERVICE_OPTIONS = [
-  { id: "websites", title: "Website (plan not decided)" },
-  ...services.classes.map((c) => ({ id: c.id, title: `Website · ${c.name}` })),
-  ...services.categories.filter((s) => s.id !== "websites").map((s) => ({ id: s.id, title: s.title })),
-  { id: "lease", title: "Lease (licensed plan)" },
-]
+// Everything a brief can be about: each service (including apps and websites) and the 30-day pilot
+const SERVICE_OPTIONS = [...SERVICE_LIST, { id: "pilot", title: "30-day pilot" }]
 
 const LINKS = [
   { label: "LinkedIn", href: CONTACT_LINKEDIN, icon: LinkedinIcon },
   { label: "GitHub", href: CONTACT_GITHUB, icon: GithubIcon },
+  { label: "Instagram", href: CONTACT_INSTAGRAM, icon: InstagramIcon },
 ]
 
 // Square icon buttons: fill with the accent and lift on hover, with a small tooltip naming the link
-const iconClasses = "group relative flex w-12 h-12 items-center justify-center border border-line text-fg transition-all duration-300 hover:border-accent hover:bg-accent hover:text-on-accent motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent cursor-pointer"
+const iconClasses = "group relative flex w-12 h-12 items-center justify-center border border-line text-fg transition-all duration-300 hover:border-accent hover:bg-accent hover:text-on-accent motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink cursor-pointer"
 const tipClasses = "pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap bg-fg px-2 py-1 text-xs font-medium text-bg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
-const fieldClasses = "w-full border border-line bg-bg/50 px-3.5 py-3 text-sm text-fg placeholder:text-muted/70 transition-colors focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
+const fieldClasses = "w-full border border-line bg-bg/50 px-3.5 py-3 text-sm text-fg placeholder:text-muted/70 transition-colors focus:outline-none focus:border-accent-ink focus:ring-2 focus:ring-accent-ink/20"
 const labelClasses = "text-xs font-medium text-muted"
 
 // Contact: a headline, then one card with the description, availability and icon-only links (email
 // copies on click) beside a short project brief. "Send" opens the visitor's mail app with the brief pre-filled (mailto), so no backend is
 // involved. The "Ask about my work" assistant can pre-fill the brief via a BRIEF_EVENT, and the services
-// questionnaire via /?brief=<service id>#contact.
+// page via /?brief=<service id>#contact.
 export default function ContactSection({ id }: { id?: string }) {
   const time = useIndiaTime()
   const [copied, setCopied] = useState(false)
@@ -53,7 +50,7 @@ export default function ContactSection({ id }: { id?: string }) {
       setTimeout(() => messageRef.current?.focus({ preventScroll: true }), 600)
     }
     window.addEventListener(BRIEF_EVENT, handleBrief)
-    // Arriving from the services questionnaire (/?brief=<service id>#contact) pre-selects the service
+    // Arriving from the services page (/?brief=<service id>#contact) pre-selects the service
     const fromUrl = new URLSearchParams(window.location.search).get("brief")
     const preselect = fromUrl && SERVICE_OPTIONS.some((o) => o.id === fromUrl) ? fromUrl : null
     const timer = preselect ? setTimeout(() => setService(preselect), 0) : undefined
@@ -89,7 +86,6 @@ export default function ContactSection({ id }: { id?: string }) {
       <div className="w-full text-left space-y-8 py-12">
         <SectionHeading
           title={<>Let&apos;s build something <span className="underline decoration-accent decoration-4 underline-offset-8">real</span>.</>}
-          note="Say hello"
         />
 
         <Reveal className="grid lg:grid-cols-[1fr_1.4fr] border border-line bg-surface">
@@ -100,7 +96,7 @@ export default function ContactSection({ id }: { id?: string }) {
             </p>
             <div className="space-y-1.5 text-sm text-muted">
               <span className="flex items-center gap-2 font-medium text-fg">
-                <span className={`w-2 h-2 rounded-full ${services.availability.accepting ? "bg-emerald-500 motion-safe:animate-pulse" : "bg-fg/30"}`} aria-hidden="true" />
+                <span className={`w-2 h-2 rounded-full ${services.availability.accepting ? "bg-emerald-500" : "bg-fg/30"}`} aria-hidden="true" />
                 {services.availability.accepting ? "Available for new projects" : "Fully booked right now"}
               </span>
               <span className="block">Based in India · {time} IST</span>
@@ -152,7 +148,7 @@ export default function ContactSection({ id }: { id?: string }) {
                       role="radio"
                       aria-checked={selected}
                       onClick={() => setTimeline(selected ? "" : t)}
-                      className={`border px-3 py-1.5 text-sm transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent cursor-pointer ${
+                      className={`border px-3 py-1.5 text-sm transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent-ink cursor-pointer ${
                         selected ? "border-accent bg-accent text-on-accent" : "border-line text-muted hover:border-fg/40 hover:text-fg"
                       }`}
                     >

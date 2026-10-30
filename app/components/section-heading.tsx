@@ -2,15 +2,13 @@ import Reveal from "./effects/reveal"
 
 interface SectionHeadingProps {
   title: React.ReactNode // plain text, or text with inline emphasis (e.g. the Contact heading's underline)
-  note: string
 }
 
-// Plain section heading: title with a one-line note underneath.
-export default function SectionHeading({ title, note }: SectionHeadingProps) {
+// Plain section heading: just the title
+export default function SectionHeading({ title }: SectionHeadingProps) {
   return (
-    <Reveal className="space-y-2">
-      <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg">{title}</h2>
-      <p className="text-base text-muted">{note}</p>
+    <Reveal>
+      <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-fg">{title}</h2>
     </Reveal>
   )
 }

@@ -42,18 +42,29 @@
     "stack": []
   },
   {
-    "id": "client-4",
+    "id": "as-metals",
     "kind": "client",
     "category": "work",
     "phase": "deployed",
-    "title": "Project name",
-    "tagline": "",
-    "summary": "",
-    "placeholder": true
+    "title": "AS Metals",
+    "tagline": "Website for a scrap and metal trader and steel supplier.",
+    "summary": "A business website for AS Metals, a scrap and metal trader and supplier of steel coils and plates. It presents the company and its product catalogue, and captures enquiries and quote requests so new buyers can reach the team quickly.",
+    "stack": []
+  },
+  {
+    "id": "frontwave",
+    "kind": "client",
+    "category": "work",
+    "phase": "deployed",
+    "title": "FrontWave",
+    "tagline": "Research publishing platform for an equity researcher.",
+    "summary": "A website and subscriber platform for FrontWave, an equity research business. Subscribers sign up, pay and read published research reports in a members' portal, and an admin panel lets the research team publish new reports themselves.",
+    "stack": []
   },
   {
     "id": "plinth",
     "kind": "personal",
+    "featured": true,
     "category": "hardware",
     "phase": "development",
     "title": "Plinth Scout",
@@ -68,24 +79,85 @@
     ]
   },
   {
-    "id": "personal-1",
+    "id": "e-crf",
     "kind": "personal",
+    "featured": true,
     "category": "github",
     "phase": "development",
-    "title": "Project name",
-    "tagline": "",
-    "summary": "",
-    "placeholder": true
+    "title": "E-CRF",
+    "tagline": "Electronic case report forms for clinical research.",
+    "summary": "An electronic case report form (eCRF) system that replaces paper forms for collecting clinical and research data in a structured, checkable way. It started as a demo for a client; that project didn't go ahead, and the system is still in development.",
+    "stack": []
   },
   {
-    "id": "personal-2",
+    "id": "dokai",
     "kind": "personal",
     "category": "github",
     "phase": "development",
-    "title": "Project name",
-    "tagline": "",
-    "summary": "",
-    "placeholder": true
+    "title": "DokAI",
+    "tagline": "AI assistant for business email and WhatsApp.",
+    "summary": "An AI assistant that reads business email and WhatsApp messages about invoices and other business information, picks out what matters, and helps draft, send and analyse emails.",
+    "stack": []
+  },
+  {
+    "id": "airbnb-eda",
+    "kind": "personal",
+    "category": "github",
+    "phase": "complete",
+    "status": "Complete",
+    "title": "Airbnb Bookings",
+    "tagline": "Exploratory analysis of Airbnb bookings.",
+    "summary": "An exploratory data analysis of Airbnb bookings that works through a business question step by step, told as a written narrative with 11 charts.",
+    "stack": [
+      "Python",
+      "Jupyter",
+      "EDA"
+    ]
+  },
+  {
+    "id": "bank-segmentation",
+    "kind": "personal",
+    "category": "github",
+    "phase": "complete",
+    "status": "Complete",
+    "title": "Bank Customer Segmentation",
+    "tagline": "Clustering bank customers by how they transact.",
+    "summary": "Groups a bank's customers into segments based on their transactions using clustering, with a written walkthrough and 8 charts.",
+    "stack": [
+      "Python",
+      "Jupyter",
+      "Clustering"
+    ]
+  },
+  {
+    "id": "airline-referral",
+    "kind": "personal",
+    "category": "github",
+    "phase": "complete",
+    "status": "Complete",
+    "title": "Airline Passenger Referral",
+    "tagline": "Predicting which passengers will recommend an airline.",
+    "summary": "A full machine learning workflow, from cleaning and exploring passenger review data to training and comparing classification models that predict whether a passenger would recommend the airline.",
+    "stack": [
+      "Python",
+      "Jupyter",
+      "Classification"
+    ]
+  },
+  {
+    "id": "cardekho-prices",
+    "kind": "personal",
+    "category": "github",
+    "phase": "complete",
+    "status": "Complete",
+    "title": "CarDekho Used Car Prices",
+    "tagline": "Exploring and predicting used car prices.",
+    "summary": "Explores used car listings from CarDekho and builds a model that predicts a car's price, with a written walkthrough and 8 charts.",
+    "stack": [
+      "Python",
+      "Jupyter",
+      "Regression"
+    ]
   },
   {
     "id": "personal-3",

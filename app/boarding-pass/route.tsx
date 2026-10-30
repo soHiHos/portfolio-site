@@ -39,7 +39,7 @@ export function GET() {
             </div>
             <div style={{ display: "flex", gap: 56 }}>
               {field("PILOT", "SOHAM KAR")}
-              {field("ROLE", "PRODUCT ENGINEER")}
+              {field("ROLE", "ENGINEER")}
               {field("BASE", "INDIA")}
               {field("STATUS", "BOARDING", true)}
             </div>

@@ -14,7 +14,7 @@ export function ResearchSection({ id, limit }: { id?: string; limit?: number }) 
   return (
     <section id={id}>
       <div className="w-full text-left space-y-8 py-12">
-        <SectionHeading title="Research" note="Publications and papers" />
+        <SectionHeading title="Research" />
 
         <div className="space-y-4">
           {items.map((item, i) => (
@@ -26,7 +26,7 @@ export function ResearchSection({ id, limit }: { id?: string; limit?: number }) 
                 className="group relative grid sm:grid-cols-[6rem_1fr] overflow-hidden border border-line bg-surface transition-[translate,border-color] duration-300 hover:border-accent/50 focus-visible:border-accent/50 motion-safe:hover:-translate-y-1"
               >
                 {/* Year column: full-height strip (top strip on phones) that fills with the accent on hover */}
-                <span className="px-5 py-3 sm:px-0 sm:py-7 sm:text-center border-b sm:border-b-0 sm:border-r border-line text-sm font-semibold tabular-nums text-muted transition-colors duration-300 group-hover:bg-accent group-hover:text-white group-hover:border-accent group-focus-visible:bg-accent group-focus-visible:text-white group-focus-visible:border-accent">
+                <span className="px-5 py-3 sm:px-0 sm:py-7 sm:text-center border-b sm:border-b-0 sm:border-r border-line text-sm font-semibold tabular-nums text-muted transition-colors duration-300 group-hover:bg-accent-2 group-hover:text-on-accent-2 group-hover:border-accent-2 group-focus-visible:bg-accent-2 group-focus-visible:text-on-accent-2 group-focus-visible:border-accent-2">
                   {item.year}
                 </span>
                 <div className="space-y-2 p-5 sm:p-7">

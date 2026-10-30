@@ -1,14 +1,11 @@
 "use client"
 
-import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN } from "../../../content/contact";
 
-import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_LINKEDIN } from "../../../content/contact";
-
-export { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_LINKEDIN };
+export { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN };
 
 // Copies text to the clipboard, falling back to the legacy execCommand trick
-// for non-secure contexts / older browsers. Shared by the contact menu and footer.
+// for non-secure contexts / older browsers. Shared by the contact card, contact section and footer.
 export async function copyToClipboard(text: string) {
     if (navigator.clipboard) {
         await navigator.clipboard.writeText(text);
@@ -41,61 +38,12 @@ export function GithubIcon({ className }: { className?: string }) {
     );
 }
 
-interface ContactMenuProps {
-    open: boolean;
-    onClose: () => void;
-    className?: string;
-}
-
-// Shared dropdown panel used by both the hero "Contact" button and the
-// floating contact button that appears once you scroll past the hero.
-export function ContactMenu({ open, onClose, className = "" }: ContactMenuProps) {
-    const [copied, setCopied] = useState(false);
-
-    async function handleCopyEmail() {
-        try {
-            await copyToClipboard(CONTACT_EMAIL);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1500);
-        } catch {
-            // Copy failed silently — email is still visible to select/copy manually
-        }
-    }
-
+export function InstagramIcon({ className }: { className?: string }) {
     return (
-        <div
-            className={`z-[60] border border-line bg-black/[0.85] backdrop-blur-lg text-white shadow-lg overflow-hidden transition-all duration-200 ${
-                open ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
-            } ${className}`}
-        >
-            <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="flex items-center gap-2 px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors w-full text-left whitespace-nowrap"
-            >
-                {copied ? <Check className="w-4 h-4 shrink-0" /> : <Copy className="w-4 h-4 shrink-0" />}
-                {copied ? "Copied!" : CONTACT_EMAIL}
-            </button>
-            <a
-                href={CONTACT_LINKEDIN}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors border-t border-white/10"
-                onClick={onClose}
-            >
-                <LinkedinIcon className="w-4 h-4 shrink-0" />
-                LinkedIn
-            </a>
-            <a
-                href={CONTACT_GITHUB}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors border-t border-white/10"
-                onClick={onClose}
-            >
-                <GithubIcon className="w-4 h-4 shrink-0" />
-                GitHub
-            </a>
-        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className} aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5.5" />
+            <circle cx="12" cy="12" r="4.5" />
+            <circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none" />
+        </svg>
     );
 }

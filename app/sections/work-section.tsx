@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import ProjectTile from "../components/project-tile";
 import SectionHeading from "../components/section-heading";
 import Reveal from "../components/effects/reveal";
@@ -9,14 +11,19 @@ const CLIENT_PROJECTS = [...PROJECTS, ...PLACEHOLDER_PROJECTS].filter((project) 
 // Pairs of tiles, one row per pair
 const ROWS = Array.from({ length: Math.ceil(CLIENT_PROJECTS.length / 2) }, (_, r) => CLIENT_PROJECTS.slice(r * 2, r * 2 + 2));
 
-// Golden-ratio checkerboard collage: each row is a pair split 1.618 : 1, alternating sides (wide |
-// narrow, then narrow | wide) so the big tiles sit on opposite corners. A leftover single tile takes a
-// full row. One column on phones.
+// Work: client projects as a golden-ratio checkerboard collage: each row is a pair split 1.618 : 1,
+// alternating sides (wide | narrow, then narrow | wide) so the big tiles sit on opposite corners. A
+// leftover single tile takes a full row. One column on phones. Tiles show only the name; details are on /projects.
 export default function WorkSection({ id }: { id?: string }) {
   return (
     <section id={id}>
       <div className="w-full text-left space-y-8 py-12">
-        <SectionHeading title="Work" note="Client projects" />
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading title="Work" />
+          <Link href="/projects" className="btn-link text-sm text-fg">
+            See all projects <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
         <div>
           {ROWS.map((row, r) => (
             <div
@@ -26,16 +33,7 @@ export default function WorkSection({ id }: { id?: string }) {
               {row.map((project, i) => (
                 <Reveal key={project.id} delay={i * 100}>
                   <div id={project.id} className="scroll-mt-28 h-full">
-                    <ProjectTile
-                      phase={project.phase}
-                      image={project.image}
-                      title={project.title}
-                      summary={project.shortSummary ?? project.summary}
-                      href={project.link}
-                      external
-                      stack={project.stack}
-                      placeholder={project.placeholder}
-                    />
+                    <ProjectTile image={project.image} title={project.title} href={project.link} external placeholder={project.placeholder} />
                   </div>
                 </Reveal>
               ))}

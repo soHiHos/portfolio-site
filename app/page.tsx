@@ -3,7 +3,6 @@ import AboutSection from "./sections/about-section";
 import WorkSection from "./sections/work-section";
 import ResearchSection from "./sections/research-section";
 import ContactSection from "./sections/contact-section";
-import ProjectsSection from "./sections/projects-section";
 import OrganizationsSection from "./sections/organizations-section";
 import SideNav from "./components/side-nav";
 import ServicesSection from "./sections/services-section";
@@ -22,9 +21,8 @@ export default function Home() {
         </div>
         <div className="snap-start"><WorkSection id="work" /></div>
         <ServicesSection id="services" />
-        <AboutSection id="about" />
-        <OrganizationsSection id="partners" />
-        <ProjectsSection id="projects" />
+        <AboutSection id="about" short />
+        <OrganizationsSection id="collaborators" />
         <ResearchSection id="research" limit={2} />
         <ContactSection id="contact" />
       </div>

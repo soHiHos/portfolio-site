@@ -3,283 +3,277 @@
     "accepting": true,
     "label": "Accepting projects"
   },
-  "classes": [
-    {
-      "id": "launch",
-      "name": "Launch",
-      "summary": "A clean, fast marketing site to get you online.",
-      "for": [
-        "Small businesses",
-        "Personal brands",
-        "Landing pages"
+  "hero": {
+    "title": "Less manual work. Clearer numbers. Better decisions.",
+    "promise": "I build software and AI automations that remove manual work and give growing businesses clear numbers."
+  },
+  "problems": {
+    "intro": "Most growing businesses I meet have the same six problems.",
+    "items": [
+      {
+        "id": "retyping",
+        "quote": "We type the same data again and again.",
+        "detail": "Dispatch slips become invoices, POs go into your system, bills go into your books. All by hand."
+      },
+      {
+        "id": "numbers",
+        "quote": "We don't know our real numbers until it's too late.",
+        "detail": "Stock, sales, dispatch and dues sit in different registers and sheets."
+      },
+      {
+        "id": "whatsapp",
+        "quote": "Everything happens on WhatsApp, and nothing is recorded.",
+        "detail": "Orders, stock updates and production figures get lost in chats."
+      },
+      {
+        "id": "payments",
+        "quote": "Payments always come in late.",
+        "detail": "Nobody has a clear list of who owes what, or time to follow up."
+      },
+      {
+        "id": "network",
+        "quote": "Our dealer or distributor network is hard to manage.",
+        "detail": "Different price tiers, ledgers and orders, tracked across too many places."
+      },
+      {
+        "id": "custom",
+        "quote": "Every tool we try makes us change how we work.",
+        "detail": "Off-the-shelf tools force workarounds. Software should fit your workflow, not the other way around."
+      }
+    ]
+  },
+  "proof": {
+    "caseStudy": {
+      "placeholder": true,
+      "title": "Rever: running a distributor network on one platform",
+      "business": "A direct-selling and distribution company managing a growing network of distributors, each with their own pricing tier.",
+      "problem": "Orders, distributor pricing, deposits and payments were tracked manually across different places. Verifying payments and keeping ledgers right took constant effort.",
+      "built": [
+        "Distributor management with phone OTP login",
+        "Tier-based pricing and multi-step order creation",
+        "Ledgers, deposits, payment verification and reversals",
+        "A public shop for non-member buyers, with UPI payments ready to move to a payment gateway"
       ],
-      "includes": [
-        "1–5 pages, mobile-first",
-        "Clean design on a proven system",
-        "Contact form & WhatsApp button",
-        "Basic SEO, Google-ready",
-        "Hosting setup & handover"
-      ]
+      "builtIntro": "A production platform, now live in pilot:",
+      "result": null
     },
-    {
-      "id": "growth",
-      "name": "Growth",
-      "recommended": true,
-      "summary": "A custom-designed site your team can update.",
-      "for": [
-        "Growing businesses",
-        "Brands that need to stand out"
-      ],
-      "includes": [
-        "Up to ~10 pages",
-        "Custom design for your brand",
-        "CMS to edit content yourself",
-        "Animations & interactions",
-        "Forms, analytics & integrations"
-      ]
-    },
-    {
-      "id": "signature",
-      "name": "Signature",
-      "summary": "An immersive, fully custom web experience.",
-      "for": [
-        "Brands where the site is the product"
-      ],
-      "includes": [
-        "Fully custom, brand-led design",
-        "Scroll-driven & interactive motion, 3D where it fits",
-        "Payments, booking & CRM integrations",
-        "Multilingual (e.g. Hindi + English)",
-        "Advanced SEO & performance tuning"
-      ]
-    }
-  ],
+    "demos": []
+  },
+  "categoriesIntro": "Every service is built around how your business already works, and works with the data you already have (Excel sheets, or exports from your billing and accounting software).",
   "categories": [
     {
-      "id": "websites",
-      "title": "Websites",
-      "summary": "Marketing sites in three classes, from simple to immersive.",
-      "for": [],
-      "covers": [
-        "Launch",
-        "Growth",
-        "Signature"
+      "id": "data",
+      "title": "Data analytics & modelling",
+      "summary": "See what sold, who owes you, who your best customers are, and where your next growth will come from.",
+      "tags": [
+        "MIS reports",
+        "Dashboards",
+        "Forecasting",
+        "Data cleanup"
       ],
-      "includes": [],
-      "priceFrom": 35000,
-      "priceFactors": [
-        "Number of pages",
-        "Design and motion",
-        "Content and copy",
-        "Integrations"
-      ]
-    },
-    {
-      "id": "saas",
-      "title": "CRM, ERP & SaaS products",
-      "summary": "Software that runs your business or becomes your product, built around your real workflows.",
-      "for": [
-        "Early-stage founders",
-        "Small businesses going online",
-        "Distributors & franchises",
-        "SMEs on spreadsheets",
-        "Service businesses",
-        "Manufacturing & warehouses"
-      ],
-      "covers": [
-        "CRM",
-        "ERP",
-        "Internal tools",
-        "SaaS & MVPs"
-      ],
-      "includes": [
-        "Product scoping & architecture",
-        "Mobile-friendly web app or installable PWA",
-        "Auth, payments (Razorpay/Stripe) & admin dashboard",
-        "Inventory, orders & payments",
-        "Ledgers, refunds & audit logs",
-        "Role-based staff & partner access",
-        "Replaces Excel & WhatsApp workflows",
-        "Cloud deployment & handover"
-      ],
-      "priceFrom": 80000,
-      "priceFactors": [
-        "Modules and workflows",
-        "User roles and permissions",
-        "Integrations (payments, SMS, email)",
-        "Users and data volume"
-      ]
-    },
-    {
-      "id": "aiaas",
-      "title": "AIaaS",
-      "summary": "LLM-powered tools that work on your own data.",
-      "for": [
-        "Support teams",
-        "Operations-heavy businesses",
-        "Existing products"
-      ],
-      "covers": [
-        "Assistants",
-        "Automation",
-        "Document Q&A"
-      ],
-      "includes": [
-        "Document Q&A over your data (RAG)",
-        "Support & WhatsApp bots",
-        "Workflow automation: data entry, reports, lead routing",
-        "AI features in apps: search, summaries, extraction"
-      ],
-      "priceFrom": 70000,
-      "priceFactors": [
-        "Number of workflows",
-        "Data sources and volume",
-        "Accuracy and review needs",
-        "Cloud or offline hosting"
-      ]
-    }
-  ],
-  "lease": {
-    "title": "Lease",
-    "summary": "A lower upfront cost: I build, host and maintain the product, and you use it under licence for a monthly fee.",
-    "includes": [
-      "Hosting, maintenance & security updates included",
-      "Small changes & improvements included",
-      "12-month minimum term",
-      "Buyout option: purchase the code outright later",
-      "You always own your data"
-    ],
-    "setup": "30–40% of the build price",
-    "monthly": "3–5% of the build price"
-  },
-  "engagements": [
-    {
-      "id": "build",
-      "title": "Full build",
-      "summary": "A scoped build with a fixed quote, paid in milestones. The client owns the code and the data.",
-      "stats": [
+      "services": [
         {
-          "label": "QUOTE",
-          "value": "Fixed price"
+          "id": "paper-to-digital",
+          "title": "Paper to digital",
+          "summary": "Send photos of registers, job cards, gate passes or stock books. I turn them into clean, searchable data."
         },
         {
-          "label": "PAYMENT",
-          "value": "In milestones"
+          "id": "daily-entry",
+          "title": "Mobile daily entry",
+          "summary": "Supervisors and staff log production, stock in and out, and dispatch from their phone with a simple form or a photo. It goes straight into your records."
+        },
+        {
+          "id": "business-pulse",
+          "title": "Business Pulse (automated MIS)",
+          "summary": "A weekly report on your phone and email, plus a simple dashboard: sales, stock, dispatch, dues and the few things that need your attention."
+        },
+        {
+          "id": "decision-report",
+          "title": "Decision Report",
+          "summary": "Share three months of data and get a one-page report with three decisions you can act on this month."
+        }
+      ]
+    },
+    {
+      "id": "ai-automations",
+      "title": "AI automations",
+      "summary": "Let software handle the invoices, reminders and data entry.",
+      "tags": [
+        "Automatic invoicing",
+        "Payment reminders",
+        "Document reading",
+        "Gmail, Telegram & WhatsApp assistant"
+      ],
+      "services": [
+        {
+          "id": "order-to-cash",
+          "title": "Order-to-cash automation",
+          "summary": "Invoices drafted from dispatch slips or POs, e-invoice and e-way bill details prepared, sent to customers, and tracked until paid."
+        },
+        {
+          "id": "collections",
+          "title": "Collections autopilot",
+          "summary": "A clear list of who owes what, with automatic payment reminders by email and SMS."
+        },
+        {
+          "id": "document-capture",
+          "title": "Document capture",
+          "summary": "AI reads bills, invoices and POs and turns them into clean data in your records."
+        }
+      ]
+    },
+    {
+      "id": "erp-crm",
+      "title": "ERPs & CRMs",
+      "summary": "One system for your orders, stock, ledgers, customers and dealer network.",
+      "tags": [
+        "ERP",
+        "CRM",
+        "Dealer & distributor platforms"
+      ],
+      "services": [
+        {
+          "id": "distribution-os",
+          "title": "Distribution OS",
+          "summary": "One platform for dealers, distributors or agents: price tiers, orders, ledgers, payments and an online shop."
+        }
+      ]
+    },
+    {
+      "id": "custom-tools",
+      "title": "Custom tools & software",
+      "summary": "Built for the one job off-the-shelf software doesn't do well.",
+      "tags": [
+        "Internal portals",
+        "Calculators & quoting tools",
+        "Admin dashboards"
+      ],
+      "services": [
+        {
+          "id": "custom-tools",
+          "title": "Custom tools",
+          "summary": "Something specific to your business? I build internal portals, calculators and quoting tools, and admin dashboards around how you already work."
+        }
+      ]
+    },
+    {
+      "id": "mobile-apps",
+      "title": "Mobile apps",
+      "summary": "One app for Android and iPhone, for your team, dealers or customers.",
+      "tags": [
+        "Field & floor apps",
+        "Dealer ordering",
+        "Customer apps"
+      ],
+      "services": [
+        {
+          "title": "Field and floor apps",
+          "summary": "For supervisors, sales reps and delivery staff to log orders, stock, dispatch and visits, even with weak internet."
+        },
+        {
+          "title": "Dealer and distributor apps",
+          "summary": "Ordering, price lists, ledgers and payment status in their pocket."
+        },
+        {
+          "title": "Customer apps",
+          "summary": "Ordering, bookings, tracking and support."
+        },
+        {
+          "title": "Companion apps",
+          "summary": "For the systems I build, so your team can use them on the go."
         }
       ],
-      "points": [
-        "You own the code and your data",
-        "30 days of bug fixes after launch",
-        "Care plan optional but recommended if you host it yourself"
-      ]
+      "note": "Every app comes with an admin dashboard, secure login and publishing to the Play Store and App Store."
     },
     {
-      "id": "lease",
-      "title": "Lease (licensed)",
-      "summary": "A lower upfront cost: a setup fee of about 30–40% of the build price, then about 3–5% of the build price per month. Hosting, maintenance and small changes are included, the minimum term is 12 months, and the code can be bought outright later. The client always owns their data."
-    },
-    {
-      "id": "care",
-      "title": "Care plan (monthly maintenance)",
-      "summary": "Hosting, security updates, monitoring, backups and bug fixes, priced by scale tier from ₹3,000 per month. Included in a lease. Required when the build is hosted or run for the client (including AI automations), and optional but recommended when the client hosts it after handover.",
-      "from": 3000,
-      "points": [
-        "Hosting and uptime monitoring",
-        "Security and dependency updates",
-        "Backups and bug fixes"
-      ]
-    },
-    {
-      "id": "retainer",
-      "title": "Monthly retainer",
-      "summary": "Ongoing development of new features and improvements, from ₹15,000 per month, by arrangement.",
-      "from": 15000,
-      "points": [
-        "New features and improvements",
-        "Ongoing development and support"
-      ]
+      "id": "websites",
+      "title": "Marketing & portfolio sites",
+      "summary": "Sites that make a strong first impression and turn visitors into enquiries.",
+      "tags": [
+        "Business websites",
+        "Portfolio sites",
+        "Lead capture to WhatsApp"
+      ],
+      "services": [
+        {
+          "title": "Launch",
+          "summary": "A fast 1–5 page site that works well on mobile, contact form, WhatsApp button, basic SEO, hosting setup.",
+          "for": "Landing pages, new businesses, personal brands"
+        },
+        {
+          "title": "Business",
+          "summary": "Up to about 10 pages, custom design, a CMS so you can edit content yourself, analytics, lead capture into WhatsApp or your CRM.",
+          "for": "Growing businesses that need a proper online presence"
+        },
+        {
+          "title": "Signature",
+          "summary": "Fully custom, with scroll-driven motion and 3D where it fits, payments, booking, CRM integration, Hindi and English, advanced SEO and speed tuning.",
+          "for": "Brands that want to stand out"
+        }
+      ],
+      "note": "Website care: hosting, updates, backups and a monthly report on visits and leads."
     }
   ],
   "process": [
     {
-      "step": "Scoping call",
-      "detail": "Free 30-minute call to understand the problem and goals."
+      "step": "A free 30-minute call",
+      "detail": "You walk me through how things work today. I mostly listen."
     },
     {
-      "step": "Fixed quote",
-      "detail": "A clear scope, price and timeline within 48 hours."
+      "step": "A fixed quote within 48 hours",
+      "detail": "Clear scope, clear price, clear timeline."
     },
     {
-      "step": "Weekly sprints",
-      "detail": "Built in weekly sprints, with a live demo every week."
+      "step": "Built in weekly steps",
+      "detail": "You see a live demo every week and can change direction early."
     },
     {
-      "step": "Launch & support",
-      "detail": "Deployment, handover, and an optional retainer."
+      "step": "Launch and training",
+      "detail": "I set it up, train your team, and stay on hand while everyone settles in."
     }
   ],
+  "nda": "Happy to sign an NDA before we talk, if you'd like.",
   "faq": [
     {
-      "q": "Do you sign NDAs?",
-      "a": "Yes, I'm happy to sign your NDA before we discuss the details of your project."
+      "q": "Our team isn't very tech-savvy. Will this work for us?",
+      "a": "Yes. Everything works on a phone, with simple screens your team can learn in a day. I train everyone before launch."
     },
     {
-      "q": "How is pricing decided?",
-      "a": "Starting prices are ₹35,000 for websites, ₹80,000 for CRM, ERP and SaaS products, and ₹70,000 for AI automation. The final price depends on scope (pages and design, modules and workflows, integrations, data) and on how many users it needs to handle. You get a fixed quote after a free scoping call."
+      "q": "Do we have to replace our current software?",
+      "a": "No. I usually work with the data your software already exports, like Excel or CSV files, so you keep what you use today."
     },
     {
-      "q": "What's the lease option?",
-      "a": "Instead of paying for the full build upfront, you pay a smaller setup fee and a monthly fee. I own and maintain the product and you use it under licence, with hosting, maintenance and small changes included. The minimum term is 12 months, you can buy the code outright later, and your data is always yours."
+      "q": "Who owns our data?",
+      "a": "You do, always. With Own it, you also own the code from day one. With Subscribe, you can buy the code any time."
     },
     {
-      "q": "How do payments work?",
-      "a": "Payments are milestone-based, with the milestones and amounts agreed in each project's quote."
+      "q": "What happens if we stop the subscription?",
+      "a": "You get a full export of your data. You can also buy the code and keep running it yourself."
     },
     {
-      "q": "What happens after launch?",
-      "a": "Every project includes 30 days of bug fixes after launch. After that, a monthly care plan (from ₹3,000) covers hosting, security updates, monitoring and backups. It's included in a lease, required for anything hosted or run for you (including AI automations), and optional but recommended if you take over hosting yourself. New features run on a monthly retainer from ₹15,000."
+      "q": "Is our data safe?",
+      "a": "Access is limited by role, everything is backed up, and I'll sign an NDA if you want one."
     },
     {
-      "q": "Will it handle more users as I grow?",
-      "a": "Apps and AI builds are scoped to a scale tier: up to about 100 users, up to about 1,000, or 10,000 or more. Higher tiers add server and database sizing and load testing, and the monthly care plan rises with them."
+      "q": "How long does it take?",
+      "a": "A pilot takes 30 days. Most full systems take 4–12 weeks, depending on what's included. Your fixed quote will say exactly."
     },
     {
-      "q": "Do you work with clients outside India?",
-      "a": "I mainly work with clients in India. International projects are welcome by arrangement."
+      "q": "Which AI do you use, and who pays for it?",
+      "a": "I use the latest models from leading AI providers, picked for each task. You either pay the AI usage cost directly at actual cost, or choose a monthly plan that includes it up to a set limit."
     },
     {
-      "q": "How long does a project take?",
-      "a": "It depends on scope. Your fixed quote includes a timeline, and you'll see a live demo of progress every week."
+      "q": "Can I see a demo built for my business before committing?",
+      "a": "Yes. I can build a working demo around your own process and data, so you see exactly how it would work for you. It's priced as a small share of the estimated project fee, confirmed on the call."
     },
     {
-      "q": "How do we get started?",
-      "a": "Send a short brief using the form or by email. I'll reply to set up a free 30-minute scoping call, then send a fixed quote within 48 hours."
+      "q": "Can you build an app for millions of users?",
+      "a": "That's not what I focus on. I build systems for businesses and their teams, dealers and customers, from a handful of users up to around 10,000. I can also build MVPs designed to grow to that size. That focus keeps your costs predictable and lets me support you personally. If you're building a mass-market consumer app, a larger team will serve you better, and I'm happy to point you to one."
     }
   ],
-  "scale": {
-    "intro": "Every app and AI build is sized to a user count, so it keeps working as you grow. Higher tiers add server and database sizing and load testing to the build, and raise the monthly care plan.",
-    "tiers": [
-      {
-        "id": "starter",
-        "label": "Starter",
-        "users": "Up to ~100 users",
-        "summary": "A team or a first launch.",
-        "careFrom": 3000
-      },
-      {
-        "id": "growth",
-        "label": "Growth",
-        "users": "Up to ~1,000 users",
-        "summary": "A growing business or a live product.",
-        "careFrom": 7000
-      },
-      {
-        "id": "scale",
-        "label": "Scale",
-        "users": "10,000+ users",
-        "summary": "A high-traffic product or a large organisation, with load testing and a scalable cloud setup in scope.",
-        "careFrom": 15000
-      }
-    ]
+  "cta": {
+    "title": "Let's talk",
+    "summary": "Tell me which part of your business takes the most time today. In 30 minutes, you'll know whether I can help and roughly what it would take.",
+    "note": "Need a website as well? Websites with lead capture are available alongside any of the services above."
   }
 }

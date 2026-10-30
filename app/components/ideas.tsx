@@ -3,7 +3,7 @@ import Reveal from "./effects/reveal"
 import ideas from "../content/ideas.json"
 
 // Placeholder entries in ideas.json stay out of the page until they are filled in
-const IDEAS = ideas.filter((idea) => !idea.placeholder)
+export const IDEAS = ideas.filter((idea) => !idea.placeholder)
 
 // Static class names so Tailwind picks them up; a lone idea gets a readable width instead of a third
 const COLS = { 1: "max-w-2xl", 2: "sm:grid-cols-2", 3: "sm:grid-cols-3" } as Record<number, string>
@@ -13,8 +13,8 @@ export default function Ideas() {
   if (IDEAS.length === 0) return null
 
   return (
-    <div className="space-y-6">
-      <SectionHeading title="Ideas" note="Things I'd like to build. Let's collaborate." />
+    <div id="ideas" className="space-y-6">
+      <SectionHeading title="Ideas" />
       <Reveal className={`grid gap-4 ${COLS[Math.min(IDEAS.length, 3)]}`}>
         {IDEAS.map((idea, i) => (
           <div key={i} className="border border-line bg-surface p-5 space-y-2">

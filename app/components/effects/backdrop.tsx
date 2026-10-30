@@ -71,6 +71,9 @@ export default function Backdrop() {
         )}
       </svg>
 
+      {/* Veil over the map, under the flights: quiets the map behind the content column (see globals.css) */}
+      <div className="backdrop-veil" />
+
       {/* Flight patterns above the city, kept sharp */}
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
         {FLIGHTS.map((flight, i) => (

@@ -2,11 +2,14 @@
   {
     "id": "futurise",
     "name": "Futurise",
+    "logo": "/logos/futurise.webp",
+    "logoBg": "#000000",
     "status": "current"
   },
   {
     "id": "co-daftar",
     "name": "Co-Daftar",
+    "logo": "/logos/co-daftar.svg",
     "status": "partner",
     "role": "Past collaborator · workspace partner",
     "link": "https://codaftar.com/"
