@@ -5,8 +5,8 @@ import SectionHeading from "../components/section-heading";
 import Reveal from "../components/effects/reveal";
 import { PLACEHOLDER_PROJECTS, PROJECTS } from "../content/projects";
 
-// Client projects, then any empty client slots from projects.json
-const CLIENT_PROJECTS = [...PROJECTS, ...PLACEHOLDER_PROJECTS].filter((project) => project.kind === "client");
+// Client projects (except any marked hideOnHome), then any empty client slots from projects.json
+const CLIENT_PROJECTS = [...PROJECTS, ...PLACEHOLDER_PROJECTS].filter((project) => project.kind === "client" && !project.hideOnHome);
 
 // Pairs of tiles, one row per pair
 const ROWS = Array.from({ length: Math.ceil(CLIENT_PROJECTS.length / 2) }, (_, r) => CLIENT_PROJECTS.slice(r * 2, r * 2 + 2));
@@ -33,7 +33,7 @@ export default function WorkSection({ id }: { id?: string }) {
               {row.map((project, i) => (
                 <Reveal key={project.id} delay={i * 100}>
                   <div id={project.id} className="scroll-mt-28 h-full">
-                    <ProjectTile image={project.image} title={project.title} href={project.link} external placeholder={project.placeholder} />
+                    <ProjectTile image={project.image} video={project.video} title={project.title} href={project.link} external placeholder={project.placeholder} />
                   </div>
                 </Reveal>
               ))}

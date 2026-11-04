@@ -51,10 +51,10 @@ export default function Footer() {
   }
 
   return (
-    // Negative margins cancel most of the page's side padding (see layout.tsx body: 1rem, 3rem, 6rem,
-    // 12rem), leaving an even 1.5rem gutter on both sides and the same space above and below
-    <footer ref={footerRef} className="py-6 px-2 sm:px-0 sm:-mx-6 md:-mx-18 lg:-mx-42">
-      <div className="flex flex-col md:flex-row">
+    // Negative margins cancel the page's side padding (see layout.tsx body: 1rem, 3rem, 6rem, 12rem) so the
+    // footer spans the full width, and the ticket then takes the same width as the top nav bar (see header.tsx)
+    <footer ref={footerRef} className="py-6 -mx-4 sm:-mx-12 md:-mx-24 lg:-mx-48">
+      <div className="mx-auto flex w-[min(80rem,calc(100%-1.5rem))] flex-col md:flex-row">
         {/* Ticket */}
         <div className="relative flex-1 border border-line border-b-2 [border-bottom-style:dashed] md:border-b md:[border-bottom-style:solid] md:border-r-2 md:[border-right-style:dashed] bg-surface p-4 sm:p-5">
           {/* Punched notches at both ends of the perforation */}

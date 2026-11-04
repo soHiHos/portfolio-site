@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Code2 } from "lucide-react";
 import Reveal from "../../components/effects/reveal";
 import LidarVisual from "../../components/effects/lidar-visual";
+import HoverVideo from "../../components/effects/hover-video";
+import LoadImg from "../../components/effects/media-spinner";
 import { CATEGORIES, PROJECTS } from "../../content/projects";
 
 // Only ids in projects.json exist; anything else 404s
@@ -67,7 +69,13 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
             {project.visual === "lidar" ? (
               <LidarVisual />
             ) : (
-              <img src={project.image} alt={`${project.title} screenshot`} className="w-full h-full object-contain" />
+              <>
+                <LoadImg src={project.image} alt={`${project.title} screenshot`} className="w-full h-full object-contain" />
+                {/* Preview over the screenshot, played while the frame is hovered */}
+                {project.video && (
+                  <HoverVideo src={project.video} poster={project.image} className="absolute inset-0 w-full h-full object-contain" />
+                )}
+              </>
             )}
           </div>
         </Reveal>

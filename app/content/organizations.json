@@ -4,14 +4,15 @@
     "name": "Futurise",
     "logo": "/logos/futurise.webp",
     "logoBg": "#000000",
-    "status": "current"
+    "status": "past",
+    "role": "Agency, former workplace",
+    "link": "https://futurise.studio/"
   },
   {
     "id": "co-daftar",
     "name": "Co-Daftar",
     "logo": "/logos/co-daftar.svg",
     "status": "partner",
-    "role": "Past collaborator · workspace partner",
     "link": "https://codaftar.com/"
   }
 ]

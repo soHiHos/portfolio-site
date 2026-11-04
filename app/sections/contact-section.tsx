@@ -8,12 +8,10 @@ import { useIndiaTime } from "../components/use-india-time"
 import Reveal from "../components/effects/reveal"
 import { BRIEF_EVENT, type BriefDetail } from "../components/ask-tower/answer-blocks"
 import services from "../content/services.json"
-import { SERVICE_LIST } from "../content/service-list"
+import { SERVICE_LIST, TIMELINES } from "../content/service-list"
 
-const TIMELINES = ["As soon as possible", "Within 1–3 months", "Flexible / exploring"]
-
-// Everything a brief can be about: each service (including apps and websites) and the 30-day pilot
-const SERVICE_OPTIONS = [...SERVICE_LIST, { id: "pilot", title: "30-day pilot" }]
+// The four services a brief can be about; the choice also decides which PDF is sent
+const SERVICE_OPTIONS = SERVICE_LIST
 
 const LINKS = [
   { label: "LinkedIn", href: CONTACT_LINKEDIN, icon: LinkedinIcon },
@@ -28,24 +26,28 @@ const fieldClasses = "w-full border border-line bg-bg/50 px-3.5 py-3 text-sm tex
 const labelClasses = "text-xs font-medium text-muted"
 
 // Contact: a headline, then one card with the description, availability and icon-only links (email
-// copies on click) beside a short project brief. "Send" opens the visitor's mail app with the brief pre-filled (mailto), so no backend is
-// involved. The "Ask about my work" assistant can pre-fill the brief via a BRIEF_EVENT, and the services
-// page via /?brief=<service id>#contact.
+// copies on click) beside a short project brief. "Send" posts the brief to /api/lead (saved to Supabase and emailed);
+// if that fails it opens the visitor's mail app with the brief filled in. The "Ask about my work" assistant can
+// pre-fill the brief via a BRIEF_EVENT, and the services page via /?brief=<service id>#contact.
 export default function ContactSection({ id }: { id?: string }) {
   const time = useIndiaTime()
   const [copied, setCopied] = useState(false)
   const [name, setName] = useState("")
-  const [service, setService] = useState("")
+  const [picked, setPicked] = useState<string[]>([])
+  const [whatsapp, setWhatsapp] = useState("")
+  const [email, setEmail] = useState("")
+  const [consent, setConsent] = useState(false)
+  const [website, setWebsite] = useState("") // honeypot: a hidden field people never fill in
   const [timeline, setTimeline] = useState("")
   const [message, setMessage] = useState("")
   const messageRef = useRef<HTMLTextAreaElement>(null)
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "fallback">("idle")
 
   // Pre-fill from the assistant's "Start a brief"
   useEffect(() => {
     function handleBrief(e: Event) {
       const { service: s, message: m } = (e as CustomEvent<BriefDetail>).detail
-      if (s) setService(s)
+      if (s) setPicked((p) => (p.includes(s) ? p : [...p, s]))
       if (m) setMessage(m)
       setTimeout(() => messageRef.current?.focus({ preventScroll: true }), 600)
     }
@@ -53,7 +55,7 @@ export default function ContactSection({ id }: { id?: string }) {
     // Arriving from the services page (/?brief=<service id>#contact) pre-selects the service
     const fromUrl = new URLSearchParams(window.location.search).get("brief")
     const preselect = fromUrl && SERVICE_OPTIONS.some((o) => o.id === fromUrl) ? fromUrl : null
-    const timer = preselect ? setTimeout(() => setService(preselect), 0) : undefined
+    const timer = preselect ? setTimeout(() => setPicked([preselect]), 0) : undefined
     return () => {
       window.removeEventListener(BRIEF_EVENT, handleBrief)
       clearTimeout(timer)
@@ -70,15 +72,31 @@ export default function ContactSection({ id }: { id?: string }) {
     }
   }
 
-  function handleSend(e: React.FormEvent<HTMLFormElement>) {
+  // A message, a way to reply (email or WhatsApp) and consent are needed
+  const canSend = !!message.trim() && !!(whatsapp.trim() || email.trim()) && consent
+
+  // Sends the brief to /api/lead (saved to Supabase and emailed). If that fails, it falls back to the visitor's mail app
+  async function handleSend(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!message.trim()) return
-    const serviceName = SERVICE_OPTIONS.find((x) => x.id === service)?.title ?? "Not sure yet"
+    if (!canSend || status === "sending") return
+    setStatus("sending")
+    const sent = await fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kind: "brief", name, whatsapp, email, services: picked, timeline, message, consent, website }),
+    })
+      .then((r) => r.ok)
+      .catch(() => false)
+    if (sent) {
+      setStatus("sent")
+      setName(""); setWhatsapp(""); setEmail(""); setPicked([]); setTimeline(""); setMessage(""); setConsent(false)
+      return
+    }
+    const serviceName = SERVICE_OPTIONS.filter((x) => picked.includes(x.id)).map((x) => x.title).join(", ") || "Not sure yet"
     const subject = `Project brief${name.trim() ? ` from ${name.trim()}` : ""}`
-    const body = [`Name: ${name.trim() || "-"}`, `Service: ${serviceName}`, `Timeline: ${timeline || "-"}`, "", message.trim()].join("\n")
+    const body = [`Name: ${name.trim() || "-"}`, `Services: ${serviceName}`, `WhatsApp: ${whatsapp.trim() || "-"}`, `Email: ${email.trim() || "-"}`, `Timeline: ${timeline || "-"}`, "", message.trim()].join("\n")
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    setSent(true)
-    setTimeout(() => setSent(false), 4000)
+    setStatus("fallback")
   }
 
   return (
@@ -119,7 +137,7 @@ export default function ContactSection({ id }: { id?: string }) {
           <form onSubmit={handleSend} className="space-y-5 p-5 sm:p-8 border-t lg:border-t-0 lg:border-l border-line">
             <div className="space-y-1">
               <div className="text-sm font-semibold text-fg">Send a project brief</div>
-              <p className="text-sm text-muted">A few lines is enough. Only the last field is required.</p>
+              <p className="text-sm text-muted">A few lines is enough. I need your message, and an email or WhatsApp number to reply on.</p>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <label className="block space-y-1.5">
@@ -127,14 +145,34 @@ export default function ContactSection({ id }: { id?: string }) {
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className={fieldClasses} />
               </label>
               <label className="block space-y-1.5">
-                <span className={labelClasses}>Service</span>
-                <select value={service} onChange={(e) => setService(e.target.value)} className={fieldClasses}>
-                  <option value="">Not sure yet</option>
-                  {SERVICE_OPTIONS.map((x) => (
-                    <option key={x.id} value={x.id}>{x.title}</option>
-                  ))}
-                </select>
+                <span className={labelClasses}>WhatsApp number</span>
+                <input type="tel" inputMode="tel" autoComplete="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="+91 98765 43210" pattern="\+?[\d\s\-]{10,16}" maxLength={20} className={fieldClasses} />
               </label>
+              <label className="block space-y-1.5 sm:col-span-2">
+                <span className={labelClasses}>Email</span>
+                <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" maxLength={120} className={fieldClasses} />
+              </label>
+            </div>
+            <div className="space-y-1.5">
+              <span className={labelClasses} id="services-label">Services you need</span>
+              <div role="group" aria-labelledby="services-label" className="flex flex-wrap gap-2">
+                {SERVICE_OPTIONS.map((x) => {
+                  const selected = picked.includes(x.id)
+                  return (
+                    <button
+                      key={x.id}
+                      type="button"
+                      aria-pressed={selected}
+                      onClick={() => setPicked(selected ? picked.filter((id) => id !== x.id) : [...picked, x.id])}
+                      className={`border px-3 py-1.5 text-sm transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent-ink cursor-pointer ${
+                        selected ? "border-accent bg-accent text-on-accent" : "border-line text-muted hover:border-fg/40 hover:text-fg"
+                      }`}
+                    >
+                      {x.title}
+                    </button>
+                  )
+                })}
+              </div>
             </div>
             <div className="space-y-1.5">
               <span className={labelClasses} id="timeline-label">Timeline</span>
@@ -170,12 +208,21 @@ export default function ContactSection({ id }: { id?: string }) {
                 className={`${fieldClasses} resize-none`}
               />
             </label>
+            <label className="flex items-start gap-2 text-xs leading-relaxed text-muted">
+              <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 accent-[var(--accent-ink)]" />
+              <span>I agree to be contacted about my enquiry by email or WhatsApp, including with a PDF of service details, and that my details are stored to handle it.</span>
+            </label>
+            <input type="text" name="website" value={website} onChange={(e) => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
             <div className="flex flex-wrap items-center justify-between gap-3">
               <span className="text-xs text-muted" aria-live="polite">
-                {sent ? "Sent to your mail app, check it to finish" : "Opens your mail app with the brief filled in"}
+                {status === "sent"
+                  ? "Thanks, I've got your brief. I'll reply by email or WhatsApp within 48 hours."
+                  : status === "fallback"
+                    ? "Couldn't send it just now. Your mail app has opened with the brief filled in, send it from there."
+                    : "I reply by email or WhatsApp within 48 hours."}
               </span>
-              <button type="submit" disabled={!message.trim()} className="btn btn-primary">
-                Send brief
+              <button type="submit" disabled={!canSend || status === "sending"} className="btn btn-primary">
+                {status === "sending" ? "Sending" : "Send brief"}
                 <Send className="w-4 h-4" />
               </button>
             </div>

@@ -1,31 +1,34 @@
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight, ImageIcon } from "lucide-react"
 import LidarVisual from "./effects/lidar-visual"
+import HoverVideo from "./effects/hover-video"
+import LoadImg from "./effects/media-spinner"
 import type { ProjectPhase } from "../content/projects"
 
 interface ProjectTileProps {
   phase?: ProjectPhase // status line; left out for a name-only tile
   image?: string
+  video?: string // muted preview over the image, played on hover
   visual?: "lidar"
   title: string
   summary?: string
   href?: string
   external?: boolean // open href in a new tab (live site) vs. navigate (detail page)
-  stack?: string[]
   placeholder?: boolean // empty slot: dashed frame with the title, not clickable
 }
 
 const PHASE = {
   deployed: { label: "Live", dot: "bg-emerald-500" },
   servicing: { label: "Live · updating", dot: "bg-amber-400" },
+  soon: { label: "Deploying soon", dot: "bg-amber-400" },
   development: { label: "In development", dot: "bg-accent" },
+  prototype: { label: "Idea to prototype stage", dot: "bg-accent" },
   complete: { label: "Complete", dot: "bg-white/50" },
 }
 
 // A project as an image tile: the screenshot fills the tile and the title, summary and status sit
-// on a gradient at the bottom. Stack chips fade in on hover (always visible on touch screens).
-// Without a summary it's name-only, and the dark tint shrinks to a band behind the name.
-export default function ProjectTile({ phase, image, visual, title, summary, href, external, stack, placeholder }: ProjectTileProps) {
+// on a gradient at the bottom. Without a summary it's name-only, and the dark tint shrinks to a band behind the name.
+export default function ProjectTile({ phase, image, video, visual, title, summary, href, external, placeholder }: ProjectTileProps) {
   if (placeholder) {
     return (
       <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 border border-dashed border-line bg-surface text-muted">
@@ -46,7 +49,14 @@ export default function ProjectTile({ phase, image, visual, title, summary, href
       {visual === "lidar" ? (
         <div className="absolute inset-0"><LidarVisual /></div>
       ) : image && (
-        <img src={image} alt={`${title} screenshot`} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 motion-safe:group-hover:scale-[1.03]" />
+        <LoadImg src={image} alt={`${title} screenshot`} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 motion-safe:group-hover:scale-[1.03]" />
+      )}
+      {video && (
+        <HoverVideo
+          src={video}
+          poster={image}
+          className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
+        />
       )}
       {summary && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" aria-hidden="true" />}
 
@@ -62,15 +72,6 @@ export default function ProjectTile({ phase, image, visual, title, summary, href
           {href && <Arrow className="w-4 h-4 text-white/70 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />}
         </h3>
         {summary && <p className="max-w-xl text-sm sm:text-base leading-relaxed text-white/75">{summary}</p>}
-        {stack && stack.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-1 transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 motion-safe:md:translate-y-2 motion-safe:md:group-hover:translate-y-0">
-            {stack.map((item) => (
-              <span key={item} className="rounded-md bg-white/10 border border-white/15 px-2 py-0.5 text-xs">
-                {item}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </>
   )

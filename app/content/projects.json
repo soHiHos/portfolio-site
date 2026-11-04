@@ -3,12 +3,13 @@
     "id": "rever-home",
     "kind": "client",
     "category": "work",
-    "phase": "servicing",
+    "phase": "deployed",
     "title": "Rever Life ERP",
     "tagline": "Full-stack ERP for a wellness distributor business.",
     "summary": "A full-stack ERP platform built for a wellness and distributor-based business, streamlining inventory, orders, payments, ledger management, and user administration. The project involved designing scalable backend architecture, authentication, cloud deployment, and cost-optimized infrastructure while providing valuable lessons in product development, client management, pricing, and real-world software adoption.",
     "shortSummary": "A full-stack ERP for a wellness distributor, covering inventory, orders, payments, ledgers and user management, deployed on cost-optimized cloud infrastructure.",
     "image": "/images/rever-home.png",
+    "video": "/videos/reverlife.mp4",
     "link": "https://reverlife.in/home",
     "stack": [
       "Firebase Auth",
@@ -25,6 +26,7 @@
     "summary": "A community-driven football platform designed to connect local players, teams, and organizers through match discovery, event management, and social engagement. The project explored how technology can strengthen grassroots sports by simplifying coordination, encouraging participation, and making local football more accessible for players and organizers.",
     "shortSummary": "A community platform connecting local football players, teams and organizers through match discovery, event management and social engagement.",
     "image": "/images/local-legends.png",
+    "video": "/videos/local-legends.mp4",
     "link": "https://locallegends.co.in/home",
     "stack": []
   },
@@ -32,23 +34,28 @@
     "id": "co-daftar",
     "kind": "client",
     "category": "work",
-    "phase": "servicing",
+    "phase": "deployed",
     "title": "Co-Daftar",
     "tagline": "Premium coworking space in Raipur.",
     "summary": "Co-Daftar is a premium coworking space where Raipur's most driven entrepreneurs, freelancers, startups, and professionals come to do their best work. More than just an office, it is a thoughtfully designed environment that inspires productivity, collaboration, and innovation. With modern infrastructure, high-speed internet, comfortable workspaces, meeting rooms, and a vibrant community, Co-Daftar provides everything ambitious individuals and growing teams need to build, create, and thrive.",
     "shortSummary": "A premium coworking space in Raipur with modern workspaces, meeting rooms, high-speed internet and a community for entrepreneurs and teams.",
-    "image": "/images/co-daftar.png",
+    "image": "/images/co-daftar_tumbnail.png",
+    "video": "/videos/co-daftar.mp4",
     "link": "https://codaftar.com/",
     "stack": []
   },
   {
     "id": "as-metals",
+    "hideOnHome": true,
     "kind": "client",
     "category": "work",
-    "phase": "deployed",
+    "phase": "soon",
     "title": "AS Metals",
+    "status": "Deploying soon",
     "tagline": "Website for a scrap and metal trader and steel supplier.",
     "summary": "A business website for AS Metals, a scrap and metal trader and supplier of steel coils and plates. It presents the company and its product catalogue, and captures enquiries and quote requests so new buyers can reach the team quickly.",
+    "image": "/images/as-metals_thumbnail.webp",
+    "video": "/videos/as-metals.mp4",
     "stack": []
   },
   {
@@ -57,18 +64,21 @@
     "category": "work",
     "phase": "deployed",
     "title": "FrontWave",
+    "image": "/images/frontwave_thumbnail.webp",
+    "video": "/videos/frontwave.mp4",
     "tagline": "Research publishing platform for an equity researcher.",
     "summary": "A website and subscriber platform for FrontWave, an equity research business. Subscribers sign up, pay and read published research reports in a members' portal, and an admin panel lets the research team publish new reports themselves.",
     "stack": []
   },
   {
     "id": "plinth",
+    "placeholder": true,
     "kind": "personal",
     "featured": true,
     "category": "hardware",
-    "phase": "development",
+    "phase": "prototype",
     "title": "Plinth Scout",
-    "status": "In development",
+    "status": "Idea to prototype stage",
     "tagline": "Low-cost rotating LiDAR scanner for architects and engineers.",
     "summary": "A long-term hardware concept: a low-cost rotating LiDAR scanner that generates point clouds, floor plans, and DXF exports for architects and engineers.",
     "visual": "lidar",
@@ -80,8 +90,8 @@
   },
   {
     "id": "e-crf",
+    "area": "Healthcare software demo",
     "kind": "personal",
-    "featured": true,
     "category": "github",
     "phase": "development",
     "title": "E-CRF",
@@ -90,32 +100,21 @@
     "stack": []
   },
   {
-    "id": "dokai",
+    "id": "Munshi",
     "kind": "personal",
+    "featured": true,
     "category": "github",
     "phase": "development",
-    "title": "DokAI",
+    "title": "Munshi",
     "tagline": "AI assistant for business email and WhatsApp.",
     "summary": "An AI assistant that reads business email and WhatsApp messages about invoices and other business information, picks out what matters, and helps draft, send and analyse emails.",
+    "image": "/images/munshi_thumbnail.webp",
+    "video": "/videos/munshi.mp4",
     "stack": []
   },
   {
-    "id": "airbnb-eda",
-    "kind": "personal",
-    "category": "github",
-    "phase": "complete",
-    "status": "Complete",
-    "title": "Airbnb Bookings",
-    "tagline": "Exploratory analysis of Airbnb bookings.",
-    "summary": "An exploratory data analysis of Airbnb bookings that works through a business question step by step, told as a written narrative with 11 charts.",
-    "stack": [
-      "Python",
-      "Jupyter",
-      "EDA"
-    ]
-  },
-  {
     "id": "bank-segmentation",
+    "area": "Data science",
     "kind": "personal",
     "category": "github",
     "phase": "complete",
@@ -130,22 +129,8 @@
     ]
   },
   {
-    "id": "airline-referral",
-    "kind": "personal",
-    "category": "github",
-    "phase": "complete",
-    "status": "Complete",
-    "title": "Airline Passenger Referral",
-    "tagline": "Predicting which passengers will recommend an airline.",
-    "summary": "A full machine learning workflow, from cleaning and exploring passenger review data to training and comparing classification models that predict whether a passenger would recommend the airline.",
-    "stack": [
-      "Python",
-      "Jupyter",
-      "Classification"
-    ]
-  },
-  {
     "id": "cardekho-prices",
+    "area": "Data science",
     "kind": "personal",
     "category": "github",
     "phase": "complete",
@@ -158,6 +143,34 @@
       "Jupyter",
       "Regression"
     ]
+  },
+  {
+    "id": "justwatch-scraper",
+    "area": "Web scraping",
+    "kind": "personal",
+    "category": "github",
+    "phase": "complete",
+    "status": "Complete",
+    "title": "JustWatch Scraper",
+    "tagline": "Collecting movie and TV data from a live website.",
+    "summary": "A web scraper that collects movie and TV show details from JustWatch (title, year, genre, IMDb rating and the streaming services each is on) by reading the pages directly, not through an API. The data is then filtered to recent, highly rated titles and analysed to find the top genres and the streaming service with the most offerings, with the results saved to CSV. It runs as a notebook or as a script.",
+    "stack": [
+      "Python",
+      "Selenium",
+      "BeautifulSoup",
+      "Pandas"
+    ]
+  },
+  {
+    "id": "bhoondh",
+    "kind": "personal",
+    "category": "hardware",
+    "phase": "development",
+    "status": "Prototype",
+    "title": "Bhoondh",
+    "tagline": "",
+    "summary": "",
+    "placeholder": true
   },
   {
     "id": "personal-3",

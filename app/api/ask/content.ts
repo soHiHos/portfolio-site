@@ -18,7 +18,7 @@ their operations. He builds what's simple, practical and cost-effective, and eas
 maintain and grow. Toolkit: Python, FastAPI, Next.js, PostgreSQL, Redis, Raspberry Pi,
 LiDAR, RAG and AI automation.`;
 
-const PHASE = { deployed: "live", servicing: "live, currently being updated", development: "in development", complete: "complete" } as const;
+const PHASE = { deployed: "live", servicing: "live, currently being updated", soon: "deploying soon", development: "in development", prototype: "at the idea-to-prototype stage", complete: "complete" } as const;
 
 function facts(): string {
   const projectLines = projects.filter((p) => !("placeholder" in p)).map(
@@ -37,7 +37,7 @@ function facts(): string {
   const process = services.process.map((p, i) => `${i + 1}. ${p.step}: ${p.detail}`).join(" ");
   const pricing = `PRICING: never quote a price, fee or range. For pricing, point the visitor to ${
     ESTIMATOR_ON ? "the 2-minute price estimator on the services page (it gives a price range as a PDF), or to " : ""
-  }a free 30-minute call; every project gets a fixed quote within 48 hours of that call. A 30-day pilot on one process is available for businesses not ready to commit.`;
+  }a free call or Google Meet; every project gets a written proposal within 3-5 days of that call. A paid workflow audit and decision report is available as a first step for businesses not ready to commit.`;
   const faq = services.faq.map((f) => `Q: ${f.q} A: ${f.a}`).join("\n");
   const partners = organizations.map((o) => `${o.name}${"role" in o && o.role ? ` (${o.role})` : ""}`).join(", ");
 

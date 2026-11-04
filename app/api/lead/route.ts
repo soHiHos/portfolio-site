@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server';
 import { CONTACT_EMAIL } from '../../content/contact';
-import { ESTIMATOR_ON, QUESTIONS, estimate, formatRange, inr, validAnswers, type Contact } from '../../components/estimator/estimate';
+import { SERVICE_LIST, TIMELINES } from '../../content/service-list';
+import { ESTIMATOR_ON, QUESTIONS, estimate, inr, validAnswers, type Contact } from '../../components/estimator/estimate';
 
-// Saves a price-estimator lead to Supabase and emails it to Soham (Resend). No model calls here; those stay
-// in /api/ask. The estimate is recomputed from the answers, never taken from the browser. If one of the two
+// Saves a price-estimator lead, or a contact-form brief (`kind: 'brief'`), to Supabase and emails it to Soham (Resend).
+// No model calls here; those stay in /api/ask. The estimate is recomputed from the answers, never taken from the browser. If one of the two
 // sinks is down the lead still counts as received, as long as the other one worked.
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// The secret key (sb_secret_...); the older service_role JWT still works under its old name
+const SUPABASE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const NOTIFY_TO = process.env.LEAD_NOTIFY_EMAIL || CONTACT_EMAIL;
 const NOTIFY_FROM = process.env.LEAD_EMAIL_FROM || 'Portfolio leads <onboarding@resend.dev>';
@@ -40,14 +42,20 @@ function label(key: keyof typeof QUESTIONS, id: string) {
   return (QUESTIONS[key].options as readonly { id: string; label: string }[]).find((o) => o.id === id)?.label ?? id;
 }
 
-async function saveToSupabase(row: Record<string, unknown>) {
+async function saveToSupabase(table: 'leads' | 'briefs', row: Record<string, unknown>) {
   if (!SUPABASE_URL || !SUPABASE_KEY) return false;
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
     method: 'POST',
-    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+    // New secret keys are not JWTs, so they go in apikey only; a legacy service_role JWT also needs the Bearer header
+    headers: {
+      apikey: SUPABASE_KEY,
+      ...(SUPABASE_KEY.startsWith('sb_') ? {} : { Authorization: `Bearer ${SUPABASE_KEY}` }),
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
     body: JSON.stringify(row),
   });
-  if (!res.ok) console.error('lead: supabase insert failed', res.status, await res.text());
+  if (!res.ok) console.error(`lead: supabase insert into ${table} failed`, res.status, await res.text());
   return res.ok;
 }
 
@@ -62,9 +70,42 @@ async function emailSoham(subject: string, body: string, replyTo: string) {
   return res.ok;
 }
 
-export async function POST(req: Request) {
-  if (!ESTIMATOR_ON) return NextResponse.json({ error: 'not_available' }, { status: 404 });
+// A brief from the contact form: needs a message, a way to reply (email or WhatsApp) and consent. Not tied to the
+// estimator, so it works while the estimator is hidden.
+async function handleBrief(body: Record<string, unknown>) {
+  const name = text(body.name, 80);
+  const whatsapp = text(body.whatsapp, 20);
+  const email = text(body.email, 120);
+  const message = text(body.message, 2000);
+  const timeline = text(body.timeline, 40);
+  const services = Array.isArray(body.services) ? body.services.filter((s): s is string => typeof s === 'string') : [];
 
+  const valid =
+    message &&
+    (whatsapp || email) &&
+    (!whatsapp || /^\+?[\d\s-]{10,16}$/.test(whatsapp)) &&
+    (!email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) &&
+    (!timeline || TIMELINES.includes(timeline)) &&
+    services.length <= SERVICE_LIST.length &&
+    services.every((s) => SERVICE_LIST.some((x) => x.id === s)) &&
+    body.consent === true;
+  if (!valid) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
+
+  const serviceNames = SERVICE_LIST.filter((x) => services.includes(x.id)).map((x) => x.title).join(', ') || 'Not sure yet';
+  const [saved, emailed] = await Promise.all([
+    saveToSupabase('briefs', { name, whatsapp, email, services, timeline, message, consent: true }).catch((err) => (console.error('brief: supabase error', err), false)),
+    emailSoham(
+      `New project brief${name ? ` from ${name}` : ''}`,
+      [`Name: ${name || '-'}`, `WhatsApp: ${whatsapp || '-'}`, `Email: ${email || '-'}`, `Services: ${serviceNames}`, `Timeline: ${timeline || '-'}`, '', message].join('\n'),
+      email || CONTACT_EMAIL
+    ).catch((err) => (console.error('brief: resend error', err), false)),
+  ]);
+
+  if (!saved && !emailed) return NextResponse.json({ error: 'not_saved' }, { status: 502 });
+  return NextResponse.json({ ok: true });
+}
+
+export async function POST(req: Request) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
   if (rateLimited(ip)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
 
@@ -78,6 +119,10 @@ export async function POST(req: Request) {
   // Honeypot: a hidden field people never fill in. Pretend it worked so bots don't retry.
   if (text(body.website, 200)) return NextResponse.json({ ok: true });
 
+  if (body.kind === 'brief') return handleBrief(body);
+
+  if (!ESTIMATOR_ON) return NextResponse.json({ error: 'not_available' }, { status: 404 });
+
   const contact = body.contact && typeof body.contact === 'object' ? validContact(body.contact as Record<string, unknown>) : null;
   if (!validAnswers(body.answers) || !contact || body.consent !== true) {
     return NextResponse.json({ error: 'bad_request' }, { status: 400 });
@@ -87,7 +132,8 @@ export async function POST(req: Request) {
 
   const summary = [
     `Business: ${label('business', answers.business)}`,
-    `Wants to fix: ${answers.outcomes.map((o) => label('outcomes', o)).join(' | ')}`,
+    `Wants to fix: ${answers.outcomes.map((o) => label('outcomes', o)).join(' | ') || '(see the note below)'}`,
+    ...(answers.other?.trim() ? [`In their own words: ${answers.other.trim()}`] : []),
     `Tracks today with: ${answers.tracking.map((t) => label('tracking', t)).join(', ')}`,
     `Users: ${label('users', answers.users)}`,
     `Also needs: ${answers.extras.map((x) => label('extras', x)).join(', ') || 'Neither'}`,
@@ -96,19 +142,19 @@ export async function POST(req: Request) {
     `Start: ${label('start', answers.start)}`,
   ];
   const estimateLines = [
-    `Build: ${formatRange(e.build)}${e.monthly[1] > 0 ? `, running fees ${formatRange(e.monthly)} a month` : ''}, care plan from ${inr(e.care)} a month`,
-    ...(e.subscribe ? [`Subscribe: ${formatRange(e.subscribe.setup)} to start, then ${formatRange(e.subscribe.monthly)} a month`] : []),
+    `Setup from ${inr(e.setup)}${e.licence ? `, licence from ${inr(e.licence)} a month` : ''}${e.siteCare ? `, optional site care from ${inr(e.siteCare)} a month` : ''} (excl. GST)`,
+    `Buyout: ${e.buyout ? `from ${inr(e.buyout)}${e.retainer ? `, optional retainer from ${inr(e.retainer)} a month` : ''}` : 'code handed over with setup'} (excl. GST)`,
     `Timeline: ${e.timeline}`,
   ];
 
   const [saved, emailed] = await Promise.all([
-    saveToSupabase({
+    saveToSupabase('leads', {
       name: contact.name,
       business_name: contact.business,
       phone: contact.phone,
       email: contact.email,
       answers,
-      estimate: { build: e.build, monthly: e.monthly, care: e.care, subscribe: e.subscribe, timeline: e.timeline },
+      estimate: { setup: e.setup, licence: e.licence, siteCare: e.siteCare, retainer: e.retainer, buyout: e.buyout, timeline: e.timeline },
       start: answers.start,
     }).catch((err) => (console.error('lead: supabase error', err), false)),
     emailSoham(

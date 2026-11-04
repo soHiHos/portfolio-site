@@ -1,28 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check, ChevronDown, Mail, MessageCircle, PlayCircle } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, PlayCircle } from "lucide-react";
 import SectionHeading from "../components/section-heading";
 import AvailabilityBadge from "../components/availability-badge";
 import Reveal from "../components/effects/reveal";
-import { CONTACT_EMAIL } from "../components/ui/menu/contact-menu";
-import { ESTIMATOR_ON, QUESTIONS } from "../components/estimator/estimate";
+import { ESTIMATOR_ON } from "../components/estimator/estimate";
+import { RETAINER_NOTE } from "../components/services/category-price";
+import PricePlans from "../components/services/price-plans";
 import services from "../content/services.json";
 import Estimator from "../components/estimator/estimator";
 import ProblemTiles from "../components/services/problem-tiles";
+import ProcessSteps from "../components/services/process-steps";
 import SideNav from "../components/side-nav";
+import ContactSection from "../sections/contact-section";
 
 export const metadata: Metadata = {
   title: "Services — Soham Kar",
   description: "Software and AI automations that remove manual work and give growing businesses clear numbers. Get a price estimate in two minutes.",
 };
 
-const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Free 30-minute call")}`;
-
 // Proof shows only what's finished: the case study once it's cleared (no "placeholder"), and any demo videos
 const CASE_STUDY = services.proof.caseStudy.placeholder ? null : services.proof.caseStudy;
 const DEMOS = services.proof.demos as { title: string; href: string }[];
 
 const NAV = [
+  ...(ESTIMATOR_ON ? [{ id: "prices", label: "Prices" }] : []),
   { id: "problems", label: "Sound familiar" },
   ...(ESTIMATOR_ON ? [{ id: "estimate", label: "Estimate" }] : []),
   ...(CASE_STUDY || DEMOS.length > 0 ? [{ id: "proof", label: "Work in action" }] : []),
@@ -31,25 +33,24 @@ const NAV = [
   { id: "talk", label: "Let's talk" },
 ];
 
-// The page's one call to action: the price estimator, with booking a call alongside. Without the
-// estimator (pricing not yet reviewed), booking a call is the call to action.
-function Actions({ dark }: { dark?: boolean }) {
+// The page's one front door is the form; the free call follows my reply. With the estimator on, it sits alongside.
+function Actions() {
   return (
     <div className="flex flex-wrap items-center gap-4">
+      <Link href="#talk" className="btn btn-primary">
+        Fill out the form <ArrowRight className="w-4 h-4" />
+      </Link>
       {ESTIMATOR_ON && (
-        <Link href="#estimate" className="btn btn-primary">
+        <Link href="#estimate" className="btn-link text-sm text-fg">
           Get your price estimate in 2 minutes <ArrowRight className="w-4 h-4" />
         </Link>
       )}
-      <a href={MAILTO} className={ESTIMATOR_ON ? `btn-link text-sm ${dark ? "text-white" : "text-fg"}` : "btn btn-primary"}>
-        <Mail className="w-4 h-4" /> Book a free 30-minute call
-      </a>
     </div>
   );
 }
 
-// Services page: one line on what I do, the problems I solve, the estimator right under them, then proof, how we'll work,
-// the FAQ and booking. No prices here: the estimator gives ranges, and the fixed quote comes after a call.
+// Services page: one line on what I do, the prices in plain view, the problems I solve with the estimator right
+// under them for an exact range, then proof, how we'll work, the FAQ and booking. The proposal comes after a call.
 export default function ServicesPage() {
   return (
     <section id="services-page">
@@ -64,16 +65,38 @@ export default function ServicesPage() {
           </Reveal>
         </div>
 
+        {/* Prices in plain view: a range for every service, so nobody has to use the estimator to see them */}
+        {ESTIMATOR_ON && (
+          <Reveal id="prices" className="space-y-5">
+            <h2 className="text-3xl sm:text-4xl font-bold text-fg">Services and prices</h2>
+            <PricePlans categories={services.categories} />
+            <p className="text-sm text-muted">{RETAINER_NOTE}</p>
+            <Link href="#estimate" className="btn-link text-sm text-fg">
+              Want a figure for your business? Use the estimator <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Reveal>
+        )}
+
         {/* Sound familiar? */}
         <Reveal id="problems" className="space-y-5">
           <h2 className="text-3xl sm:text-4xl font-bold text-fg">Sound familiar?</h2>
-          <ProblemTiles items={services.problems.items} max={QUESTIONS.outcomes.max} selectable={ESTIMATOR_ON} />
+          <ProblemTiles items={services.problems.items} selectable={ESTIMATOR_ON} />
+          <div id="before-you-reach-out" className="scroll-mt-28 border border-line bg-surface p-5 sm:p-6 space-y-4">
+            <h3 className="text-lg font-semibold text-fg">{services.cta.requirement.title}</h3>
+            <p className="text-sm leading-relaxed text-muted">{services.cta.requirement.body}</p>
+            <p className="text-sm leading-relaxed text-muted">
+              <span className="font-semibold text-fg">{services.cta.title}</span> {services.cta.summary}
+            </p>
+            <Link href="#talk" className="btn btn-primary btn-sm">
+              Fill out the form <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </Reveal>
 
         {/* The price estimator, right under the problems it prices */}
         {ESTIMATOR_ON && (
-          <div id="estimate" className="scroll-mt-28 max-w-3xl space-y-5">
-            <SectionHeading title="Get your price estimate" />
+          <div id="estimate" className="scroll-mt-28 space-y-5">
+            <SectionHeading title="Get an exact estimate" />
             <Reveal>
               <Estimator />
             </Reveal>
@@ -119,21 +142,10 @@ export default function ServicesPage() {
         )}
 
         {/* Process */}
-        <Reveal id="process" className="glass p-6 sm:p-8 space-y-4">
+        <Reveal id="process" className="border border-line bg-white dark:bg-surface p-5 sm:p-8 space-y-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-fg">How we&apos;ll work</h2>
-          <ol className="relative grid sm:grid-cols-4 gap-6">
-            <span className="hidden sm:block absolute left-0 right-0 top-4 border-t-2 border-dashed border-line" aria-hidden="true" />
-            {services.process.map((step, i) => (
-              <li key={step.step} className="group relative space-y-2">
-                <span className="relative inline-flex items-center justify-center w-8 h-8 rounded-full panel border border-white/10 text-xs font-bold text-accent-ink transition-all duration-300 motion-safe:group-hover:scale-110 group-hover:bg-accent-2 group-hover:text-on-accent-2 group-hover:border-accent-2">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-base font-semibold text-fg transition-colors duration-300 group-hover:text-accent-ink">{step.step}</h3>
-                <p className="text-sm leading-relaxed text-muted">{step.detail}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="text-sm text-muted">{services.nda}</p>
+          <ProcessSteps steps={services.process} />
+          <p className="border-t border-line pt-4 text-sm text-muted">{services.nda}</p>
         </Reveal>
 
         {/* FAQ */}
@@ -152,20 +164,8 @@ export default function ServicesPage() {
           </div>
         </Reveal>
 
-        {/* Let's talk */}
-        <Reveal id="talk" className="space-y-4">
-          <div className="border border-white/10 panel text-white p-6 sm:p-8 space-y-5">
-            <div className="space-y-1">
-              <h2 className="text-3xl sm:text-4xl font-bold">{services.cta.title}</h2>
-              <p className="max-w-xl text-sm text-white/60">{services.cta.summary}</p>
-            </div>
-            <Actions dark />
-            <span className="inline-flex items-center gap-2 text-xs text-white/50">
-              <MessageCircle className="w-3.5 h-3.5" /> WhatsApp details are shared in the reply
-            </span>
-          </div>
-          <p className="text-sm text-muted">{services.cta.note}</p>
-        </Reveal>
+        {/* Let's talk: the project brief form */}
+        <ContactSection id="talk" />
       </div>
     </section>
   );

@@ -1,16 +1,17 @@
 // The estimator's questions, answer validation and the estimate itself. Shared by the questionnaire (browser)
-// and the lead route (server), so both compute the same ranges from the same answers. All prices come from
+// and the lead route (server), so both compute the same figures from the same answers. All prices come from
 // content/pricing.ts.
 
 import services from "../../content/services.json"
-import { PRICING, type Range } from "../../content/pricing"
+import { PRICING } from "../../content/pricing"
 
 // The estimator is live once its pricing is reviewed; until then it only runs in `next dev`
 export const ESTIMATOR_ON = PRICING.reviewed || process.env.NODE_ENV !== "production"
 
 type OutcomeId = keyof typeof PRICING.outcomes
-type TrackingId = keyof typeof PRICING.tracking
-type UsersId = keyof typeof PRICING.users
+type TrackingId = "paper" | "excel" | "tally" | "software"
+type UsersId = "under50" | "to500" | "to2000" | "more"
+type ServiceId = keyof typeof PRICING.services
 type AddonId = keyof typeof PRICING.addons
 
 type Option<T extends string> = { id: T; label: string }
@@ -28,7 +29,7 @@ const OUTCOMES: (Option<OutcomeId> & { quote: string })[] = services.problems.it
 
 export const QUESTIONS = {
   business: { title: "What kind of business are you?", options: BUSINESSES as readonly Option<string>[] },
-  outcomes: { title: "What do you want to fix?", hint: "Pick up to two.", max: 2, options: OUTCOMES },
+  outcomes: { title: "What is your primary problem?", hint: "Pick the main one, or choose Other and describe it in your own words.", max: 1, options: OUTCOMES },
   tracking: {
     title: "How do you track things today?",
     hint: "Pick all that apply.",
@@ -68,10 +69,11 @@ export const QUESTIONS = {
   },
   payment: {
     title: "How would you prefer to pay?",
+    hint: "Monthly licence means a lower setup fee, then a monthly fee (6-month minimum) while I host and maintain it. With Own the code you pay once and receive the code, with no minimum period.",
     options: [
-      { id: "upfront", label: "Upfront, and own it" },
-      { id: "monthly", label: "Spread monthly (Subscribe)" },
-    ] as Option<"upfront" | "monthly">[],
+      { id: "licence", label: "Monthly licence" },
+      { id: "buyout", label: "Own the code" },
+    ] as Option<"licence" | "buyout">[],
   },
   start: {
     title: "When do you want to start?",
@@ -86,15 +88,18 @@ export const QUESTIONS = {
 export type Answers = {
   business: string
   outcomes: OutcomeId[]
+  other?: string // the visitor's own words; set (even if empty) once they choose "Other"
   tracking: TrackingId[]
   users: UsersId
   extras: AddonId[]
   ai: "yes" | "no" | "unsure"
-  payment: "upfront" | "monthly"
+  payment: "licence" | "buyout"
   start: "now" | "soon" | "exploring"
 }
 
 export type Contact = { name: string; business: string; phone: string; email: string }
+
+export const OTHER_MAX = 500
 
 const ids = (options: readonly { id: string }[]) => options.map((o) => o.id)
 const isOne = (v: unknown, options: readonly { id: string }[]) => typeof v === "string" && ids(options).includes(v)
@@ -108,7 +113,10 @@ export function validAnswers(a: unknown): a is Answers {
   const q = QUESTIONS
   return (
     isOne(x.business, q.business.options) &&
-    isMany(x.outcomes, q.outcomes.options, 1, q.outcomes.max) &&
+    isMany(x.outcomes, q.outcomes.options, 0, q.outcomes.max) &&
+    (x.other === undefined || (typeof x.other === "string" && x.other.length <= OTHER_MAX)) &&
+    (x.outcomes as unknown[]).length + (x.other === undefined ? 0 : 1) <= q.outcomes.max &&
+    ((x.outcomes as unknown[]).length > 0 || (typeof x.other === "string" && x.other.trim().length > 0)) &&
     isMany(x.tracking, q.tracking.options, 1, q.tracking.options.length) &&
     isOne(x.users, q.users.options) &&
     isMany(x.extras, q.extras.options, 0, q.extras.options.length) &&
@@ -118,28 +126,26 @@ export function validAnswers(a: unknown): a is Answers {
   )
 }
 
-const add = (a: Range, b: Range): Range => [a[0] + b[0], a[1] + b[1]]
-const scale = (r: Range, f: number): Range => [r[0] * f, r[1] * f]
-const step = (n: number) => (n < PRICING.roundTo.threshold ? PRICING.roundTo.small : PRICING.roundTo.large)
-const round = ([lo, hi]: Range): Range => [Math.floor(lo / step(lo)) * step(lo), Math.ceil(hi / step(hi)) * step(hi)]
+const sum = (nums: number[]) => nums.reduce((a, b) => a + b, 0)
+const orNull = (nums: number[]) => (nums.length > 0 ? sum(nums) : null)
 
 export function inr(n: number) {
   return `₹${n.toLocaleString("en-IN")}`
 }
-export function formatRange([lo, hi]: Range) {
-  return lo === hi ? inr(lo) : `${inr(lo)}–${inr(hi)}`
-}
+
+// Prices exclude GST; the PDF and the page show it as a separate line at this rate
+export const GST_PERCENT = Math.round(PRICING.gst * 100)
 
 export type Estimate = {
   business: { label: string; examples: string }
   problems: string[] // the visitor's own picks, in their words
   solutions: { title: string; includes: string[] }[]
-  build: Range
-  monthly: Range // running fees; Own it adds the optional care plan on top
-  care: number
-  subscribe: { setup: Range; monthly: Range; minimumMonths: number } | null
-  pilot: Range
-  pilotDays: number
+  // All "from" prices, excluding GST
+  setup: number // one-time, paid in three milestones
+  licence: number | null // monthly, billed in advance; null when only a marketing site is chosen (it has none)
+  siteCare: number | null // marketing site only: optional monthly hosting and care, no minimum
+  buyout: number | null // one-time to own the code, on top of nothing else; null when only a marketing site is chosen (code handed over)
+  retainer: number | null // optional monthly hosting and upkeep after a buyout; null when there is no buyout
   timeline: string
   ai: boolean
   needsCall: boolean // more than 2,000 users: the range is a rough guide only
@@ -147,22 +153,17 @@ export type Estimate = {
 }
 
 export function estimate(a: Answers, today = new Date()): Estimate {
-  const users = PRICING.users[a.users]
-  const outcomes = a.outcomes.map((id) => PRICING.outcomes[id])
-  const addons = a.extras.map((id) => PRICING.addons[id])
+  // Only "Other" chosen: priced as a custom system until the call
+  const outcomes = a.outcomes.length > 0 ? a.outcomes.map((id) => PRICING.outcomes[id]) : [PRICING.outcomes.custom]
+  const other = a.other?.trim()
 
-  // Bringing existing records in: the most involved source sets the range
-  const tracking = a.tracking.map((id) => PRICING.tracking[id]).reduce<Range>((m, r) => [Math.max(m[0], r[0]), Math.max(m[1], r[1])], [0, 0])
+  // A service is priced once, however many of the visitor's picks it delivers
+  const serviceIds = [...new Set<ServiceId>([...outcomes.map((o) => o.service), ...a.extras.map((id) => PRICING.addons[id].service)])]
+  const services = serviceIds.map((id) => PRICING.services[id])
+  const licensed = services.filter((x) => x.licence !== null)
+  const site = services.filter((x) => x.licence === null)
 
-  const core = scale(outcomes.reduce<Range>((s, o) => add(s, o.build), tracking), users.factor)
-  const build = round(addons.reduce<Range>((s, x) => add(s, x.build), core))
-  const monthly = round([...outcomes, ...addons].reduce<Range>((s, x) => add(s, x.monthly), [0, 0]))
-
-  const s = PRICING.subscribe
-  const subscribe =
-    a.payment === "monthly"
-      ? { setup: round(scale(build, s.setupShare)), monthly: round(add(scale(build, s.monthlyShare), monthly)), minimumMonths: s.minimumMonths }
-      : null
+  const weeks = serviceIds.map((id) => PRICING.timeline[id])
 
   const business = BUSINESSES.find((b) => b.id === a.business) ?? BUSINESSES[BUSINESSES.length - 1]
   const validUntil = new Date(today)
@@ -170,19 +171,18 @@ export function estimate(a: Answers, today = new Date()): Estimate {
 
   return {
     business: { label: business.label, examples: business.examples },
-    problems: a.outcomes.map((id) => OUTCOMES.find((o) => o.id === id)?.quote).filter((q): q is string => !!q),
+    problems: [...a.outcomes.map((id) => OUTCOMES.find((o) => o.id === id)?.quote).filter((q): q is string => !!q), ...(other ? [other] : [])],
     solutions: [
       ...outcomes.map((o) => ({ title: o.title, includes: o.includes })),
-      ...addons.map((x) => ({ title: x.title, includes: [] })),
-      ...(tracking[1] > 0 ? [{ title: "Bringing your existing records in", includes: [`Your ${business.examples}, moved into one place`] }] : []),
+      ...a.extras.map((id) => ({ title: PRICING.services[PRICING.addons[id].service].title, includes: [] })),
+      { title: "Bringing your existing records in", includes: [`Your ${business.examples}, moved into one place, as part of setup`] },
     ],
-    build,
-    monthly,
-    care: users.care,
-    subscribe,
-    pilot: PRICING.pilot.price,
-    pilotDays: PRICING.pilot.days,
-    timeline: PRICING.timeline.find((t) => build[1] <= t.upTo)!.weeks,
+    setup: sum(services.map((x) => x.setup)),
+    licence: orNull(licensed.map((x) => x.licence!)),
+    siteCare: orNull(site.map((x) => x.retainer)),
+    buyout: orNull(licensed.map((x) => x.buyout!)),
+    retainer: orNull(licensed.map((x) => x.retainer)),
+    timeline: `${Math.max(...weeks.map((w) => w[0]))}–${Math.max(...weeks.map((w) => w[1]))} weeks`,
     ai: a.ai === "yes" || outcomes.some((o) => o.ai),
     needsCall: a.users === "more",
     validUntil,

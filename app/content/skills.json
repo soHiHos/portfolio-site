@@ -1,18 +1,27 @@
 [
   {
-    "group": "Programming, Data & Frameworks",
-    "items": [
-      "C", "Python", "Dart", "Vue.js", "TypeScript", "SQL", "NoSQL", "FastAPI", "Pydantic", "PostgreSQL", "Redis", "Flutter",
-      "Firebase Firestore", "Docker", "Git", "Linux Server Management", "Nginx", "Pandas", "NumPy", "SciPy", "Matplotlib",
-      "Scikit-Learn", "TensorFlow 2.0", "PyTorch"
-    ]
+    "group": "Business software & websites",
+    "use": "ERPs, CRMs, dashboards, APIs and the sites in front of them",
+    "items": ["Python", "FastAPI", "Pydantic", "TypeScript", "Vue.js", "SQL", "PostgreSQL", "NoSQL", "Redis", "Supabase", "Vercel"]
   },
   {
-    "group": "Electronics & Prototyping",
-    "items": ["Arduino", "ESP8266 / ESP32", "Sensors", "IoT Systems", "MQTT", "3D Printing", "CNC", "Laser Cutting", "Soldering & Circuit Assembly"]
+    "group": "Mobile apps",
+    "use": "One codebase for Android and iPhone",
+    "items": ["Flutter", "Dart", "Firebase Firestore"]
   },
   {
-    "group": "Design Software, Engineering & Tools",
-    "items": ["AutoCAD", "SolidWorks", "Illustrator", "Figma", "STAAD.Pro", "Android Studio", "GRASS GIS", "Blender"]
+    "group": "AI & data",
+    "use": "Reading documents, cleaning data, forecasting and reports",
+    "items": ["Pandas", "Scikit-Learn", "TensorFlow 2.0", "PyTorch"]
+  },
+  {
+    "group": "Running it in production",
+    "use": "Hosting, deployment and keeping it up",
+    "items": ["Docker", "Linux Server Management", "Nginx", "Git"]
+  },
+  {
+    "group": "Interface design",
+    "use": "Screens designed and agreed before they're built",
+    "items": ["Figma", "PenPot"]
   }
 ]

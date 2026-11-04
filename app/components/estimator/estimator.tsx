@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { ArrowLeft, ArrowRight, Check, Download, Loader2 } from "lucide-react"
 import { CONTACT_EMAIL } from "../../content/contact"
 import { QUESTIONS, estimate, type Answers, type Contact } from "./estimate"
+import ProblemPicker from "./problem-picker"
 
 type Key = keyof typeof QUESTIONS
 const ORDER: Key[] = ["business", "outcomes", "tracking", "users", "extras", "ai", "payment", "start"]
@@ -28,7 +29,7 @@ export const PICK_EVENT = "estimator:pick"
 // (/api/lead) and downloads a PDF estimate built in the browser. The PDF is given even if saving fails.
 export default function Estimator() {
   const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState<Partial<Record<Key, string | string[]>>>({ extras: [] })
+  const [answers, setAnswers] = useState<Partial<Record<Key, string | string[]>> & { other?: string }>({ extras: [] })
   const [contact, setContact] = useState<Contact>({ name: "", business: "", phone: "", email: "" })
   const [consent, setConsent] = useState(false)
   const [honeypot, setHoneypot] = useState("")
@@ -37,7 +38,7 @@ export default function Estimator() {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
 
   useEffect(() => {
-    const pick = (e: Event) => setAnswers((a) => ({ ...a, outcomes: (e as CustomEvent<string[]>).detail }))
+    const pick = (e: Event) => setAnswers((a) => ({ ...a, outcomes: (e as CustomEvent<string[]>).detail, other: undefined }))
     window.addEventListener(PICK_EVENT, pick)
     return () => window.removeEventListener(PICK_EVENT, pick)
   }, [])
@@ -47,6 +48,8 @@ export default function Estimator() {
   const multi = key ? MULTI[key] : undefined
   const picked = key ? answers[key] : undefined
   const pickedList = Array.isArray(picked) ? picked : []
+  // "What do you want to fix?" needs one pick, or "Other" with some words in it
+  const canContinue = key === "outcomes" ? pickedList.length > 0 || !!answers.other?.trim() : multi ? pickedList.length >= multi.min : true
 
   function choose(id: string) {
     if (!key) return
@@ -76,7 +79,7 @@ export default function Estimator() {
     setSaveFailed(!saved)
 
     const { estimatePdf } = await import("./estimate-pdf")
-    const blob = await estimatePdf(contact, estimate(full, today), today)
+    const blob = await estimatePdf(contact, estimate(full, today), full.payment === "buyout", today)
     const url = URL.createObjectURL(blob)
     setPdfUrl(url)
     setStatus("done")
@@ -113,7 +116,15 @@ export default function Estimator() {
             <span className="block text-xl sm:text-2xl font-bold text-fg">{QUESTIONS[key].title}</span>
             {"hint" in QUESTIONS[key] && <span className="block text-sm text-muted">{(QUESTIONS[key] as { hint: string }).hint}</span>}
           </legend>
-          <div className="grid sm:grid-cols-2 gap-3">
+          {key === "outcomes" ? (
+            <ProblemPicker
+              options={QUESTIONS.outcomes.options}
+              value={pickedList}
+              other={answers.other}
+              onChange={(value, other) => setAnswers({ ...answers, outcomes: value, other })}
+            />
+          ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {(QUESTIONS[key].options as readonly { id: string; label: string }[]).map((o) => {
               const on = multi ? pickedList.includes(o.id) : picked === o.id
               return (
@@ -130,8 +141,9 @@ export default function Estimator() {
               )
             })}
           </div>
+          )}
           {multi && (
-            <button type="button" disabled={pickedList.length < multi.min} onClick={() => setStep(step + 1)} className="btn btn-primary disabled:opacity-50 disabled:pointer-events-none">
+            <button type="button" disabled={!canContinue} onClick={() => setStep(step + 1)} className="btn btn-primary disabled:opacity-50 disabled:pointer-events-none">
               {pickedList.length === 0 && multi.min === 0 ? "Neither, continue" : "Continue"} <ArrowRight className="w-4 h-4" />
             </button>
           )}
@@ -142,9 +154,9 @@ export default function Estimator() {
         <form onSubmit={submit} className="space-y-4">
           <div className="space-y-1">
             <h2 className="text-xl sm:text-2xl font-bold text-fg">Where should I send your estimate?</h2>
-            <p className="text-sm text-muted">Your PDF downloads straight away. I&apos;ll also follow up once, to offer a free 30-minute call.</p>
+            <p className="text-sm text-muted">Your PDF downloads straight away. I&apos;ll also follow up once, to offer a free call.</p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {(
               [
                 ["name", "Your name", "text", "name"],
@@ -193,7 +205,7 @@ export default function Estimator() {
       {status === "done" && pdfUrl && (
         <div className="space-y-4">
           <h2 className="text-xl sm:text-2xl font-bold text-fg">Your estimate is ready</h2>
-          <p className="text-sm text-muted">It&apos;s a range, not a quote. Your fixed quote comes after a free 30-minute call.</p>
+          <p className="text-sm text-muted">The figures are &ldquo;from&rdquo; prices, not a quote. Your proposal comes after a free call.</p>
           {saveFailed && (
             <p className="border border-accent/60 bg-accent/10 px-4 py-3 text-sm text-fg">
               Your details didn&apos;t reach me. Please email the PDF to {CONTACT_EMAIL} so I can follow up.
@@ -209,6 +221,10 @@ export default function Estimator() {
           </div>
         </div>
       )}
+
+      <p className="border-t border-line pt-4 text-xs leading-relaxed text-muted">
+        This is an estimate of the project cost. The actual figures may or may not match it. It only gives us an idea of what to discuss in our meeting; your actual quotation is calculated after a proper briefing meeting.
+      </p>
     </div>
   )
 }

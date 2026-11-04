@@ -12,7 +12,7 @@ type Organization = {
   link?: string
 }
 
-const STATUS_LABEL = { current: "Current", contract: "Contract", partner: "Partner", past: "Past" }
+const STATUS_LABEL = { current: "Current", contract: "Contract", partner: "Co-working space", past: "Past" }
 
 // Organizations I've worked with or am contracting for, as a row of logo cards.
 export default function OrganizationsSection({ id }: { id?: string }) {
@@ -21,14 +21,14 @@ export default function OrganizationsSection({ id }: { id?: string }) {
       <div className="w-full text-left space-y-8 py-12">
         <SectionHeading title="Collaborators" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {(organizations as Organization[]).map((org, i) => {
             const Wrapper = org.link ? "a" : "div"
             return (
               <Reveal key={org.id} delay={i * 100}>
                 <Wrapper
                   {...(org.link ? { href: org.link, target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group flex items-center gap-4 border border-line bg-surface p-4 transition-colors duration-300 hover:border-accent/50"
+                  className="group flex h-full items-center gap-4 border border-line bg-surface p-5 transition-colors duration-300 hover:border-accent/60"
                 >
                   <span
                     className="flex w-12 h-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-bg"

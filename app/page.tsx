@@ -1,11 +1,10 @@
 import HeroSection from "./sections/hero-section";
 import AboutSection from "./sections/about-section";
 import WorkSection from "./sections/work-section";
-import ResearchSection from "./sections/research-section";
 import ContactSection from "./sections/contact-section";
-import OrganizationsSection from "./sections/organizations-section";
 import SideNav from "./components/side-nav";
 import ServicesSection from "./sections/services-section";
+import ProcessSection from "./sections/process-section";
 
 // Only the hero is a full screen. Scrolling snaps (proximity) at two points, the hero and the
 // start of Work, so leaving the hero lands cleanly on the first section; after that sections keep
@@ -21,9 +20,8 @@ export default function Home() {
         </div>
         <div className="snap-start"><WorkSection id="work" /></div>
         <ServicesSection id="services" />
+        <ProcessSection id="process" />
         <AboutSection id="about" short />
-        <OrganizationsSection id="collaborators" />
-        <ResearchSection id="research" limit={2} />
         <ContactSection id="contact" />
       </div>
     </div>

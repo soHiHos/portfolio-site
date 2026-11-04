@@ -18,27 +18,27 @@
       {
         "id": "numbers",
         "quote": "We don't know our real numbers until it's too late.",
-        "detail": "Stock, sales, dispatch and dues sit in different registers and sheets."
+        "detail": "Sales, stock and dues sit in different sheets and different heads, so you find out what happened long after it could have helped."
       },
       {
         "id": "whatsapp",
         "quote": "Everything happens on WhatsApp, and nothing is recorded.",
-        "detail": "Orders, stock updates and production figures get lost in chats."
+        "detail": "Orders, production and dispatch get agreed in chats and are forgotten by evening."
       },
       {
         "id": "payments",
         "quote": "Payments always come in late.",
-        "detail": "Nobody has a clear list of who owes what, or time to follow up."
+        "detail": "Chasing money is awkward and easy to forget, so it stays with your customers longer than it should."
       },
       {
         "id": "network",
         "quote": "Our dealer or distributor network is hard to manage.",
-        "detail": "Different price tiers, ledgers and orders, tracked across too many places."
+        "detail": "Price lists, orders and ledgers live in different places, and every dealer question turns into a phone call."
       },
       {
         "id": "custom",
         "quote": "Every tool we try makes us change how we work.",
-        "detail": "Off-the-shelf tools force workarounds. Software should fit your workflow, not the other way around."
+        "detail": "Off-the-shelf software pushes its way onto your business, so your team quietly stops using it."
       }
     ]
   },
@@ -62,14 +62,15 @@
   "categoriesIntro": "Every service is built around how your business already works, and works with the data you already have (Excel sheets, or exports from your billing and accounting software).",
   "categories": [
     {
-      "id": "data",
-      "title": "Data analytics & modelling",
-      "summary": "See what sold, who owes you, who your best customers are, and where your next growth will come from.",
+      "id": "ai-automations",
+      "title": "AI automations & analytics",
+      "summary": "Let software handle the invoices, reminders and data entry, and see what sold, who owes you and where your next growth will come from.",
       "tags": [
-        "MIS reports",
-        "Dashboards",
-        "Forecasting",
-        "Data cleanup"
+        "Automatic invoicing",
+        "Payment reminders",
+        "Document reading",
+        "MIS reports & dashboards",
+        "Price and tender tracking"
       ],
       "services": [
         {
@@ -79,76 +80,59 @@
         },
         {
           "id": "daily-entry",
-          "title": "Mobile daily entry",
-          "summary": "Supervisors and staff log production, stock in and out, and dispatch from their phone with a simple form or a photo. It goes straight into your records."
+          "title": "WhatsApp and mobile daily entry",
+          "summary": "Supervisors and staff log production, stock in and out, and dispatch from their phone with a simple form or a photo. It lands in your records for you to check and confirm."
         },
         {
           "id": "business-pulse",
           "title": "Business Pulse (automated MIS)",
-          "summary": "A weekly report on your phone and email, plus a simple dashboard: sales, stock, dispatch, dues and the few things that need your attention."
+          "summary": "A weekly report on your phone and email, plus a simple dashboard: sales, stock, dispatch, dues and the few things that need your attention. Deeper analysis and forecasting when you need it."
         },
         {
           "id": "decision-report",
           "title": "Decision Report",
           "summary": "Share three months of data and get a one-page report with three decisions you can act on this month."
-        }
-      ]
-    },
-    {
-      "id": "ai-automations",
-      "title": "AI automations",
-      "summary": "Let software handle the invoices, reminders and data entry.",
-      "tags": [
-        "Automatic invoicing",
-        "Payment reminders",
-        "Document reading",
-        "Gmail, Telegram & WhatsApp assistant"
-      ],
-      "services": [
+        },
         {
           "id": "order-to-cash",
           "title": "Order-to-cash automation",
-          "summary": "Invoices drafted from dispatch slips or POs, e-invoice and e-way bill details prepared, sent to customers, and tracked until paid."
+          "summary": "Invoices drafted from dispatch slips or POs, e-invoice and e-way bill details prepared, sent to customers after your approval, and tracked until paid."
         },
         {
           "id": "collections",
           "title": "Collections autopilot",
-          "summary": "A clear list of who owes what, with automatic payment reminders by email and SMS."
+          "summary": "A clear list of who owes what, with automatic payment reminders by email and WhatsApp."
         },
         {
           "id": "document-capture",
           "title": "Document capture",
           "summary": "AI reads bills, invoices and POs and turns them into clean data in your records."
+        },
+        {
+          "id": "market-tracking",
+          "title": "Market and price tracking",
+          "summary": "Automatic checks of competitor prices, marketplace listings, tenders or supplier rates (public web data only), delivered to you as a daily or weekly sheet or alert."
         }
       ]
     },
     {
-      "id": "erp-crm",
-      "title": "ERPs & CRMs",
-      "summary": "One system for your orders, stock, ledgers, customers and dealer network.",
+      "id": "custom-software",
+      "title": "Custom software, ERPs & CRMs",
+      "summary": "One system for your orders, stock, ledgers, customers and dealer network, or a tool built for the one job off-the-shelf software doesn't do well.",
       "tags": [
         "ERP",
         "CRM",
-        "Dealer & distributor platforms"
+        "Dealer & distributor platforms",
+        "Internal portals",
+        "Calculators & quoting tools",
+        "Admin dashboards"
       ],
       "services": [
         {
           "id": "distribution-os",
           "title": "Distribution OS",
           "summary": "One platform for dealers, distributors or agents: price tiers, orders, ledgers, payments and an online shop."
-        }
-      ]
-    },
-    {
-      "id": "custom-tools",
-      "title": "Custom tools & software",
-      "summary": "Built for the one job off-the-shelf software doesn't do well.",
-      "tags": [
-        "Internal portals",
-        "Calculators & quoting tools",
-        "Admin dashboards"
-      ],
-      "services": [
+        },
         {
           "id": "custom-tools",
           "title": "Custom tools",
@@ -187,11 +171,11 @@
     },
     {
       "id": "websites",
-      "title": "Marketing & portfolio sites",
+      "title": "Marketing & business sites",
       "summary": "Sites that make a strong first impression and turn visitors into enquiries.",
       "tags": [
         "Business websites",
-        "Portfolio sites",
+        "Landing pages",
         "Lead capture to WhatsApp"
       ],
       "services": [
@@ -216,27 +200,41 @@
   ],
   "process": [
     {
-      "step": "A free 30-minute call",
-      "detail": "You walk me through how things work today. I mostly listen."
+      "step": "Fill out the form, then a free call or Google Meet",
+      "label": "Fill out the form",
+      "blurb": "Tell me what you need. I reply within 48 hours by email or WhatsApp, and we set up a free call.",
+      "detail": "Tell me which services you need. I reply by email or WhatsApp within 48 hours, and we set up a call where you walk me through how things work today. I'll tell you honestly whether you need custom software at all, or whether a free product already does the same job."
     },
     {
-      "step": "A fixed quote within 48 hours",
-      "detail": "Clear scope, clear price, clear timeline."
+      "step": "A written proposal in 3–5 days",
+      "label": "Get a proposal",
+      "blurb": "Scope, price and timeline in 3–5 days, fixed after the call. Setup is paid in three milestones.",
+      "detail": "Scope, price and timeline, fixed after the call. Setup is paid in three milestones: at signing, at demo approval and at go-live. The exact split is in your proposal."
     },
     {
-      "step": "Built in weekly steps",
-      "detail": "You see a live demo every week and can change direction early."
+      "step": "Prototype, then built in stages",
+      "label": "Prototype, then build",
+      "blurb": "You approve a prototype first, then see a demo at each milestone, so you can change direction early.",
+      "detail": "Your team signs off a prototype before the full build. For larger systems we start with one workflow and expand. You see a demo at each milestone and can change direction early."
     },
     {
       "step": "Launch and training",
-      "detail": "I set it up, train your team, and stay on hand while everyone settles in."
+      "label": "Launch and training",
+      "blurb": "I set it up and run a handover session, so your team knows how to use it from day one.",
+      "detail": "I set it up and run a handover session so your team knows how to use it. If you need more, such as extra sessions or on-site training, it's quoted in your proposal."
+    },
+    {
+      "step": "After go-live",
+      "label": "After go-live",
+      "blurb": "On a monthly plan it stays hosted, backed up and secure, with a review at 60–90 days.",
+      "detail": "The monthly licence keeps it hosted, up and secure, with bug fixes. We review how it's being used at 60–90 days. Extra changes are quoted per request, with 10% off for plan clients."
     }
   ],
   "nda": "Happy to sign an NDA before we talk, if you'd like.",
   "faq": [
     {
       "q": "Our team isn't very tech-savvy. Will this work for us?",
-      "a": "Yes. Everything works on a phone, with simple screens your team can learn in a day. I train everyone before launch."
+      "a": "Most likely. I keep the screens simple so teams pick them up quickly, and they work on a phone. A handover session is included in setup; extra or on-site training is quoted in your proposal. You'll need one person on your side who owns it day to day."
     },
     {
       "q": "Do we have to replace our current software?",
@@ -244,36 +242,44 @@
     },
     {
       "q": "Who owns our data?",
-      "a": "You do, always. With Own it, you also own the code from day one. With Subscribe, you can buy the code any time."
+      "a": "You do, always, and you can export it in standard formats at any time. On a licence plan the software is licensed to you and I keep the code. You can buy the code outright, from month 12 or earlier by agreement, or choose Own the code from the start."
     },
     {
-      "q": "What happens if we stop the subscription?",
-      "a": "You get a full export of your data. You can also buy the code and keep running it yourself."
+      "q": "What happens if we stop?",
+      "a": "You get a full export of your data either way. If you own the code, you can leave any time, with no minimum period; services run to the end of the paid month. A monthly licence has a 6-month minimum from go-live, then 30 days' notice. If you need to leave a licence earlier, we agree it together; if you leave anyway, you choose between paying 2 months' fees or buying the code."
+    },
+    {
+      "q": "Who runs the WhatsApp number?",
+      "a": "You do. I set up a dedicated WhatsApp Business number for your company, and someone on your side uses it day to day: staff send in entries, and you approve invoices and confirm records. If you'd rather not use WhatsApp, a simple portal does the same job. The automation only works if someone on your side is using it."
     },
     {
       "q": "Is our data safe?",
-      "a": "Access is limited by role, everything is backed up, and I'll sign an NDA if you want one."
+      "a": "Access is limited by role, your data is backed up weekly as standard, and I'll sign an NDA if you want one. Daily backups are available as a paid add-on."
     },
     {
       "q": "How long does it take?",
-      "a": "A pilot takes 30 days. Most full systems take 4–12 weeks, depending on what's included. Your fixed quote will say exactly."
+      "a": "Automation takes 3–5 weeks, mobile apps 4–8 weeks, custom software 6–12 weeks and websites 3–5 weeks. The clock starts once you've sent your data and approvals. Your proposal will say exactly."
     },
     {
       "q": "Which AI do you use, and who pays for it?",
-      "a": "I use the latest models from leading AI providers, picked for each task. You either pay the AI usage cost directly at actual cost, or choose a monthly plan that includes it up to a set limit."
+      "a": "I use the latest models from leading AI providers, picked for each task. AI, API and WhatsApp message usage is included in your monthly fee up to ₹2,000 a month. Above that, it's billed at cost plus 15%, and I check with you first."
     },
     {
       "q": "Can I see a demo built for my business before committing?",
-      "a": "Yes. I can build a working demo around your own process and data, so you see exactly how it would work for you. It's priced as a small share of the estimated project fee, confirmed on the call."
+      "a": "Yes. I can build a working demo around your own process and data, so you see exactly how it would work for you. It's priced as a small share of the estimated project fee, confirmed once we've discussed the scope of work (SOW)."
     },
     {
       "q": "Can you build an app for millions of users?",
-      "a": "That's not what I focus on. I build systems for businesses and their teams, dealers and customers, from a handful of users up to around 10,000. I can also build MVPs designed to grow to that size. That focus keeps your costs predictable and lets me support you personally. If you're building a mass-market consumer app, a larger team will serve you better, and I'm happy to point you to one."
+      "a": "That's not what I focus on. I build systems for businesses and their teams, dealers and customers, from a handful of users up to around 50,000–100,000 monthly active users. I can also build MVPs designed to grow to that size. I'm a one-person studio, and that focus keeps your costs predictable and lets me give each client proper attention. If you're building a mass-market consumer app, a larger team will serve you better, and I'm happy to point you to one."
     }
   ],
   "cta": {
-    "title": "Let's talk",
-    "summary": "Tell me which part of your business takes the most time today. In 30 minutes, you'll know whether I can help and roughly what it would take.",
+    "title": "Need a proper estimate?",
+    "requirement": {
+      "title": "Before you reach out",
+      "body": "Automation only works when your team uses it. I set up a dedicated WhatsApp Business number for your company, and someone on your side runs it day to day. Prefer not to use WhatsApp? A simple portal works too."
+    },
+    "summary": "Tell me which services you need and what's slowing your business down. Fill out the form, and you'll get a reply by email or WhatsApp within 48 hours.",
     "note": "Need a website as well? Websites with lead capture are available alongside any of the services above."
   }
 }

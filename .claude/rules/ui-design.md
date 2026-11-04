@@ -44,8 +44,7 @@ page (work, projects, research, contact) stays plain so visitors read the work, 
 ## Copy
 - Sentence case for headings, buttons, nav and labels ("Explore work", not "EXPLORE WORK").
 - No aviation wording in content sections. The theme lives only in: the map backdrop, the footer
-  boarding pass, the 404 page, the easter-egg jet and the small plane on the "What you can count on"
-  panel (no aviation words there).
+  boarding pass, the 404 page and the easter-egg jet.
 - Never show visitors unfinished content. Placeholders (`"placeholder": true` in content JSON) are
   hidden everywhere except the deliberate project slots on the home page.
 

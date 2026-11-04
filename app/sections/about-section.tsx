@@ -2,7 +2,8 @@ import Link from "next/link"
 import { ArrowRight, Download } from "lucide-react"
 import SectionHeading from "../components/section-heading"
 import Reveal from "../components/effects/reveal"
-import CountOn from "../components/count-on"
+import LoadImg from "../components/effects/media-spinner"
+import GalleryCollage, { FEATURED } from "../components/gallery-collage"
 
 // `short`: the home page's summary with a link to /about; the about page shows the full bio and the CV download
 export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
@@ -11,31 +12,25 @@ export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
       <div className="w-full space-y-12 py-12">
         <SectionHeading title="About" />
 
-        <div className="grid lg:grid-cols-2">
+        <div className={`grid ${short && FEATURED ? "lg:grid-cols-[20rem_1fr]" : "lg:grid-cols-2"}`}>
           {/* Bio */}
-          <Reveal className="border border-line bg-surface p-6 sm:p-8 space-y-6">
+          <Reveal className={`border border-line bg-surface p-6 sm:p-8 space-y-6 ${short && FEATURED ? "lg:flex lg:flex-col lg:justify-center" : ""}`}>
             {short ? (
               <>
-                <p className="text-lg leading-relaxed text-muted">
-                  I&apos;m Soham, an engineer working across web, software, AI, hardware and environmental engineering. That mix helps me see business problems from every angle and design solutions that fit how a business actually runs.
+                <p className="text-lg leading-relaxed text-muted text-justify">
+                  I&apos;m Soham. I started in civil and environmental engineering, then taught myself web, mobile and AI. Now I build <strong className="text-fg font-semibold">clear, reliable systems</strong> for businesses, kept <strong className="text-fg font-semibold">simple, practical and easy to grow</strong>.
                 </p>
-                <p className="text-lg leading-relaxed text-muted">
-                  I help businesses and founders turn messy, manual work into <strong className="text-fg font-semibold">clear, reliable systems</strong>: custom software, ERPs, AI automations, data insights, mobile apps and websites that teams use every day. I keep them <strong className="text-fg font-semibold">simple, practical and cost-effective</strong>, and easy to hand over, maintain and grow.
-                </p>
-                <Link href="/about" className="btn-link text-sm text-fg">
+                <Link href="/about" className="btn btn-secondary">
                   More about me <ArrowRight className="w-4 h-4" />
                 </Link>
               </>
             ) : (
               <>
-                <p className="text-lg leading-relaxed text-muted">
-                  I&apos;m Soham, an engineer working across web, software, AI, hardware and environmental engineering. That mix helps me understand business problems from every angle and design solutions that actually fit how a business runs.
+                <p className="text-lg leading-relaxed text-muted text-justify">
+                  I&apos;m Soham, an engineer working across web, software, AI, hardware and environmental engineering. That mix lets me see a business problem from every angle and design a solution that fits how the business actually runs.
                 </p>
-                <p className="text-lg leading-relaxed text-muted">
-                  I help businesses and founders turn messy, manual work into <strong className="text-fg font-semibold">clear, reliable systems</strong>: custom software, ERPs, AI automations, data insights, mobile apps and websites. The systems and automations I build are used by businesses every day to run their operations and take the routine work off their teams, so I know what it takes to build something people depend on.
-                </p>
-                <p className="text-lg leading-relaxed text-muted">
-                  Models and frameworks will keep changing, but a well-designed system that solves a real problem keeps paying off. So I build what&apos;s <strong className="text-fg font-semibold">simple, practical and cost-effective</strong>, and easy to hand over, maintain and grow.
+                <p className="text-lg leading-relaxed text-muted text-justify">
+                  I turn messy, manual work into <strong className="text-fg font-semibold">clear, reliable systems</strong>: custom software, ERPs, AI automations, data insights, mobile apps and websites that businesses run on every day. Tools keep changing, but a system that solves a real problem keeps paying off, so I keep mine <strong className="text-fg font-semibold">simple, practical and cost-effective</strong>, and easy to hand over and grow.
                 </p>
               </>
             )}
@@ -51,10 +46,18 @@ export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
             )}
           </Reveal>
 
-          {/* Overlaps the bio by 1px so the shared edge is a single border */}
-          <Reveal className="-mt-px lg:mt-0 lg:-ml-px">
-            <CountOn />
-          </Reveal>
+          {/* Beside the bio: the collage of paintings and drawings on the about page, one featured picture on the left on the home page */}
+          {short && FEATURED ? (
+            <Reveal className="mt-2 lg:mt-0 lg:mr-2 lg:order-first">
+              <figure className="relative aspect-[4/5] max-h-[28rem] w-full overflow-hidden border border-line bg-surface lg:max-h-none">
+                <LoadImg src={FEATURED.src} alt={FEATURED.alt} className="h-full w-full object-cover" />
+              </figure>
+            </Reveal>
+          ) : (
+            <Reveal className="mt-2 lg:mt-0 lg:ml-2">
+              <GalleryCollage />
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

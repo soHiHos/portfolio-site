@@ -1,5 +1,5 @@
 -- Leads from the price estimator (/services/estimate). Run once in the Supabase SQL editor.
--- Only the server route writes here, with the service role key, so row level security is on with no
+-- Only the server route writes here, with a secret key, so row level security is on with no
 -- policies: the public (anon) key can neither read nor write leads.
 
 create table if not exists public.leads (

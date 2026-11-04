@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import AboutSection from "../sections/about-section";
 import AboutExtras from "../components/about-extras";
 import ResearchSection from "../sections/research-section";
+import OrganizationsSection from "../sections/organizations-section";
 import ContactSection from "../sections/contact-section";
 import SectionHeading from "../components/section-heading";
-import SkillsMarquee from "../components/skills-marquee";
+import SkillsToolkit from "../components/skills-toolkit";
 import Reveal from "../components/effects/reveal";
 import SideNav from "../components/side-nav";
 
@@ -17,6 +18,7 @@ const NAV = [
   { id: "about", label: "About" },
   { id: "toolkit", label: "Toolkit" },
   { id: "research", label: "Research" },
+  { id: "collaborators", label: "Collaborators" },
   { id: "awards", label: "Awards" },
   { id: "contact", label: "Contact" },
 ];
@@ -27,16 +29,17 @@ export default function AboutPage() {
       <SideNav sections={NAV} />
       <AboutSection id="about" />
 
-      {/* Toolkit: the full CV skills list as rolling sliders */}
-      <div id="toolkit" className="space-y-6 pb-12">
+      {/* Toolkit: the tools behind the services, grouped by what each is used for */}
+      <div id="toolkit" className="space-y-8 pb-12">
         <SectionHeading title="Toolkit" />
         <Reveal>
-          <SkillsMarquee />
+          <SkillsToolkit />
         </Reveal>
       </div>
 
-      {/* Every paper; the landing page shows only the newest two and links here */}
       <ResearchSection id="research" />
+
+      <OrganizationsSection id="collaborators" />
 
       <AboutExtras id="awards" />
 

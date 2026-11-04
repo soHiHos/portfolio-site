@@ -1,8 +1,8 @@
 import projects from "./projects.json"
 
 export type ProjectCategory = "work" | "github" | "hardware"
-// A project's state: live as is, live but being updated, still being built, or finished (notebooks and studies)
-export type ProjectPhase = "deployed" | "servicing" | "development" | "complete"
+// A project's state: live as is, live but being updated, about to go live, still being built, an idea moving to a prototype, or finished (notebooks and studies)
+export type ProjectPhase = "deployed" | "servicing" | "soon" | "development" | "prototype" | "complete"
 
 // Shape of an entry in projects.json. Optional fields render only when present, so a project can
 // start minimal and gain a case study (problem / approach / outcome) later.
@@ -10,7 +10,9 @@ export type Project = {
   id: string
   code: string
   kind: "client" | "personal"
-  featured?: boolean // personal project shown with client work under Projects, not under Other projects
+  area?: string // what kind of project it is (e.g. "Data science"); shown as a label on the Others cards
+  hideOnHome?: boolean // left out of the home page Work collage; still on /projects
+  featured?: boolean // personal project shown with client work under Projects, not under Others
   category: ProjectCategory
   phase: ProjectPhase
   title: string
@@ -19,6 +21,7 @@ export type Project = {
   shortSummary?: string // 18–20 words for the Work tiles; project pages and the assistant use `summary`
   status?: string
   image?: string
+  video?: string // muted preview played on hover; `image` is its thumbnail
   visual?: "lidar"
   link?: string
   github?: string

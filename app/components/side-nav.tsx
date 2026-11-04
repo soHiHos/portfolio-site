@@ -8,9 +8,8 @@ export type NavSection = { id: string; label: string }
 const HOME_SECTIONS: NavSection[] = [
   { id: "work", label: "Work" },
   { id: "services", label: "Services" },
+  { id: "process", label: "How I work" },
   { id: "about", label: "About" },
-  { id: "collaborators", label: "Collaborators" },
-  { id: "research", label: "Research" },
   { id: "contact", label: "Contact" },
 ]
 
