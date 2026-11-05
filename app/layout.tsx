@@ -69,8 +69,8 @@ export default function RootLayout({
         <BackToTop />
         <Analytics />
       </body>
-      {/* Loads only when NEXT_PUBLIC_GTM_ID is set, so local dev and previews stay untracked */}
-      {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
+      {/* Loads only when PUBLIC_GTM_ID is set, so local dev and previews stay untracked */}
+      {process.env.PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.PUBLIC_GTM_ID} />}
     </html>
   );
 }
