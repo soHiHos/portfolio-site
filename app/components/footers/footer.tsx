@@ -3,7 +3,8 @@
 // Footer styled as a final boarding pass: route, flight details, the boarding pass download, map credit
 // and barcode on the ticket; copyright and contact links on the tear-off stub.
 import { useEffect, useRef, useState } from 'react';
-import { Check, Contact, Mail, Plane, PlaneTakeoff, Ticket } from 'lucide-react';
+import Link from 'next/link';
+import { Check, Contact, Mail, Plane, PlaneTakeoff, ShieldCheck, Ticket } from 'lucide-react';
 import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, GithubIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from '../ui/menu/contact-menu';
 
 const year = new Date().getFullYear();
@@ -141,6 +142,10 @@ export default function Footer() {
                 <Contact className="w-4 h-4" />
                 Save contact
               </a>
+              <Link href="/privacy" className={linkClasses}>
+                <ShieldCheck className="w-4 h-4" />
+                Privacy policy
+              </Link>
             </nav>
           </div>
           {/* Pinned to the stub's bottom-right corner (the stub is a column with justify-between) */}

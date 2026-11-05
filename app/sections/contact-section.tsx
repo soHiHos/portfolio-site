@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Check, Mail, Send } from "lucide-react"
+import { sendGTMEvent } from "@next/third-parties/google"
 import SectionHeading from "../components/section-heading"
 import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, GithubIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from "../components/ui/menu/contact-menu"
 import { useIndiaTime } from "../components/use-india-time"
@@ -88,6 +89,8 @@ export default function ContactSection({ id }: { id?: string }) {
       .then((r) => r.ok)
       .catch(() => false)
     if (sent) {
+      // Tells GTM a brief was sent (no personal data), for a GA4 "generate_lead" tag
+      sendGTMEvent({ event: "generate_lead", lead_source: "contact_form", services: picked.join(",") })
       setStatus("sent")
       setName(""); setWhatsapp(""); setEmail(""); setPicked([]); setTimeline(""); setMessage(""); setConsent(false)
       return

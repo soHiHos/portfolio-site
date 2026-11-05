@@ -6,6 +6,8 @@ import Footer from "./components/footers/footer";
 import Backdrop from "./components/effects/backdrop";
 import EasterJet from "./components/effects/easter-jet";
 import BackToTop from "./components/back-to-top";
+import { GoogleTagManager } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -65,7 +67,10 @@ export default function RootLayout({
         <Footer />
         <EasterJet />
         <BackToTop />
+        <Analytics />
       </body>
+      {/* Loads only when NEXT_PUBLIC_GTM_ID is set, so local dev and previews stay untracked */}
+      {process.env.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />}
     </html>
   );
 }

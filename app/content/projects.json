@@ -66,6 +66,7 @@
     "title": "FrontWave",
     "image": "/images/frontwave_thumbnail.webp",
     "video": "/videos/frontwave.mp4",
+    "link": "https://frontwaveresearch.com/",
     "tagline": "Research publishing platform for an equity researcher.",
     "summary": "A website and subscriber platform for FrontWave, an equity research business. Subscribers sign up, pay and read published research reports in a members' portal, and an admin panel lets the research team publish new reports themselves.",
     "stack": []
