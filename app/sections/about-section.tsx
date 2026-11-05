@@ -27,10 +27,10 @@ export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
             ) : (
               <>
                 <p className="text-lg leading-relaxed text-muted text-justify">
-                  I&apos;m Soham, an engineer working across web, software, AI, hardware and environmental engineering. That mix lets me see a business problem from every angle and design a solution that fits how the business actually runs.
+                  I&apos;m Soham, an engineer working across web, software, AI, hardware and environmental engineering. That mix helps me see a business problem from several angles and build something that fits how the business runs.
                 </p>
                 <p className="text-lg leading-relaxed text-muted text-justify">
-                  I turn messy, manual work into <strong className="text-fg font-semibold">clear, reliable systems</strong>: custom software, ERPs, AI automations, data insights, mobile apps and websites that businesses run on every day. Tools keep changing, but a system that solves a real problem keeps paying off, so I keep mine <strong className="text-fg font-semibold">simple, practical and cost-effective</strong>, and easy to hand over and grow.
+                  I turn messy, manual work into <strong className="text-fg font-semibold">clear, reliable systems</strong>: custom software, ERPs, AI automations, data insights, mobile apps and websites that businesses run on every day. I keep them <strong className="text-fg font-semibold">simple, practical and cost-effective</strong>, and easy to hand over and grow.
                 </p>
               </>
             )}

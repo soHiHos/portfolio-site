@@ -62,7 +62,7 @@ export default function ProblemTiles({ items, selectable }: { items: Problem[]; 
             </button>
           ) : (
             <a href="#before-you-reach-out" className="btn btn-primary btn-sm">
-              What to know before you reach out <ArrowRight className="w-4 h-4" />
+              What to know before you send the form <ArrowRight className="w-4 h-4" />
             </a>
           )}
         </div>

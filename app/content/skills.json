@@ -2,7 +2,7 @@
   {
     "group": "Business software & websites",
     "use": "ERPs, CRMs, dashboards, APIs and the sites in front of them",
-    "items": ["Python", "FastAPI", "Pydantic", "TypeScript", "Vue.js", "SQL", "PostgreSQL", "NoSQL", "Redis", "Supabase", "Vercel"]
+    "items": ["Python", "Next.js", "FastAPI", "Pydantic", "TypeScript", "Vue.js", "SQL", "PostgreSQL", "NoSQL", "Redis", "Supabase", "Vercel"]
   },
   {
     "group": "Mobile apps",

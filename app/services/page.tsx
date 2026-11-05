@@ -16,7 +16,7 @@ import ContactSection from "../sections/contact-section";
 
 export const metadata: Metadata = {
   title: "Services — Soham Kar",
-  description: "Software and AI automations that remove manual work and give growing businesses clear numbers. Get a price estimate in two minutes.",
+  description: `Software and AI automations that remove manual work and give growing businesses clear numbers.${ESTIMATOR_ON ? " Get a price estimate in two minutes." : ""}`,
 };
 
 // Proof shows only what's finished: the case study once it's cleared (no "placeholder"), and any demo videos
@@ -25,7 +25,7 @@ const DEMOS = services.proof.demos as { title: string; href: string }[];
 
 const NAV = [
   ...(ESTIMATOR_ON ? [{ id: "prices", label: "Prices" }] : []),
-  { id: "problems", label: "Sound familiar" },
+  { id: "problems", label: "Problems" },
   ...(ESTIMATOR_ON ? [{ id: "estimate", label: "Estimate" }] : []),
   ...(CASE_STUDY || DEMOS.length > 0 ? [{ id: "proof", label: "Work in action" }] : []),
   { id: "process", label: "How we'll work" },
@@ -79,7 +79,7 @@ export default function ServicesPage() {
 
         {/* Sound familiar? */}
         <Reveal id="problems" className="space-y-5">
-          <h2 className="text-3xl sm:text-4xl font-bold text-fg">Sound familiar?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-fg">Six problems I solve</h2>
           <ProblemTiles items={services.problems.items} selectable={ESTIMATOR_ON} />
           <div id="before-you-reach-out" className="scroll-mt-28 border border-line bg-surface p-5 sm:p-6 space-y-4">
             <h3 className="text-lg font-semibold text-fg">{services.cta.requirement.title}</h3>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
         {/* The price estimator, right under the problems it prices */}
         {ESTIMATOR_ON && (
           <div id="estimate" className="scroll-mt-28 space-y-5">
-            <SectionHeading title="Get an exact estimate" />
+            <SectionHeading title="Get a price estimate" />
             <Reveal>
               <Estimator />
             </Reveal>

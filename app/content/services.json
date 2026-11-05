@@ -4,7 +4,7 @@
     "label": "Accepting projects"
   },
   "hero": {
-    "title": "Less manual work. Clearer numbers. Better decisions.",
+    "title": "Software and AI automations that remove manual work and give growing businesses clear numbers",
     "promise": "I build software and AI automations that remove manual work and give growing businesses clear numbers."
   },
   "problems": {
@@ -38,7 +38,7 @@
       {
         "id": "custom",
         "quote": "Every tool we try makes us change how we work.",
-        "detail": "Off-the-shelf software pushes its way onto your business, so your team quietly stops using it."
+        "detail": "Off-the-shelf software forces its own process on your business, and your team stops using it."
       }
     ]
   },
@@ -181,12 +181,12 @@
       "services": [
         {
           "title": "Launch",
-          "summary": "A fast 1–5 page site that works well on mobile, contact form, WhatsApp button, basic SEO, hosting setup.",
+          "summary": "A fast 1–5 page site that works well on mobile, with a contact form, WhatsApp button, basic SEO and hosting setup.",
           "for": "Landing pages, new businesses, personal brands"
         },
         {
           "title": "Business",
-          "summary": "Up to about 10 pages, custom design, a CMS so you can edit content yourself, analytics, lead capture into WhatsApp or your CRM.",
+          "summary": "Up to about 10 pages with custom design, a CMS so you can edit content yourself, analytics, and lead capture into WhatsApp or your CRM.",
           "for": "Growing businesses that need a proper online presence"
         },
         {
@@ -203,7 +203,7 @@
       "step": "Fill out the form, then a free call or Google Meet",
       "label": "Fill out the form",
       "blurb": "Tell me what you need. I reply within 48 hours by email or WhatsApp, and we set up a free call.",
-      "detail": "Tell me which services you need. I reply by email or WhatsApp within 48 hours, and we set up a call where you walk me through how things work today. I'll tell you honestly whether you need custom software at all, or whether a free product already does the same job."
+      "detail": "Tell me which services you need. I reply by email or WhatsApp within 48 hours, and we set up a call where you walk me through how things work today. I'll tell you whether you need custom software at all, or whether a free product already does the same job."
     },
     {
       "step": "A written proposal in 3–5 days",
@@ -230,7 +230,7 @@
       "detail": "The monthly licence keeps it hosted, up and secure, with bug fixes. We review how it's being used at 60–90 days. Extra changes are quoted per request, with 10% off for plan clients."
     }
   ],
-  "nda": "Happy to sign an NDA before we talk, if you'd like.",
+  "nda": "I'll sign an NDA before we talk if you want one.",
   "faq": [
     {
       "q": "Our team isn't very tech-savvy. Will this work for us?",
@@ -276,7 +276,7 @@
   "cta": {
     "title": "Need a proper estimate?",
     "requirement": {
-      "title": "Before you reach out",
+      "title": "Before you send the form",
       "body": "Automation only works when your team uses it. I set up a dedicated WhatsApp Business number for your company, and someone on your side runs it day to day. Prefer not to use WhatsApp? A simple portal works too."
     },
     "summary": "Tell me which services you need and what's slowing your business down. Fill out the form, and you'll get a reply by email or WhatsApp within 48 hours.",

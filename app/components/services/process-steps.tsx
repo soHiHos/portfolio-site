@@ -71,7 +71,7 @@ export default function ProcessSteps({ steps }: { steps: Step[] }) {
               Step {index + 1} of {steps.length}
             </p>
             <h3 className="text-2xl font-bold text-fg">{current.step}</h3>
-            <p className="max-w-2xl text-base leading-relaxed text-muted">{current.detail}</p>
+            <p className="text-base leading-relaxed text-muted">{current.detail}</p>
           </motion.div>
         </AnimatePresence>
       </div>

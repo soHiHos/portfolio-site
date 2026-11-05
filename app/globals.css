@@ -390,11 +390,6 @@ p {
   :is(.btn, .btn-link):hover .lucide-rotate-ccw { transform: rotate(-120deg); }
 }
 
-/* Side nav steps left of the open contact card (560px wide, 28px from the edge) when they would overlap;
-   side-nav.tsx measures that and sets data-shifted. 580px clears the card from either nav position
-   (right-6 or xl:right-12). */
-.side-nav[data-shifted] { transform: translateX(-580px); }
-
 /* FAQ answers (services page) slide open; browsers without ::details-content just open instantly */
 .faq { interpolate-size: allow-keywords; }
 .faq::details-content {

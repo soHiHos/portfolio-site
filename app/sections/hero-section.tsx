@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowDown, Mail } from "lucide-react";
 import StaggeredText from "../components/effects/staggered-text";
 
-const WORDS = ["workflows", "operations", "processes", "back offices", "routines"];
+const WORDS = ["workflows", "operations", "processes", "routines"];
 
 export default function HeroSection() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -26,7 +26,7 @@ export default function HeroSection() {
             <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
             ENGINEER
           </span>
-          <span>WEB · MOBILE · AI AUTOMATION — INDIA</span>
+          <span>WEB · MOBILE · AI AUTOMATION · INDIA</span>
         </div>
 
         {/* Name + rotating word */}
@@ -51,7 +51,7 @@ export default function HeroSection() {
         <div className="space-y-7">
           <p className="text-[clamp(1.05rem,1.9cqi,1.35rem)] leading-relaxed text-muted">
             I build <strong className="text-fg font-semibold">web, mobile and AI automations</strong> that take over the{" "}
-            <strong className="text-fg font-semibold">manual, repetitive work</strong> slowing your business down, so your team can spend its time on what matters.
+            <strong className="text-fg font-semibold">manual, repetitive work</strong> slowing your business down.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">

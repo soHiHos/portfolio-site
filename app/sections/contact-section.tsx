@@ -106,14 +106,14 @@ export default function ContactSection({ id }: { id?: string }) {
     <section id={id}>
       <div className="w-full text-left space-y-8 py-12">
         <SectionHeading
-          title={<>Let&apos;s build something <span className="underline decoration-accent decoration-4 underline-offset-8">real</span>.</>}
+          title="Tell me about your project"
         />
 
         <Reveal className="grid lg:grid-cols-[1fr_1.4fr] border border-line bg-surface">
           {/* Description, availability and icon-only links */}
           <div className="flex flex-col gap-6 p-5 sm:p-8">
             <p className="text-lg leading-relaxed text-muted">
-              Have a project in mind? Send a short brief and I&apos;ll reply to set up a scoping call, or reach me directly.
+              Send a short brief and I&apos;ll reply to set up a scoping call, or use the links below to reach me directly.
             </p>
             <div className="space-y-1.5 text-sm text-muted">
               <span className="flex items-center gap-2 font-medium text-fg">
@@ -221,7 +221,7 @@ export default function ContactSection({ id }: { id?: string }) {
                 {status === "sent"
                   ? "Thanks, I've got your brief. I'll reply by email or WhatsApp within 48 hours."
                   : status === "fallback"
-                    ? "Couldn't send it just now. Your mail app has opened with the brief filled in, send it from there."
+                    ? "Couldn't send it just now. Your mail app has opened with the brief filled in; send it from there."
                     : "I reply by email or WhatsApp within 48 hours."}
               </span>
               <button type="submit" disabled={!canSend || status === "sending"} className="btn btn-primary">

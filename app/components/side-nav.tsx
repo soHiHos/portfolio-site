@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useActiveSection } from "./use-active-section"
 
 export type NavSection = { id: string; label: string }
@@ -18,8 +18,7 @@ const HOME_SECTIONS: NavSection[] = [
 // current section's tick is long and accent and its label is bold; the others brighten on hover.
 // Hidden over the hero (appears once the first section reaches the top). Vertically centred on the screen, but never
 // lower than just above the floating contact button, which rises with the footer (--footer-lift) on the
-// last sections. While the contact card is open it slides left beside it, but only if the two would
-// actually overlap (see globals.css). Large screens only.
+// last sections. While the contact card is open it moves up to sit just above it. Large screens only.
 //
 // `bottom` places the nav's centre (translate-y-1/2 shifts it down by half its height): the larger of
 // mid-screen and button top (1.75rem offset + 4rem button + lift) + 1rem gap + half the nav.
@@ -33,19 +32,19 @@ export default function SideNav({ sections = HOME_SECTIONS }: { sections?: NavSe
   const bottom = `max(50%, calc(${1.75 + 4 + 1 + (sections.length * ITEM_REM + PAD_REM) / 2}rem + var(--footer-lift, 0px)))`
   const visible = active !== null
   const activeIndex = Math.max(0, ids.indexOf(active ?? ""))
-  const navRef = useRef<HTMLElement>(null)
-  const [shifted, setShifted] = useState(false)
+  const [aboveCard, setAboveCard] = useState<string | null>(null)
 
-  // Re-check overlap with the contact card whenever it opens/closes (header toggles data-contact-open
-  // on <html>) and on scroll/resize, since both the card and the nav move with the footer
+  // While the contact card is open (header toggles data-contact-open on <html>) the nav sits just above it.
+  // The card hangs 0.75rem above the contact button; measure the button and card so this follows the footer lift.
   useEffect(() => {
     const root = document.documentElement
     function update() {
-      const card = document.querySelector("[data-contact-card]")
-      if (!navRef.current || !card || !root.hasAttribute("data-contact-open")) return setShifted(false)
-      const nav = navRef.current.getBoundingClientRect()
-      const box = card.getBoundingClientRect()
-      setShifted(nav.bottom > box.top - 8 && nav.top < box.bottom + 8)
+      const card = document.querySelector<HTMLElement>("[data-contact-card]")
+      const button = card?.parentElement
+      if (!card || !button || !root.hasAttribute("data-contact-open")) return setAboveCard(null)
+      const cardTop = button.getBoundingClientRect().top - 12 - card.offsetHeight
+      const navHeight = (sections.length * ITEM_REM + PAD_REM) * 16
+      setAboveCard(`${window.innerHeight - cardTop + 16 + navHeight / 2}px`)
     }
     update()
     const observer = new MutationObserver(update)
@@ -57,19 +56,17 @@ export default function SideNav({ sections = HOME_SECTIONS }: { sections?: NavSe
       window.removeEventListener("scroll", update)
       window.removeEventListener("resize", update)
     }
-  }, [])
+  }, [sections.length])
 
   return (
     <nav
-      ref={navRef}
-      data-shifted={shifted || undefined}
       aria-label="Sections"
       aria-hidden={!visible}
       inert={!visible}
-      className={`side-nav hidden lg:block fixed right-6 xl:right-12 translate-y-1/2 px-3 py-2 z-40 transition-[opacity,transform,translate] duration-500 ${
+      className={`side-nav hidden lg:block fixed right-6 xl:right-12 translate-y-1/2 px-3 py-2 z-40 transition-[opacity,transform,translate,bottom] duration-500 ${
         visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6 pointer-events-none"
       }`}
-      style={{ bottom }}
+      style={{ bottom: aboveCard ?? bottom }}
     >
       <ul className="relative flex flex-col items-end">
         {/* A ruler on the right edge: the rail runs from the first tick to the last, fills with the accent

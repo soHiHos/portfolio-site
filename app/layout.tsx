@@ -22,16 +22,16 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Soham Kar — Engineer",
   description:
-    "Soham Kar is an engineer in India building at the intersection of AI, software, hardware, and environmental engineering.",
+    "Soham Kar is an engineer in India who builds custom software, ERPs, mobile apps and AI automations for growing businesses.",
   openGraph: {
     title: "Soham Kar — Engineer",
-    description: "Building at the intersection of AI, software, hardware, and sustainability.",
+    description: "Custom software, mobile apps and AI automations for growing businesses in India.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Soham Kar — Engineer",
-    description: "Building at the intersection of AI, software, hardware, and sustainability.",
+    description: "Custom software, mobile apps and AI automations for growing businesses in India.",
   },
 };
 
