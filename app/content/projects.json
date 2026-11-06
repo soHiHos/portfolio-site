@@ -11,7 +11,23 @@
     "image": "/images/rever-home.png",
     "video": "/videos/reverlife.mp4",
     "link": "https://reverlife.in/home",
+    "highlights": [
+      "Built for a multi-level distribution business: inventory, order processing, distributor management and ledger workflows.",
+      "Backend of 20+ modular APIs and 15+ tables, with email and phone OTP sign-in, role-based access and audit trails.",
+      "Admin dashboards for the team and a separate portal for distributors.",
+      "Deployed on a Linux VPS with Docker and Nginx. Media moved to Amazon S3 to avoid disk and memory exhaustion during concurrent uploads.",
+      "Worked with the client through requirements, demos and testing."
+    ],
     "stack": [
+      "Vue 3",
+      "TypeScript",
+      "FastAPI",
+      "PostgreSQL",
+      "SQLAlchemy",
+      "Redis",
+      "Docker",
+      "Nginx",
+      "Amazon S3",
       "Firebase Auth",
       "MSG91 OTP"
     ]
@@ -52,11 +68,27 @@
     "phase": "soon",
     "title": "AS Metals",
     "status": "Deploying soon",
-    "tagline": "Website for a scrap and metal trader and steel supplier.",
-    "summary": "A business website for AS Metals, a scrap and metal trader and supplier of steel coils and plates. It presents the company and its product catalogue, and captures enquiries and quote requests so new buyers can reach the team quickly.",
+    "tagline": "Corporate website for a steel and scrap processor in Sharjah, UAE.",
+    "summary": "A corporate website for Al Saham Al Fadhi Metal Industries LLC, a steel and scrap processor in Sharjah, UAE. It presents the company, its processing lines and a product catalogue, and gives buyers sourcing and cut-to-length tools plus a way to send enquiries and quote requests. It is exported as plain static files, so it needs no server to run.",
     "image": "/images/as-metals_thumbnail.webp",
     "video": "/videos/as-metals.mp4",
-    "stack": []
+    "link": "https://as-metals.vercel.app/",
+    "linkLabel": "Visit demo site",
+    "linkNote": "This is a demo link. The live site will be deployed soon.",
+    "agency": "futurise",
+    "highlights": [
+      "21 prerendered routes: 10 pages and 11 generated product pages, exported as static files.",
+      "Interactive tools: a sea-lane sourcing map of scrap routes and shipments, a cut-to-length line comparison and a filterable product catalogue.",
+      "All copy and product data live in typed content modules, so a mistyped field fails the build instead of rendering blank.",
+      "Full-screen sections with scroll-snap that scale type and spacing with both screen width and height, so they fit short laptop screens, and respect reduced-motion settings.",
+      "Generated sitemap and robots.txt, canonical and Open Graph metadata, and a contact form that falls back to the visitor's email app when no form endpoint is set."
+    ],
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion"
+    ]
   },
   {
     "id": "frontwave",
@@ -68,8 +100,23 @@
     "video": "/videos/frontwave.mp4",
     "link": "https://frontwaveresearch.com/",
     "tagline": "Research publishing platform for an equity researcher.",
-    "summary": "A website and subscriber platform for FrontWave, an equity research business. Subscribers sign up, pay and read published research reports in a members' portal, and an admin panel lets the research team publish new reports themselves.",
-    "stack": []
+    "summary": "A website and subscriber platform for FrontWave, a SEBI-registered equity research firm in Mumbai. Visitors read the firm's public pages and the research it publishes openly. Members sign in to the Terminal to read full reports and momentum calls, and pay for a plan online. The research team drafts, reviews and publishes everything from their own portal, with no developer involved.",
+    "agency": "futurise",
+    "highlights": [
+      "Three parts: the public site, the Terminal for members, and a team portal for staff.",
+      "Research is written, reviewed and published in the team portal, with analyst and admin roles and an approval step before anything goes live.",
+      "Members-only research is gated on the server, not just hidden in the page.",
+      "Members sign in with an emailed link or Google, and pay for plans online with GST invoices generated for them.",
+      "Every sensitive action is recorded in an audit log."
+    ],
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Razorpay",
+      "Vercel"
+    ]
   },
   {
     "id": "plinth",

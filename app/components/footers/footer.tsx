@@ -4,8 +4,8 @@
 // and barcode on the ticket; copyright and contact links on the tear-off stub.
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Check, Contact, Mail, Plane, PlaneTakeoff, ShieldCheck, Ticket } from 'lucide-react';
-import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, GithubIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from '../ui/menu/contact-menu';
+import { Check, Mail, Plane, PlaneTakeoff, ShieldCheck, Ticket } from 'lucide-react';
+import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, FacebookIcon, GithubIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from '../ui/menu/contact-menu';
 
 const year = new Date().getFullYear();
 
@@ -17,7 +17,17 @@ const FIELDS = [
   { label: 'BOARDING', value: 'NOW', accent: true },
 ];
 
-const linkClasses = 'inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent-ink transition-colors cursor-pointer';
+// Social links as square icon buttons (same look as the contact section): fill with the accent on hover
+const SOCIALS = [
+  { label: 'LinkedIn', href: CONTACT_LINKEDIN, icon: LinkedinIcon },
+  { label: 'GitHub', href: CONTACT_GITHUB, icon: GithubIcon },
+  { label: 'Instagram', href: CONTACT_INSTAGRAM, icon: InstagramIcon },
+  ...(CONTACT_FACEBOOK ? [{ label: 'Facebook', href: CONTACT_FACEBOOK, icon: FacebookIcon }] : []),
+];
+const iconClasses = 'group relative flex w-10 h-10 items-center justify-center border border-line text-fg transition-all duration-300 hover:border-accent hover:bg-accent hover:text-on-accent motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink cursor-pointer';
+const tipClasses = 'pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap bg-fg px-2 py-1 text-xs font-medium text-bg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100';
+
+const linkClasses = 'inline-flex items-center gap-1.5 max-sm:py-2 text-sm text-muted hover:text-accent-ink transition-colors cursor-pointer';
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
@@ -53,9 +63,9 @@ export default function Footer() {
 
   return (
     // Negative margins cancel the page's side padding (see layout.tsx body: 1rem, 3rem, 6rem, 12rem) so the
-    // footer spans the full width, and the ticket then takes the same width as the top nav bar (see header.tsx)
+    // footer spans the full width, and the ticket then takes the same width as the top nav bar (see header.tsx): 6rem narrower than the viewport on each side on large screens, so both sit 6rem wider than the page content
     <footer ref={footerRef} className="py-6 -mx-4 sm:-mx-12 md:-mx-24 lg:-mx-48">
-      <div className="mx-auto flex w-[min(80rem,calc(100%-1.5rem))] flex-col md:flex-row">
+      <div className="mx-auto flex w-[calc(100%-1.5rem)] lg:w-[calc(100%-12rem)] flex-col md:flex-row">
         {/* Ticket */}
         <div className="relative flex-1 border border-line border-b-2 [border-bottom-style:dashed] md:border-b md:[border-bottom-style:solid] md:border-r-2 md:[border-right-style:dashed] bg-surface p-4 sm:p-5">
           {/* Punched notches at both ends of the perforation */}
@@ -122,34 +132,28 @@ export default function Footer() {
           <div className="space-y-2">
             <div className="text-xs font-medium tracking-[0.25em] text-muted">THANKS FOR FLYING</div>
             <nav className="flex flex-col items-start gap-1.5">
-              <a href={CONTACT_LINKEDIN} target="_blank" rel="noopener noreferrer" className={linkClasses}>
-                <LinkedinIcon className="w-4 h-4" />
-                LinkedIn
-              </a>
-              <a href={CONTACT_GITHUB} target="_blank" rel="noopener noreferrer" className={linkClasses}>
-                <GithubIcon className="w-4 h-4" />
-                GitHub
-              </a>
-              <a href={CONTACT_INSTAGRAM} target="_blank" rel="noopener noreferrer" className={linkClasses}>
-                <InstagramIcon className="w-4 h-4" />
-                Instagram
-              </a>
-              <button type="button" onClick={handleCopyEmail} className={linkClasses}>
-                {copied ? <Check className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
-                {copied ? 'Copied!' : CONTACT_EMAIL}
-              </button>
-              <a href="/soham-kar.vcf" download className={linkClasses}>
-                <Contact className="w-4 h-4" />
-                Save contact
-              </a>
               <Link href="/privacy" className={linkClasses}>
                 <ShieldCheck className="w-4 h-4" />
                 Privacy policy
               </Link>
             </nav>
           </div>
-          {/* Pinned to the stub's bottom-right corner (the stub is a column with justify-between) */}
-          <p className="self-end text-right text-sm text-fg">&copy; {year} Made by Soham Kar</p>
+          {/* Email, social icons, then the credit, pinned to the stub's bottom (the stub is a column with justify-between) */}
+          <div className="space-y-4">
+            <button type="button" onClick={handleCopyEmail} className={linkClasses}>
+              {copied ? <Check className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
+              {copied ? 'Copied!' : CONTACT_EMAIL}
+            </button>
+            <div className="flex flex-wrap gap-3">
+              {SOCIALS.map(({ label, href, icon: Icon }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={iconClasses}>
+                  <Icon className="w-5 h-5" />
+                  <span className={tipClasses} aria-hidden="true">{label}</span>
+                </a>
+              ))}
+            </div>
+            <p className="text-right text-sm text-fg">&copy; {year} Made by Soham Kar</p>
+          </div>
         </div>
       </div>
     </footer>

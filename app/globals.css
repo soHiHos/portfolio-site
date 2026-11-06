@@ -12,8 +12,11 @@
 /* Section snap scrolling on the home page (snap stops are set in app/page.tsx). Anchors and snap
    stops land below the fixed header. */
 html {
-  scroll-snap-type: y proximity;
   scroll-padding-top: var(--header-h);
+}
+/* Snapping fights touch scrolling on phones, so it only applies from tablet width up */
+@media (min-width: 48rem) {
+  html { scroll-snap-type: y proximity; }
 }
 
 /* Slim themed scrollbar. Standard properties cover Chrome/Edge/Firefox; the ::-webkit-scrollbar
@@ -48,13 +51,14 @@ html {
   --flap-bg: var(--panel-dark);
   --grid: rgb(16 42 67 / 0.04);
   --city-ground: var(--background);
-  --street: #f7f9fb;
-  --street-major: #ffffff;
-  --park: #d0ddd6;
-  --river: #c8d9e4;
-  --river-bank: #b3c8d7;
-  --rail: rgb(16 42 67 / 0.18);
-  --runway: rgb(16 42 67 / 0.26);
+  /* Map lines are dark navy, not white, so the fine street detail reads against the pale page */
+  --street: rgb(16 42 67 / 0.12);
+  --street-major: rgb(16 42 67 / 0.2);
+  --park: #c8d9d0;
+  --river: #bed3e1;
+  --river-bank: #a0bccd;
+  --rail: rgb(16 42 67 / 0.16);
+  --runway: rgb(16 42 67 / 0.2);
 }
 
 .dark {
@@ -231,6 +235,12 @@ p {
 }
 
 /* Hero rotating word (sections/hero-section.tsx) */
+/* Idle bob for the hero's Contact button. Uses the individual `translate` property so it never fights the
+   button's own transform transitions; it stays in place and only drifts a few pixels. */
+@keyframes btn-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
 @keyframes word-in {
   from { opacity: 0; transform: translateY(0.35em); }
   to { opacity: 1; transform: none; }
@@ -432,4 +442,13 @@ p {
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Touch screens: thumb-sized hit areas without changing how things look, and 16px form fields (iOS Safari
+   zooms the page in on any field smaller than that when it gets focus) */
+@media (pointer: coarse) {
+  .btn-sm { min-height: 2.5rem; }
+  .btn-link { padding-block: 0.625rem; margin-block: -0.625rem; }
+  .btn-link::after { bottom: calc(0.625rem - 3px); }
+  input, select, textarea { font-size: 1rem; }
 }

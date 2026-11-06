@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .tile { fill: #e8a33d; }
+    .ink { fill: none; stroke: #102a43; stroke-width: 5; stroke-linejoin: miter; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #f97316; }
+      .ink { stroke: #16191d; }
+    }
+  </style>
+  <!-- Square tile with the top-right corner cut at 45 degrees -->
+  <polygon class="tile" points="0,0 46,0 64,18 64,64 0,64" />
+  <!-- S and K drawn as strokes so no font is needed -->
+  <path class="ink" d="M28 22H12V32H28V42H12" />
+  <path class="ink" d="M38 19.5V44.5M53 20L39 32.5M43.5 30L54 44.5" />
+</svg>

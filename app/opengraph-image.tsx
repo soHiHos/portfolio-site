@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'Soham Kar — Engineer'
+export const alt = 'Soham Kar · Engineer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -23,7 +23,10 @@ export default function Image() {
         }}
       >
         <div style={{ fontSize: 64, fontWeight: 700 }}>SOHAM KAR</div>
-        <div style={{ fontSize: 32, marginTop: 16, color: '#a0a0a8' }}>— engineering better</div>
+        <div style={{ display: 'flex', alignItems: 'center', fontSize: 32, marginTop: 16, color: '#a0a0a8' }}>
+          <div style={{ width: 16, height: 16, marginRight: 16, background: '#f97316' }} />
+          Engineering better
+        </div>
         <div style={{ fontSize: 160, fontWeight: 700, color: '#f97316', lineHeight: 1 }}>FUTURES</div>
         <div style={{ fontSize: 28, marginTop: 32, color: '#a0a0a8' }}>Engineer · AI · Software · Hardware</div>
       </div>

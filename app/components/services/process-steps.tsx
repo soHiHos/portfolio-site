@@ -37,7 +37,7 @@ export default function ProcessSteps({ steps }: { steps: Step[] }) {
             aria-selected={i === index}
             aria-label={`Step ${i + 1}: ${s.step}`}
             onClick={() => go(i)}
-            className={`relative z-10 flex h-8 w-8 items-center justify-center border text-xs font-bold tabular-nums transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink ${
+            className={`relative z-10 flex h-8 w-8 items-center justify-center border text-xs font-bold after:absolute after:-inset-1.5 after:content-[''] tabular-nums transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink ${
               i === index
                 ? "border-accent bg-accent text-on-accent"
                 : i < index

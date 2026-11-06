@@ -11,7 +11,7 @@ import { CATEGORIES, PROJECTS, type Project } from "../content/projects";
 import { CONTACT_GITHUB } from "../content/contact";
 
 export const metadata: Metadata = {
-  title: "Projects — Soham Kar",
+  title: "Projects · Soham Kar",
   description: "All of Soham Kar's projects: client work, side projects and hardware.",
 };
 
@@ -39,7 +39,6 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
             video={project.video}
             visual={project.visual}
             title={project.title}
-            summary={project.tagline}
             href={`/projects/${project.id}`}
           />
         </Reveal>

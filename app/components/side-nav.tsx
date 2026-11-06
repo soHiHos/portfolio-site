@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { useActiveSection } from "./use-active-section"
+import { CONTACT_WHATSAPP } from "../content/contact"
 
 export type NavSection = { id: string; label: string }
 
@@ -21,15 +22,17 @@ const HOME_SECTIONS: NavSection[] = [
 // last sections. While the contact card is open it moves up to sit just above it. Large screens only.
 //
 // `bottom` places the nav's centre (translate-y-1/2 shifts it down by half its height): the larger of
-// mid-screen and button top (1.75rem offset + 4rem button + lift) + 1rem gap + half the nav.
+// mid-screen and the top of the button stack (1.75rem offset + 4rem contact button + the 3rem WhatsApp button and its
+// 0.75rem gap when there is one + lift) + 1rem gap + half the nav.
 // Every item is h-8 and the panel adds py-2 — keep ITEM_REM and PAD_REM in sync if those change.
 const ITEM_REM = 2
 const PAD_REM = 1
+const STACK_REM = CONTACT_WHATSAPP ? 3.75 : 0 // the WhatsApp button above the contact button (see header.tsx)
 
 export default function SideNav({ sections = HOME_SECTIONS }: { sections?: NavSection[] }) {
   const ids = useMemo(() => sections.map((s) => s.id), [sections])
   const active = useActiveSection(ids)
-  const bottom = `max(50%, calc(${1.75 + 4 + 1 + (sections.length * ITEM_REM + PAD_REM) / 2}rem + var(--footer-lift, 0px)))`
+  const bottom = `max(50%, calc(${1.75 + 4 + STACK_REM + 1 + (sections.length * ITEM_REM + PAD_REM) / 2}rem + var(--footer-lift, 0px)))`
   const visible = active !== null
   const activeIndex = Math.max(0, ids.indexOf(active ?? ""))
   const [aboveCard, setAboveCard] = useState<string | null>(null)

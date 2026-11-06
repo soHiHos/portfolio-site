@@ -5,12 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Mail } from "lucide-react";
+import { CONTACT_WHATSAPP, WhatsAppIcon } from "../ui/menu/contact-menu";
 import ContactCard from "./contact-card";
 import ThemeToggle from "../effects/theme-toggle";
 import { EASTER_EVENT } from "../effects/easter-jet";
 import services from "../../content/services.json";
 import { useActiveSection } from "../use-active-section";
 import ScrollProgress from "./scroll-progress";
+import LogoMark from "../logo-mark";
 
 // Page navigation; in-page section navigation lives in the floating side nav on the home page
 const PAGES = [
@@ -43,7 +45,7 @@ function TopNav({ pathname, hidden }: NavProps) {
     <header
       aria-hidden={hidden}
       inert={hidden}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[min(80rem,calc(100%-1.5rem))] border border-line bg-bg/60 backdrop-blur-xl transition-all duration-500 ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] lg:w-[calc(100%-12rem)] border border-line bg-bg/60 backdrop-blur-xl transition-all duration-500 ${
         hidden ? "-translate-y-[150%] opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
       }`}
     >
@@ -51,9 +53,10 @@ function TopNav({ pathname, hidden }: NavProps) {
         <Link
           href="/"
           onClick={handleBadgeClick}
-          className="hidden sm:block shrink-0 pl-3 text-sm font-semibold text-accent-ink transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-accent-ink"
+          className="hidden sm:flex items-center gap-2.5 shrink-0 pl-2 text-sm font-semibold text-accent-ink transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-accent-ink"
           aria-label="Soham Kar, home"
         >
+          <LogoMark />
           Soham Kar
         </Link>
         <nav className="flex items-center gap-0.5 sm:gap-1 flex-1 justify-center">
@@ -64,7 +67,7 @@ function TopNav({ pathname, hidden }: NavProps) {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`whitespace-nowrap px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent-ink ${
+                className={`whitespace-nowrap px-2.5 max-[360px]:px-1.5 sm:px-3.5 py-2.5 sm:py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent-ink ${
                   active ? "bg-accent text-on-accent" : "text-muted hover:text-fg hover:bg-fg/5"
                 }`}
               >
@@ -139,19 +142,32 @@ export default function Header() {
 
         {/* Floating contact button: on the home page once scrolled past the hero, on other pages always */}
         {isPastHero && (
-            <div ref={contactRef} className="fixed right-7 z-50" style={{ bottom: "calc(1.75rem + var(--footer-lift, 0px))" }}>
+            <div ref={contactRef} className="fixed right-4 sm:right-7 z-50 bottom-4 sm:bottom-[calc(1.75rem+var(--footer-lift,0px))]">
                 <ContactCard
                     open={isContactOpen}
                     className="absolute bottom-full right-0 mb-3 origin-bottom-right"
                 />
 
+                {/* WhatsApp chat, just above the contact button; shows once CONTACT_WHATSAPP is set */}
+                {CONTACT_WHATSAPP && (
+                    <a
+                        href={`https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent("Hi Soham, I found your site and would like to talk about a project.")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Chat on WhatsApp"
+                        className="mx-auto mb-3 flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#25D366] bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:bg-[#1da851] hover:border-[#1da851] motion-safe:hover:-translate-y-0.5 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink cursor-pointer"
+                    >
+                        <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </a>
+                )}
+
                 <button
                     onClick={() => setIsContactOpen((open) => !open)}
                     aria-expanded={isContactOpen}
                     aria-label="Contact"
-                    className="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-on-accent shadow-lg transition-all duration-300 hover:bg-fg hover:text-bg hover:shadow-[0_12px_28px_-10px_var(--foreground)] motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-ink cursor-pointer"
+                    className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-accent text-on-accent shadow-lg transition-all duration-300 hover:bg-fg hover:text-bg hover:shadow-[0_12px_28px_-10px_var(--foreground)] motion-safe:hover:-translate-y-0.5 motion-safe:hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-ink cursor-pointer"
                 >
-                    <Mail className="w-7 h-7" />
+                    <Mail className="w-6 h-6 sm:w-7 sm:h-7" />
                 </button>
             </div>
         )}

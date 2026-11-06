@@ -10,7 +10,7 @@ import Reveal from "../components/effects/reveal";
 import SideNav from "../components/side-nav";
 
 export const metadata: Metadata = {
-  title: "About — Soham Kar",
+  title: "About · Soham Kar",
   description: "Soham Kar's background: civil engineering, environmental research, entrepreneurship, and self-taught software, hardware and AI.",
 };
 

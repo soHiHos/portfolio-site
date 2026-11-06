@@ -15,7 +15,7 @@ import SideNav from "../components/side-nav";
 import ContactSection from "../sections/contact-section";
 
 export const metadata: Metadata = {
-  title: "Services — Soham Kar",
+  title: "Services · Soham Kar",
   description: `Software and AI automations that remove manual work and give growing businesses clear numbers.${ESTIMATOR_ON ? " Get a price estimate in two minutes." : ""}`,
 };
 

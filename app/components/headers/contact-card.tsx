@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowUpRight, Check, Copy, Download } from "lucide-react"
+import { ArrowUpRight, Check, Copy } from "lucide-react"
 import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, copyToClipboard } from "../ui/menu/contact-menu"
 import { useIndiaTime } from "../use-india-time"
 
-const channelClasses = "group/ch flex items-center gap-3 w-full px-3 py-2.5 text-left hover:bg-white/5 transition-colors cursor-pointer"
+const channelClasses = "group/ch flex items-center gap-3 w-full px-3 py-3 sm:py-2.5 text-left hover:bg-white/5 transition-colors cursor-pointer"
 
 // Contact card that pops out of the floating contact button, laid out wide: name, role and local time on the
 // left, the email and links on the right (stacked on phones).
@@ -58,9 +58,9 @@ export default function ContactCard({ open, className = "" }: { open: boolean; c
             <span className="flex-1 text-sm font-medium">Instagram</span>
             <ArrowUpRight className="w-4 h-4 shrink-0 text-white/50 group-hover/ch:text-white" />
           </a>
-          <a href="/cv-resume/SOHAM_KAR_cv_02-2026.pdf" download className={channelClasses} tabIndex={open ? 0 : -1}>
+          <a href="/about#cv" className={channelClasses} tabIndex={open ? 0 : -1}>
             <span className="flex-1 text-sm font-medium">CV</span>
-            <Download className="w-4 h-4 shrink-0 text-white/50 group-hover/ch:text-white" />
+            <ArrowUpRight className="w-4 h-4 shrink-0 text-white/50 group-hover/ch:text-white" />
           </a>
         </div>
       </div>

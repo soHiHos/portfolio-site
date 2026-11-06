@@ -3,7 +3,7 @@ import Reveal from "../components/effects/reveal";
 import { CONTACT_EMAIL } from "../content/contact";
 
 export const metadata: Metadata = {
-  title: "Privacy policy — Soham Kar",
+  title: "Privacy policy · Soham Kar",
   description: "What this site collects, why, who handles it, and how to ask me to delete it.",
 };
 
@@ -17,7 +17,10 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           services you are interested in, your timeline and your message. The form has a consent checkbox, and nothing is
           sent until you tick it and press send.
         </p>
-        <p>The site has no accounts, no payments and no newsletter.</p>
+        <p>
+          If you download my CV, I ask for your name and email first, with the same kind of consent checkbox, so I know who
+          took it. The site has no accounts, no payments and no newsletter.
+        </p>
       </>
     ),
   },
@@ -26,7 +29,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     body: (
       <p>
         To reply to you and scope your project. I don&apos;t sell your details, and I won&apos;t add you to a mailing list
-        without asking. The message is stored in a database and emailed to me, so I can answer by email or WhatsApp.
+        without asking. The message, or the name and email from a CV download, is stored in a database and emailed to me, so I can answer by email or WhatsApp.
       </p>
     ),
   },
@@ -40,8 +43,8 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           your approximate location. Vercel Web Analytics counts page views without cookies.
         </p>
         <p>
-          Nothing you type into the contact form is sent to either tool. The only form-related signal is that a brief was
-          sent, along with the services ticked. You can block Google Analytics with your browser&apos;s cookie settings, a
+          Nothing you type into the contact form is sent to either tool. The only form-related signals are that a brief was
+          sent, along with the services ticked, and that the CV was downloaded. You can block Google Analytics with your browser&apos;s cookie settings, a
           content blocker, or Google&apos;s opt-out browser add-on.
         </p>
       </>

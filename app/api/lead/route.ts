@@ -1,5 +1,8 @@
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { NextResponse } from 'next/server';
-import { CONTACT_EMAIL } from '../../content/contact';
+import { CONTACT_EMAIL, CV_PATH } from '../../content/contact';
+import { estimatePdfBuffer } from './estimate-pdf-server';
 import { SERVICE_LIST, TIMELINES } from '../../content/service-list';
 import { ESTIMATOR_ON, QUESTIONS, estimate, inr, validAnswers, type Contact } from '../../components/estimator/estimate';
 
@@ -59,16 +62,34 @@ async function saveToSupabase(table: 'leads' | 'briefs', row: Record<string, unk
   return res.ok;
 }
 
-async function emailSoham(subject: string, body: string, replyTo: string) {
+type Attachment = { filename: string; content: Buffer };
+
+async function sendEmail(to: string, subject: string, body: string, replyTo: string, attachments: Attachment[] = []) {
   if (!RESEND_API_KEY) return false;
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: NOTIFY_FROM, to: [NOTIFY_TO], reply_to: replyTo, subject, text: body }),
+    body: JSON.stringify({
+      from: NOTIFY_FROM,
+      to: [to],
+      reply_to: replyTo,
+      subject,
+      text: body,
+      ...(attachments.length ? { attachments: attachments.map((a) => ({ filename: a.filename, content: a.content.toString('base64') })) } : {}),
+    }),
   });
-  if (!res.ok) console.error('lead: resend email failed', res.status, await res.text());
+  if (!res.ok) console.error(`lead: resend email to ${to === NOTIFY_TO ? 'owner' : 'visitor'} failed`, res.status, await res.text());
   return res.ok;
 }
+
+const emailSoham = (subject: string, body: string, replyTo: string, attachments?: Attachment[]) => sendEmail(NOTIFY_TO, subject, body, replyTo, attachments);
+
+// Reply to the visitor. Never decides whether the lead counts as received: that depends on Supabase / the owner email only.
+const emailVisitor = (to: string, subject: string, body: string, attachments?: Attachment[]) =>
+  sendEmail(to, subject, body, CONTACT_EMAIL, attachments).catch((err) => (console.error('lead: visitor email error', err), false));
+
+const firstName = (name: string) => name.split(/\s+/)[0] || 'there';
+const SIGN_OFF = `Soham Kar\n${CONTACT_EMAIL}`;
 
 // A brief from the contact form: needs a message, a way to reply (email or WhatsApp) and consent. Not tied to the
 // estimator, so it works while the estimator is hidden.
@@ -92,7 +113,30 @@ async function handleBrief(body: Record<string, unknown>) {
   if (!valid) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
 
   const serviceNames = SERVICE_LIST.filter((x) => services.includes(x.id)).map((x) => x.title).join(', ') || 'Not sure yet';
-  const [saved, emailed] = await Promise.all([
+  // Acknowledgement to the visitor (only if they gave an email; WhatsApp-only briefs get no auto-reply)
+  const ack = email
+    ? emailVisitor(
+      email,
+      'I got your project brief',
+      [
+        `Hi ${firstName(name)},`,
+        '',
+        "Thanks for your brief. I've received it and I'll reply personally to set up a scoping call.",
+        '',
+        'What you sent:',
+        `Services: ${serviceNames}`,
+        `Timeline: ${timeline || '-'}`,
+        '',
+        message,
+        '',
+        'If anything is missing, just reply to this email.',
+        '',
+        SIGN_OFF,
+      ].join('\n')
+    )
+    : Promise.resolve(false);
+  const [, saved, emailed] = await Promise.all([
+    ack,
     saveToSupabase('briefs', { name, whatsapp, email, services, timeline, message, consent: true }).catch((err) => (console.error('brief: supabase error', err), false)),
     emailSoham(
       `New project brief${name ? ` from ${name}` : ''}`,
@@ -101,6 +145,34 @@ async function handleBrief(body: Record<string, unknown>) {
     ).catch((err) => (console.error('brief: resend error', err), false)),
   ]);
 
+  if (!saved && !emailed) return NextResponse.json({ error: 'not_saved' }, { status: 502 });
+  return NextResponse.json({ ok: true });
+}
+
+// A CV download: the visitor leaves a name and email (and consent) so Soham knows who took it. Stored with the briefs
+// (message "CV download") and emailed; the PDF itself is downloaded by the browser.
+async function handleCv(body: Record<string, unknown>) {
+  const name = text(body.name, 80);
+  const email = text(body.email, 120);
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || body.consent !== true) {
+    return NextResponse.json({ error: 'bad_request' }, { status: 400 });
+  }
+  // A copy of the CV for their inbox (the browser download still starts on its own)
+  const cvCopy = readFile(path.join(process.cwd(), 'public', CV_PATH))
+    .then((content) =>
+      emailVisitor(
+        email,
+        'My CV',
+        [`Hi ${firstName(name)},`, '', 'Thanks for your interest. My CV is attached.', '', 'If you have a project in mind, reply to this email or send a brief from my site.', '', SIGN_OFF].join('\n'),
+        [{ filename: path.basename(CV_PATH), content }]
+      )
+    )
+    .catch((err) => (console.error('cv: could not attach the CV', err), false));
+  const [, saved, emailed] = await Promise.all([
+    cvCopy,
+    saveToSupabase('briefs', { name, whatsapp: '', email, services: [], timeline: '', message: 'CV download', consent: true }).catch((err) => (console.error('cv: supabase error', err), false)),
+    emailSoham(`CV downloaded by ${name}`, [`Name: ${name}`, `Email: ${email}`].join('\n'), email).catch((err) => (console.error('cv: resend error', err), false)),
+  ]);
   if (!saved && !emailed) return NextResponse.json({ error: 'not_saved' }, { status: 502 });
   return NextResponse.json({ ok: true });
 }
@@ -120,6 +192,7 @@ export async function POST(req: Request) {
   if (text(body.website, 200)) return NextResponse.json({ ok: true });
 
   if (body.kind === 'brief') return handleBrief(body);
+  if (body.kind === 'cv') return handleCv(body);
 
   if (!ESTIMATOR_ON) return NextResponse.json({ error: 'not_available' }, { status: 404 });
 
@@ -147,7 +220,29 @@ export async function POST(req: Request) {
     `Timeline: ${e.timeline}`,
   ];
 
-  const [saved, emailed] = await Promise.all([
+  // The same PDF the browser downloads, emailed to the visitor and copied to Soham. If it can't be built, both
+  // still get a plain-text email.
+  const pdf = await estimatePdfBuffer(contact, e, answers.payment === 'buyout').catch((err) => (console.error('lead: estimate pdf failed', err), null));
+  const attachments = pdf ? [{ filename: `Price estimate - ${contact.business.replace(/[\\/:*?"<>|]/g, '')}.pdf`, content: pdf }] : [];
+  const visitorEmail = emailVisitor(
+    contact.email,
+    `Your price estimate, ${contact.business}`,
+    [
+      `Hi ${firstName(contact.name)},`,
+      '',
+      pdf ? 'Thanks for using the estimator. Your price estimate is attached as a PDF.' : 'Thanks for using the estimator. Here is a summary of your price estimate.',
+      '',
+      ...estimateLines,
+      '',
+      'This is an estimate, not a quote. Your proposal comes after a free call: reply to this email with a time that suits you.',
+      '',
+      SIGN_OFF,
+    ].join('\n'),
+    attachments
+  );
+
+  const [, saved, emailed] = await Promise.all([
+    visitorEmail,
     saveToSupabase('leads', {
       name: contact.name,
       business_name: contact.business,
@@ -160,7 +255,8 @@ export async function POST(req: Request) {
     emailSoham(
       `New estimate lead: ${contact.business} (${label('start', answers.start)})`,
       [`${contact.name}, ${contact.business}`, `Phone/WhatsApp: ${contact.phone}`, `Email: ${contact.email}`, '', ...summary, '', 'Estimate sent:', ...estimateLines].join('\n'),
-      contact.email
+      contact.email,
+      attachments
     ).catch((err) => (console.error('lead: resend error', err), false)),
   ]);
 

@@ -77,7 +77,7 @@ export default function Backdrop() {
       {/* Flight patterns above the city, kept sharp */}
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
         {FLIGHTS.map((flight, i) => (
-          <g key={flight.d}>
+          <g key={flight.d} className={i >= 3 ? "max-sm:hidden" : undefined}>
             <path id={`flight-${i}`} d={flight.d} fill="none" stroke="var(--accent)" strokeOpacity="0.3" strokeWidth="1.3" strokeDasharray="6 9" />
             <path className="flight-plane" d={PLANE} fill="var(--accent)" fillOpacity="0.85" transform="scale(1.4)" opacity={0}>
               <animateMotion dur={FLIGHT_DUR} begin={flight.begin} repeatCount="indefinite" rotate="auto">

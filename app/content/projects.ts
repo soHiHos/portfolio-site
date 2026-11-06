@@ -21,9 +21,13 @@ export type Project = {
   shortSummary?: string // 18–20 words for the Work tiles; project pages and the assistant use `summary`
   status?: string
   image?: string
-  video?: string // muted preview played on hover; `image` is its thumbnail
+  video?: string // muted preview played on hover (and, on touch screens, a .webp of the same name); `image` is its thumbnail
   visual?: "lidar"
   link?: string
+  linkLabel?: string // button text for `link` when it is not the live site (default "Visit live site")
+  linkNote?: string // short note under the link, e.g. that it is a demo
+  agency?: string // id in organizations.json: the studio a client project was undertaken at (shows a "Built at" card)
+  highlights?: string[] // short facts listed under the overview
   github?: string
   stack?: string[]
   caseStudy?: { problem?: string; approach?: string; outcome?: string }

@@ -10,8 +10,6 @@ type Idea = { title: string; summary: string; stage?: string; points?: string[];
 // Placeholder entries in ideas.json stay out of the page until they are filled in
 export const IDEAS = (ideas as Idea[]).filter((idea) => !idea.placeholder)
 
-const Label = ({ n }: { n: number }) => <span className="text-[10px] font-semibold tracking-[0.25em] text-muted">IDEA {String(n).padStart(2, "0")}</span>
-
 // Ideas board, shared by the About and Projects pages. The first idea is the featured one: it stretches the full
 // width with its text beside the key points, and its image (if any) at the end. The rest sit below in columns.
 // Renders nothing while there are no ideas.
@@ -25,7 +23,6 @@ export default function Ideas() {
       <Reveal className="space-y-4">
         <div className={`grid border border-line bg-surface ${first.image ? "lg:grid-cols-[1fr_1fr_20rem]" : "lg:grid-cols-2"}`}>
           <div className="space-y-2 p-5 sm:p-6">
-            <Label n={1} />
             {first.stage && <div className="text-[10px] font-semibold tracking-[0.2em] text-accent-ink uppercase">{first.stage}</div>}
             <h3 className="text-xl font-bold text-fg">{first.title}</h3>
             <p className="text-sm leading-relaxed text-muted">{first.summary}</p>
@@ -43,15 +40,15 @@ export default function Ideas() {
           {first.image && (
             <figure className="relative min-h-56 border-t border-line lg:min-h-full lg:border-l lg:border-t-0">
               <LoadImg src={first.image} alt={first.imageAlt ?? first.title} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-black/25" aria-hidden="true" />
             </figure>
           )}
         </div>
 
         {rest.length > 0 && (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {rest.map((idea, i) => (
+            {rest.map((idea) => (
               <div key={idea.title} className="border border-line bg-surface p-5 space-y-2">
-                <Label n={i + 2} />
                 {idea.stage && <div className="text-[10px] font-semibold tracking-[0.2em] text-accent-ink uppercase">{idea.stage}</div>}
                 <h3 className="text-base font-semibold text-fg">{idea.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{idea.summary}</p>

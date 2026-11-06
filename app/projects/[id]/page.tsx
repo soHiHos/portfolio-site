@@ -7,6 +7,7 @@ import LidarVisual from "../../components/effects/lidar-visual";
 import HoverVideo from "../../components/effects/hover-video";
 import LoadImg from "../../components/effects/media-spinner";
 import { CATEGORIES, PROJECTS } from "../../content/projects";
+import organizations from "../../content/organizations.json";
 
 // Only ids in projects.json exist; anything else 404s
 export const dynamicParams = false;
@@ -18,7 +19,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/projects/[id]">): Promise<Metadata> {
   const { id } = await params;
   const project = PROJECTS.find((p) => p.id === id);
-  return project ? { title: `${project.title} — Soham Kar`, description: project.tagline } : {};
+  return project ? { title: `${project.title} · Soham Kar`, description: project.tagline } : {};
 }
 
 const CHAPTERS = [
@@ -39,6 +40,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
   const project = PROJECTS[index];
   const next = PROJECTS[(index + 1) % PROJECTS.length];
   const category = CATEGORIES.find((c) => c.id === project.category);
+  const agency = project.agency ? organizations.find((o) => o.id === project.agency) : undefined;
   const chapters = CHAPTERS.flatMap((chapter) => {
     const text = project.caseStudy?.[chapter.key];
     return text ? [{ chapter, text }] : [];
@@ -86,8 +88,19 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
         <Reveal className="space-y-3">
           <div className="text-xs font-semibold tracking-[0.25em] text-muted">OVERVIEW</div>
           <p className="text-lg leading-relaxed text-muted">{project.summary}</p>
+          {project.highlights && project.highlights.length > 0 && (
+            <ul className="space-y-2 pt-2 text-base leading-relaxed text-fg">
+              {project.highlights.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
         </Reveal>
-        <Reveal className="border border-line bg-surface p-5 space-y-4 self-start">
+        <div className="space-y-4 self-start">
+        <Reveal className="border border-line bg-surface p-5 space-y-4">
           <div className="text-xs font-semibold tracking-[0.25em] text-muted">DETAILS</div>
           {project.stack && project.stack.length > 0 && (
             <div className="space-y-2">
@@ -102,9 +115,10 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
           <div className="flex flex-col gap-2">
             {project.link && (
               <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-link text-sm text-fg">
-                Visit live site <ArrowUpRight className="w-4 h-4" />
+                {project.linkLabel ?? "Visit live site"} <ArrowUpRight className="w-4 h-4" />
               </a>
             )}
+            {project.link && project.linkNote && <p className="text-xs leading-relaxed text-muted">{project.linkNote}</p>}
             {project.github && (
               <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-link text-sm text-fg">
                 <Code2 className="w-4 h-4" /> View source <ArrowUpRight className="w-4 h-4" />
@@ -112,6 +126,30 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
             )}
           </div>
         </Reveal>
+        {/* Which studio a client project was undertaken at */}
+        {agency && (
+          <Reveal className="border border-line bg-surface p-5 space-y-4">
+            <div className="text-xs font-semibold tracking-[0.25em] text-muted">BUILT AT</div>
+            <div className="flex items-center gap-4">
+              <span
+                className="flex w-12 h-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-bg"
+                style={agency.logoBg ? { backgroundColor: agency.logoBg } : undefined}
+              >
+                <img src={agency.logo ?? "/logos/placeholder.svg"} alt={`${agency.name} logo`} className="w-[86%] h-[86%] object-contain" />
+              </span>
+              <p className="text-base font-semibold text-fg">{agency.name}</p>
+            </div>
+            <p className="text-sm leading-relaxed text-muted">
+              This is a client project undertaken at {agency.name}.
+            </p>
+            {agency.link && (
+              <a href={agency.link} target="_blank" rel="noopener noreferrer" className="btn-link text-sm text-fg">
+                Visit {agency.name} <ArrowUpRight className="w-4 h-4" />
+              </a>
+            )}
+          </Reveal>
+        )}
+        </div>
       </div>
 
       {/* Case study: only the chapters written in projects.json; hidden until at least one is */}

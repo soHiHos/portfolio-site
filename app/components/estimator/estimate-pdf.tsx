@@ -41,7 +41,7 @@ function Tick({ children }: { children: string }) {
   )
 }
 
-function EstimateDocument({ contact, e, today, preferBuyout }: { contact: Contact; e: Estimate; today: Date; preferBuyout: boolean }) {
+export function EstimateDocument({ contact, e, today, preferBuyout }: { contact: Contact; e: Estimate; today: Date; preferBuyout: boolean }) {
   const T = PRICING.terms
   const licence = e.licence !== null && (
     <View style={s.box} wrap={false}>

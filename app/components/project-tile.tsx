@@ -8,7 +8,7 @@ import type { ProjectPhase } from "../content/projects"
 interface ProjectTileProps {
   phase?: ProjectPhase // status line; left out for a name-only tile
   image?: string
-  video?: string // muted preview over the image, played on hover
+  video?: string // muted preview over the image: plays on hover, or as a looping .webp of the same name on touch screens
   visual?: "lidar"
   title: string
   summary?: string
@@ -62,7 +62,7 @@ export default function ProjectTile({ phase, image, video, visual, title, summar
 
       <div className={`absolute inset-x-0 bottom-0 p-5 sm:p-6 space-y-2 text-white ${summary ? "" : "pt-12 bg-gradient-to-t from-black/75 to-transparent"}`}>
         {phase && (
-          <span className="flex items-center gap-1.5 text-xs font-medium text-white/70">
+          <span className="flex w-fit items-center gap-1.5 bg-black px-2.5 py-1 text-xs font-medium text-white">
             <span className={`w-1.5 h-1.5 rounded-full ${PHASE[phase].dot}`} aria-hidden="true" />
             {PHASE[phase].label}
           </span>

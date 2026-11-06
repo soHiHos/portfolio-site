@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { ArrowUp } from "lucide-react"
 
-// "Go to top" button, centred at the bottom of the screen. Appears once the first screen (the hero
+// "Go to top" button, centred at the bottom of the screen (bottom-left on phones, where it stays put over the footer). Appears once the first screen (the hero
 // on the home page) has been scrolled past. A frosted square button whose accent outline traces round
 // with page progress; on hover it fills with the accent and the arrow nudges up.
 export default function BackToTop() {
@@ -44,7 +44,7 @@ export default function BackToTop() {
       aria-label="Go to top"
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`group fixed left-1/2 -translate-x-1/2 bottom-5 z-50 flex w-12 h-12 items-center justify-center border border-line bg-bg/60 backdrop-blur-xl text-fg transition-all duration-300 hover:bg-accent hover:border-accent hover:text-on-accent motion-safe:hover:-translate-y-0.5 active:scale-95 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink ${
+      className={`group fixed left-4 bottom-4 sm:left-1/2 sm:-translate-x-1/2 sm:bottom-5 z-50 flex w-12 h-12 items-center justify-center border border-line bg-bg/90 sm:bg-bg/60 sm:backdrop-blur-xl text-fg transition-all duration-300 hover:bg-accent hover:border-accent hover:text-on-accent motion-safe:hover:-translate-y-0.5 active:scale-95 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink ${
         visible ? "opacity-100" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
     >

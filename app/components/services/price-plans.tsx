@@ -47,7 +47,7 @@ export default function PricePlans({ categories }: { categories: Category[] }) {
             aria-selected={plan === p.id}
             aria-controls="plan-panel"
             onClick={() => setPlan(p.id)}
-            className={`px-4 py-2 text-sm font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink ${
+            className={`px-4 py-2.5 sm:py-2 text-sm font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink ${
               plan === p.id ? "bg-accent text-on-accent" : "text-muted hover:text-fg hover:bg-fg/5"
             }`}
           >
