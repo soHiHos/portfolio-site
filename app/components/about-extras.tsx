@@ -26,7 +26,7 @@ export default function AboutExtras({ id }: { id?: string }) {
               <span className="absolute inset-x-0 top-0 h-0.5 bg-accent origin-left opacity-0 transition-all duration-300 group-hover:opacity-100 motion-safe:scale-x-0 motion-safe:group-hover:scale-x-100" aria-hidden="true" />
 
               <div className="relative flex items-center justify-between gap-2">
-                <span className="text-[10px] font-semibold tracking-[0.25em] text-accent-ink uppercase">{item.type}</span>
+                <span className="text-xs font-semibold text-accent-ink">{item.type}</span>
                 <span className="text-sm font-semibold tabular-nums text-muted transition-colors duration-300 group-hover:text-accent-ink">{item.year}</span>
               </div>
               <h3 className="relative text-base font-semibold leading-snug text-fg transition-colors duration-300 group-hover:text-accent-ink">{item.title}</h3>
@@ -48,7 +48,7 @@ export default function AboutExtras({ id }: { id?: string }) {
                 className="group border border-line bg-surface p-5 flex flex-col gap-3 transition-all duration-300 motion-safe:hover:-translate-y-1 hover:border-accent/60"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.25em] text-accent-ink uppercase">
+                  <span className="flex items-center gap-2 text-xs font-semibold text-accent-ink">
                     <BadgeCheck className="w-4 h-4" aria-hidden="true" />
                     Certified
                   </span>
@@ -57,8 +57,8 @@ export default function AboutExtras({ id }: { id?: string }) {
                 <h3 className="text-base font-semibold leading-snug text-fg">{item.title}</h3>
                 <p className="text-xs font-medium tracking-wide text-muted">{item.issuer}</p>
                 {item.href && (
-                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.15em] text-accent-ink hover:underline">
-                    VIEW CREDENTIAL <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-accent-ink hover:underline">
+                    View credential <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </a>
                 )}
               </div>

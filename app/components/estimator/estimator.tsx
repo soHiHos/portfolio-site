@@ -196,7 +196,7 @@ export default function Estimator() {
             <span>I agree to Soham Kar (sohambuilds.in) storing these details and contacting me about this estimate by phone, WhatsApp or email.</span>
           </label>
           <button type="submit" disabled={status === "sending"} className="btn btn-primary">
-            {status === "sending" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+            {status === "sending" ? <Loader2 className="w-4 h-4 motion-safe:animate-spin" aria-hidden="true" /> : <Download className="w-4 h-4" />}
             Get my estimate
           </button>
         </form>

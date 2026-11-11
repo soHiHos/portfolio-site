@@ -8,6 +8,7 @@ import type { ProjectPhase } from "../content/projects"
 interface ProjectTileProps {
   phase?: ProjectPhase // status line; left out for a name-only tile
   image?: string
+  imageMobile?: string // phone-size screenshot used below 640px instead of the cropped desktop one
   video?: string // muted preview over the image: plays on hover, or loops by itself (one tile at a time) on touch screens
   visual?: "lidar"
   title: string
@@ -15,12 +16,13 @@ interface ProjectTileProps {
   href?: string
   external?: boolean // open href in a new tab (live site) vs. navigate (detail page)
   placeholder?: boolean // empty slot: dashed frame with the title, not clickable
+  priority?: boolean // on screen at load (top of the projects page): load the image at once instead of lazily
 }
 
 const PHASE = {
   deployed: { label: "Live", dot: "bg-emerald-500" },
   servicing: { label: "Live · updating", dot: "bg-amber-400" },
-  soon: { label: "Deploying soon", dot: "bg-amber-400" },
+  soon: { label: "Deploying soon", dot: "bg-sky-400" }, // blue: amber-400 matched the light accent used by "In development"
   development: { label: "In development", dot: "bg-accent" },
   prototype: { label: "Idea to prototype stage", dot: "bg-accent" },
   complete: { label: "Complete", dot: "bg-white/50" },
@@ -28,7 +30,7 @@ const PHASE = {
 
 // A project as an image tile: the screenshot fills the tile and the title, summary and status sit
 // on a gradient at the bottom. Without a summary it's name-only, and the dark tint shrinks to a band behind the name.
-export default function ProjectTile({ phase, image, video, visual, title, summary, href, external, placeholder }: ProjectTileProps) {
+export default function ProjectTile({ phase, image, imageMobile, video, visual, title, summary, href, external, placeholder, priority }: ProjectTileProps) {
   if (placeholder) {
     return (
       <div className="flex h-full min-h-72 flex-col items-center justify-center gap-3 border border-dashed border-line bg-surface text-muted">
@@ -49,12 +51,11 @@ export default function ProjectTile({ phase, image, video, visual, title, summar
       {visual === "lidar" ? (
         <div className="absolute inset-0"><LidarVisual /></div>
       ) : image && (
-        <LoadImg src={image} alt={`${title} screenshot`} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 motion-safe:group-hover:scale-[1.03]" />
+        <LoadImg src={image} mobileSrc={imageMobile} alt={`${title} screenshot`} loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : undefined} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 motion-safe:group-hover:scale-[1.03]" />
       )}
       {video && (
         <HoverVideo
           src={video}
-          poster={image}
           className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
         />
       )}

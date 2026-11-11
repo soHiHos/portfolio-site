@@ -61,7 +61,7 @@ export default function ProblemTiles({ items, selectable }: { items: Problem[]; 
               Price this <ArrowRight className="w-4 h-4" />
             </button>
           ) : (
-            <a href="#before-you-reach-out" className="btn btn-primary btn-sm">
+            <a href="#before-you-reach-out" className="btn btn-primary btn-sm max-sm:whitespace-normal">
               What to know before you send the form <ArrowRight className="w-4 h-4" />
             </a>
           )}
@@ -76,7 +76,7 @@ export default function ProblemTiles({ items, selectable }: { items: Problem[]; 
       onMouseEnter={() => setAuto(false)}
       onFocus={() => setAuto(false)}
     >
-      <ul role="radiogroup" aria-label="Your biggest problem" className="flex flex-col divide-y divide-line border border-line bg-white dark:bg-surface">
+      <ul role="radiogroup" aria-label="Your biggest problem" className="flex flex-col divide-y divide-line border border-line bg-surface">
         {items.map((p, i) => {
           const on = p.id === id
           return (
@@ -99,10 +99,11 @@ export default function ProblemTiles({ items, selectable }: { items: Problem[]; 
         })}
       </ul>
 
-      {/* Every problem's panel is laid out in the same cell, hidden, so the card is always as tall as the tallest one */}
-      <div className="grid border border-line bg-white dark:bg-surface p-5 sm:p-6" aria-live="polite">
+      {/* Every problem's panel is laid out in the same cell, hidden, so the card is always as tall as the tallest one
+          (from sm up; on phones it fits the current problem, since the list sits above it and nothing below moves) */}
+      <div className="grid border border-line bg-surface p-5 sm:p-6" aria-live="polite">
         {items.map((p) => (
-          <div key={p.id} aria-hidden="true" className="invisible col-start-1 row-start-1 h-full">
+          <div key={p.id} aria-hidden="true" className="invisible col-start-1 row-start-1 h-full max-sm:hidden">
             {detail(p)}
           </div>
         ))}

@@ -1,6 +1,6 @@
 [
-  { "src": "/images/about/IMG_0002.webp", "alt": "Acrylic painting of an abstract face in bright, flat colours, with a yellow crown and a white door" },
-  { "src": "/images/about/IMG_0003.webp", "featured": true, "alt": "Coloured-pencil drawing of a distorted green-brown head and shoulders on a green scribbled background" },
-  { "src": "/images/about/IMG_0004.webp", "alt": "Pencil sketch of a dog's face resting low, looking up" },
-  { "src": "/images/about/IMG_0005.webp", "alt": "Coloured-pencil drawing of many smiling and sad faces, hands and eyes on a magenta background" }
+  { "src": "/images/about/IMG_0002-web.webp", "small": "/images/about/IMG_0002-500.webp", "alt": "Acrylic painting of an abstract face in bright, flat colours, with a yellow crown and a white door" },
+  { "src": "/images/about/IMG_0003-web.webp", "small": "/images/about/IMG_0003-500.webp", "featured": true, "alt": "Coloured-pencil drawing of a distorted green-brown head and shoulders on a green scribbled background" },
+  { "src": "/images/about/IMG_0004-web.webp", "small": "/images/about/IMG_0004-500.webp", "alt": "Pencil sketch of a dog's face resting low, looking up" },
+  { "src": "/images/about/IMG_0005-web.webp", "small": "/images/about/IMG_0005-500.webp", "alt": "Coloured-pencil drawing of many smiling and sad faces, hands and eyes on a magenta background" }
 ]

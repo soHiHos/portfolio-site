@@ -23,7 +23,7 @@ export default function Ideas() {
       <Reveal className="space-y-4">
         <div className={`grid border border-line bg-surface ${first.image ? "lg:grid-cols-[1fr_1fr_20rem]" : "lg:grid-cols-2"}`}>
           <div className="space-y-2 p-5 sm:p-6">
-            {first.stage && <div className="text-[10px] font-semibold tracking-[0.2em] text-accent-ink uppercase">{first.stage}</div>}
+            {first.stage && <div className="text-xs font-semibold text-accent-ink">{first.stage}</div>}
             <h3 className="text-xl font-bold text-fg">{first.title}</h3>
             <p className="text-sm leading-relaxed text-muted">{first.summary}</p>
           </div>
@@ -49,7 +49,7 @@ export default function Ideas() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((idea) => (
               <div key={idea.title} className="border border-line bg-surface p-5 space-y-2">
-                {idea.stage && <div className="text-[10px] font-semibold tracking-[0.2em] text-accent-ink uppercase">{idea.stage}</div>}
+                {idea.stage && <div className="text-xs font-semibold text-accent-ink">{idea.stage}</div>}
                 <h3 className="text-base font-semibold text-fg">{idea.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{idea.summary}</p>
                 {idea.points && (

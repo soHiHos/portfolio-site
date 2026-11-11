@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "../../content/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Code2 } from "lucide-react";
@@ -19,7 +20,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/projects/[id]">): Promise<Metadata> {
   const { id } = await params;
   const project = PROJECTS.find((p) => p.id === id);
-  return project ? { title: `${project.title} · Soham Kar`, description: project.tagline } : {};
+  return project ? pageMeta(`${project.title} · Soham Kar`, project.tagline, `/projects/${project.id}`) : {};
 }
 
 const CHAPTERS = [
@@ -54,7 +55,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
 
       {/* Title plate */}
       <Reveal className="space-y-4">
-        <div className="flex flex-wrap items-center gap-3 text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase">
+        <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
           <span className="text-muted">{category?.label} · {project.kind === "client" ? "Client work" : "Personal"}</span>
           <span className={`rounded-full border px-2 py-0.5 ${project.status ? "border-accent/60 text-accent-ink" : "border-line text-fg"}`}>
             {project.status ?? "Live"}
@@ -72,10 +73,10 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
               <LidarVisual />
             ) : (
               <>
-                <LoadImg src={project.image} alt={`${project.title} screenshot`} className="w-full h-full object-contain" />
+                <LoadImg src={project.image} alt={`${project.title} screenshot`} loading="eager" fetchPriority="high" className="w-full h-full object-contain" />
                 {/* Preview over the screenshot, played while the frame is hovered */}
                 {project.video && (
-                  <HoverVideo src={project.video} poster={project.image} className="absolute inset-0 w-full h-full object-contain" />
+                  <HoverVideo src={project.video} className="absolute inset-0 w-full h-full object-contain" />
                 )}
               </>
             )}
@@ -86,7 +87,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
       {/* Overview + details */}
       <div className="grid lg:grid-cols-[1.6fr_1fr] gap-8">
         <Reveal className="space-y-3">
-          <div className="text-xs font-semibold tracking-[0.25em] text-muted">OVERVIEW</div>
+          <div className="text-xs font-semibold text-muted">Overview</div>
           <p className="text-lg leading-relaxed text-muted">{project.summary}</p>
           {project.highlights && project.highlights.length > 0 && (
             <ul className="space-y-2 pt-2 text-base leading-relaxed text-fg">
@@ -101,10 +102,10 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
         </Reveal>
         <div className="space-y-4 self-start">
         <Reveal className="border border-line bg-surface p-5 space-y-4">
-          <div className="text-xs font-semibold tracking-[0.25em] text-muted">DETAILS</div>
+          <div className="text-xs font-semibold text-muted">Details</div>
           {project.stack && project.stack.length > 0 && (
             <div className="space-y-2">
-              <div className="text-[10px] tracking-[0.2em] text-muted">STACK</div>
+              <div className="text-xs text-muted">Stack</div>
               <div className="flex flex-wrap gap-2">
                 {project.stack.map((item) => (
                   <span key={item} className="rounded-lg border border-line px-2.5 py-1 text-xs text-fg">{item}</span>
@@ -129,7 +130,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
         {/* Which studio a client project was undertaken at */}
         {agency && (
           <Reveal className="border border-line bg-surface p-5 space-y-4">
-            <div className="text-xs font-semibold tracking-[0.25em] text-muted">BUILT AT</div>
+            <div className="text-xs font-semibold text-muted">Built at</div>
             <div className="flex items-center gap-4">
               <span
                 className="flex w-12 h-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-bg"
@@ -155,11 +156,11 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
       {/* Case study: only the chapters written in projects.json; hidden until at least one is */}
       {chapters.length > 0 && (
         <Reveal className="space-y-4">
-          <div className="text-xs font-semibold tracking-[0.25em] text-muted">CASE STUDY</div>
+          <div className="text-xs font-semibold text-muted">Case study</div>
           <div className={`grid ${CHAPTER_COLS[chapters.length] ?? ""} border border-line bg-surface overflow-hidden`}>
             {chapters.map(({ chapter, text }, c) => (
               <div key={chapter.key} className={`p-5 sm:p-6 space-y-2 ${c > 0 ? "border-t md:border-t-0 md:border-l border-line" : ""}`}>
-                <div className="text-[10px] font-semibold tracking-[0.25em] text-accent-ink uppercase">
+                <div className="text-xs font-semibold text-accent-ink">
                   {String(c + 1).padStart(2, "0")} · {chapter.label}
                 </div>
                 <p className="text-base leading-relaxed text-fg">{text}</p>
@@ -172,7 +173,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
       {/* No chapters yet: a short note on why, when one is set */}
       {chapters.length === 0 && project.caseStudyNote && (
         <Reveal className="space-y-4">
-          <div className="text-xs font-semibold tracking-[0.25em] text-muted">CASE STUDY</div>
+          <div className="text-xs font-semibold text-muted">Case study</div>
           <div className="border border-line bg-surface p-5 sm:p-6">
             <p className="text-base leading-relaxed text-muted">{project.caseStudyNote}</p>
           </div>
@@ -182,7 +183,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
       {/* Results + testimonial: each shows only once real ones are added in projects.json */}
       {(project.metrics?.length || project.testimonial) && (
         <Reveal className="space-y-4">
-          <div className="text-xs font-semibold tracking-[0.25em] text-muted">RESULTS</div>
+          <div className="text-xs font-semibold text-muted">Results</div>
           {project.metrics && project.metrics.length > 0 && (
             <div className="grid sm:grid-cols-3 gap-4">
               {project.metrics.map((metric, i) => (
@@ -208,7 +209,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
       {next.id !== project.id && (
         <Link href={`/projects/${next.id}`} className="group flex items-center justify-between gap-4 border border-white/10 panel text-white px-5 sm:px-7 py-5 transition-colors hover:bg-panel-2">
           <span>
-            <span className="block text-[10px] font-semibold tracking-[0.25em] text-white/50">NEXT PROJECT</span>
+            <span className="block text-xs font-semibold text-white/50">Next project</span>
             <span className="text-xl font-semibold">{next.title}</span>
           </span>
           <ArrowUpRight className="w-6 h-6 text-accent-ink transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

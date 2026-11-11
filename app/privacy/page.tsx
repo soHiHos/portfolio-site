@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMeta } from "../content/seo";
 import Reveal from "../components/effects/reveal";
+import LegalLayout from "../components/legal-layout";
 import { CONTACT_EMAIL } from "../content/contact";
 
-export const metadata: Metadata = {
-  title: "Privacy policy · Soham Kar",
-  description: "What this site collects, why, who handles it, and how to ask me to delete it.",
-};
+export const metadata: Metadata = pageMeta(
+  "Privacy policy · Soham Kar",
+  "What this site collects, why, who handles it, and how to ask me to delete it.",
+  "/privacy",
+);
 
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
@@ -108,7 +111,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
 
 export default function PrivacyPage() {
   return (
-    <section className="max-w-3xl space-y-8 pb-12">
+    <LegalLayout>
       <Reveal>
         <div className="space-y-3">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-fg">Privacy policy</h1>
@@ -130,6 +133,6 @@ export default function PrivacyPage() {
       </div>
 
       <p className="text-sm text-muted">Last updated 5 November 2026.</p>
-    </section>
+    </LegalLayout>
   );
 }

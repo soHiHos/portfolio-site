@@ -5,8 +5,9 @@ import LoadImg from "./effects/media-spinner"
 // Paintings and photos beside the bio. To add one: put the file in /public/gallery and add
 // { "src": "/gallery/<file>", "alt": "<what it shows>", "caption": "<optional title>" } to content/gallery.json.
 // The first four fill the collage in order; the first gets the big slot.
-// `featured` marks the one picture shown alone on the home page
-export type GalleryImage = { src: string; alt: string; caption?: string; featured?: boolean }
+// `featured` marks the one picture shown alone on the home page. `small` is an optional 500px-wide copy that the
+// collage's small slots (and phones) use instead of the full 1000px `src`.
+export type GalleryImage = { src: string; small?: string; alt: string; caption?: string; featured?: boolean }
 
 export const FEATURED = (gallery as GalleryImage[]).find((i) => i.featured)
 
@@ -33,6 +34,10 @@ export default function GalleryCollage() {
               <>
                 <LoadImg
                   src={image.src}
+                  srcSet={image.small ? `${image.small} 500w, ${image.src} 1000w` : undefined}
+                  // Slot widths: the big square is 0.618 of the collage, the rest 0.382; the collage is full width on
+                  // phones and half the content width beside the bio from lg up
+                  sizes={i === 0 ? "(min-width: 1024px) 24vw, 62vw" : "(min-width: 1024px) 15vw, 38vw"}
                   alt={image.alt}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.04]"

@@ -1,7 +1,7 @@
 // app/components/headers/header.tsx
 "use client"
 
-import Link from "next/link";
+import Link, { useLinkStatus } from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Mail } from "lucide-react";
@@ -21,6 +21,15 @@ const PAGES = [
   { href: "/projects", label: "Projects" },
   { href: "/services", label: "Services" },
 ]
+
+// Pulsing accent bar along a nav link's bottom edge while its page is loading (a click on a page that wasn't
+// prefetched, mostly on slow phone networks). Must sit inside the <Link>.
+function PendingBar() {
+  const { pending } = useLinkStatus()
+  return pending ? <span className="absolute inset-x-1 bottom-0 h-0.5 bg-accent motion-safe:animate-pulse" aria-hidden="true" /> : null
+}
+
+const PILLARS = ["what-i-do"] // module-level so the hook's effect doesn't re-run every render
 
 type NavProps = { pathname: string; hidden: boolean }
 
@@ -67,11 +76,12 @@ function TopNav({ pathname, hidden }: NavProps) {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`whitespace-nowrap px-2.5 max-[360px]:px-1.5 sm:px-3.5 py-2.5 sm:py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent-ink ${
+                className={`relative whitespace-nowrap px-2.5 max-[360px]:px-1.5 sm:px-3.5 py-3 sm:py-1.5 text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-accent-ink ${
                   active ? "bg-accent text-on-accent" : "text-muted hover:text-fg hover:bg-fg/5"
                 }`}
               >
                 {item.label}
+                <PendingBar />
               </Link>
             )
           })}
@@ -104,13 +114,17 @@ export default function Header() {
 
     // Only the home page has a hero to stay out of; every other page shows the contact button from the start
     const isPastHero = pathname !== "/" || activeSection !== null;
+    // Phones reach Work only after several screens, so there the contact buttons already show once the hero has
+    // scrolled away ("What I do" at the top); from sm up they keep waiting for Work
+    const pastPillarsTop = useActiveSection(PILLARS) !== null;
+    const showContact = isPastHero || pastPillarsTop;
 
     // Close the contact card when scrolling back up to the hero (adjusting state during render,
     // per React's "you might not need an effect" guidance, instead of a sync effect)
-    const [wasPastHero, setWasPastHero] = useState(isPastHero);
-    if (isPastHero !== wasPastHero) {
-        setWasPastHero(isPastHero);
-        if (!isPastHero) setIsContactOpen(false);
+    const [wasShown, setWasShown] = useState(showContact);
+    if (showContact !== wasShown) {
+        setWasShown(showContact);
+        if (!showContact) setIsContactOpen(false);
     }
 
     // Lets other fixed UI (the side nav) move out of the contact card's way while it's open
@@ -137,12 +151,12 @@ export default function Header() {
 
     return (
         <>
-        {/* On the home page the nav stays out of the hero and drops in once Work reaches the top */}
-        <TopNav pathname={pathname} hidden={pathname === "/" && !isPastHero} />
+        {/* On the home page the nav stays out of the hero and drops in once "What I do" reaches the top */}
+        <TopNav pathname={pathname} hidden={pathname === "/" && !pastPillarsTop} />
 
         {/* Floating contact button: on the home page once scrolled past the hero, on other pages always */}
-        {isPastHero && (
-            <div ref={contactRef} className="fixed right-4 sm:right-7 z-50 bottom-4 sm:bottom-[calc(1.75rem+var(--footer-lift,0px))]">
+        {showContact && (
+            <div ref={contactRef} className={`fixed right-4 sm:right-7 z-50 bottom-4 sm:bottom-[calc(1.75rem+var(--footer-lift,0px))] ${isPastHero ? "" : "sm:hidden"}`}>
                 <ContactCard
                     open={isContactOpen}
                     className="absolute bottom-full right-0 mb-3 origin-bottom-right"

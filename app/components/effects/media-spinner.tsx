@@ -13,7 +13,9 @@ export function Spinner() {
 
 // An <img> that shows the spinner until it has loaded. Its parent must be `relative` (every image frame here is).
 // Checks `complete` on mount too, since a cached image can finish before React hydrates and never fire onLoad.
-export default function LoadImg({ alt, ...props }: ImgHTMLAttributes<HTMLImageElement> & { alt: string }) {
+// Lazy by default so phones only download images as they scroll near them; pass loading="eager" above the fold.
+// `mobileSrc` swaps in a phone-size image below 640px (the same breakpoint HoverVideo treats as a phone).
+export default function LoadImg({ alt, mobileSrc, loading = "lazy", decoding = "async", ...props }: ImgHTMLAttributes<HTMLImageElement> & { alt: string; mobileSrc?: string }) {
   const ref = useRef<HTMLImageElement>(null)
   const [loaded, setLoaded] = useState(false)
 
@@ -21,9 +23,15 @@ export default function LoadImg({ alt, ...props }: ImgHTMLAttributes<HTMLImageEl
     if (ref.current?.complete) setLoaded(true)
   }, [])
 
+  const img = <img ref={ref} alt={alt} loading={loading} decoding={decoding} {...props} onLoad={() => setLoaded(true)} onError={() => setLoaded(true)} />
   return (
     <>
-      <img ref={ref} alt={alt} {...props} onLoad={() => setLoaded(true)} onError={() => setLoaded(true)} />
+      {mobileSrc ? (
+        <picture>
+          <source media="(max-width: 639px)" srcSet={mobileSrc} />
+          {img}
+        </picture>
+      ) : img}
       {!loaded && <Spinner />}
     </>
   )

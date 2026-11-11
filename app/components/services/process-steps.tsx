@@ -41,8 +41,8 @@ export default function ProcessSteps({ steps }: { steps: Step[] }) {
               i === index
                 ? "border-accent bg-accent text-on-accent"
                 : i < index
-                  ? "border-accent bg-white dark:bg-surface text-accent-ink"
-                  : "border-line bg-white dark:bg-surface text-muted hover:border-accent hover:text-fg"
+                  ? "border-accent bg-surface text-accent-ink"
+                  : "border-line bg-surface text-muted hover:border-accent hover:text-fg"
             }`}
           >
             {String(i + 1).padStart(2, "0")}
@@ -51,10 +51,11 @@ export default function ProcessSteps({ steps }: { steps: Step[] }) {
       </div>
 
       {/* The current step. Every step is also laid out invisibly in the same grid cell, so the box is always as tall as
-          the longest one and the buttons below never jump between steps of different lengths. */}
+          the longest one and the buttons below never jump between steps of different lengths. On phones the box fits the current step
+          instead, so short steps don't leave a tall gap. */}
       <div className="grid overflow-hidden" aria-live="polite">
         {steps.map((s, i) => (
-          <div key={s.step} className="invisible col-start-1 row-start-1 space-y-2" aria-hidden="true">
+          <div key={s.step} className="invisible col-start-1 row-start-1 space-y-2 max-sm:hidden" aria-hidden="true">
             <p className="text-sm font-semibold tabular-nums">Step {i + 1} of {steps.length}</p>
             <p className="text-2xl font-bold">{s.step}</p>
             <p className="text-base leading-relaxed">{s.detail}</p>

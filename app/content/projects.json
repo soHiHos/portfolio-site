@@ -9,7 +9,8 @@
     "tagline": "Community platform for grassroots football.",
     "summary": "A football platform that connects local players, teams and organizers through match discovery, event management and social engagement. It simplifies coordination and makes local football easier to join.",
     "shortSummary": "A community platform connecting local football players, teams and organizers through match discovery, event management and social engagement.",
-    "image": "/images/local-legends.png",
+    "image": "/images/local-legends-web.webp",
+    "imageMobile": "/images/mobile/local-legends.webp",
     "video": "/videos/local-legends.mp4",
     "link": "https://locallegends.co.in/home",
     "stack": []
@@ -24,7 +25,8 @@
     "tagline": "Full-stack ERP for a wellness distributor business.",
     "summary": "A full-stack ERP for a wellness and distributor-based business, covering inventory, orders, payments, ledger management and user administration. The build included a scalable backend architecture, authentication, cloud deployment and cost-optimized infrastructure.",
     "shortSummary": "A full-stack ERP for a wellness distributor, covering inventory, orders, payments, ledgers and user management, deployed on cost-optimized cloud infrastructure.",
-    "image": "/images/rever-home.png",
+    "image": "/images/rever-home-web.webp",
+    "imageMobile": "/images/mobile/rever-home.webp",
     "video": "/videos/reverlife.mp4",
     "link": "https://reverlife.in/home",
     "highlights": [
@@ -55,6 +57,7 @@
     "phase": "deployed",
     "title": "FrontWave",
     "image": "/images/frontwave_thumbnail.webp",
+    "imageMobile": "/images/mobile/frontwave.webp",
     "video": "/videos/frontwave.mp4",
     "link": "https://frontwaveresearch.com/",
     "tagline": "Research publishing platform for an equity researcher.",
@@ -87,6 +90,7 @@
     "tagline": "Corporate website for a steel and scrap processor in Sharjah, UAE.",
     "summary": "A corporate website for Al Saham Al Fadhi Metal Industries LLC, a steel and scrap processor in Sharjah, UAE. It presents the company, its processing lines and a product catalogue, and gives buyers sourcing and cut-to-length tools plus a way to send enquiries and quote requests. It is exported as plain static files, so it needs no server to run.",
     "image": "/images/as-metals_thumbnail.webp",
+    "imageMobile": "/images/mobile/as-metals.webp",
     "video": "/videos/as-metals.mp4",
     "link": "https://as-metals.vercel.app/",
     "linkLabel": "Visit demo site",
@@ -115,7 +119,8 @@
     "tagline": "Premium coworking space in Raipur.",
     "summary": "Co-Daftar is a premium coworking space in Raipur for entrepreneurs, freelancers, startups and professionals. It has modern workspaces, meeting rooms, high-speed internet and a member community.",
     "shortSummary": "A premium coworking space in Raipur with modern workspaces, meeting rooms, high-speed internet and a community for entrepreneurs and teams.",
-    "image": "/images/co-daftar_tumbnail.png",
+    "image": "/images/co-daftar_tumbnail-web.webp",
+    "imageMobile": "/images/mobile/co-daftar.webp",
     "video": "/videos/co-daftar.mp4",
     "link": "https://codaftar.com/",
     "stack": []
@@ -150,7 +155,7 @@
     "stack": []
   },
   {
-    "id": "Munshi",
+    "id": "munshi",
     "kind": "personal",
     "featured": true,
     "category": "github",

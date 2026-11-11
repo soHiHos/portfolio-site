@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "../content/seo";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Code2 } from "lucide-react";
 import SectionHeading from "../components/section-heading";
@@ -10,10 +11,11 @@ import ContactSection from "../sections/contact-section";
 import { CATEGORIES, PROJECTS, type Project } from "../content/projects";
 import { CONTACT_GITHUB } from "../content/contact";
 
-export const metadata: Metadata = {
-  title: "Projects · Soham Kar",
-  description: "Soham Kar's projects: apps, websites and custom software built for clients, plus his own work in automation, data analysis and hardware.",
-};
+export const metadata: Metadata = pageMeta(
+  "Projects · Soham Kar",
+  "Soham Kar's projects: apps, websites and custom software built for clients, plus his own work in automation, data analysis and hardware.",
+  "/projects",
+);
 
 // Projects in category order (client work, then GitHub, then hardware), split into client work plus
 // featured personal projects, and the rest of the personal work ("Others"), without category labels
@@ -36,10 +38,12 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
           <ProjectTile
             phase={project.phase}
             image={project.image}
+            imageMobile={project.imageMobile}
             video={project.video}
             visual={project.visual}
             title={project.title}
             href={`/projects/${project.id}`}
+            priority={i < 2} // first row is on screen at load
           />
         </Reveal>
       ))}

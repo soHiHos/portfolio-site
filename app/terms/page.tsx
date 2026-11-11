@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMeta } from "../content/seo";
 import { notFound } from "next/navigation";
 import Reveal from "../components/effects/reveal";
+import LegalLayout from "../components/legal-layout";
 import { ESTIMATOR_ON, inr } from "../components/estimator/estimate";
 import { BUYOUT, PRICING, SETUP_PAYMENT_TEXT } from "../content/pricing";
 import { BUYOUT_EXAMPLE } from "../components/services/category-price";
 
-export const metadata: Metadata = {
-  title: "Terms · Soham Kar",
-  description: "How the setup fee, the monthly plan, changes, leaving and buying outright work.",
-};
+export const metadata: Metadata = pageMeta(
+  "Terms · Soham Kar",
+  "How the setup fee, the monthly plan, changes, leaving and buying outright work.",
+  "/terms",
+);
 
 const T = PRICING.terms;
 const GST = Math.round(PRICING.gst * 100);
@@ -86,7 +89,7 @@ const TERMS: { title: string; body: string }[] = [
 export default function TermsPage() {
   if (!ESTIMATOR_ON) notFound();
   return (
-    <section className="max-w-3xl space-y-8 pb-12">
+    <LegalLayout>
       <Reveal>
         <div className="space-y-3">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-fg">Terms</h1>
@@ -117,6 +120,6 @@ export default function TermsPage() {
       </div>
 
       <p className="text-sm text-muted">Last updated 8 November 2026.</p>
-    </section>
+    </LegalLayout>
   );
 }

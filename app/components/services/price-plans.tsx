@@ -13,7 +13,7 @@ import { pillarLabel, servicePath } from "../../content/service-list";
 // A card spans the rows of the grid (subgrid): three with prices (title and summary, the price band, the buy-outright
 // note), one without. Across a row the titles and prices line up whatever the length of the text. A click anywhere on
 // the card opens the service's own page; the title is the real link (keyboard, screen readers, crawlers).
-const CARD = "relative grid grid-rows-subgrid cursor-pointer border bg-white transition-colors dark:bg-surface";
+const CARD = "relative grid grid-rows-subgrid cursor-pointer border bg-surface transition-colors";
 
 type Category = { id: string; title: string; summary: string; pillars: string[] };
 
@@ -76,7 +76,7 @@ export default function PricePlans({ categories, showPrices }: { categories: Cat
         onClick={() => {
           setOwn((v) => !v);
         }}
-        className="relative h-6 w-11 shrink-0 cursor-pointer border border-line bg-white transition-colors dark:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink data-[on=true]:border-accent data-[on=true]:bg-accent"
+        className="relative h-6 w-11 shrink-0 cursor-pointer border border-line bg-surface transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink data-[on=true]:border-accent data-[on=true]:bg-accent"
         data-on={own}
       >
         <span className={`absolute left-0.5 top-0.5 h-4 w-4 bg-accent-ink transition-transform motion-reduce:transition-none data-[on=true]:translate-x-5 data-[on=true]:bg-on-accent`} data-on={own} />

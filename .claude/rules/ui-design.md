@@ -48,8 +48,10 @@ page (work, projects, research, contact) stays plain so visitors read the work, 
 - Sentence case for headings, buttons, nav and labels ("Explore work", not "EXPLORE WORK").
 - No aviation wording in content sections. The theme lives only in: the map backdrop, the footer
   boarding pass, the 404 page and the easter-egg jet.
-- Never show visitors unfinished content. Placeholders (`"placeholder": true` in content JSON) are
-  hidden everywhere except the deliberate project slots on the home page.
+- "Coming soon" sections on real work are fine to show (e.g. "Case study coming soon." on a live project):
+  the project itself and its links are real. Template filler is different: entries marked
+  `"placeholder": true` in content JSON ("Placeholder certification", "Issuing organisation") stay hidden
+  everywhere except the deliberate project slots on the home page.
 
 ## Rules
 1. Respect prefers-reduced-motion: transforms, slides and auto-advance degrade to a plain state change.

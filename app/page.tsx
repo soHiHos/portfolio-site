@@ -7,6 +7,7 @@ import ServicesSection from "./sections/services-section";
 import ProcessSection from "./sections/process-section";
 import PillarsSection from "./sections/pillars-section";
 import type { Metadata } from "next";
+import { SITE_JSON_LD, jsonLdHtml } from "./content/seo";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
@@ -16,6 +17,8 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
     <div className="relative min-h-screen">
+      {/* Who runs the site, for search engines and AI answer engines (content/seo.ts) */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(SITE_JSON_LD)} />
       <SideNav />
       <div>
         {/* The hero absorbs main's top padding so it fills exactly the first screen */}

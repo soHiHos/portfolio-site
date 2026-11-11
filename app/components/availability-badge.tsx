@@ -6,7 +6,7 @@ export default function AvailabilityBadge() {
   const accepting = AVAILABLE_FOR_WORK
   const { label } = services.availability
   return (
-    <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold tracking-[0.2em] uppercase ${accepting ? "status-live border-emerald-700 bg-emerald-700 text-white" : "border-line text-muted"}`}>
+    <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${accepting ? "status-live border-emerald-700 bg-emerald-700 text-white" : "border-line text-muted"}`}>
       {accepting ? (
         // "Live" signal on one beat (globals.css): the dot breathes, a ring ripples out, the badge glows
         <span className="relative flex w-1.5 h-1.5" aria-hidden="true">

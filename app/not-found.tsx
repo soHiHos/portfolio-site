@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <section className="min-h-[60vh] flex flex-col items-start justify-center gap-8 py-16">
       <div className="text-xs font-semibold tracking-[0.3em] text-muted">ERROR 404 · GATE CLOSED</div>
-      <div className="text-5xl sm:text-7xl font-bold [--flap-fg:var(--accent)]">
+      <div className="text-[min(3rem,9.5vw)] sm:text-7xl font-bold [--flap-fg:var(--accent)]">
         <SplitFlap text="NO FLIGHT" delay={150} />
       </div>
       <div className="w-full max-w-xl border border-white/10 panel text-white p-5 space-y-2 text-sm">

@@ -17,6 +17,7 @@ import { HOVER_CARD, TopLine, stagger } from "../../components/effects/hover-car
 import services from "../../content/services.json";
 import { PRICING } from "../../content/pricing";
 import { SITE_URL } from "../../content/contact";
+import { PERSON_ID, pageMeta } from "../../content/seo";
 import { pillarLabel, servicePath } from "../../content/service-list";
 
 // One page per service category, at /services/<slug> (slugs in services.json). Only those slugs exist; anything
@@ -52,12 +53,7 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   if (!category) return {};
   const { metaTitle, metaDescription } = category.page;
   const path = servicePath(category.id);
-  return {
-    title: `${metaTitle} · Soham Kar`,
-    description: metaDescription,
-    alternates: { canonical: path },
-    openGraph: { title: `${metaTitle} · Soham Kar`, description: metaDescription, url: path, type: "website" },
-  };
+  return pageMeta(`${metaTitle} · Soham Kar`, metaDescription, path);
 }
 
 const PROBLEMS = Object.fromEntries(services.problems.items.map((p) => [p.id, p]));
@@ -107,6 +103,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
         areaServed: { "@type": "Country", name: "India" },
         provider: {
           "@type": "Person",
+          "@id": PERSON_ID,
           name: "Soham Kar",
           url: SITE_URL,
           address: { "@type": "PostalAddress", addressLocality: "Raipur", addressRegion: "Chhattisgarh", addressCountry: "IN" },
@@ -519,7 +516,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
           <div className="border border-line bg-surface divide-y divide-line">
             {page.faq.map((item) => (
               <details key={item.q} name="faq" className="faq group px-5 py-4 sm:px-6 transition-colors duration-300 hover:bg-bg open:bg-bg">
-                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none text-base font-semibold text-fg transition-colors group-hover:text-accent-ink [&::-webkit-details-marker]:hidden">
+                <summary className="-my-4 py-4 flex items-center justify-between gap-4 cursor-pointer list-none text-base font-semibold text-fg transition-colors group-hover:text-accent-ink [&::-webkit-details-marker]:hidden">
                   {item.q}
                   <ChevronDown className="w-4 h-4 shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
                 </summary>

@@ -86,7 +86,7 @@ export default function PriceCompare({ service }: { service?: Id }) {
               aria-checked={id === k}
               onClick={() => chooseService(k)}
               className={`cursor-pointer px-4 py-2.5 text-left text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent-ink ${
-                id === k ? "bg-accent text-on-accent" : "bg-white text-fg hover:bg-fg/5 dark:bg-surface"
+                id === k ? "bg-accent text-on-accent" : "bg-surface text-fg hover:bg-fg/5"
               }`}
             >
               {PRICING.services[k].title}
@@ -164,7 +164,7 @@ export default function PriceCompare({ service }: { service?: Id }) {
                 value={codeRaw}
                 onChange={(e) => setCodeRaw(e.target.value)}
                 placeholder={inr(p.buyout)}
-                className="mt-1 block w-48 border border-line bg-white px-3 py-2 text-sm tabular-nums text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink dark:bg-surface"
+                className="mt-1 block w-48 border border-line bg-surface px-3 py-2 text-sm tabular-nums text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
               />
             </label>
             <button
@@ -191,7 +191,7 @@ export default function PriceCompare({ service }: { service?: Id }) {
           {ROUTES.map((r) => {
             const best = cheapest === r.key;
             return (
-              <div key={r.key} className={`space-y-1 border p-4 ${best ? "border-accent bg-accent/10" : "border-line bg-white dark:bg-surface"}`}>
+              <div key={r.key} className={`space-y-1 border p-4 ${best ? "border-accent bg-accent/10" : "border-line bg-surface"}`}>
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-xs font-semibold text-muted">{r.title}</p>
                   {best && <span className="border border-accent bg-accent px-1.5 py-0.5 text-[0.65rem] font-semibold text-on-accent">Lowest</span>}

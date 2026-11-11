@@ -73,7 +73,7 @@ export default function HeroSection() {
             <button
               type="button"
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="btn btn-primary btn-lg motion-safe:animate-[btn-float_3s_ease-in-out_infinite] hover:[animation-play-state:paused] focus-visible:[animation-play-state:paused]"
+              className="btn btn-primary btn-lg max-sm:w-full motion-safe:animate-[btn-float_3s_ease-in-out_infinite] hover:[animation-play-state:paused] focus-visible:[animation-play-state:paused]"
             >
               Book a free call
               <ArrowRight className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function HeroSection() {
             <button
               type="button"
               onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
-              className="btn btn-secondary btn-lg"
+              className="btn btn-secondary btn-lg max-sm:w-full"
             >
               See my work
               <ArrowDown className="w-4 h-4" />

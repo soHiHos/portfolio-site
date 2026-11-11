@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "../content/seo";
 import AboutSection from "../sections/about-section";
 import AboutExtras from "../components/about-extras";
 import ResearchSection from "../sections/research-section";
@@ -9,10 +10,11 @@ import SkillsToolkit from "../components/skills-toolkit";
 import Reveal from "../components/effects/reveal";
 import SideNav from "../components/side-nav";
 
-export const metadata: Metadata = {
-  title: "About · Soham Kar",
-  description: "Soham Kar is an engineer in Raipur, India who builds apps, websites and software for digitalisation, automation and analysis, with a background in civil and environmental engineering, research and entrepreneurship.",
-};
+export const metadata: Metadata = pageMeta(
+  "About · Soham Kar",
+  "Soham Kar is an engineer in Raipur, India who builds apps, websites and software for digitalisation, automation and analysis, with a background in civil and environmental engineering, research and entrepreneurship.",
+  "/about",
+);
 
 const NAV = [
   { id: "about", label: "About" },

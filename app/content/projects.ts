@@ -21,6 +21,7 @@ export type Project = {
   shortSummary?: string // 18–20 words for the Work tiles; project pages and the assistant use `summary`
   status?: string
   image?: string
+  imageMobile?: string // phone-size screenshot (390px wide) shown on tiles on phones instead of the cropped desktop `image`
   video?: string // muted preview played on hover (and loops by itself on touch screens); `image` is its thumbnail
   visual?: "lidar"
   link?: string

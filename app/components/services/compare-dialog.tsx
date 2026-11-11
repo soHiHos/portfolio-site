@@ -18,7 +18,7 @@ export default function CompareDialog({ service, className = "btn btn-primary bt
         ref={ref}
         aria-label="The two routes side by side"
         onClick={(e) => e.target === e.currentTarget && ref.current?.close()}
-        className="m-auto max-h-[85vh] w-[min(56rem,calc(100vw-2rem))] overflow-hidden border border-line bg-white p-0 text-fg backdrop:bg-black/50 open:flex open:flex-col dark:bg-surface"
+        className="m-auto max-h-[85vh] w-[min(56rem,calc(100vw-2rem))] overflow-hidden border border-line bg-surface p-0 text-fg backdrop:bg-black/50 open:flex open:flex-col"
       >
         <div className="relative flex min-h-0 flex-1 flex-col">
           <button

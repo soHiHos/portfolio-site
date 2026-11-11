@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { Download, X } from "lucide-react"
+import { Download, Loader2, X } from "lucide-react"
 import { sendGTMEvent } from "@next/third-parties/google"
 import { CV_PATH } from "../content/contact"
 
@@ -102,7 +102,7 @@ export default function CvDownload({ className = "", iconClassName = "w-4 h-4" }
               <input type="text" name="website" value={website} onChange={(e) => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
               <button type="submit" disabled={!consent || status === "sending"} className="btn btn-primary">
                 {status === "sending" ? "One moment" : "Download CV"}
-                <Download className="w-4 h-4" />
+                {status === "sending" ? <Loader2 className="w-4 h-4 motion-safe:animate-spin" aria-hidden="true" /> : <Download className="w-4 h-4" />}
               </button>
             </>
           )}

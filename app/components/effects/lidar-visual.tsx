@@ -2,7 +2,7 @@
 // Pure CSS/SVG — animations stop under prefers-reduced-motion (see globals.css).
 export default function LidarVisual() {
   return (
-    <div className="relative w-full h-full overflow-hidden bg-[#0b0d12] text-orange-500">
+    <div className="relative w-full h-full overflow-hidden bg-[#0b0d12] text-accent">
       {/* Point grid */}
       <div
         className="absolute inset-0 opacity-30"
@@ -21,14 +21,14 @@ export default function LidarVisual() {
       <div className="absolute left-1/2 top-1/2 w-[160%] aspect-square -translate-x-1/2 -translate-y-1/2">
         <div
           className="lidar-sweep w-full h-full rounded-full"
-          style={{ background: "conic-gradient(from 0deg, rgb(249 115 22 / 0.35), transparent 60deg)" }}
+          style={{ background: "conic-gradient(from 0deg, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60deg)" }}
         />
       </div>
 
       {/* Emitter */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <span className="lidar-pulse absolute inset-0 rounded-full bg-orange-500" />
-        <span className="relative block w-3 h-3 rounded-full bg-orange-500" />
+        <span className="lidar-pulse absolute inset-0 rounded-full bg-accent" />
+        <span className="relative block w-3 h-3 rounded-full bg-accent" />
       </div>
 
       <span className="absolute left-4 bottom-3 font-mono text-[11px] tracking-widest text-white/60">SCANNING · POINT CLOUD</span>

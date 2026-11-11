@@ -40,9 +40,8 @@ export const metadata: Metadata = {
 };
 
 // Runs before paint: applies the saved theme, or by default the time of day in IST (light 7am-6pm,
-// dark otherwise), with no flash, and marks JS as available
-// so scroll-reveal styles only hide content when they can also reveal it.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':(function(){var h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hourCycle:'h23'}).format(new Date());return h<7||h>=18})();if(d)document.documentElement.classList.add('dark')}catch(e){}document.documentElement.classList.add('js')})()`;
+// dark otherwise), with no flash.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':(function(){var h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hourCycle:'h23'}).format(new Date());return h<7||h>=18})();if(d)document.documentElement.classList.add('dark')}catch(e){}})()`;
 
 export default function RootLayout({
   children,

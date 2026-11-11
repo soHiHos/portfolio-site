@@ -3,6 +3,7 @@ import services from "./content/services.json";
 import { PROJECTS } from "./content/projects";
 import { SITE_URL } from "./content/contact";
 import { servicePath } from "./content/service-list";
+import { ESTIMATOR_ON } from "./components/estimator/estimate";
 
 // Every public page, for search engines: the main pages, one page per service and one per project
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,7 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/projects", 0.7),
     ...PROJECTS.map((p) => page(`/projects/${p.id}`, 0.6)),
     page("/about", 0.6),
-    page("/terms", 0.3),
+    // The estimator and terms 404 on the live site until pricing is reviewed, so they're listed only from then
+    ...(ESTIMATOR_ON ? [page("/services/estimate", 0.5), page("/terms", 0.3)] : []),
     page("/privacy", 0.3),
   ];
 }

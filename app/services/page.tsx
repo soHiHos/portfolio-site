@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "../content/seo";
 import Link from "next/link";
 import { ArrowRight, Check, ChevronDown, PlayCircle } from "lucide-react";
 import SectionHeading from "../components/section-heading";
@@ -16,11 +17,11 @@ import ContactSection from "../sections/contact-section";
 import { HOVER_CARD, TopLine } from "../components/effects/hover-card";
 import { pillarCategories, servicePath } from "../content/service-list";
 
-export const metadata: Metadata = {
-  title: "Services: digitalisation, automation and analysis · Soham Kar",
-  alternates: { canonical: "/services" },
-  description: `Digitalisation, automation and analysis for growing businesses in India. ${services.hero.title}.${ESTIMATOR_ON ? " Get a price estimate in two minutes." : ""}`,
-};
+export const metadata: Metadata = pageMeta(
+  "Services: digitalisation, automation and analysis · Soham Kar",
+  `Digitalisation, automation and analysis for growing businesses in India. ${services.hero.title}.${ESTIMATOR_ON ? " Get a price estimate in two minutes." : ""}`,
+  "/services",
+);
 
 // Proof shows only what's finished: the case study once it's cleared (no "placeholder"), and any demo videos
 const CASE_STUDY = services.proof.caseStudy.placeholder ? null : services.proof.caseStudy;
@@ -179,7 +180,7 @@ export default function ServicesPage() {
           <div className="border border-line bg-surface divide-y divide-line">
             {services.faq.map((item) => (
               <details key={item.q} name="faq" className="faq group px-5 py-4 transition-colors duration-300 hover:bg-bg open:bg-bg">
-                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none text-base font-semibold text-fg transition-colors group-hover:text-accent-ink [&::-webkit-details-marker]:hidden">
+                <summary className="-my-4 py-4 flex items-center justify-between gap-4 cursor-pointer list-none text-base font-semibold text-fg transition-colors group-hover:text-accent-ink [&::-webkit-details-marker]:hidden">
                   {item.q}
                   <ChevronDown className="w-4 h-4 shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
                 </summary>

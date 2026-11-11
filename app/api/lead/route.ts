@@ -71,6 +71,27 @@ const emailSoham = (subject: string, body: string, replyTo: string, attachments?
 const emailVisitor = (to: string, subject: string, body: string, attachments?: Attachment[]) =>
   sendEmail(to, subject, body, CONTACT_EMAIL, attachments).catch((err) => (console.error('lead: visitor email error', err), false));
 
+// Services and pricing guides (service-pdfs/, outside public so they only go out by email), by service id.
+// Websites has no guide yet.
+const SERVICE_PDFS: Record<string, string> = {
+  'ai-automations': 'Soham-Kar-Automation-and-Analysis.pdf',
+  'custom-software': 'Soham-Kar-Custom-Business-Software.pdf',
+  'mobile-apps': 'Soham-Kar-Mobile-Apps.pdf',
+};
+
+// The guides for the chosen services. A file that can't be read is skipped, so the email still goes out.
+async function servicePdfs(services: string[]): Promise<Attachment[]> {
+  const files = services.flatMap((id) => (SERVICE_PDFS[id] ? [SERVICE_PDFS[id]] : []));
+  const read = await Promise.all(
+    files.map((filename) =>
+      readFile(path.join(process.cwd(), 'service-pdfs', filename))
+        .then((content): Attachment => ({ filename, content }))
+        .catch((err) => (console.error(`brief: could not attach ${filename}`, err), null))
+    )
+  );
+  return read.filter((a): a is Attachment => a !== null);
+}
+
 const firstName = (name: string) => name.split(/\s+/)[0] || 'there';
 const SIGN_OFF = `Soham Kar\n${CONTACT_EMAIL}`;
 
@@ -96,15 +117,19 @@ async function handleBrief(body: Record<string, unknown>) {
   if (!valid) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
 
   const serviceNames = SERVICE_LIST.filter((x) => services.includes(x.id)).map((x) => x.title).join(', ') || 'Not sure yet';
-  // Acknowledgement to the visitor (only if they gave an email; WhatsApp-only briefs get no auto-reply)
+  // Acknowledgement to the visitor (only if they gave an email; WhatsApp-only briefs get no auto-reply), with the
+  // services and pricing guide for each service they chose
   const ack = email
-    ? emailVisitor(
+    ? servicePdfs(services).then((guides) => emailVisitor(
       email,
       'I got your project brief',
       [
         `Hi ${firstName(name)},`,
         '',
         "Thanks for your brief. I've received it and I'll reply personally to set up a scoping call.",
+        ...(guides.length
+          ? ['', `I've attached my services and pricing ${guides.length > 1 ? 'guides' : 'guide'}, so you can look through the prices and examples before we talk.`]
+          : []),
         '',
         'What you sent:',
         `Services: ${serviceNames}`,
@@ -115,8 +140,9 @@ async function handleBrief(body: Record<string, unknown>) {
         'If anything is missing, just reply to this email.',
         '',
         SIGN_OFF,
-      ].join('\n')
-    )
+      ].join('\n'),
+      guides
+    ))
     : Promise.resolve(false);
   const [, saved, emailed] = await Promise.all([
     ack,

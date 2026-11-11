@@ -33,6 +33,7 @@ html {
 :root {
   /* Light theme: "Harbor" — misty grey-blue page, near-white cards and panels, warm amber accent for every
      fill and highlight, steel blue for accent-coloured text (amber isn't readable as text on this page) */
+  color-scheme: light; /* native controls (select menus, autofill, scrollbars) follow the site theme, not the OS */
   --background: #dce3e8;
   --foreground: #102a43;
   --muted: #364b60; /* dark: muted text sits on the map, so it needs the contrast */
@@ -62,6 +63,7 @@ html {
 }
 
 .dark {
+  color-scheme: dark;
   --scroll-thumb: rgb(255 255 255 / 0.25);
   /* Dark theme: "Night Ops" — deep gunmetal, lighter instrument panels, orange accent */
   --background: #111316;
@@ -216,15 +218,14 @@ p {
   }
 }
 
-/* Scroll reveal — only hides content once JS has marked the page, so no-JS still renders everything */
-.js [data-reveal] {
+/* Scroll reveal (components/effects/reveal.tsx). Content renders visible; once JS runs, blocks below the fold get
+   data-hidden (instantly, no transition) and fade in when it is removed as they scroll into view. */
+[data-reveal][data-hidden] {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.js [data-reveal][data-visible] {
-  opacity: 1;
-  transform: none;
+[data-reveal]:not([data-hidden]) {
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 /* Theme toggle circular reveal is driven from JS; disable the default cross-fade */
@@ -428,10 +429,9 @@ p {
   .flight-plane {
     display: none;
   }
-  .js [data-reveal] {
+  [data-reveal][data-hidden] {
     opacity: 1;
     transform: none;
-    transition: none;
   }
   .lidar-sweep,
   .lidar-pulse,

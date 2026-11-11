@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { ArrowLeft, ArrowRight, Check, ChevronDown, Mail, Send } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check, ChevronDown, Loader2, Mail, Send } from "lucide-react"
 import { sendGTMEvent } from "@next/third-parties/google"
 import SectionHeading from "../components/section-heading"
 import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, CONTACT_WHATSAPP, FacebookIcon, InstagramIcon, LinkedinIcon, WhatsAppIcon, BRAND_HOVER, copyToClipboard } from "../components/ui/menu/contact-menu"
@@ -189,8 +189,8 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
                   </div>
                 </div>
 
-                <div className="grid min-h-[29rem] sm:min-h-[27rem]">
-                  <div inert={step !== 1} className={`col-start-1 row-start-1 flex flex-col gap-5 ${step === 1 ? "" : "invisible"}`}>
+                <div className="grid sm:min-h-[27rem]">
+                  <div inert={step !== 1} className={`col-start-1 row-start-1 flex flex-col gap-5 ${step === 1 ? "" : "invisible max-sm:hidden"}`}>
                     <label className="block space-y-1.5">
                       <span className={labelClasses}>What do you need?</span>
                       <span className="relative block">
@@ -258,7 +258,7 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
                       </button>
                     </div>
                   </div>
-                  <div inert={step !== 2} className={`col-start-1 row-start-1 flex flex-col gap-5 ${step === 2 ? "" : "invisible"}`}>
+                  <div inert={step !== 2} className={`col-start-1 row-start-1 flex flex-col gap-5 ${step === 2 ? "" : "invisible max-sm:hidden"}`}>
                     <label className="block space-y-1.5">
                       <span className={labelClasses}>Your name <span className="font-normal">(optional)</span></span>
                       <input type="text" autoComplete="name" ref={nameRef} value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" maxLength={80} className={fieldClasses} />
@@ -311,7 +311,7 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
                       </button>
                       <button type="submit" disabled={!consent || status === "sending"} className="btn btn-primary">
                         {status === "sending" ? "Sending" : "Send brief"}
-                        <Send className="w-4 h-4" />
+                        {status === "sending" ? <Loader2 className="w-4 h-4 motion-safe:animate-spin" aria-hidden="true" /> : <Send className="w-4 h-4" />}
                       </button>
                     </div>
                     <p className="text-xs text-muted" aria-live="polite">

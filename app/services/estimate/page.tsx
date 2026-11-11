@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "../../content/seo";
 import { notFound } from "next/navigation";
 import SectionHeading from "../../components/section-heading";
 import Estimator from "../../components/estimator/estimator";
 import { ESTIMATOR_ON } from "../../components/estimator/estimate";
 
-export const metadata: Metadata = {
-  title: "Price estimate · Soham Kar",
-  description: "Answer eight quick questions and get starting prices for your software or AI automation as a PDF.",
-};
+export const metadata: Metadata = pageMeta(
+  "Price estimate · Soham Kar",
+  "Answer eight quick questions and get starting prices for your software or AI automation as a PDF.",
+  "/services/estimate",
+);
 
 // Price estimator page. Hidden on the live site until the pricing in content/pricing.ts is reviewed.
 export default function EstimatePage() {

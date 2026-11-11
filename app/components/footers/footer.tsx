@@ -4,10 +4,14 @@
 // and barcode on the ticket; copyright and contact links on the tear-off stub.
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Check, Mail, Plane, PlaneTakeoff, ShieldCheck, Ticket } from 'lucide-react';
-import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, FacebookIcon, GithubIcon, InstagramIcon, LinkedinIcon, BRAND_HOVER, copyToClipboard } from '../ui/menu/contact-menu';
+import { Check, FileText, Mail, Plane, PlaneTakeoff, ShieldCheck, Ticket } from 'lucide-react';
+import { ESTIMATOR_ON } from '../estimator/estimate';
+import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, CONTACT_WHATSAPP, FacebookIcon, GithubIcon, InstagramIcon, LinkedinIcon, WhatsAppIcon, BRAND_HOVER, copyToClipboard } from '../ui/menu/contact-menu';
 
 const year = new Date().getFullYear();
+
+// The boarding pass download is hidden for now; set to true to bring it back (the /boarding-pass route still exists)
+const SHOW_BOARDING_PASS = false;
 
 const FIELDS = [
   { label: 'PASSENGER', value: 'VISITOR' },
@@ -19,6 +23,7 @@ const FIELDS = [
 
 // Social links as square icon buttons (same look as the contact section): fill with each brand's colours on hover
 const SOCIALS = [
+  ...(CONTACT_WHATSAPP ? [{ label: 'WhatsApp', href: `https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent('Hi Soham, I found your site and would like to talk about a project.')}`, icon: WhatsAppIcon }] : []),
   { label: 'LinkedIn', href: CONTACT_LINKEDIN, icon: LinkedinIcon },
   { label: 'GitHub', href: CONTACT_GITHUB, icon: GithubIcon },
   { label: 'Instagram', href: CONTACT_INSTAGRAM, icon: InstagramIcon },
@@ -107,11 +112,13 @@ export default function Footer() {
 
           {/* Boarding pass download + map credit, just above the barcode */}
           <div className="mt-3 sm:mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-            <a href="/boarding-pass" download="soham-kar-boarding-pass.png" className={linkClasses}>
-              <Ticket className="w-4 h-4" />
-              Download boarding pass
-            </a>
-            <p className="text-[11px] text-muted">
+            {SHOW_BOARDING_PASS && (
+              <a href="/boarding-pass" download="soham-kar-boarding-pass.png" className={linkClasses}>
+                <Ticket className="w-4 h-4" />
+                Download boarding pass
+              </a>
+            )}
+            <p className="ml-auto text-[11px] text-muted">
               Background map data &copy;{' '}
               <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent-ink">
                 OpenStreetMap contributors
@@ -136,6 +143,13 @@ export default function Footer() {
                 <ShieldCheck className="w-4 h-4" />
                 Privacy policy
               </Link>
+              {/* Terms stay hidden with the prices until pricing is reviewed (the page 404s until then) */}
+              {ESTIMATOR_ON && (
+                <Link href="/terms" className={linkClasses}>
+                  <FileText className="w-4 h-4" />
+                  Terms
+                </Link>
+              )}
             </nav>
           </div>
           {/* Email, social icons, then the credit, pinned to the stub's bottom (the stub is a column with justify-between) */}
