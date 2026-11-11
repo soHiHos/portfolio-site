@@ -10,8 +10,8 @@
     "items": ["Flutter", "Dart", "Firebase Firestore"]
   },
   {
-    "group": "AI & data",
-    "use": "Reading documents, cleaning data, forecasting and reports",
+    "group": "Automation, AI & analysis",
+    "use": "Automated workflows, reading documents, cleaning data, forecasting and reports",
     "items": ["Pandas", "Scikit-Learn", "TensorFlow 2.0", "PyTorch"]
   },
   {

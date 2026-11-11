@@ -130,8 +130,8 @@ html {
    Only used where there is no solid card behind the text, so blurred layers never stack. */
 @utility glass {
   background-color: color-mix(in srgb, var(--background) 14%, transparent);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  /* Only the standard property: the build adds the -webkit- prefix itself (writing both made it keep only the prefix) */
+  backdrop-filter: blur(32px);
   border: 1px solid var(--line);
 }
 

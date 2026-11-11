@@ -8,6 +8,7 @@ import EasterJet from "./components/effects/easter-jet";
 import BackToTop from "./components/back-to-top";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SITE_URL } from "./content/contact";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -19,19 +20,22 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+// metadataBase turns relative canonical and Open Graph URLs into full ones. Canonicals are set per page, never here
+// (a canonical in the layout would point every page at the home page)
 export const metadata: Metadata = {
-  title: "Soham Kar · Engineer",
+  metadataBase: new URL(SITE_URL),
+  title: "Soham Kar · Apps, websites, digitalisation and automation",
   description:
-    "Soham Kar is an engineer in India who builds custom software, ERPs, mobile apps and AI automations for growing businesses.",
+    "Soham Kar builds apps, websites and software for growing businesses in Raipur and across India: digitalisation, automation and analysis that take you off paper and show you clear numbers.",
   openGraph: {
-    title: "Soham Kar · Engineer",
-    description: "Custom software, mobile apps and AI automations for growing businesses in India.",
+    title: "Soham Kar · Apps, websites, digitalisation and automation",
+    description: "Apps, websites, digitalisation, automation and analysis for growing businesses in Raipur and across India.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Soham Kar · Engineer",
-    description: "Custom software, mobile apps and AI automations for growing businesses in India.",
+    title: "Soham Kar · Apps, websites, digitalisation and automation",
+    description: "Apps, websites, digitalisation, automation and analysis for growing businesses in Raipur and across India.",
   },
 };
 

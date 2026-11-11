@@ -11,7 +11,7 @@ import SideNav from "../components/side-nav";
 
 export const metadata: Metadata = {
   title: "About · Soham Kar",
-  description: "Soham Kar's background: civil engineering, environmental research, entrepreneurship, and self-taught software, hardware and AI.",
+  description: "Soham Kar is an engineer in Raipur, India who builds apps, websites and software for digitalisation, automation and analysis, with a background in civil and environmental engineering, research and entrepreneurship.",
 };
 
 const NAV = [

@@ -21,7 +21,7 @@ page (work, projects, research, contact) stays plain so visitors read the work, 
 - Cards: solid `bg-surface` (near-white #fafcfd light) + `border-line`. This is the default container.
 - Glass only for floating chrome and text that sits on the map, never for content cards:
   - Floating chrome (top nav, go-to-top button): `bg-bg/60 backdrop-blur-xl` + 1px `border-line`.
-  - Text panels on the map (`glass` utility in globals.css): 14% fill + 16px blur + 1px border.
+  - Text panels on the map (`glass` utility in globals.css): 14% fill + 32px blur (heavy, by request) + 1px border.
 - One accent (`--accent`: warm amber #e8a33d light / orange dark), used for every fill and highlight: primary
   buttons, the active nav link, the floating contact button, hover fills and lines, markers, progress fills,
   flight routes. Text on amber fills is navy (`--on-accent`). Never use amber for text.
@@ -40,6 +40,9 @@ page (work, projects, research, contact) stays plain so visitors read the work, 
   fill, sheen) / `.btn-secondary` (outline, fill wipe) / `.btn-link` (text, underline grows), sizes
   `.btn-sm` / `.btn-lg`. Icons move with their meaning on hover (arrows slide, download dips).
 - Icon-only buttons: square, 1px border, fill with the accent on hover, tooltip/`aria-label` names them.
+  Exception: social icons (LinkedIn, GitHub, Instagram, Facebook) fill with their own brand colours on
+  hover, set once in `BRAND_HOVER` (components/ui/menu/contact-menu.tsx). This is the only allowed use of
+  non-token colours.
 
 ## Copy
 - Sentence case for headings, buttons, nav and labels ("Explore work", not "EXPLORE WORK").

@@ -4,25 +4,27 @@ import { useEffect, useRef, useState } from "react"
 import { ArrowLeft, ArrowRight, Check, ChevronDown, Mail, Send } from "lucide-react"
 import { sendGTMEvent } from "@next/third-parties/google"
 import SectionHeading from "../components/section-heading"
-import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, FacebookIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from "../components/ui/menu/contact-menu"
+import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, CONTACT_WHATSAPP, FacebookIcon, InstagramIcon, LinkedinIcon, WhatsAppIcon, BRAND_HOVER, copyToClipboard } from "../components/ui/menu/contact-menu"
 import { useIndiaTime } from "../components/use-india-time"
 import Reveal from "../components/effects/reveal"
 import { BRIEF_EVENT, type BriefDetail } from "../components/ask-tower/answer-blocks"
-import services from "../content/services.json"
+import { AVAILABLE_FOR_WORK } from "../content/availability"
 import { SERVICE_LIST, TIMELINES } from "../content/service-list"
 
 // The four services a brief can be about; the choice also decides which PDF is sent
 const SERVICE_OPTIONS = SERVICE_LIST
 const OTHER = "other"
 
+// WhatsApp first: it's how most clients here get in touch. Same pre-filled message as the floating WhatsApp button
 const LINKS = [
+  ...(CONTACT_WHATSAPP ? [{ label: "WhatsApp", href: `https://wa.me/${CONTACT_WHATSAPP}?text=${encodeURIComponent("Hi Soham, I found your site and would like to talk about a project.")}`, icon: WhatsAppIcon }] : []),
   { label: "LinkedIn", href: CONTACT_LINKEDIN, icon: LinkedinIcon },
   { label: "Instagram", href: CONTACT_INSTAGRAM, icon: InstagramIcon },
   ...(CONTACT_FACEBOOK ? [{ label: "Facebook", href: CONTACT_FACEBOOK, icon: FacebookIcon }] : []),
 ]
 
-// Square icon buttons: fill with the accent and lift on hover, with a small tooltip naming the link
-const iconClasses = "group relative flex w-12 h-12 items-center justify-center border border-line text-fg transition-all duration-300 hover:border-accent hover:bg-accent hover:text-on-accent motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink cursor-pointer"
+// Square icon buttons: lift on hover and fill (the accent for email, each brand's colours for the socials), with a small tooltip naming the link
+const iconClasses = "group relative flex w-12 h-12 items-center justify-center border border-line text-fg transition-all duration-300 motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink cursor-pointer"
 const tipClasses = "pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap bg-fg px-2 py-1 text-xs font-medium text-bg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
 const fieldClasses = "w-full border border-line bg-bg/50 px-3.5 py-3 text-sm text-fg placeholder:text-muted/70 transition-colors focus:outline-none focus:border-accent-ink focus:ring-2 focus:ring-accent-ink/20"
 const labelClasses = "text-xs font-medium text-muted"
@@ -31,11 +33,13 @@ const labelClasses = "text-xs font-medium text-muted"
 // copies on click) beside a short project brief. "Send" posts the brief to /api/lead (saved to Supabase and emailed);
 // if that fails it opens the visitor's mail app with the brief filled in. The "Ask about my work" assistant can
 // pre-fill the brief via a BRIEF_EVENT, and the services page via /?brief=<service id>#contact.
-export default function ContactSection({ id }: { id?: string }) {
+// `service`: a service id to pre-select, e.g. on that service's own page. `flush`: no vertical padding, for pages
+// that space their sections with a gap of their own (the services pages)
+export default function ContactSection({ id, service, flush }: { id?: string; service?: string; flush?: boolean }) {
   const time = useIndiaTime()
   const [copied, setCopied] = useState(false)
   const [name, setName] = useState("")
-  const [choice, setChoice] = useState("") // "" (nothing yet), a service id, or OTHER
+  const [choice, setChoice] = useState(service ?? "") // "" (nothing yet), a service id, or OTHER
   const [whatsapp, setWhatsapp] = useState("")
   const [email, setEmail] = useState("")
   const [consent, setConsent] = useState(false)
@@ -128,8 +132,8 @@ export default function ContactSection({ id }: { id?: string }) {
   }
 
   return (
-    <section id={id}>
-      <div className="w-full text-left space-y-8 py-12">
+    <section id={id} className={flush ? "scroll-mt-28" : undefined}>
+      <div className={`w-full text-left space-y-8 ${flush ? "" : "py-12"}`}>
         <SectionHeading
           title="Tell me about your project"
         />
@@ -142,18 +146,18 @@ export default function ContactSection({ id }: { id?: string }) {
             </p>
             <div className="space-y-1.5 text-sm text-muted">
               <span className="flex items-center gap-2 font-medium text-fg">
-                <span className={`w-2 h-2 rounded-full ${services.availability.accepting ? "bg-emerald-500" : "bg-fg/30"}`} aria-hidden="true" />
-                {services.availability.accepting ? "Available for new projects" : "Fully booked right now"}
+                <span className={`w-2 h-2 rounded-full ${AVAILABLE_FOR_WORK ? "bg-emerald-500" : "bg-fg/30"}`} aria-hidden="true" />
+                {AVAILABLE_FOR_WORK ? "Available for new projects" : "Fully booked right now"}
               </span>
               <span className="block">Based in India · {time} IST</span>
             </div>
             <div className="mt-auto flex flex-wrap gap-3 pt-2">
-              <button type="button" onClick={handleCopyEmail} aria-label={copied ? "Email copied" : `Copy email (${CONTACT_EMAIL})`} className={iconClasses}>
+              <button type="button" onClick={handleCopyEmail} aria-label={copied ? "Email copied" : `Copy email (${CONTACT_EMAIL})`} className={`${iconClasses} hover:border-accent hover:bg-accent hover:text-on-accent`}>
                 {copied ? <Check className="w-5 h-5" /> : <Mail className="w-5 h-5" />}
                 <span className={tipClasses} aria-hidden="true">{copied ? "Copied!" : "Copy email"}</span>
               </button>
               {LINKS.map(({ label, href, icon: Icon }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={iconClasses}>
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`${iconClasses} ${BRAND_HOVER[label]}`}>
                   <Icon className="w-5 h-5" />
                   <span className={tipClasses} aria-hidden="true">{label}</span>
                 </a>

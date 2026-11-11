@@ -4,19 +4,22 @@ import SectionHeading from "../components/section-heading";
 import AvailabilityBadge from "../components/availability-badge";
 import Reveal from "../components/effects/reveal";
 import { ESTIMATOR_ON } from "../components/estimator/estimate";
-import { HOME_PRICES, RETAINER_NOTE } from "../components/services/category-price";
+import { AUDIT_OFFER, HOME_PRICES, HOME_TIMELINES, PRICE_NOTE } from "../components/services/category-price";
 import services from "../content/services.json";
+import { pillarLabel, servicePath } from "../content/service-list";
 
-// Compact home-page "Services" strip: the service tiles, then the main button with availability beside it
+// Compact home-page "Services" strip. "What I do" above already explains each service, so this is about cost and
+// how to start: how the pricing works, the service tiles, the entry audit, then the main button with availability
+// beside it. Everything about price shows only once pricing is reviewed (ESTIMATOR_ON), like the estimator.
 
-// The four service categories, in funnel order: automations and analytics first (the easiest way in), websites last
+// The four service categories, cheapest first (services.json order): websites, automation, apps, custom software
 const TILES = services.categories
 export default function ServicesSection({ id }: { id?: string }) {
   return (
     <section id={id}>
       <div className="w-full text-left space-y-8 py-12">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading title="Services" />
+          <SectionHeading title={ESTIMATOR_ON ? "Services and prices" : "Services"} />
           <Link href="/services" className="btn-link text-sm text-fg">
             View services
             <ArrowRight className="w-4 h-4" />
@@ -24,19 +27,29 @@ export default function ServicesSection({ id }: { id?: string }) {
         </div>
 
         <Reveal className="space-y-6">
+          {/* How the pricing works, before any number: most clients expect a one-time payment */}
+          {ESTIMATOR_ON && (
+            <div className="space-y-1">
+              <p className="text-base font-semibold text-fg">{services.pricingIntro.title}</p>
+              <p className="text-sm leading-relaxed text-muted">{services.pricingIntro.body}</p>
+            </div>
+          )}
 
           {/* Two columns, like the services page. Every card has the same four parts in the same order: title,
-              summary, the three prices side by side (once pricing is reviewed, like the estimator) and tags. Each
-              card spans four rows of the parent grid (subgrid), so titles, summaries, prices and tags line up
-              across a row whatever the length of the text */}
+              summary, the three prices side by side (once pricing is reviewed) and the typical timeline. Each
+              card spans four rows of the parent grid (subgrid), so they line up across a row whatever the length
+              of the text */}
           <div className="grid gap-4 sm:grid-cols-2">
             {TILES.map((service) => (
               <Link
                 key={service.id}
-                href="/services"
+                href={servicePath(service.id)}
                 className="group row-span-4 grid grid-rows-subgrid gap-y-3 border border-line bg-surface p-5 transition-colors hover:border-accent/40 sm:p-6"
               >
-                <span className="block self-end text-lg font-bold leading-snug text-fg transition-colors group-hover:text-accent-ink">{service.title}</span>
+                <span className="block self-end space-y-1">
+                  {service.pillars.length > 0 && <span className="block text-xs font-medium text-muted">{pillarLabel(service.pillars)}</span>}
+                  <span className="block text-lg font-bold leading-snug text-fg transition-colors group-hover:text-accent-ink">{service.title}</span>
+                </span>
                 <span className="block text-sm leading-relaxed text-muted">{service.summary}</span>
                 {ESTIMATOR_ON ? (
                   <dl className="divide-y divide-line self-start border-y border-line sm:grid sm:grid-cols-3 sm:divide-x sm:divide-y-0">
@@ -50,18 +63,25 @@ export default function ServicesSection({ id }: { id?: string }) {
                 ) : (
                   <span aria-hidden="true" />
                 )}
-                <span className="flex flex-wrap content-start gap-1.5">
-                  {service.tags.slice(0, 4).map((tag) => (
-                    <span key={tag} className="rounded-md border border-accent-2/50 bg-accent-2/20 px-2 py-0.5 text-xs font-medium text-fg">
-                      {tag}
-                    </span>
-                  ))}
+                <span className="flex items-baseline justify-between gap-3 text-sm">
+                  <span className="text-xs text-muted">Typical timeline</span>
+                  <span className="font-semibold tabular-nums text-fg">{HOME_TIMELINES[service.id]}</span>
                 </span>
               </Link>
             ))}
           </div>
 
-          {ESTIMATOR_ON && <p className="text-sm text-muted">{RETAINER_NOTE}</p>}
+          {ESTIMATOR_ON && <p className="text-sm text-muted">{PRICE_NOTE}</p>}
+
+          {/* For anyone unsure which service they need: the entry audit (it has a price, so only once pricing is
+              reviewed), then an invitation to just get in touch, which always shows */}
+          <p className="border-l-2 border-accent pl-3 text-sm leading-relaxed text-muted">
+            <span className="font-semibold text-fg">Not sure where to start?</span>{" "}
+            {ESTIMATOR_ON && <>{AUDIT_OFFER} Still unsure? </>}
+            Feel free to{" "}
+            <a href="#contact" className="font-semibold text-accent-ink underline underline-offset-2 hover:no-underline">contact me</a>
+            , and we&apos;ll work out the right first step together.
+          </p>
 
           {/* The main button on the left, availability on the right (alone on the right while the estimator is off) */}
           <div className="flex flex-wrap items-center justify-between gap-4">

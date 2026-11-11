@@ -8,7 +8,7 @@ import type { ProjectPhase } from "../content/projects"
 interface ProjectTileProps {
   phase?: ProjectPhase // status line; left out for a name-only tile
   image?: string
-  video?: string // muted preview over the image: plays on hover, or as a looping .webp of the same name on touch screens
+  video?: string // muted preview over the image: plays on hover, or loops by itself (one tile at a time) on touch screens
   visual?: "lidar"
   title: string
   summary?: string

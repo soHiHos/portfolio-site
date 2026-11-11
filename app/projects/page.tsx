@@ -12,7 +12,7 @@ import { CONTACT_GITHUB } from "../content/contact";
 
 export const metadata: Metadata = {
   title: "Projects · Soham Kar",
-  description: "All of Soham Kar's projects: client work, side projects and hardware.",
+  description: "Soham Kar's projects: apps, websites and custom software built for clients, plus his own work in automation, data analysis and hardware.",
 };
 
 // Projects in category order (client work, then GitHub, then hardware), split into client work plus
@@ -77,7 +77,13 @@ export default function ProjectsPage() {
       <SideNav sections={NAV} />
       <section id="all-projects">
         <div className="w-full text-left space-y-12 py-12">
-          <SectionHeading title="Projects" />
+          <div className="space-y-3">
+            <SectionHeading title="Projects" />
+            {/* Sits on the map, so it gets the glass panel like the service pages' descriptions */}
+            <p className="glass px-4 py-3 text-base leading-relaxed text-muted">
+              Client work and my own projects: apps, websites and custom software, plus digitalisation, automation and data analysis. Open any project for the details.
+            </p>
+          </div>
           <ProjectGrid projects={MAIN} />
 
           {OTHER.length > 0 && (

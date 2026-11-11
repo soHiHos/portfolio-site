@@ -6,7 +6,7 @@ import { ESTIMATOR_ON } from "../../components/estimator/estimate";
 
 export const metadata: Metadata = {
   title: "Price estimate · Soham Kar",
-  description: "Answer eight quick questions and get a price range for your software or AI automation as a PDF.",
+  description: "Answer eight quick questions and get starting prices for your software or AI automation as a PDF.",
 };
 
 // Price estimator page. Hidden on the live site until the pricing in content/pricing.ts is reviewed.

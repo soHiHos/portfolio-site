@@ -21,7 +21,7 @@ export type Project = {
   shortSummary?: string // 18–20 words for the Work tiles; project pages and the assistant use `summary`
   status?: string
   image?: string
-  video?: string // muted preview played on hover (and, on touch screens, a .webp of the same name); `image` is its thumbnail
+  video?: string // muted preview played on hover (and loops by itself on touch screens); `image` is its thumbnail
   visual?: "lidar"
   link?: string
   linkLabel?: string // button text for `link` when it is not the live site (default "Visit live site")
@@ -31,6 +31,7 @@ export type Project = {
   github?: string
   stack?: string[]
   caseStudy?: { problem?: string; approach?: string; outcome?: string }
+  caseStudyNote?: string // shown in the case study slot while no chapters are written (e.g. "coming soon")
   metrics?: { value: string; label: string }[] // real results only; placeholders show until set
   testimonial?: { quote: string; author: string; role?: string }
   // Empty slot shown only on the home page's Work collage (client slots; personal slots aren't shown anywhere).

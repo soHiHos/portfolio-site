@@ -9,7 +9,7 @@ import { CONTACT_WHATSAPP, WhatsAppIcon } from "../ui/menu/contact-menu";
 import ContactCard from "./contact-card";
 import ThemeToggle from "../effects/theme-toggle";
 import { EASTER_EVENT } from "../effects/easter-jet";
-import services from "../../content/services.json";
+import { AVAILABLE_FOR_WORK } from "../../content/availability";
 import { useActiveSection } from "../use-active-section";
 import ScrollProgress from "./scroll-progress";
 import LogoMark from "../logo-mark";
@@ -77,7 +77,7 @@ function TopNav({ pathname, hidden }: NavProps) {
           })}
         </nav>
         <span className="hidden md:flex items-center gap-2 text-xs font-medium text-muted whitespace-nowrap">
-          {services.availability.accepting ? (
+          {AVAILABLE_FOR_WORK ? (
             // Same "live" beat as the Accepting projects badge (globals.css): the dot breathes, a ring ripples out
             <span className="relative flex w-1.5 h-1.5" aria-hidden="true">
               <span className="status-ring absolute inset-0 rounded-full border border-emerald-500" />
@@ -86,7 +86,7 @@ function TopNav({ pathname, hidden }: NavProps) {
           ) : (
             <span className="w-1.5 h-1.5 rounded-full bg-fg/30" aria-hidden="true" />
           )}
-          {services.availability.accepting ? "Available for work" : "Fully booked"}
+          {AVAILABLE_FOR_WORK ? "Available for work" : "Fully booked"}
         </span>
         <ThemeToggle />
       </div>

@@ -1,163 +1,113 @@
 # Services page: notes, section by section
 
-Route: `/services` ([app/services/page.tsx](app/services/page.tsx)). Content comes from [services.json](app/content/services.json) and [pricing.ts](app/content/pricing.ts). Last updated 2026-11-03.
+Routes: `/services` ([app/services/page.tsx](app/services/page.tsx)) and `/terms` ([app/terms/page.tsx](app/terms/page.tsx)). Content comes from [services.json](app/content/services.json) and [pricing.ts](app/content/pricing.ts). Last updated 2026-11-08.
 
-## How the page is switched on and off
+## How the pages are switched on and off
 
 - `ESTIMATOR_ON` ([estimate.ts](app/components/estimator/estimate.ts)) is true when `PRICING.reviewed` is true, or when running `next dev`.
 - `PRICING.reviewed` is currently **false**, so on the live site:
   - "Services and prices" and "Get an exact estimate" are hidden, along with their side-nav links.
   - Tiles don't show the "Usually delivered as" line or the "Price this" button.
   - The hero's primary button becomes "Book a free call".
-  - `/services/estimate` returns 404, and `/api/lead` returns 404.
+  - `/services/estimate` and `/terms` return 404, and `/api/lead` returns 404.
 - In `next dev` everything shows.
 - "Work in action" shows only when the case study is no longer a placeholder, or when there are demo links. Today `placeholder: true` and `demos: []`, so it is hidden everywhere.
 
-Side nav order (when everything is on): Prices, Sound familiar, Estimate, Work in action, How we'll work, Questions, Let's talk.
+Side nav order (when everything is on): Prices, Sound familiar, How we'll work, Estimate, Work in action, Questions, Let's talk.
 
 ---
 
 ## 1. Hero
 
-- Title from `services.hero.title`: "Less manual work. Clearer numbers. Better decisions."
-- Buttons (`Actions`):
-  - Estimator on: "Get your price estimate in 2 minutes" (scrolls to `#estimate`), plus a "Book a free call" text link (mailto, subject "Free call").
-  - Estimator off: "Book a free call" is the one primary button.
-- Availability badge, driven by `services.availability` (`accepting`, label).
+- Title from `services.hero.title`. Buttons (`Actions`): the estimator link plus "Fill out the form", or just the form button when the estimator is off. Availability badge from `services.availability`.
 - `hero.promise` exists in the JSON but the page doesn't render it.
 
 ## 2. Services and prices (`#prices`, estimator on only)
 
-Component: [price-plans.tsx](app/components/services/price-plans.tsx). Data: [category-price.ts](app/components/services/category-price.ts), built entirely from `PRICING`.
+Components: [price-plans.tsx](app/components/services/price-plans.tsx) (cards, switch, dialog), [price-compare.tsx](app/components/services/price-compare.tsx) (the comparison), [category-price.ts](app/components/services/category-price.ts) (all card text). Every figure is derived from `PRICING`.
 
-- **Plan tabs:** "Monthly licence" (lower setup, then a monthly fee; I host, maintain and keep the code) or "Own the code" (pay once, receive the code, licence and retainer end). Switching fades the cards; the marketing site card doesn't flip because its price is the same on both plans.
-- **Four cards**, in this order:
-  1. AI automations & analytics
-  2. Custom software, ERPs & CRMs
-  3. Mobile apps
-  4. Marketing & business sites
-- **Each card:**
-  - Title and one-line summary.
-  - A harbor-blue price bar. Monthly plan: "Setup from ₹X + ₹Y/month" (marketing site: "From ₹X"). Own the code: "From ₹X".
-  - A "See breakdown" button. The whole card is clickable.
-- **Breakdown:** it opens as a dropdown laid over the page, so card sizes never change. One opens at a time, and Escape or a click outside closes it. It lists:
-  - Setup range, monthly licence range, optional retainer.
-  - For the own-the-code plan: the one-time price, "You get: the code", and "No licence".
-  - The automation card also carries the AI usage note (₹2,000 a month included, billed at cost above that).
-- Below the cards: the indicative-price note (excludes GST at 18%, milestones, billed in advance) and a link to the estimator.
-- Cards share row heights through a subgrid, so titles and price bars line up across a row.
+- **Intro:** a title and short paragraph from `services.pricingIntro`.
+- **Four cards** (names are defined once in `pricing.ts`): Workflow Automation, Custom Business Software, Mobile Apps, Business and Marketing Websites.
+  - Software cards show one line: "Setup from ₹X (one time) + ₹Y/month". The website card shows "Build from ₹35,000 (one time)".
+  - The whole card is clickable and opens a "See breakdown" dropdown (one at a time; Escape or a click outside closes it; no layout shift).
+  - The dropdown has four rows: what's included, what moves the price, typical timeline, and owning the code (software, kept to the key rules and pointing to the terms) or the care plan (websites).
+- **Switch below the cards:** "Show the own-the-code prices" swaps the software cards to "Own the code: from about ₹Z, quoted after scope" plus the maintenance-plan line. The website card does not change.
+- **"Compare both routes" button** opens a dialog:
+  - Pick a service; drag "Project size" (setup from the "from" price up to four times it) and "How long you stay" (1 to 48 months).
+  - Optional "Set your own price for owning the code".
+  - Three result cards (stay on the monthly plan, start monthly and buy later, own from day one) with the lowest marked, a break-even line, and a table at 6, 12, 24 and 36 months whose rows set the month.
+- **Note below the cards (once):** GST, setup paid in two parts (50% at signing, 50% at live testing), 6-month minimum, AI and third-party fees at cost, UPI, with a link to `/terms`, then a link to the estimator, which emails a detailed PDF.
 
 ### Price reference (excl. GST, from `pricing.ts`)
 
-| Service | Setup | Licence / month | Retainer / month | Buyout |
+| Service | Setup from | Monthly plan | Own the code from about | Maintenance plan after buying |
 |---|---|---|---|---|
-| Marketing site | 25,000–60,000 | 2,000–4,000 (optional) | none | 25,000–60,000 |
-| Invoice and workflow automation | 40,000–80,000 | 5,000–10,000 | 10,000–20,000 | 1,50,000–3,00,000 |
-| Custom software, ERPs & CRMs | 1,00,000–2,50,000 | 10,000–20,000 | 15,000–25,000 | 3,50,000–7,00,000 |
-| Flutter mobile app | 60,000–1,50,000 | 5,000–10,000 | 8,000–15,000 | 2,00,000–4,00,000 |
+| Workflow Automation | 40,000 | 18,000 | 1,25,000 | 9,000 |
+| Custom Business Software | 1,50,000 | 20,000 | 2,50,000 | 10,000 |
+| Mobile Apps | 60,000 | 15,000 | 1,25,000 | 7,500 |
+| Business and Marketing Websites | 35,000 | none | code included | care plan 3,000 (higher tier 5,000) |
 
-- Pilot: ₹40,000–75,000 over 30 days; the fee counts toward setup if the client continues. It appears only in the estimate PDF.
-- Timeline by the top of the setup range: up to ₹1.5L = 3–5 weeks, up to ₹4L = 6–10 weeks, above = 10–16 weeks. Both the timeline and the AI allowance are marked DRAFT in the file.
-- Ranges are rounded outward: to ₹1,000 under ₹1,00,000, to ₹5,000 above it.
+### Rules behind the numbers
+
+- **Buyout:** a "from about" figure, quoted after scope. A client who starts monthly and buys later gets the setup paid deducted and 50% of the monthly fees paid credited, never below 25% of the code price (`BUYOUT` and `buyoutPrice`, with unit tests in [pricing.test.ts](app/content/pricing.test.ts); run `npm test`).
+- **Break-even:** with maintenance at half the monthly plan and these code prices, owning from day one beats the monthly plan after about 9 to 10 months on paper, about 15 once the owner's own hosting (about ₹3,000 a month) is counted.
+- **Scaling with project size** (`SCALING`, `scaledPrices`): the monthly plan rises at half the rate of setup (doubling setup raises it about 50%); the code price scales fully with setup; the maintenance plan follows the monthly plan. Used by the comparison dialog and the FAQ.
+- **Terms** (`PRICING.terms`): 6-month minimum on the monthly plan, 3-month on the maintenance plan, 90 days of adjustments after go-live, then up to 3 hours of small changes a month, a ₹10,000 day rate for bigger changes, 30 days' notice. AI usage and third-party fees (WhatsApp and similar) are never included: billed at cost as separate lines.
+- **User scale:** no per-user charges. The page says "typically 50,000 to 90,000 monthly active users".
+- **Timelines** (weeks, one source in `pricing.ts`): automation 4–16, custom software 5–20, mobile apps 4–12, websites 1–5. The estimator and PDF use the same values.
+- Several terms values are marked DRAFT in `pricing.ts` (notice, export window, overdue and warning days, response times, day rate).
 
 ## 3. Sound familiar? (`#problems`)
 
-Component: [problem-tiles.tsx](app/components/services/problem-tiles.tsx).
+Component: [problem-tiles.tsx](app/components/services/problem-tiles.tsx). Six clickable problems on the left (retyping, numbers, whatsapp, payments, network, custom); on the right a detail, the help lines from `PRICING.outcomes[id].includes`, and the next step. "Price this" appears only when the estimator is on and fires `estimator:pick`. It auto-cycles every 3 seconds until hovered or focused, and stops with reduced motion. Both cards keep a constant size.
 
-- **Left card:** six clickable problems (a radio group).
-  1. retyping: "We type the same data again and again."
-  2. numbers: "We don't know our real numbers until it's too late."
-  3. whatsapp: "Everything happens on WhatsApp, and nothing is recorded."
-  4. payments: "Payments always come in late."
-  5. network: "Our dealer or distributor network is hard to manage."
-  6. custom: "Every tool we try makes us change how we work."
-- **Right card:** a one- or two-sentence detail, then "We can help with automating" with the help lines, then the next step. The "Price this" button (or the "What to know before you reach out" link when the estimator is off) is pinned to the bottom.
-- **Help lines** come from `PRICING.outcomes[id].includes`, so the tile and the estimator can't drift. Quote and detail live in `services.json`; tile ids must match the outcome keys.
-- **Mapping:** retyping, numbers, whatsapp and payments map to Invoice and workflow automation; network and custom map to Custom software, ERPs & CRMs. The "Usually delivered as: {title}, setup from {amount}." line shows only when the estimator is on.
-- **Behaviour:**
-  - It auto-cycles every 3 seconds until the visitor hovers or focuses the section.
-  - Reduced motion turns the cycling off.
-  - Both cards keep a constant size: the right card reserves the height of the tallest panel.
-  - "Price this" fires `estimator:pick` with the id and scrolls to the estimator.
+The "Usually delivered as: {title}, setup from {amount}." line uses the service names and "from" setups in `PRICING`.
 
 ### Closing block, "Before you reach out" (`#before-you-reach-out`)
 
-- States once that automation only works when the team uses it. We set up a dedicated WhatsApp Business number, someone on the client's side runs it, and a simple portal works for anyone who prefers it.
-- "Need a proper estimate?" asks for the services needed and what's slowing the business down. The reply promise is **within 48 hours** by email or WhatsApp.
-- Button "Fill out the form" scrolls to the form at the bottom of the page (`#talk`).
+States that automation only works when the team uses it, offers a dedicated WhatsApp Business number or a simple portal, and promises a reply within 48 hours. The button scrolls to the form (`#talk`).
 
 ## 4. Get an exact estimate (`#estimate`, estimator on only)
 
-Component: [estimator.tsx](app/components/estimator/estimator.tsx). Logic: [estimate.ts](app/components/estimator/estimate.ts).
+Component: [estimator.tsx](app/components/estimator/estimator.tsx). Logic: [estimate.ts](app/components/estimator/estimate.ts). Same estimator also lives at `/services/estimate`.
 
-- Eight one-at-a-time questions:
-  1. Business type
-  2. Primary problem (one pick, or "Other" in their own words; the six problems above)
-  3. How they track things today (paper, Excel, Tally, other software)
-  4. Number of users
-  5. Mobile app and/or website too
-  6. AI features (yes, no, not sure)
-  7. Payment preference (monthly licence or own the code)
-  8. Start (right away, 1–3 months, just exploring)
-- Then contact details (name, business, phone, email), a consent checkbox and a honeypot.
-- Submitting posts to `/api/lead`, which re-computes the estimate on the server. The lead is saved to Supabase and emailed through Resend; either one working counts as received, and there is a per-IP limit of 5 requests per 10 minutes.
-- The browser then builds and downloads a PDF estimate ([estimate-pdf.tsx](app/components/estimator/estimate-pdf.tsx)), even if saving failed.
-- The same estimator also lives at `/services/estimate`.
+- Eight one-at-a-time questions: business type, primary problem, how they track things today, number of users, mobile app and/or website too, AI features, payment preference ("Monthly plan" or "Own the code"), start.
+- Then contact details, a consent checkbox and a honeypot. Submitting posts to `/api/lead`, which re-computes the estimate, saves the lead to Supabase and emails it through Resend (either one working counts), with a per-IP limit of 5 requests per 10 minutes.
+- The browser builds and downloads a PDF estimate ([estimate-pdf.tsx](app/components/estimator/estimate-pdf.tsx)). Its own-the-code section uses the same wording as the page: price depends on scope, setup paid deducted, half the monthly fees credited down to a 25% floor, maintenance plan after buying. The users flag says "You chose more than 2,000 users, so these starting prices are a rough guide."
 
 ## 5. Work in action (`#proof`, currently hidden)
 
-- Demo links (a grid) and a case study (business, problem, what was built, result).
-- The case study is the Rever distributor platform, still flagged `placeholder: true` with no result. It stays hidden until cleared.
+Demo links and a case study (business, problem, what was built, result). The case study is the Rever distributor platform, still `placeholder: true` with no result.
 
 ## 6. How we'll work (`#process`)
 
-Component: [process-steps.tsx](app/components/services/process-steps.tsx): numbered tabs with Back and Next. Five steps:
-
-1. A free call or Google Meet. An honest view on whether custom software is needed at all.
-2. A written proposal in 3–5 days. Setup is paid in three milestones (signing, demo approval, go-live).
-3. Prototype, then built in stages. The team signs off a prototype first.
-4. Launch and training. A handover session is included; extra or on-site training is quoted.
-5. After go-live. The licence keeps it hosted and secure; a review at 60–90 days; extra changes are change requests or use the optional retainer.
-
-Below the steps: "Happy to sign an NDA before we talk, if you'd like."
+[process-steps.tsx](app/components/services/process-steps.tsx): five numbered steps with Back and Next: free call (including budget and start date), free discovery (a visit in or around Raipur, a screen share elsewhere, working with me personally) then a written proposal in 5–7 days (scope, price, timeline; detailed design after approval; the paid audit for a deeper analysis), proposal free, no obligation, valid 21 days; 50% of setup then prototype as the first milestone of a staged build (changes within scope included, new features quoted; the other 50% at live testing), launch and training, and after go-live (the monthly plan keeps it hosted; a review at 60–90 days; small changes included after 90 days, bigger ones quoted; after buying outright, 30 days of bug fixes then an optional maintenance plan). The websites page shows its own five steps instead (page.process in services.json): call, proposal, design, build and launch with 50% before launch, optional care plan. Below: "Happy to sign an NDA before we talk, if you'd like."
 
 ## 7. Common questions (`#faq`)
 
-Nine accordion questions (only one open at a time):
+Eighteen accordion questions, one open at a time. Figures that come from `PRICING` are written as `{{placeholders}}` in `services.json` and filled in by `fillFaq` in `category-price.ts` (an unknown placeholder fails the build). Money and terms questions: how the monthly plan works (including what it covers), whether the fee rises for a bigger project, what counts as a change, how quickly problems are fixed, owning the code (the worked example is on the terms page), who owns the data, whose name the accounts are in, other costs, stopping, what if I stop working on this, and how payments work. The rest cover non-technical teams, replacing software, data safety, timelines, AI, demos and scale.
 
-1. Will this work for a team that isn't tech-savvy?
-2. Do we have to replace our current software? (No; Excel or CSV exports are enough.)
-3. Who owns our data? (The client; the code is licensed, and it can be bought outright.)
-4. What happens if we stop the subscription?
-5. Is our data safe? (Role-based access, weekly backups, optional daily backups, NDA.)
-6. How long does it take? (A pilot takes 30 days; full systems "4–12 weeks". **This conflicts with the estimator timelines; see below.**)
-7. Which AI do you use, and who pays? (Included up to a limit; above it, billed at cost after approval.)
-8. Can I see a demo built for my business? (Yes; priced as a small share of the project fee.)
-9. Can you build an app for millions of users? (No; up to about 50,000–100,000 monthly active users.)
+## 8. Terms (`/terms`, estimator on only)
 
-## 8. Let's talk, the project brief form (`#talk`)
+Thirteen numbered clauses and an "In short" box, drawn from `PRICING.terms`. It is a plain-English draft that a lawyer should review before it goes into a contract. It is not linked anywhere until the estimator is on.
 
-Component: [contact-section.tsx](app/sections/contact-section.tsx), shared with the home, about and projects pages.
+## 9. Let's talk, the project brief form (`#talk`)
 
-- **Fields:** name, WhatsApp number, "Services you need" (multi-select of the four categories), timeline (as soon as possible, 1–3 months, flexible), and "What are you building?" (required).
-- **Consent:** the checkbox appears once a WhatsApp number is entered and must be ticked before sending.
-- **Honeypot:** a hidden field that blocks sending when filled.
-- **Sending:** "Send brief" opens the visitor's mail app with everything filled in (a mailto, so there is no backend).
-- **Pre-fill:** `?brief=<service id>` in the URL and the ask-bar assistant's "Start a brief" can both pre-select services.
-- It also shows availability, local India time, and links for email (copies on click), LinkedIn, GitHub and Instagram.
+Component: [contact-section.tsx](app/sections/contact-section.tsx), shared with the home, about and projects pages. Fields: name, WhatsApp number, services needed (multi-select of the four categories), timeline, and what are you building. "Send brief" opens the mail app (a mailto). `?brief=<service id>` and the ask-bar assistant can pre-select services.
 
 ---
 
 ## Open decisions and loose ends
 
-1. **Timelines don't agree:** the FAQ says 4–12 weeks; the estimator says 3–16 weeks by price band (both unconfirmed).
-2. **Service names:** the tile line says "Invoice and workflow automation", but the page category is "AI automations & analytics". The "Flutter mobile app" and "Marketing site" titles also differ from their page categories.
-3. **AI allowance:** ₹2,000 a month is shown on the page; the PDF says "a limit agreed upfront". It is marked DRAFT.
-4. **Pilot price:** ₹40,000–75,000 shows only in the PDF.
-5. **The form is a mailto.** A real bot check (such as Turnstile) and the automated PDF email need a submit route, which isn't built.
-6. **Estimator pre-fill of the form** is not wired.
-7. **WhatsApp per-message fees:** pass through at cost, or include in the licence? Needs a line in the PDF.
-8. **48-hour reply:** if weekends or travel make it unsafe, the fallback wording is "within two working days".
-9. **Not covered by a tile or price:** the customer-facing reply bot, mobile apps and marketing sites (they appear only in the price cards and the form).
-10. **Unused content:** `services.cta`, `problems.intro` and `hero.promise` in `services.json` are no longer rendered.
+1. **Contract:** none yet; waiting on the lawyer. Seller details (legal name, address, GSTIN, PAN) go in `BUSINESS` in `contact.ts`; the PDF footer shows them once filled. Missing from the terms page: an annual price review, a liability cap, an outage policy, data-protection terms, and a quote validity (the PDF uses 21 days, `PRICING.validDays`).
+2. **Capacity:** no cap on plan clients; the availability badge does not reflect it.
+3. **Billing:** invoices by UPI only; auto-debit is not set up.
+4. **Prices against effort and real clients:** not checked yet.
+5. **Proof:** the case study is still a placeholder.
+6. **DRAFT defaults** in `PRICING.terms` need confirming.
+7. **WhatsApp fees** are passed through at cost; the PDF line should be checked against the contract wording.
+8. **The form is a mailto.** A real bot check and the automated PDF email need a submit route that isn't built.
+9. **Estimator pre-fill of the form** is not wired.
+10. **Content not shown on this page:** `problems.intro` and `cta.note` in `services.json` are not rendered anywhere. `hero.promise` and `categoriesIntro` are used by the ask route, and the category `tags` by the home page, so keep those.
 11. **Turning prices on** means setting `PRICING.reviewed` to true once the figures are signed off.
+12. **Buyout floor kicks in early:** at "from" prices the 25% floor already applies by month 6 for every software service, so the cost to buy then stays fixed (₹31,250 automation, ₹62,500 custom software, ₹31,250 apps) and "start monthly, buy later" always costs more in total than the other two routes. Options: keep it, lower `BUYOUT.floorShare`, or lower `BUYOUT.feeCreditShare`. Undecided.

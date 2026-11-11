@@ -1,8 +1,10 @@
 import services from "../content/services.json"
+import { AVAILABLE_FOR_WORK } from "../content/availability"
 
-// Green-filled "accepting projects" status pill (white text on emerald-700 keeps AA contrast at this size), driven by services.json
+// Green-filled "accepting projects" status pill (white text on emerald-700 keeps AA contrast at this size), driven by AVAILABLE_FOR_WORK (env)
 export default function AvailabilityBadge() {
-  const { accepting, label } = services.availability
+  const accepting = AVAILABLE_FOR_WORK
+  const { label } = services.availability
   return (
     <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold tracking-[0.2em] uppercase ${accepting ? "status-live border-emerald-700 bg-emerald-700 text-white" : "border-line text-muted"}`}>
       {accepting ? (

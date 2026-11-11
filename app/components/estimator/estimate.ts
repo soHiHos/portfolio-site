@@ -60,7 +60,7 @@ export const QUESTIONS = {
   },
   ai: {
     title: "Do you want AI features?",
-    hint: "For example a WhatsApp agent, or reading bills and POs automatically.",
+    hint: "For example a WhatsApp or Telegram agent, or reading bills and POs automatically.",
     options: [
       { id: "yes", label: "Yes" },
       { id: "no", label: "No" },
@@ -69,10 +69,10 @@ export const QUESTIONS = {
   },
   payment: {
     title: "How would you prefer to pay?",
-    hint: "Monthly licence means a lower setup fee, then a monthly fee (6-month minimum) while I host and maintain it. With Own the code you pay once and receive the code, with no minimum period.",
+    hint: "The monthly plan means a lower setup fee, then a monthly fee (6-month minimum) while I host and maintain it. With Buy outright you pay once and receive the full source code, with no minimum period.",
     options: [
-      { id: "licence", label: "Monthly licence" },
-      { id: "buyout", label: "Own the code" },
+      { id: "licence", label: "Monthly plan" },
+      { id: "buyout", label: "Buy outright" },
     ] as Option<"licence" | "buyout">[],
   },
   start: {
@@ -141,14 +141,14 @@ export type Estimate = {
   problems: string[] // the visitor's own picks, in their words
   solutions: { title: string; includes: string[] }[]
   // All "from" prices, excluding GST
-  setup: number // one-time, paid in three milestones
+  setup: number // one-time, paid in two parts: at signing and at live testing
   licence: number | null // monthly, billed in advance; null when only a marketing site is chosen (it has none)
   siteCare: number | null // marketing site only: optional monthly hosting and care, no minimum
   buyout: number | null // one-time to own the code, on top of nothing else; null when only a marketing site is chosen (code handed over)
   retainer: number | null // optional monthly hosting and upkeep after a buyout; null when there is no buyout
   timeline: string
   ai: boolean
-  needsCall: boolean // more than 2,000 users: the range is a rough guide only
+  needsCall: boolean // more than 2,000 users: the starting prices are a rough guide only
   validUntil: Date
 }
 

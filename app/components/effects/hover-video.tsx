@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react"
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { Spinner } from "./media-spinner"
 
 // Subscribes to a media query; false on the server so the first render matches
@@ -17,8 +17,7 @@ function useMedia(query: string) {
 }
 
 // Touch screens: only one tile plays at a time, the one nearest the middle of the screen that is mostly in view.
-// Once scrolling has settled the previews take turns; the rest show their poster. A looping image can't be paused,
-// so a tile plays by mounting its image (restarting the loop) and stops by unmounting it.
+// Once scrolling has settled the previews take turns; the rest are paused and show their poster or first frame.
 const tiles = new Set<HTMLElement>()
 const listeners = new Set<() => void>()
 let playing: HTMLElement | null = null
@@ -68,32 +67,62 @@ function subscribe(notify: () => void) {
 // Project preview over the poster. Where there is a mouse, it is a muted video that plays only while its parent
 // (the tile or frame) is hovered or focused, and goes back to the poster on leave; preload="none", so the file
 // downloads on the first hover, not on page load, and a spinner shows while it loads or buffers. On touch screens
-// and phones there is no hover, so a short looping animated WebP (the same name as the video, .webp) plays by
-// itself instead, one tile at a time (see above). Nothing animates for reduced motion.
+// and phones there is no hover, so the same video loops by itself instead, one tile at a time (see above). Nothing animates for reduced motion.
 export default function HoverVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
   const reduce = useMedia("(prefers-reduced-motion: reduce)")
   const touch = useMedia("(hover: none), (max-width: 639px)")
   if (reduce) return null
-  return touch ? <LoopingPreview src={src.replace(/\.mp4$/i, ".webp")} className={className} /> : <VideoPreview src={src} poster={poster} className={className} />
+  return touch ? <LoopingPreview src={src} poster={poster} className={className} /> : <VideoPreview src={src} poster={poster} className={className} />
 }
 
-function LoopingPreview({ src, className }: { src: string; className?: string }) {
+// Loops with a soft dip instead of a hard cut: the last moment dims the video, and it restarts already dimmed and
+// brightens again, so the loop feels continuous. The transition is inline because the tile's own transition-transform
+// class would override a transition-filter class. Needs the video without the `loop` attribute.
+const FADE_MS = 400
+const DIM = 0.35
+function useFadeLoop(ref: React.RefObject<HTMLVideoElement | null>) {
+  const [dim, setDim] = useState(false)
+  const reset = useCallback(() => setDim(false), [])
+  const onTimeUpdate = () => {
+    const video = ref.current
+    if (video && video.duration && video.duration - video.currentTime < FADE_MS / 1000) setDim(true)
+  }
+  const onEnded = () => {
+    const video = ref.current
+    if (!video) return
+    video.currentTime = 0
+    video.play().catch(() => {})
+    setDim(false)
+  }
+  return { onEnded, onTimeUpdate, reset, fadeStyle: { filter: `brightness(${dim ? DIM : 1})`, transition: `filter ${FADE_MS}ms ease, transform 500ms` } }
+}
+
+function LoopingPreview({ src, poster, className }: { src: string; poster?: string; className?: string }) {
   const marker = useRef<HTMLSpanElement>(null) // hidden; its parent is the tile that is measured
-  const [failed, setFailed] = useState(false)
+  const ref = useRef<HTMLVideoElement>(null)
   const active = useSyncExternalStore(subscribe, () => playing !== null && playing === marker.current?.parentElement, () => false)
+  const { onEnded, onTimeUpdate, reset, fadeStyle } = useFadeLoop(ref)
 
   useEffect(() => {
     const tile = marker.current?.parentElement
     return tile ? register(tile) : undefined
   }, [])
 
+  useEffect(() => {
+    const video = ref.current
+    if (!video) return
+    if (active) video.play().catch(() => {})
+    else {
+      reset()
+      video.pause()
+      video.currentTime = 0
+    }
+  }, [active, reset])
+
   return (
     <>
       <span ref={marker} className="hidden" aria-hidden="true" />
-      {active && !failed && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt="" aria-hidden="true" decoding="async" className={className} onError={() => setFailed(true)} />
-      )}
+      <video ref={ref} src={src} poster={poster} muted playsInline preload="none" aria-hidden="true" className={className} style={fadeStyle} onEnded={onEnded} onTimeUpdate={onTimeUpdate} />
     </>
   )
 }
@@ -101,6 +130,7 @@ function LoopingPreview({ src, className }: { src: string; className?: string })
 function VideoPreview({ src, poster, className }: { src: string; poster?: string; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null)
   const [loading, setLoading] = useState(false)
+  const { onEnded, onTimeUpdate, reset, fadeStyle } = useFadeLoop(ref)
 
   useEffect(() => {
     const video = ref.current
@@ -111,7 +141,11 @@ function VideoPreview({ src, poster, className }: { src: string; poster?: string
       video.play().catch(() => setLoading(false))
     }
     const stop = () => {
-      video.load() // pauses and shows the poster again
+      // Pause and rewind, keeping the buffered data so the next hover starts at once (video.load() would throw it
+      // away and download again); the poster only shows while the video has not started
+      reset()
+      video.pause()
+      video.currentTime = 0
       setLoading(false)
     }
     parent.addEventListener("mouseenter", play)
@@ -124,7 +158,7 @@ function VideoPreview({ src, poster, className }: { src: string; poster?: string
       parent.removeEventListener("focusin", play)
       parent.removeEventListener("focusout", stop)
     }
-  }, [])
+  }, [reset])
 
   return (
     <>
@@ -133,11 +167,13 @@ function VideoPreview({ src, poster, className }: { src: string; poster?: string
         src={src}
         poster={poster}
         muted
-        loop
         playsInline
         preload="none"
         aria-hidden="true"
         className={className}
+        style={fadeStyle}
+        onEnded={onEnded}
+        onTimeUpdate={onTimeUpdate}
         onWaiting={() => setLoading(true)}
         onPlaying={() => setLoading(false)}
       />

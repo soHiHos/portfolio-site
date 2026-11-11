@@ -1,7 +1,23 @@
 [
   {
+    "id": "local-legends",
+    "kind": "client",
+    "caseStudyNote": "Case study coming soon.",
+    "category": "work",
+    "phase": "deployed",
+    "title": "Local Legends",
+    "tagline": "Community platform for grassroots football.",
+    "summary": "A football platform that connects local players, teams and organizers through match discovery, event management and social engagement. It simplifies coordination and makes local football easier to join.",
+    "shortSummary": "A community platform connecting local football players, teams and organizers through match discovery, event management and social engagement.",
+    "image": "/images/local-legends.png",
+    "video": "/videos/local-legends.mp4",
+    "link": "https://locallegends.co.in/home",
+    "stack": []
+  },
+  {
     "id": "rever-home",
     "kind": "client",
+    "caseStudyNote": "Case study coming soon.",
     "category": "work",
     "phase": "deployed",
     "title": "Rever Life ERP",
@@ -33,32 +49,32 @@
     ]
   },
   {
-    "id": "local-legends",
+    "id": "frontwave",
     "kind": "client",
     "category": "work",
     "phase": "deployed",
-    "title": "Local Legends",
-    "tagline": "Community platform for grassroots football.",
-    "summary": "A football platform that connects local players, teams and organizers through match discovery, event management and social engagement. It simplifies coordination and makes local football easier to join.",
-    "shortSummary": "A community platform connecting local football players, teams and organizers through match discovery, event management and social engagement.",
-    "image": "/images/local-legends.png",
-    "video": "/videos/local-legends.mp4",
-    "link": "https://locallegends.co.in/home",
-    "stack": []
-  },
-  {
-    "id": "co-daftar",
-    "kind": "client",
-    "category": "work",
-    "phase": "deployed",
-    "title": "Co-Daftar",
-    "tagline": "Premium coworking space in Raipur.",
-    "summary": "Co-Daftar is a premium coworking space in Raipur for entrepreneurs, freelancers, startups and professionals. It has modern workspaces, meeting rooms, high-speed internet and a member community.",
-    "shortSummary": "A premium coworking space in Raipur with modern workspaces, meeting rooms, high-speed internet and a community for entrepreneurs and teams.",
-    "image": "/images/co-daftar_tumbnail.png",
-    "video": "/videos/co-daftar.mp4",
-    "link": "https://codaftar.com/",
-    "stack": []
+    "title": "FrontWave",
+    "image": "/images/frontwave_thumbnail.webp",
+    "video": "/videos/frontwave.mp4",
+    "link": "https://frontwaveresearch.com/",
+    "tagline": "Research publishing platform for an equity researcher.",
+    "summary": "A website and subscriber platform for FrontWave, a SEBI-registered equity research firm in Mumbai. Visitors read the firm's public pages and the research it publishes openly. Members sign in to the Terminal to read full reports and momentum calls, and pay for a plan online. The research team drafts, reviews and publishes everything from their own portal, with no developer involved.",
+    "agency": "futurise",
+    "highlights": [
+      "Three parts: the public site, the Terminal for members, and a team portal for staff.",
+      "Research is written, reviewed and published in the team portal, with analyst and admin roles and an approval step before anything goes live.",
+      "Members-only research is gated on the server, not just hidden in the page.",
+      "Members sign in with an emailed link or Google, and pay for plans online with GST invoices generated for them.",
+      "Every sensitive action is recorded in an audit log."
+    ],
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Razorpay",
+      "Vercel"
+    ]
   },
   {
     "id": "as-metals",
@@ -91,32 +107,18 @@
     ]
   },
   {
-    "id": "frontwave",
+    "id": "co-daftar",
     "kind": "client",
     "category": "work",
     "phase": "deployed",
-    "title": "FrontWave",
-    "image": "/images/frontwave_thumbnail.webp",
-    "video": "/videos/frontwave.mp4",
-    "link": "https://frontwaveresearch.com/",
-    "tagline": "Research publishing platform for an equity researcher.",
-    "summary": "A website and subscriber platform for FrontWave, a SEBI-registered equity research firm in Mumbai. Visitors read the firm's public pages and the research it publishes openly. Members sign in to the Terminal to read full reports and momentum calls, and pay for a plan online. The research team drafts, reviews and publishes everything from their own portal, with no developer involved.",
-    "agency": "futurise",
-    "highlights": [
-      "Three parts: the public site, the Terminal for members, and a team portal for staff.",
-      "Research is written, reviewed and published in the team portal, with analyst and admin roles and an approval step before anything goes live.",
-      "Members-only research is gated on the server, not just hidden in the page.",
-      "Members sign in with an emailed link or Google, and pay for plans online with GST invoices generated for them.",
-      "Every sensitive action is recorded in an audit log."
-    ],
-    "stack": [
-      "Next.js",
-      "TypeScript",
-      "Supabase",
-      "PostgreSQL",
-      "Razorpay",
-      "Vercel"
-    ]
+    "title": "Co-Daftar",
+    "tagline": "Premium coworking space in Raipur.",
+    "summary": "Co-Daftar is a premium coworking space in Raipur for entrepreneurs, freelancers, startups and professionals. It has modern workspaces, meeting rooms, high-speed internet and a member community.",
+    "shortSummary": "A premium coworking space in Raipur with modern workspaces, meeting rooms, high-speed internet and a community for entrepreneurs and teams.",
+    "image": "/images/co-daftar_tumbnail.png",
+    "video": "/videos/co-daftar.mp4",
+    "link": "https://codaftar.com/",
+    "stack": []
   },
   {
     "id": "plinth",

@@ -169,6 +169,16 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[id]"
         </Reveal>
       )}
 
+      {/* No chapters yet: a short note on why, when one is set */}
+      {chapters.length === 0 && project.caseStudyNote && (
+        <Reveal className="space-y-4">
+          <div className="text-xs font-semibold tracking-[0.25em] text-muted">CASE STUDY</div>
+          <div className="border border-line bg-surface p-5 sm:p-6">
+            <p className="text-base leading-relaxed text-muted">{project.caseStudyNote}</p>
+          </div>
+        </Reveal>
+      )}
+
       {/* Results + testimonial: each shows only once real ones are added in projects.json */}
       {(project.metrics?.length || project.testimonial) && (
         <Reveal className="space-y-4">

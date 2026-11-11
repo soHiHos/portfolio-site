@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { NextResponse } from 'next/server';
 import { CONTACT_EMAIL, CV_PATH } from '../../content/contact';
+import { emailConfig, sendEmail as sendMail, type Attachment } from './email';
 import { estimatePdfBuffer } from './estimate-pdf-server';
 import { SERVICE_LIST, TIMELINES } from '../../content/service-list';
 import { ESTIMATOR_ON, QUESTIONS, estimate, inr, validAnswers, type Contact } from '../../components/estimator/estimate';
@@ -13,9 +14,7 @@ import { ESTIMATOR_ON, QUESTIONS, estimate, inr, validAnswers, type Contact } fr
 const SUPABASE_URL = process.env.SUPABASE_URL;
 // The secret key (sb_secret_...); the older service_role JWT still works under its old name
 const SUPABASE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const NOTIFY_TO = process.env.LEAD_NOTIFY_EMAIL || CONTACT_EMAIL;
-const NOTIFY_FROM = process.env.LEAD_EMAIL_FROM || 'Portfolio leads <onboarding@resend.dev>';
 
 // Best-effort per-IP rate limit (in-memory, per serverless instance), as in /api/ask
 const RATE_LIMIT = 5;
@@ -62,25 +61,9 @@ async function saveToSupabase(table: 'leads' | 'briefs', row: Record<string, unk
   return res.ok;
 }
 
-type Attachment = { filename: string; content: Buffer };
-
-async function sendEmail(to: string, subject: string, body: string, replyTo: string, attachments: Attachment[] = []) {
-  if (!RESEND_API_KEY) return false;
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: NOTIFY_FROM,
-      to: [to],
-      reply_to: replyTo,
-      subject,
-      text: body,
-      ...(attachments.length ? { attachments: attachments.map((a) => ({ filename: a.filename, content: a.content.toString('base64') })) } : {}),
-    }),
-  });
-  if (!res.ok) console.error(`lead: resend email to ${to === NOTIFY_TO ? 'owner' : 'visitor'} failed`, res.status, await res.text());
-  return res.ok;
-}
+const emailCfg = emailConfig();
+const sendEmail = (to: string, subject: string, body: string, replyTo: string, attachments: Attachment[] = []) =>
+  sendMail(emailCfg, to, subject, body, replyTo, attachments);
 
 const emailSoham = (subject: string, body: string, replyTo: string, attachments?: Attachment[]) => sendEmail(NOTIFY_TO, subject, body, replyTo, attachments);
 
@@ -215,8 +198,8 @@ export async function POST(req: Request) {
     `Start: ${label('start', answers.start)}`,
   ];
   const estimateLines = [
-    `Setup from ${inr(e.setup)}${e.licence ? `, licence from ${inr(e.licence)} a month` : ''}${e.siteCare ? `, optional site care from ${inr(e.siteCare)} a month` : ''} (excl. GST)`,
-    `Buyout: ${e.buyout ? `from ${inr(e.buyout)}${e.retainer ? `, optional retainer from ${inr(e.retainer)} a month` : ''}` : 'code handed over with setup'} (excl. GST)`,
+    `Setup from ${inr(e.setup)}${e.licence ? `, monthly plan from ${inr(e.licence)} a month` : ''}${e.siteCare ? `, optional site care from ${inr(e.siteCare)} a month` : ''} (excl. GST)`,
+    `Buy outright: ${e.buyout ? `from about ${inr(e.buyout)}${e.retainer ? `, maintenance plan after buying from ${inr(e.retainer)} a month` : ''}` : 'code handed over with setup'} (excl. GST)`,
     `Timeline: ${e.timeline}`,
   ];
 

@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Check, Mail, Plane, PlaneTakeoff, ShieldCheck, Ticket } from 'lucide-react';
-import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, FacebookIcon, GithubIcon, InstagramIcon, LinkedinIcon, copyToClipboard } from '../ui/menu/contact-menu';
+import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, FacebookIcon, GithubIcon, InstagramIcon, LinkedinIcon, BRAND_HOVER, copyToClipboard } from '../ui/menu/contact-menu';
 
 const year = new Date().getFullYear();
 
@@ -17,14 +17,14 @@ const FIELDS = [
   { label: 'BOARDING', value: 'NOW', accent: true },
 ];
 
-// Social links as square icon buttons (same look as the contact section): fill with the accent on hover
+// Social links as square icon buttons (same look as the contact section): fill with each brand's colours on hover
 const SOCIALS = [
   { label: 'LinkedIn', href: CONTACT_LINKEDIN, icon: LinkedinIcon },
   { label: 'GitHub', href: CONTACT_GITHUB, icon: GithubIcon },
   { label: 'Instagram', href: CONTACT_INSTAGRAM, icon: InstagramIcon },
   ...(CONTACT_FACEBOOK ? [{ label: 'Facebook', href: CONTACT_FACEBOOK, icon: FacebookIcon }] : []),
 ];
-const iconClasses = 'group relative flex w-10 h-10 items-center justify-center border border-line text-fg transition-all duration-300 hover:border-accent hover:bg-accent hover:text-on-accent motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink cursor-pointer';
+const iconClasses = 'group relative flex w-10 h-10 items-center justify-center border border-line text-fg transition-all duration-300 motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink cursor-pointer';
 const tipClasses = 'pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap bg-fg px-2 py-1 text-xs font-medium text-bg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100';
 
 const linkClasses = 'inline-flex items-center gap-1.5 max-sm:py-2 text-sm text-muted hover:text-accent-ink transition-colors cursor-pointer';
@@ -146,7 +146,7 @@ export default function Footer() {
             </button>
             <div className="flex flex-wrap gap-3">
               {SOCIALS.map(({ label, href, icon: Icon }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={iconClasses}>
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`${iconClasses} ${BRAND_HOVER[label]}`}>
                   <Icon className="w-5 h-5" />
                   <span className={tipClasses} aria-hidden="true">{label}</span>
                 </a>

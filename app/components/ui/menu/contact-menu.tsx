@@ -21,6 +21,16 @@ export async function copyToClipboard(text: string) {
     }
 }
 
+// Hover look for the square social icon buttons (footer and contact section): each takes its brand's
+// colours, the way the real logo looks. Facebook's outline "f" also fills in white.
+export const BRAND_HOVER: Record<string, string> = {
+    WhatsApp: "hover:border-[#25D366] hover:bg-[#25D366] hover:text-white",
+    LinkedIn: "hover:border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white",
+    GitHub: "hover:border-[#181717] hover:bg-[#181717] hover:text-white",
+    Instagram: "hover:border-transparent hover:bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)] hover:text-white",
+    Facebook: "hover:border-[#1877F2] hover:bg-[#1877F2] hover:text-white hover:[&_svg]:fill-current",
+};
+
 // lucide-react 1.x dropped brand icons, so LinkedIn is a small inline SVG
 export function LinkedinIcon({ className }: { className?: string }) {
     return (

@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Step = { step: string; detail: string };
 
-// "How we'll work" one step at a time: numbered tabs along the top, the current step below, and Back / Next.
+// "How I work" one step at a time: numbered tabs along the top, the current step below, and Back / Next.
 export default function ProcessSteps({ steps }: { steps: Step[] }) {
   const [[index, direction], setPage] = useState<[number, number]>([0, 1]);
   const reduceMotion = useReducedMotion();
@@ -50,8 +50,16 @@ export default function ProcessSteps({ steps }: { steps: Step[] }) {
         ))}
       </div>
 
-      {/* The current step. A fixed minimum height stops the buttons below jumping between steps of different lengths. */}
-      <div className="min-h-40 overflow-hidden" aria-live="polite">
+      {/* The current step. Every step is also laid out invisibly in the same grid cell, so the box is always as tall as
+          the longest one and the buttons below never jump between steps of different lengths. */}
+      <div className="grid overflow-hidden" aria-live="polite">
+        {steps.map((s, i) => (
+          <div key={s.step} className="invisible col-start-1 row-start-1 space-y-2" aria-hidden="true">
+            <p className="text-sm font-semibold tabular-nums">Step {i + 1} of {steps.length}</p>
+            <p className="text-2xl font-bold">{s.step}</p>
+            <p className="text-base leading-relaxed">{s.detail}</p>
+          </div>
+        ))}
         <AnimatePresence mode="wait" initial={false} custom={direction}>
           <motion.div
             key={index}
@@ -65,7 +73,7 @@ export default function ProcessSteps({ steps }: { steps: Step[] }) {
             animate="center"
             exit="exit"
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="space-y-3"
+            className="col-start-1 row-start-1 space-y-2"
           >
             <p className="text-sm font-semibold tabular-nums text-accent-ink">
               Step {index + 1} of {steps.length}

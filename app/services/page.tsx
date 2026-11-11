@@ -5,18 +5,21 @@ import SectionHeading from "../components/section-heading";
 import AvailabilityBadge from "../components/availability-badge";
 import Reveal from "../components/effects/reveal";
 import { ESTIMATOR_ON } from "../components/estimator/estimate";
-import { RETAINER_NOTE } from "../components/services/category-price";
 import PricePlans from "../components/services/price-plans";
+import { PRICE_NOTE, fillFaq } from "../components/services/category-price";
 import services from "../content/services.json";
 import Estimator from "../components/estimator/estimator";
 import ProblemTiles from "../components/services/problem-tiles";
 import ProcessSteps from "../components/services/process-steps";
 import SideNav from "../components/side-nav";
 import ContactSection from "../sections/contact-section";
+import { HOVER_CARD, TopLine } from "../components/effects/hover-card";
+import { pillarCategories, servicePath } from "../content/service-list";
 
 export const metadata: Metadata = {
-  title: "Services · Soham Kar",
-  description: `Software and AI automations that remove manual work and give growing businesses clear numbers.${ESTIMATOR_ON ? " Get a price estimate in two minutes." : ""}`,
+  title: "Services: digitalisation, automation and analysis · Soham Kar",
+  alternates: { canonical: "/services" },
+  description: `Digitalisation, automation and analysis for growing businesses in India. ${services.hero.title}.${ESTIMATOR_ON ? " Get a price estimate in two minutes." : ""}`,
 };
 
 // Proof shows only what's finished: the case study once it's cleared (no "placeholder"), and any demo videos
@@ -24,65 +27,86 @@ const CASE_STUDY = services.proof.caseStudy.placeholder ? null : services.proof.
 const DEMOS = services.proof.demos as { title: string; href: string }[];
 
 const NAV = [
-  ...(ESTIMATOR_ON ? [{ id: "prices", label: "Prices" }] : []),
+  { id: "prices", label: ESTIMATOR_ON ? "Prices" : "Services" },
   { id: "problems", label: "Problems" },
+  { id: "process", label: "How I work" },
   ...(ESTIMATOR_ON ? [{ id: "estimate", label: "Estimate" }] : []),
   ...(CASE_STUDY || DEMOS.length > 0 ? [{ id: "proof", label: "Work in action" }] : []),
-  { id: "process", label: "How we'll work" },
   { id: "faq", label: "Questions" },
   { id: "talk", label: "Let's talk" },
 ];
 
-// The page's one front door is the form; the free call follows my reply. With the estimator on, it sits alongside.
-function Actions() {
-  return (
-    <div className="flex flex-wrap items-center gap-4">
-      <Link href="#talk" className="btn btn-primary">
-        Fill out the form <ArrowRight className="w-4 h-4" />
-      </Link>
-      {ESTIMATOR_ON && (
-        <Link href="#estimate" className="btn-link text-sm text-fg">
-          Get your price estimate in 2 minutes <ArrowRight className="w-4 h-4" />
-        </Link>
-      )}
-    </div>
-  );
-}
-
-// Services page: one line on what I do, the prices in plain view, the problems I solve with the estimator right
-// under them for an exact range, then proof, how we'll work, the FAQ and booking. The proposal comes after a call.
+// Services page: the page heading and one line on what I do, the service cards (with prices in plain view once
+// pricing is reviewed), the problems I solve, how I work, the estimator, proof, the FAQ and booking. The proposal
+// comes after a call.
 export default function ServicesPage() {
   return (
     <section id="services-page">
       <SideNav sections={NAV} />
       <div className="w-full text-left space-y-14 py-12">
-        {/* Hero */}
-        <div className="space-y-5">
-          <SectionHeading title={services.hero.title} />
-          <Reveal className="space-y-5">
-            <Actions />
+        {/* The service cards always show, so visitors can see what I offer; the prices, the pricing intro and the
+            notes under the cards only once pricing is reviewed (ESTIMATOR_ON) */}
+        <Reveal id="prices" className="space-y-5">
+          {/* The heading on the left, availability on the right (below it on narrow screens) */}
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="space-y-3">
+              {/* The three pillars, the same kicker line as the home hero */}
+              <p className="text-sm font-medium text-muted">Apps · Websites · Digitalisation · Automation · Analysis</p>
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-fg">{ESTIMATOR_ON ? "Services and prices" : "Services"}</h1>
+            </div>
             <AvailabilityBadge />
-          </Reveal>
-        </div>
-
-        {/* Prices in plain view: a range for every service, so nobody has to use the estimator to see them */}
-        {ESTIMATOR_ON && (
-          <Reveal id="prices" className="space-y-5">
-            <h2 className="text-3xl sm:text-4xl font-bold text-fg">Services and prices</h2>
-            <PricePlans categories={services.categories} />
-            <p className="text-sm text-muted">{RETAINER_NOTE}</p>
-            <Link href="#estimate" className="btn-link text-sm text-fg">
-              Want a figure for your business? Use the estimator <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Reveal>
-        )}
+          </div>
+          {ESTIMATOR_ON && (
+            <div className="glass space-y-2 px-4 py-3">
+              <p className="text-lg font-semibold text-fg">{services.pricingIntro.title}</p>
+              <p className="text-sm leading-relaxed text-muted">{services.pricingIntro.body}</p>
+            </div>
+          )}
+          {/* A short guide from the three pillars on the home page to the service cards below: each pillar's
+              main service first, then the others that deliver it */}
+          <div className="border border-line bg-surface">
+            <p className="border-b border-line px-5 py-3 text-sm font-semibold text-fg sm:px-6">Not sure which service? Start from what you want to do</p>
+            <div className="grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
+              {services.pillars.map((pillar) => (
+                <div key={pillar.id} className="space-y-2 p-5 sm:p-6">
+                  <p className="flex items-center gap-2 text-base font-bold text-fg">
+                    <span className="h-2 w-2 bg-accent" aria-hidden="true" />
+                    {pillar.title}
+                  </p>
+                  <ul className="space-y-1">
+                    {pillarCategories(pillar).map((c) => (
+                      <li key={c.id}>
+                        <Link href={servicePath(c.id)} className="btn-link text-sm text-fg">
+                          {c.title} <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+          <PricePlans categories={services.categories} showPrices={ESTIMATOR_ON} />
+          {ESTIMATOR_ON && (
+            <>
+              <p className="glass px-4 py-3 text-sm text-muted">
+                {PRICE_NOTE}{" "}
+                <Link href="/terms" className="font-semibold text-accent-ink underline underline-offset-2 hover:no-underline">Read the full terms.</Link>
+              </p>
+              <Link href="#estimate" className="btn-link text-sm text-fg">
+                Want a detailed breakdown for your business, emailed to you? Use the estimator <ArrowRight className="w-4 h-4" />
+              </Link>
+            </>
+          )}
+        </Reveal>
 
         {/* Sound familiar? */}
         <Reveal id="problems" className="space-y-5">
           <h2 className="text-3xl sm:text-4xl font-bold text-fg">Six problems I solve</h2>
           <ProblemTiles items={services.problems.items} selectable={ESTIMATOR_ON} />
-          <div id="before-you-reach-out" className="scroll-mt-28 border border-line bg-surface p-5 sm:p-6 space-y-4">
-            <h3 className="text-lg font-semibold text-fg">{services.cta.requirement.title}</h3>
+          <div id="before-you-reach-out" className={`${HOVER_CARD} scroll-mt-28 space-y-4 p-5 sm:p-6`}>
+            <TopLine />
+            <h3 className="text-lg font-semibold text-fg transition-colors duration-300 group-hover:text-accent-ink">{services.cta.requirement.title}</h3>
             <p className="text-sm leading-relaxed text-muted">{services.cta.requirement.body}</p>
             <p className="text-sm leading-relaxed text-muted">
               <span className="font-semibold text-fg">{services.cta.title}</span> {services.cta.summary}
@@ -93,7 +117,15 @@ export default function ServicesPage() {
           </div>
         </Reveal>
 
-        {/* The price estimator, right under the problems it prices */}
+        {/* Process */}
+        <Reveal id="process" className={`${HOVER_CARD} space-y-5 p-5 sm:p-6`}>
+          <TopLine />
+          <h2 className="text-3xl sm:text-4xl font-bold text-fg">How I work</h2>
+          <ProcessSteps steps={services.process.map((s) => ({ step: fillFaq(s.step), detail: fillFaq(s.detail) }))} />
+          <p className="border-t border-line pt-4 text-sm text-muted">{services.nda}</p>
+        </Reveal>
+
+        {/* The price estimator, after how we work */}
         {ESTIMATOR_ON && (
           <div id="estimate" className="scroll-mt-28 space-y-5">
             <SectionHeading title="Get a price estimate" />
@@ -141,13 +173,6 @@ export default function ServicesPage() {
           </Reveal>
         )}
 
-        {/* Process */}
-        <Reveal id="process" className="border border-line bg-white dark:bg-surface p-5 sm:p-8 space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-fg">How we&apos;ll work</h2>
-          <ProcessSteps steps={services.process} />
-          <p className="border-t border-line pt-4 text-sm text-muted">{services.nda}</p>
-        </Reveal>
-
         {/* FAQ */}
         <Reveal id="faq" className="space-y-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-fg">Common questions</h2>
@@ -158,14 +183,14 @@ export default function ServicesPage() {
                   {item.q}
                   <ChevronDown className="w-4 h-4 shrink-0 text-muted transition-transform group-open:rotate-180" aria-hidden="true" />
                 </summary>
-                <p className="pt-2 text-sm leading-relaxed text-muted">{item.a}</p>
+                <p className="pt-2 text-sm leading-relaxed text-muted">{fillFaq(item.a)}</p>
               </details>
             ))}
           </div>
         </Reveal>
 
         {/* Let's talk: the project brief form */}
-        <ContactSection id="talk" />
+        <ContactSection id="talk" flush />
       </div>
     </section>
   );

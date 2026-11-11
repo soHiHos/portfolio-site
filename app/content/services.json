@@ -4,8 +4,8 @@
     "label": "Accepting projects"
   },
   "hero": {
-    "title": "Software and AI automations that remove manual work and give growing businesses clear numbers",
-    "promise": "I build software and AI automations that remove manual work and give growing businesses clear numbers."
+    "title": "Apps, websites and software that take your business off paper, automate the routine work and show you clear numbers",
+    "promise": "I build apps, websites and software that take your business off paper, automate the routine work and show you clear numbers."
   },
   "problems": {
     "intro": "Most growing businesses I meet have the same six problems.",
@@ -42,6 +42,54 @@
       }
     ]
   },
+  "pillars": [
+    {
+      "id": "digitise",
+      "title": "Digitise",
+      "summary": "Registers, paper slips and WhatsApp orders move into one system your team can use from any phone.",
+      "problem": "whatsapp",
+      "category": "custom-software",
+      "services": ["paper-to-digital", "daily-entry", "procurement-apps", "distribution-os"]
+    },
+    {
+      "id": "automate",
+      "title": "Automate",
+      "summary": "Invoices, follow-ups and payment reminders go out on their own. You approve, and the system does the rest.",
+      "problem": "retyping",
+      "category": "ai-automations",
+      "services": ["order-to-cash", "follow-ups", "payment-apps"]
+    },
+    {
+      "id": "analyse",
+      "title": "Analyse",
+      "summary": "Sales, stock, dues and customers in one weekly report, with the few things that need your attention flagged.",
+      "problem": "numbers",
+      "category": "ai-automations",
+      "services": ["business-pulse", "market-tracking"]
+    }
+  ],
+  "pillarsAlso": {
+    "title": "Apps and websites",
+    "body": "Need just one of these? I build both on their own, and they're how the three steps above reach your team and your customers.",
+    "categories": ["mobile-apps", "websites"]
+  },
+  "planCovers": {
+    "included": [
+      "Hosting, backups and uptime monitoring.",
+      "Bug fixes: anything that doesn't work the way the signed scope says. Critical issues (the system is down or blocks work) get a reply within {{replyUrgentDays}} business day, everything else within {{replyOtherDays}} business days, Monday to Friday.",
+      "Security and dependency updates.",
+      "For the first {{adjustmentDays}} days after go-live: adjustments to what I built (not new features).",
+      "After that: small changes up to {{smallChangeHours}} hours a month. Unused hours don't roll over."
+    ],
+    "notIncluded": [
+      "New screens, reports, fields or modules.",
+      "Changing how something works when it already works as agreed.",
+      "New integrations (WhatsApp, payments, Tally and similar) and new third-party services.",
+      "Anything beyond the {{smallChangeHours}} hours in a month. Bigger changes are quoted before I start."
+    ],
+    "test": "If it doesn't work the way we agreed, I fix it free. If it works as agreed and you want it different, that's a change.",
+    "note": "Every third-party service the build uses is named in the signed scope before work starts, with what it's used for. A new one added later counts as a change and is quoted."
+  },
   "proof": {
     "caseStudy": {
       "placeholder": true,
@@ -62,120 +110,74 @@
   "categoriesIntro": "Every service is built around how your business already works, and works with the data you already have (Excel sheets, or exports from your billing and accounting software).",
   "categories": [
     {
-      "id": "ai-automations",
-      "title": "AI automations & analytics",
-      "summary": "Let software handle the invoices, reminders and data entry, and see what sold, who owes you and where your next growth will come from.",
-      "tags": [
-        "Automatic invoicing",
-        "Payment reminders",
-        "Document reading",
-        "MIS reports & dashboards",
-        "Price and tender tracking"
-      ],
-      "services": [
-        {
-          "id": "paper-to-digital",
-          "title": "Paper to digital",
-          "summary": "Send photos of registers, job cards, gate passes or stock books. I turn them into clean, searchable data."
-        },
-        {
-          "id": "daily-entry",
-          "title": "WhatsApp and mobile daily entry",
-          "summary": "Supervisors and staff log production, stock in and out, and dispatch from their phone with a simple form or a photo. It lands in your records for you to check and confirm."
-        },
-        {
-          "id": "business-pulse",
-          "title": "Business Pulse (automated MIS)",
-          "summary": "A weekly report on your phone and email, plus a simple dashboard: sales, stock, dispatch, dues and the few things that need your attention. Deeper analysis and forecasting when you need it."
-        },
-        {
-          "id": "decision-report",
-          "title": "Decision Report",
-          "summary": "Share three months of data and get a one-page report with three decisions you can act on this month."
-        },
-        {
-          "id": "order-to-cash",
-          "title": "Order-to-cash automation",
-          "summary": "Invoices drafted from dispatch slips or POs, e-invoice and e-way bill details prepared, sent to customers after your approval, and tracked until paid."
-        },
-        {
-          "id": "collections",
-          "title": "Collections autopilot",
-          "summary": "A clear list of who owes what, with automatic payment reminders by email and WhatsApp."
-        },
-        {
-          "id": "document-capture",
-          "title": "Document capture",
-          "summary": "AI reads bills, invoices and POs and turns them into clean data in your records."
-        },
-        {
-          "id": "market-tracking",
-          "title": "Market and price tracking",
-          "summary": "Automatic checks of competitor prices, marketplace listings, tenders or supplier rates (public web data only), delivered to you as a daily or weekly sheet or alert."
-        }
-      ]
-    },
-    {
-      "id": "custom-software",
-      "title": "Custom software, ERPs & CRMs",
-      "summary": "One system for your orders, stock, ledgers, customers and dealer network, or a tool built for the one job off-the-shelf software doesn't do well.",
-      "tags": [
-        "ERP",
-        "CRM",
-        "Dealer & distributor platforms",
-        "Internal portals",
-        "Calculators & quoting tools",
-        "Admin dashboards"
-      ],
-      "services": [
-        {
-          "id": "distribution-os",
-          "title": "Distribution OS",
-          "summary": "One platform for dealers, distributors or agents: price tiers, orders, ledgers, payments and an online shop."
-        },
-        {
-          "id": "custom-tools",
-          "title": "Custom tools",
-          "summary": "Something specific to your business? I build internal portals, calculators and quoting tools, and admin dashboards around how you already work."
-        }
-      ]
-    },
-    {
-      "id": "mobile-apps",
-      "title": "Mobile apps",
-      "summary": "One app for Android and iPhone, for your team, dealers or customers.",
-      "tags": [
-        "Field & floor apps",
-        "Dealer ordering",
-        "Customer apps"
-      ],
-      "services": [
-        {
-          "title": "Field and floor apps",
-          "summary": "For supervisors, sales reps and delivery staff to log orders, stock, dispatch and visits, even with weak internet."
-        },
-        {
-          "title": "Dealer and distributor apps",
-          "summary": "Ordering, price lists, ledgers and payment status in their pocket."
-        },
-        {
-          "title": "Customer apps",
-          "summary": "Ordering, bookings, tracking and support."
-        },
-        {
-          "title": "Companion apps",
-          "summary": "For the systems I build, so your team can use them on the go."
-        }
-      ],
-      "note": "Every app comes with an admin dashboard, secure login and publishing to the Play Store and App Store."
-    },
-    {
       "id": "websites",
-      "title": "Marketing & business sites",
-      "summary": "Sites that make a strong first impression and turn visitors into enquiries.",
+      "pillars": [],
+      "slug": "websites",
+      "page": {
+        "metaTitle": "Website design and development in Raipur, India",
+        "metaDescription": "Fast, mobile-friendly business websites and landing pages for businesses in Raipur and across India, with WhatsApp lead capture, SEO basics and hosting set up for you.",
+        "intro": "Your website is often the first thing a customer checks before they call. I build fast, clear sites that work well on a phone, explain what you do in plain words and send every enquiry straight to your WhatsApp or inbox. The site files are yours after final payment, and an optional care plan keeps it hosted and up to date.",
+        "forWho": [
+          "New businesses that need to look credible online",
+          "Shops, studios and service businesses that get most enquiries on WhatsApp",
+          "Growing companies whose current site is slow, outdated or hard to update",
+          "Brands that want a site that stands out"
+        ],
+        "problems": [],
+        "process": [
+          {
+            "step": "Fill out the form, then a free call or Google Meet",
+            "label": "Form and free call",
+            "blurb": "I reply within 48 hours by email or WhatsApp, and on a free call we go through what the site needs to do, your budget and when you'd like it live."
+          },
+          {
+            "step": "A written proposal in 2–3 days",
+            "label": "Proposal",
+            "blurb": "Within 2–3 days you get the package, price and timeline in writing, free and with no obligation, valid for {{validDays}} days. Approve it and pay 50% to start."
+          },
+          {
+            "step": "Build, with a live preview",
+            "label": "Build and review",
+            "blurb": "I start building straight away and share a live preview for you to review. Changes within the agreed package are included."
+          },
+          {
+            "step": "Final payment, then launch",
+            "label": "Launch",
+            "blurb": "Pay the remaining 50% before launch; then the site goes live and the files are yours, with the domain in your own account."
+          },
+          {
+            "step": "After launch, an optional care plan",
+            "label": "Optional care plan",
+            "blurb": "An optional care plan with no minimum covers small edits after launch; the higher plan adds analytics and traffic reports."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Will the website work well on phones?",
+            "a": "Yes. Every site is designed for phones first, since that's where most of your visitors are, then checked on tablets and desktops."
+          },
+          {
+            "q": "Can I update the content myself?",
+            "a": "On the Business and Signature packages, yes: you get a simple editor (a CMS) for text, images and pages. On Launch, small edits are covered by the optional care plan."
+          },
+          {
+            "q": "Will people find my site on Google?",
+            "a": "Every site gets the SEO basics: fast loading, clear page titles and descriptions, and a sitemap so Google can find every page. Business and Signature also get basic GEO (generative engine optimisation): structured data and clearly written pages, so AI answer tools such as ChatGPT and Google's AI Overviews can understand your business and mention it. Signature adds advanced SEO and speed tuning. Rankings and mentions depend on your market, so I don't promise positions."
+          },
+          {
+            "q": "Do I own the website?",
+            "a": "Yes. The site files are yours after final payment. For the domain, you can buy it yourself and give me access, and I'll guide you if you're not sure how, or I can buy it for you in your business's name at cost. Either way it ends up in your own account, so you always control it."
+          }
+        ]
+      },
+      "title": "Websites",
+      "summary": "A fast, clear website that explains what you do and brings in enquiries.",
       "tags": [
         "Business websites",
         "Landing pages",
+        "Marketing sites",
+        "Portfolios",
+        "Scroll-driven sites",
         "Lead capture to WhatsApp"
       ],
       "services": [
@@ -186,48 +188,604 @@
         },
         {
           "title": "Business",
-          "summary": "Up to about 10 pages with custom design, a CMS so you can edit content yourself, analytics, and lead capture into WhatsApp or your CRM.",
+          "summary": "Up to about 10 pages with custom design, a CMS so you can edit content yourself, analytics, lead capture into WhatsApp or your CRM, and basic GEO so AI answer tools can understand and mention your business.",
           "for": "Growing businesses that need a proper online presence"
         },
         {
           "title": "Signature",
-          "summary": "Fully custom, with scroll-driven motion and 3D where it fits, payments, booking, CRM integration, Hindi and English, advanced SEO and speed tuning.",
+          "summary": "Fully custom, with scroll-driven motion and 3D where it fits, payments, booking, CRM integration, Hindi and English, advanced SEO, basic GEO and speed tuning. Visitor tracking and a lead dashboard are built in, so every enquiry is logged and you can see which ones have been followed up.",
           "for": "Brands that want to stand out"
         }
       ],
-      "note": "Website care: hosting, updates, backups and a monthly report on visits and leads."
+      "note": "Website care: hosting, updates, backups and a monthly report on visits and leads.",
+      "addon": {
+        "label": "Add-on",
+        "title": "AI assistant for your site",
+        "body": "A chat assistant that answers visitors' questions from your site's own content, such as services, prices, hours and FAQs, at any hour, so the repeated questions you get on WhatsApp are answered without you. Quoted separately; AI usage is billed at cost.",
+        "options": [
+          {
+            "name": "Simple",
+            "text": "Answers visitors' questions on your site, from your site's content."
+          },
+          {
+            "name": "Connected",
+            "text": "Everything in Simple, plus it sends enquiries to your WhatsApp, or to the lead dashboard on Signature, and notifies you of what visitors are asking, so you can see which questions your site doesn't answer yet."
+          }
+        ],
+        "disclaimer": "AI can make mistakes. The assistant answers from your site's content, but it can occasionally give wrong or made-up answers, so it shows visitors a short notice saying so. I'm not responsible for its answers or for decisions based on them."
+      }
+    },
+    {
+      "id": "ai-automations",
+      "pillars": ["automate", "analyse"],
+      "slug": "automation-and-analysis",
+      "page": {
+        "metaTitle": "Business automation and MIS reporting for Indian businesses",
+        "metaDescription": "Invoice automation, payment reminders, WhatsApp data entry, document capture and automated MIS reports for growing businesses in India. Works with your Excel sheets and billing software exports.",
+        "intro": "Most growing businesses lose hours every week retyping data, chasing payments and building reports by hand. I set up automations that do that routine work for you: invoices drafted from dispatch slips, reminders sent on time, bills read into clean data, and a weekly report on your phone that shows sales, stock and dues. Everything works with the data and tools you already use, and invoices go to customers only after your approval.",
+        "forWho": [
+          "Manufacturers, distributors, warehouses and retailers who still retype dispatch slips, POs and bills",
+          "Businesses that run orders and daily updates on WhatsApp",
+          "Owners who only see their real numbers at month end",
+          "Teams that spend too much time chasing payments"
+        ],
+        "problems": [
+          "retyping",
+          "numbers",
+          "whatsapp",
+          "payments"
+        ],
+        "faq": [
+          {
+            "q": "Does this work with Tally or our billing software?",
+            "a": "Usually, yes. I work with the exports your billing and accounting software already produces, such as Excel or CSV files, so you keep using what you have."
+          },
+          {
+            "q": "Will WhatsApp messages come from our own number?",
+            "a": "Yes. I set up a dedicated WhatsApp Business number in your company's name, and reminders and updates go out from it. WhatsApp's message fees are billed at cost."
+          },
+          {
+            "q": "What is Business Pulse?",
+            "a": "An automated MIS: a weekly report on your phone and email, plus a simple dashboard of sales, stock, dispatch and dues, with the few things that need your attention flagged and the customers who have gone quiet. If you'd rather start small, share three months of data for a one-off, one-page report with three decisions to act on."
+          },
+          {
+            "q": "Do you use AI, and is our data safe?",
+            "a": "AI is used where it helps, such as reading bills and invoices, and its usage is billed at cost as a separate line. Access is limited by role and your data is backed up weekly."
+          }
+        ],
+        "examples": [
+          {
+            "title": "A manufacturer retyping dispatch slips into invoices",
+            "situation": "Dispatch slips and POs are typed into the billing system by hand, then typed again into the books. Invoices go out late, and e-invoice and e-way bill details are filled in manually.",
+            "build": [
+              "Invoicing and collections: invoices drafted from dispatch slips or POs, e-invoice and e-way bill details prepared, sent to customers after your approval and tracked until paid",
+              "Paper and documents to data: bills, invoices and POs read into clean data in your records"
+            ],
+            "size": "from",
+            "sizeNote": "One workflow connecting one billing system: the smallest size."
+          },
+          {
+            "title": "A distributor chasing late payments",
+            "situation": "Nobody is sure who owes what. Reminders depend on someone remembering, and the owner hears about overdue money from phone calls.",
+            "build": [
+              "Invoicing and collections: a clear list of who owes what, automatic payment reminders by email and WhatsApp, and every payment tracked until it comes in",
+              "Business Pulse: a weekly report on your phone and email, plus a simple dashboard of sales, stock, dispatch and dues"
+            ],
+            "size": "mid",
+            "sizeNote": "Two workflows and a reporting dashboard: a mid-sized project."
+          },
+          {
+            "title": "A factory logging production on paper and in chats",
+            "situation": "Supervisors write production and dispatch in registers or send it on WhatsApp. It's forgotten by evening, and the numbers arrive weeks later.",
+            "build": [
+              "Paper and documents to data: photos of registers, job cards and stock books become clean, searchable data",
+              "Mobile daily entry: staff log production, stock in and out, and dispatch from their phone, and it lands in your records to check and confirm",
+              "Business Pulse: a weekly report and dashboard, with the few things that need attention flagged"
+            ],
+            "size": "top",
+            "sizeNote": "Several workflows, daily entry from many people and a dashboard: the upper end of the typical range."
+          }
+        ],
+        "needFromYou": [
+          "Exports from your current tools. Excel or CSV files are enough; up to {{dataFiles}} source files are covered by setup, and more are quoted.",
+          "One person on your side who owns it day to day. Automation only works when your team uses it.",
+          "A dedicated WhatsApp Business number for your company, or Telegram or a simple portal if you prefer.",
+          "Your approval at each stage: the system drafts, you check and confirm."
+        ],
+        "thirdParty": [
+          {
+            "name": "AI usage",
+            "text": "Models that read bills, invoices and POs, or answer messages, are billed at cost as a separate line on your monthly bill. There's no free allowance, and every AI service is named in the scope before work starts."
+          },
+          {
+            "name": "WhatsApp Business API",
+            "text": "Messaging fees are billed at cost as separate lines. Most Indian businesses already work on WhatsApp, so it's the usual choice; Telegram or a simple portal work too."
+          },
+          {
+            "name": "Email and SMS",
+            "text": "If reminders go out by email or SMS, the sending service is billed at cost and named in the scope."
+          }
+        ]
+      },
+      "title": "Automation & Analysis",
+      "summary": "Invoicing, follow-ups and payment reminders run on their own, and your numbers arrive as a clear weekly report.",
+      "tags": [
+        "Automatic invoicing",
+        "Payment reminders",
+        "Document reading",
+        "MIS reports & dashboards",
+        "Price and tender tracking"
+      ],
+      "services": [
+        {
+          "id": "paper-to-digital",
+          "title": "Paper and documents to data",
+          "summary": "Send photos of registers, job cards and stock books, or forward bills, invoices and POs. I turn them into clean, searchable data in your records."
+        },
+        {
+          "id": "daily-entry",
+          "title": "WhatsApp, Telegram and mobile daily entry",
+          "summary": "Supervisors and staff log production, stock in and out, and dispatch from their phone with a simple form or a photo. It lands in your records for you to check and confirm."
+        },
+        {
+          "id": "order-to-cash",
+          "title": "Invoicing and collections",
+          "summary": "Invoices drafted from dispatch slips or POs, with e-invoice and e-way bill details, sent after your approval and tracked until paid. A clear list of who owes what, with automatic reminders by email and WhatsApp."
+        },
+        {
+          "id": "follow-ups",
+          "title": "Follow-up automation",
+          "summary": "Enquiries, quotes and customer follow-ups sent on time by WhatsApp and email, so no lead goes cold."
+        },
+        {
+          "id": "business-pulse",
+          "title": "Business Pulse (automated MIS)",
+          "summary": "Every week: a report on your phone and email and a simple dashboard of sales, stock, dispatch and dues, including who your best customers are and who has gone quiet. Or start with a one-off report: three months of data, three decisions to act on this month."
+        },
+        {
+          "id": "market-tracking",
+          "title": "Market and price tracking",
+          "summary": "Automatic checks of competitor prices, marketplace listings, tenders or supplier rates (public web data only), delivered to you as a daily or weekly sheet or alert."
+        }
+      ],
+      "addon": {
+        "label": "Add-on",
+        "title": "AI, only where it's worth it",
+        "body": "Not every automation needs AI. Most run on plain, predictable rules. During discovery I'll suggest AI only where it saves real time and is worth its running cost for how much you'll use it. Quoted separately; AI usage is billed at cost.",
+        "options": [
+          {
+            "name": "Reading documents",
+            "text": "AI reads bills, invoices, POs and photos of registers, including handwriting, into clean data."
+          },
+          {
+            "name": "Drafted replies",
+            "text": "Follow-ups and replies to common customer questions drafted for your team to approve and send."
+          },
+          {
+            "name": "Ask your numbers",
+            "text": "Ask about sales, stock or dues in plain language and get an answer from your own data."
+          }
+        ],
+        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so I build it to suggest and draft, and your team checks before acting on it. I'm not responsible for its output or for decisions based on it."
+      }
+    },
+    {
+      "id": "mobile-apps",
+      "pillars": ["digitise", "automate"],
+      "slug": "mobile-apps",
+      "page": {
+        "metaTitle": "Android and iPhone app development in Raipur, India",
+        "metaDescription": "Android and iPhone apps for procurement, B2B ordering, payments and team collaboration, built once for both. Every app includes an admin dashboard, secure login and publishing to the Play Store and App Store.",
+        "intro": "An app puts your business in the pocket of your team, your suppliers and your buyers. I build procurement apps for supplier search, requisitions and approvals; B2B ordering apps where buyers browse your catalog, reorder and manage their account; collaboration apps that keep projects and team updates in one place; and payment apps for invoicing, vendor payments and collections. Each app is built once for both Android and iPhone, and comes with an admin dashboard so you stay in control.",
+        "forWho": [
+          "Businesses whose purchase requests and approvals run on calls, chats and paper",
+          "Manufacturers and distributors whose B2B buyers order again and again",
+          "Teams spread across sites who need projects and updates in one place",
+          "Businesses that send invoices, pay vendors and chase payments every week",
+          "Founders who need a first version (MVP) that can grow"
+        ],
+        "problems": [
+          "retyping",
+          "whatsapp",
+          "network",
+          "payments"
+        ],
+        "faq": [
+          {
+            "q": "Do you build for both Android and iPhone?",
+            "a": "Yes. Each app is built once in Flutter, Google's toolkit for making one app that runs on both, and released on both, so you don't pay for two separate apps."
+          },
+          {
+            "q": "Do I need both Android and iPhone?",
+            "a": "Not always. An app for your own staff can go Android only if everyone on the team uses Android phones, which also saves the yearly Apple fee. Because the app is built once for both, adding iPhone later means testing and publishing it, not rebuilding it."
+          },
+          {
+            "q": "Who owns and pays for the app store accounts?",
+            "a": "Your business. The Play Store and App Store accounts are created in your name, and you pay their fees directly to Google and Apple: a one-time fee of about ₹2,400 for Google Play and about ₹9,000 a year for Apple. I guide you through setting them up, then manage them for you, or you add me as a developer."
+          },
+          {
+            "q": "How long do the app stores take to approve the app?",
+            "a": "Typically 7–14 days after I submit it, and sometimes longer. Apple and Google review every new app and every update, and sometimes ask for changes before approving; I handle the submission and anything the reviewers ask for. The store review is built into the timeline in your proposal."
+          },
+          {
+            "q": "How do updates reach the people using the app?",
+            "a": "Through the Play Store and App Store, like any other app update. Bug fixes are covered by the monthly plan, and after the first {{adjustmentDays}} days small changes up to {{smallChangeHours}} hours a month are included; new screens or features are quoted first."
+          },
+          {
+            "q": "Can the app connect to software we already use?",
+            "a": "Yes. The app can work with systems you already have, such as Tally, your website or a payment gateway. Each connection is named and priced in the scope before work starts."
+          },
+          {
+            "q": "Does the app work on weak internet?",
+            "a": "Apps used on site or on the road can be built to keep working on weak or no internet and sync once the connection is back. This is agreed in the scope."
+          },
+          {
+            "q": "How many users can the app handle?",
+            "a": "I build for business teams, dealers and customers, typically up to 50,000 to 90,000 monthly active users. For a mass-market consumer app, a larger team will serve you better."
+          }
+        ],
+        "includesTitle": "Every app includes",
+        "includes": [
+          {
+            "title": "Android and iPhone",
+            "text": "Built once, released on both."
+          },
+          {
+            "title": "Admin dashboard",
+            "text": "A web panel for your team to manage users, data and orders."
+          },
+          {
+            "title": "Secure login",
+            "text": "Each person sees only what their role allows."
+          },
+          {
+            "title": "Store publishing",
+            "text": "On the Play Store and App Store, under your business's name."
+          }
+        ],
+        "process": [
+          {
+            "step": "Fill out the form, then a free call or Google Meet",
+            "label": "Form and free call",
+            "blurb": "I reply within 48 hours by email or WhatsApp. On a free call we go through who will use the app, what they need to do on it, your budget and when you'd like to start."
+          },
+          {
+            "step": "Discovery, then a written proposal in 5–7 days",
+            "label": "Discovery and proposal",
+            "blurb": "I see how your team or customers work today, in person around Raipur or on a screen share. Within 5–7 days you get the screens, roles, price and timeline in writing, free and valid for {{validDays}} days."
+          },
+          {
+            "step": "A clickable prototype, then built in stages",
+            "label": "Prototype and build",
+            "blurb": "Approve the proposal and pay 50% of setup. I design the screens as a clickable prototype for your sign-off, then build in stages, with a test version on your phone at each milestone."
+          },
+          {
+            "step": "Live testing, then store review and launch",
+            "label": "Testing and launch",
+            "blurb": "Your team tries it on their own phones; the other 50% is due at live testing. I then submit it to the Play Store and App Store and run a handover session once it's approved."
+          },
+          {
+            "step": "After go-live",
+            "label": "After go-live",
+            "blurb": "The monthly plan keeps the app and its backend hosted and secure, with bug fixes. We review how it's used at 60–90 days; after {{adjustmentDays}} days, small changes up to {{smallChangeHours}} hours a month are included."
+          }
+        ],
+        "examples": [
+          {
+            "title": "A procurement app for purchase requests and approvals",
+            "situation": "Purchase requests come in by phone and WhatsApp, approvals wait on one person, and nobody can see what has been ordered.",
+            "build": [
+              "Procurement app: supplier search, requisitions and approvals from the phone, with every request recorded",
+              "An admin dashboard and secure login, published to the Play Store and App Store"
+            ],
+            "size": "from",
+            "sizeNote": "One workflow and a handful of screens: the smallest size."
+          },
+          {
+            "title": "A B2B ordering app for dealers and buyers",
+            "situation": "Buyers phone in repeat orders and keep asking for price lists, balances and order status.",
+            "build": [
+              "B2B eCommerce app: catalog browsing, reordering and account management",
+              "An admin dashboard for your team, secure login and publishing to both stores"
+            ],
+            "size": "mid",
+            "sizeNote": "Two roles, a catalog and ledgers: a mid-sized project."
+          },
+          {
+            "title": "A payments app for invoicing, vendor payments and collections",
+            "situation": "Invoices go out late, vendor payments are tracked in a notebook, and collections depend on phone calls.",
+            "build": [
+              "Mobile payment app: invoicing, vendor payments and collections, with every payment tracked",
+              "An admin dashboard, a payment gateway and integrations with your other systems, published to both stores"
+            ],
+            "size": "top",
+            "sizeNote": "Several roles, payments and integrations: the upper end of the typical range."
+          }
+        ],
+        "needFromYou": [
+          "The screens and roles as you imagine them. I turn them into a prototype for sign-off before the full build.",
+          "A Google Play Console and Apple Developer account in your business's name. I can guide you, or you add me as a developer.",
+          "Your brand assets (logo, colours), if you have them.",
+          "One person who approves each stage."
+        ],
+        "thirdParty": [
+          {
+            "name": "App store accounts",
+            "text": "The Play Store and App Store developer accounts are created in your business's name, and you pay their fees directly to Google and Apple."
+          },
+          {
+            "name": "Notifications, SMS, maps and payments",
+            "text": "Push notifications, SMS, email, maps and payment gateway fees, if the app uses them, are billed at cost as separate lines and named in the scope."
+          },
+          {
+            "name": "OTP login",
+            "text": "If you opt for login by OTP, the DLT registration needed to send SMS in India and the SMS or WhatsApp message charges are paid by you."
+          },
+          {
+            "name": "Hosting",
+            "text": "The domain and backend hosting are part of the monthly plan; third-party usage fees are not. If you buy the code outright, the server and backend hosting are yours to run and pay for, or add a maintenance plan."
+          }
+        ]
+      },
+      "title": "Mobile Apps",
+      "summary": "Android and iPhone apps for your team, suppliers and buyers, built once for both.",
+      "tags": [
+        "Procurement apps",
+        "B2B eCommerce apps",
+        "Collaboration & companion apps",
+        "Mobile payment apps"
+      ],
+      "services": [
+        {
+          "id": "procurement-apps",
+          "title": "Procurement apps",
+          "summary": "Supplier search, purchase requisitions and approvals from the phone, with every request recorded."
+        },
+        {
+          "title": "B2B eCommerce apps",
+          "summary": "Your buyers browse the catalog, reorder in a few taps and check their account, ledger and order status."
+        },
+        {
+          "title": "Collaboration and companion apps",
+          "summary": "Projects, tasks and team communication in one place, plus companion apps for the systems I build, so your team can use them on the go."
+        },
+        {
+          "id": "payment-apps",
+          "title": "Mobile payment apps",
+          "summary": "Send invoices, pay vendors and collect payments from the phone, with every payment tracked."
+        }
+      ],
+      "note": "Every app comes with an admin dashboard, secure login and publishing to the Play Store and App Store.",
+      "addon": {
+        "label": "Add-on",
+        "title": "AI, only where it's worth it",
+        "body": "Not every app needs AI. Most screens work best as plain, fast forms and lists. During discovery I'll suggest AI only where it makes the app easier to use and is worth its running cost for how much it'll be used. Quoted separately; AI usage is billed at cost.",
+        "options": [
+          {
+            "name": "Snap and fill",
+            "text": "Take a photo of a bill, label or order slip, and the app fills in the form."
+          },
+          {
+            "name": "Smart search",
+            "text": "Buyers and staff find products, suppliers or past orders by describing what they need."
+          },
+          {
+            "name": "In-app assistant",
+            "text": "Answers common questions from your catalog, policies and order status, any time of day."
+          }
+        ],
+        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so I build it to suggest and fill in, and people check before it counts. I'm not responsible for its output or for decisions based on it."
+      }
+    },
+    {
+      "id": "custom-software",
+      "pillars": ["digitise", "analyse"],
+      "slug": "custom-software",
+      "page": {
+        "metaTitle": "Custom ERP and CRM software development in India",
+        "metaDescription": "Custom ERP, CRM, dealer and distributor platforms and internal tools, built around how your business already runs. No per-user fees, and you can buy the software outright.",
+        "intro": "Off-the-shelf software makes you change how you work, and charges you for every user. I build ERPs, CRMs, dealer and distributor platforms and internal tools around the way your business already runs, so your team actually uses them. Larger systems start with one workflow and grow from there, and you can buy the software outright whenever you want.",
+        "forWho": [
+          "Businesses that have outgrown Excel sheets and WhatsApp groups",
+          "Manufacturers tracking production, stock and dispatch across sheets and registers",
+          "Distributors and brands managing dealers, agents or price tiers",
+          "Teams paying per-user fees for software that doesn't fit",
+          "Companies that need a tool for a job no product does well"
+        ],
+        "problems": [
+          "whatsapp",
+          "network",
+          "custom",
+          "numbers"
+        ],
+        "faq": [
+          {
+            "q": "Why custom software instead of an off-the-shelf product?",
+            "a": "When a product fits your process, I'll tell you to use it. Custom software makes sense when a product forces its own process on you, charges per user, or can't handle your pricing, approvals or reports."
+          },
+          {
+            "q": "Can you move our existing data in?",
+            "a": "Yes. Setup includes moving your existing records in from up to {{dataFiles}} source files, such as Excel sheets or software exports. More are quoted."
+          },
+          {
+            "q": "Can it connect to Tally or a payment gateway?",
+            "a": "Yes. Integrations such as Tally or payments are scoped and priced in your proposal."
+          },
+          {
+            "q": "Can we start small?",
+            "a": "Yes. For larger systems we start with one workflow, then expand once your team is using it."
+          },
+          {
+            "q": "How is this different from Zoho, Tally or a ready-made ERP?",
+            "a": "Tally stays your accounting system, and the software I build works alongside it. Ready-made ERPs and CRMs like Zoho suit businesses whose process matches theirs, and charge for every user. A custom system follows your own pricing, approvals and reports, with no per-user fees."
+          },
+          {
+            "q": "Are we locked in to you?",
+            "a": "No. Your data is yours, with a full export if the plan ends. You can buy the source code outright at any time, and if I ever stop offering the service, the code and your data pass to you free of charge."
+          }
+        ],
+        "examples": [
+          {
+            "title": "A distributor whose dealers order by phone",
+            "situation": "Price lists, orders and ledgers live in different places, and every dealer question turns into a phone call.",
+            "build": [
+              "Dealer and distributor platform (Distribution OS): accounts for dealers, distributors and agents, with price tiers, orders, ledgers, payments and an online shop"
+            ],
+            "size": "from",
+            "sizeNote": "One focused platform with the standard modules: the smallest size."
+          },
+          {
+            "title": "A manufacturer running on sheets and registers",
+            "situation": "Orders, production, stock and dispatch are tracked in separate Excel sheets and paper registers, so nobody knows what's in stock or what's running late until someone checks by hand.",
+            "build": [
+              "ERP: orders, stock, production, purchase and dispatch in one system, linked to Tally",
+              "Role-based logins for the office, the floor and the owner, with an admin dashboard"
+            ],
+            "size": "mid",
+            "sizeNote": "Several connected modules and a data move from sheets: a mid-sized project."
+          },
+          {
+            "title": "A company that stopped using off-the-shelf software",
+            "situation": "The CRM they paid for per user forced its own process on the sales team, so everyone went back to sheets and chats.",
+            "build": [
+              "CRM: leads, quotes, follow-ups and each customer's full history, built around how the sales team already works",
+              "Quoting tools and calculators on the same data, plus an admin dashboard"
+            ],
+            "size": "top",
+            "sizeNote": "Several modules, a data move from the old system and integrations: the upper end of the typical range."
+          }
+        ],
+        "includesTitle": "Every system includes",
+        "includes": [
+          {
+            "title": "Role-based login",
+            "text": "Each person sees only what their role allows."
+          },
+          {
+            "title": "Admin dashboard",
+            "text": "Users, settings and reports in one place."
+          },
+          {
+            "title": "Phone and desktop",
+            "text": "Works in the browser on both, with nothing to install."
+          },
+          {
+            "title": "Backups and export",
+            "text": "Weekly backups, and a full export of your data if the plan ends."
+          }
+        ],
+        "needFromYou": [
+          "Exports of the data you already have: Excel or CSV files, or exports from your billing and accounting software. Up to {{dataFiles}} source files are covered by setup, and more are quoted.",
+          "One person who owns the project on your side and signs off the prototype.",
+          "The list of modules, price tiers, roles and approvals as they work today. I map these with you before the quote."
+        ],
+        "thirdParty": [
+          {
+            "name": "Payment gateway",
+            "text": "Fees for online orders and dealer payments are charged by the gateway, through your own gateway account created in your business's name, or billed at cost."
+          },
+          {
+            "name": "SMS, email and WhatsApp",
+            "text": "If the system sends messages, the sending fees are billed at cost as separate lines and named in the scope."
+          },
+          {
+            "name": "Domain, maps and other APIs",
+            "text": "Set up in your business's name or billed at cost, and named in the scope."
+          },
+          {
+            "name": "Integrations",
+            "text": "Integrations such as Tally are scoped before work starts. A new one added later is a change and is quoted."
+          },
+          {
+            "name": "AI usage",
+            "text": "Only if the AI add-on is used: billed at cost as a separate line on your monthly bill, and named in the scope before work starts."
+          }
+        ]
+      },
+      "title": "Custom Business Software",
+      "summary": "Your own ERP or CRM, built around how your business actually runs. No per-user fees.",
+      "tags": [
+        "ERP",
+        "CRM",
+        "Dealer & distributor platforms",
+        "Internal portals",
+        "Calculators & quoting tools",
+        "Admin dashboards"
+      ],
+      "services": [
+        {
+          "id": "erp",
+          "title": "ERP",
+          "summary": "Orders, stock, production, purchase and dispatch in one system, linked to Tally, so everyone works from the same numbers."
+        },
+        {
+          "id": "crm",
+          "title": "CRM",
+          "summary": "Leads, quotes, follow-ups and each customer's full history in one place, so your sales team knows whom to call and what was promised."
+        },
+        {
+          "id": "distribution-os",
+          "title": "Dealer and distributor platform (Distribution OS)",
+          "summary": "One platform for dealers, distributors or agents: price tiers, orders, ledgers, payments and an online shop. Add a mobile app so your dealers can order from their phone."
+        },
+        {
+          "id": "custom-tools",
+          "title": "Custom tools",
+          "summary": "Something specific to your business? I build internal portals, calculators and quoting tools, and admin dashboards around how you already work."
+        }
+      ],
+      "addon": {
+        "label": "Add-on",
+        "title": "AI, only where it's worth it",
+        "body": "Not every system needs AI. Your orders, stock, ledgers and approvals run best on plain, predictable software. During discovery I'll suggest AI only where it saves your team real time and is worth its running cost for how much you'll use it. Quoted separately; AI usage is billed at cost.",
+        "options": [
+          {
+            "name": "Reading documents",
+            "text": "Bills, invoices and POs read straight into the system, so nobody types them in."
+          },
+          {
+            "name": "Drafted quotes and messages",
+            "text": "Quotes, follow-ups and summaries drafted from your data for your team to check and send."
+          },
+          {
+            "name": "Ask your data",
+            "text": "Ask about orders, stock, dealers or customers in plain language and get an answer from your own records."
+          }
+        ],
+        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so I build it to suggest and draft, and your team checks before acting on it. I'm not responsible for its output or for decisions based on it."
+      }
     }
   ],
   "process": [
     {
       "step": "Fill out the form, then a free call or Google Meet",
-      "label": "Fill out the form",
-      "blurb": "Tell me what you need. I reply within 48 hours by email or WhatsApp, and we set up a free call.",
-      "detail": "Tell me which services you need. I reply by email or WhatsApp within 48 hours, and we set up a call where you walk me through how things work today. I'll tell you whether you need custom software at all, or whether a free product already does the same job."
+      "label": "Form and free call",
+      "blurb": "I reply within 48 hours by email or WhatsApp, and on a free call we go through how you work today.",
+      "detail": "Tell me which services you need. I reply by email or WhatsApp within 48 hours, and we set up a call where you walk me through how things work today, your budget and when you'd like to start. I'll tell you whether you need custom software at all, or whether a free product already does the same job."
     },
     {
-      "step": "A written proposal in 3–5 days",
-      "label": "Get a proposal",
-      "blurb": "Scope, price and timeline in 3–5 days, fixed after the call. Setup is paid in three milestones.",
-      "detail": "Scope, price and timeline, fixed after the call. Setup is paid in three milestones: at signing, at demo approval and at go-live. The exact split is in your proposal."
+      "step": "Discovery, then a written proposal in 5–7 days",
+      "label": "Discovery and proposal",
+      "blurb": "I visit if you're in Raipur, or you walk me through on a screen share, and within 5–7 days you get a free, no-obligation proposal with scope, price and timeline.",
+      "detail": "I see how your business runs, with a visit if you're in or around Raipur or a screen share if you're further away, and you work with me personally from here to launch. Within 5–7 days you get a written proposal, free and with no obligation: how I understand your business, what the system will do, and the scope, price, timeline and payment schedule. It stays valid for {{validDays}} days, and the detailed design comes after you approve it. For a deeper analysis before deciding, the paid workflow audit gives you a written report you keep."
     },
     {
-      "step": "Prototype, then built in stages",
-      "label": "Prototype, then build",
-      "blurb": "You approve a prototype first, then see a demo at each milestone, so you can change direction early.",
-      "detail": "Your team signs off a prototype before the full build. For larger systems we start with one workflow and expand. You see a demo at each milestone and can change direction early."
+      "step": "Prototype, then a build in stages",
+      "label": "Prototype and build",
+      "blurb": "Once you approve the proposal and pay 50% of setup, I build a prototype for your sign-off, then demo each milestone. Changes within the agreed scope are included.",
+      "detail": "Once you approve the proposal and pay 50% of the setup fee, I work out the detailed design and build a prototype as the first milestone. Your team signs it off before the full build. For larger systems we start with one workflow and expand. You see a demo at each milestone, and changes within the agreed scope are included; new features are quoted separately. The other 50% is due when it goes to live testing."
     },
     {
-      "step": "Launch and training",
+      "step": "Launch, then training for your team",
       "label": "Launch and training",
-      "blurb": "I set it up and run a handover session, so your team knows how to use it from day one.",
+      "blurb": "I set it up and run a handover session, so your team can use it confidently from day one.",
       "detail": "I set it up and run a handover session so your team knows how to use it. If you need more, such as extra sessions or on-site training, it's quoted in your proposal."
     },
     {
-      "step": "After go-live",
-      "label": "After go-live",
-      "blurb": "On a monthly plan it stays hosted, backed up and secure, with a review at 60–90 days.",
-      "detail": "The monthly licence keeps it hosted, up and secure, with bug fixes. We review how it's being used at 60–90 days. Extra changes are quoted per request, with 10% off for plan clients."
+      "step": "Go-live, then hosting and support",
+      "label": "Hosting and support",
+      "blurb": "I keep it hosted, backed up and secure on a monthly plan, or on a maintenance plan if you bought it outright, and we review how it's used at 60–90 days.",
+      "detail": "The monthly plan keeps it hosted, up and secure, with bug fixes. We review how it's being used at 60–90 days. After the first 90 days, small changes up to 3 hours a month are included; bigger changes are quoted. If you bought the code outright, you get 30 days of free bug fixes, then an optional maintenance plan."
     }
   ],
   "nda": "I'll sign an NDA before we talk if you want one.",
@@ -241,16 +799,48 @@
       "a": "No. I usually work with the data your software already exports, like Excel or CSV files, so you keep what you use today."
     },
     {
+      "q": "How does the monthly plan work?",
+      "a": "You pay a setup fee to get the software built, then a monthly fee to use it. Think of it as a licence: you use the software for as long as the plan runs, and you can buy it outright whenever you like. The plan covers hosting, backups, uptime monitoring, bug fixes and security updates. For the first {{adjustmentDays}} days after go-live, adjustments to what I built are included. After that, up to {{smallChangeHours}} hours of small changes a month are included. Bigger changes are quoted before I start."
+    },
+    {
+      "q": "Does the monthly fee go up for a bigger project?",
+      "a": "A bigger system has more to host and support, so the monthly plan rises with the size of the project, but more slowly than the setup fee. As a rule of thumb, if the setup fee doubles, the monthly plan goes up by about {{growthPercent}}%. The exact figures are agreed in your quote."
+    },
+    {
+      "q": "What counts as a change?",
+      "a": "If something doesn't work the way we agreed, it's a bug and I fix it free. If it works as agreed and you'd like it to work differently, or you want something new, that's a change."
+    },
+    {
+      "q": "How quickly do you fix problems?",
+      "a": "On working days (Monday to Friday), I reply to anything that stops your work within {{replyUrgentDays}} business day, and to everything else within {{replyOtherDays}} business days."
+    },
+    {
+      "q": "Can we buy the software outright?",
+      "a": "Yes, at any time. You receive the full source code as it stands on the day you buy, and the monthly plan ends. The price is agreed before you commit, and what you've already paid counts toward it: the setup fee, plus {{creditPercent}}% of your monthly fees. The price never drops below {{floorPercent}}% of the agreed outright price. The terms page has a worked example. After buying, you get 30 days of free bug fixes; then you can run hosting yourself or keep me on a maintenance plan that covers bug fixes, security updates and up to {{smallChangeHours}} hours of small changes a month."
+    },
+    {
       "q": "Who owns our data?",
-      "a": "You do, always, and you can export it in standard formats at any time. On a licence plan the software is licensed to you and I keep the code. You can buy the code outright, from month 12 or earlier by agreement, or choose Own the code from the start."
+      "a": "You do, always. If the plan ends, you get a full export of your data. See also \"Can we buy the software outright?\""
     },
     {
-      "q": "What happens if we stop?",
-      "a": "You get a full export of your data either way. If you own the code, you can leave any time, with no minimum period; services run to the end of the paid month. A monthly licence has a 6-month minimum from go-live, then 30 days' notice. If you need to leave a licence earlier, we agree it together; if you leave anyway, you choose between paying 2 months' fees or buying the code."
+      "q": "Whose name are the accounts in?",
+      "a": "Yours. App store accounts, your domain, your WhatsApp number and payment gateway are all created in your business's name. For the domain, you can buy it yourself and give me access, or I can buy it for you; either way it sits in your own account. I manage the rest for you, or you add me as a developer."
     },
     {
-      "q": "Who runs the WhatsApp number?",
-      "a": "You do. I set up a dedicated WhatsApp Business number for your company, and someone on your side uses it day to day: staff send in entries, and you approve invoices and confirm records. If you'd rather not use WhatsApp, a simple portal does the same job. The automation only works if someone on your side is using it."
+      "q": "Are there other costs?",
+      "a": "GST at {{gst}}% is added to all prices. AI usage and third-party services such as WhatsApp are billed at cost, as separate lines on your monthly bill. Every service your system uses is listed in the agreement before work starts, so nothing new appears later without your approval."
+    },
+    {
+      "q": "What if we want to stop?",
+      "a": "Monthly plans start with a {{minMonths}}-month minimum. If you need to leave inside those {{minMonths}} months, you can choose: pay two months' plan fees and end the plan, or buy the software outright. After {{minMonths}} months you can leave with {{noticeDays}} days' notice. Either way you get an export of your data, and the accounts stay in your name."
+    },
+    {
+      "q": "What if you stop working on this?",
+      "a": "If I ever stop offering the service, the code and your data pass to you free of charge, so your business is never stuck."
+    },
+    {
+      "q": "How do payments work?",
+      "a": "Setup is paid in two parts: {{setupPayment}}. Live testing is when real users first start using it, before it goes fully live. The monthly plan starts at go-live, after live testing, and is invoiced each month. UPI is accepted."
     },
     {
       "q": "Is our data safe?",
@@ -258,11 +848,15 @@
     },
     {
       "q": "How long does it take?",
-      "a": "Automation takes 3–5 weeks, mobile apps 4–8 weeks, custom software 6–12 weeks and websites 3–5 weeks. The clock starts once you've sent your data and approvals. Your proposal will say exactly."
+      "a": "Websites take 1–5 weeks, automation and analysis 4–16 weeks, mobile apps 4–12 weeks and custom software 5–20 weeks. The clock starts once you've sent your data and approvals. Your proposal will say exactly."
     },
     {
       "q": "Which AI do you use, and who pays for it?",
-      "a": "I use the latest models from leading AI providers, picked for each task. AI, API and WhatsApp message usage is included in your monthly fee up to ₹2,000 a month. Above that, it's billed at cost plus 15%, and I check with you first."
+      "a": "I use the latest models from leading AI providers, picked for each task. AI usage and third-party fees such as WhatsApp aren't included in your monthly fee. They're billed at cost as separate lines on your monthly bill, and each one is named in the scope before we start."
+    },
+    {
+      "q": "Do you visit us in person?",
+      "a": "If you're in or around Raipur, yes. I visit your office, shop or warehouse to see how work gets done and which software, sheets and apps you use. If you're further away, you walk me through it on a screen share. Either way you work with me personally, from the first look to launch, with no salesperson or middleman in between."
     },
     {
       "q": "Can I see a demo built for my business before committing?",
@@ -270,16 +864,20 @@
     },
     {
       "q": "Can you build an app for millions of users?",
-      "a": "That's not what I focus on. I build systems for businesses and their teams, dealers and customers, from a handful of users up to around 50,000–100,000 monthly active users. I can also build MVPs designed to grow to that size. I'm a one-person studio, and that focus keeps your costs predictable and lets me give each client proper attention. If you're building a mass-market consumer app, a larger team will serve you better, and I'm happy to point you to one."
+      "a": "That's not what I focus on. I build systems for businesses and their teams, dealers and customers, from a handful of users up to typically 50,000 to 90,000 monthly active users. I can also build MVPs designed to grow to that size. I'm a one-person studio, and that focus keeps your costs predictable and lets me give each client proper attention. If you're building a mass-market consumer app, a larger team will serve you better, and I'm happy to point you to one."
     }
   ],
   "cta": {
     "title": "Need a proper estimate?",
     "requirement": {
       "title": "Before you send the form",
-      "body": "Automation only works when your team uses it. I set up a dedicated WhatsApp Business number for your company, and someone on your side runs it day to day. Prefer not to use WhatsApp? A simple portal works too."
+      "body": "Automation only works when your team uses it. Most Indian businesses already work on WhatsApp, so that is the usual choice: I set up a dedicated WhatsApp Business number for your company. Telegram or a simple portal work too, and we can choose according to your use case. Someone on your side runs it day to day."
     },
     "summary": "Tell me which services you need and what's slowing your business down. Fill out the form, and you'll get a reply by email or WhatsApp within 48 hours.",
     "note": "Need a website as well? Websites with lead capture are available alongside any of the services above."
+  },
+  "pricingIntro": {
+    "title": "Software built around your business, run for you every month.",
+    "body": "You pay a setup fee and a monthly plan. I host it, fix it and keep it up to date, so your team just uses it. If you'd rather own it, you can buy it outright at any time."
   }
 }

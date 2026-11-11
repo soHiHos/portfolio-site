@@ -3,24 +3,31 @@ import { ArrowRight } from "lucide-react";
 import SectionHeading from "../components/section-heading";
 import Reveal from "../components/effects/reveal";
 import services from "../content/services.json";
+import { fillFaq } from "../components/services/category-price";
 
 // Compact home-page "How I work": the steps from services.json (short `label` and `blurb`) as a connected timeline,
 // across on large screens and down the left on small ones, linking to the full process and FAQ
-export default function ProcessSection({ id }: { id?: string }) {
-  const steps = services.process;
+// `flush`: no vertical padding, for pages that space their sections with a gap of their own (the service pages)
+// `steps`: a service's own process in place of the shared one (websites); the link to the full process then hides,
+// since that page shows the shared steps
+type Step = { step: string; label: string; blurb: string };
+export default function ProcessSection({ id, flush, steps: own }: { id?: string; flush?: boolean; steps?: Step[] }) {
+  const steps = own ?? services.process;
   return (
     <section id={id}>
-      <div className="w-full text-left space-y-8 py-12">
+      <div className={`w-full text-left space-y-8 ${flush ? "" : "py-12"}`}>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading title="How I work" />
-          <Link href="/services#process" className="btn-link text-sm text-fg">
-            Full process and FAQ
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          {!own && (
+            <Link href="/services#process" className="btn-link text-sm text-fg">
+              Full process and FAQ
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          )}
         </div>
 
         <Reveal>
-          <ol className="grid gap-0 border border-line bg-surface p-5 sm:p-8 lg:grid-cols-5 lg:gap-6">
+          <ol className="grid gap-0 border border-line bg-surface p-5 sm:p-6 lg:grid-cols-5 lg:gap-6">
             {steps.map((step, i) => {
               const last = i === steps.length - 1;
               return (
@@ -33,7 +40,7 @@ export default function ProcessSection({ id }: { id?: string }) {
                   </span>
                   <div className="space-y-1.5">
                     <h3 className="text-base font-bold leading-snug text-fg">{step.label}</h3>
-                    <p className="text-sm leading-relaxed text-muted">{step.blurb}</p>
+                    <p className="text-sm leading-relaxed text-muted">{fillFaq(step.blurb)}</p>
                   </div>
                 </li>
               );

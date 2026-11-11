@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ArrowUpRight, Check, Copy } from "lucide-react"
-import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, copyToClipboard } from "../ui/menu/contact-menu"
+import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, copyToClipboard } from "../ui/menu/contact-menu"
 import { useIndiaTime } from "../use-india-time"
 
 const channelClasses = "group/ch flex items-center gap-3 w-full px-3 py-3 sm:py-2.5 text-left hover:bg-white/5 transition-colors cursor-pointer"
@@ -50,8 +50,8 @@ export default function ContactCard({ open, className = "" }: { open: boolean; c
             <span className="flex-1 text-sm font-medium">LinkedIn</span>
             <ArrowUpRight className="w-4 h-4 shrink-0 text-white/50 group-hover/ch:text-white" />
           </a>
-          <a href={CONTACT_GITHUB} target="_blank" rel="noopener noreferrer" className={channelClasses} tabIndex={open ? 0 : -1}>
-            <span className="flex-1 text-sm font-medium">GitHub</span>
+          <a href={CONTACT_FACEBOOK} target="_blank" rel="noopener noreferrer" className={channelClasses} tabIndex={open ? 0 : -1}>
+            <span className="flex-1 text-sm font-medium">Facebook</span>
             <ArrowUpRight className="w-4 h-4 shrink-0 text-white/50 group-hover/ch:text-white" />
           </a>
           <a href={CONTACT_INSTAGRAM} target="_blank" rel="noopener noreferrer" className={channelClasses} tabIndex={open ? 0 : -1}>

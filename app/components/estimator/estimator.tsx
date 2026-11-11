@@ -193,7 +193,7 @@ export default function Estimator() {
           />
           <label className="flex items-start gap-2 text-sm text-fg">
             <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 accent-accent" />
-            <span>I agree to Soham Kar storing these details and contacting me about this estimate by phone, WhatsApp or email.</span>
+            <span>I agree to Soham Kar (sohambuilds.in) storing these details and contacting me about this estimate by phone, WhatsApp or email.</span>
           </label>
           <button type="submit" disabled={status === "sending"} className="btn btn-primary">
             {status === "sending" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}

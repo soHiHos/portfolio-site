@@ -5,7 +5,10 @@
 import projects from "../../content/projects.json";
 import research from "../../content/research.json";
 import services from "../../content/services.json";
+import { AVAILABLE_FOR_WORK } from "../../content/availability";
 import { ESTIMATOR_ON } from "../../components/estimator/estimate";
+import { fillFaq } from "../../components/services/category-price";
+import { PRICING } from "../../content/pricing";
 import organizations from "../../content/organizations.json";
 import { CONTACT_EMAIL, CONTACT_GITHUB, CONTACT_LINKEDIN } from "../../content/contact";
 
@@ -32,12 +35,12 @@ function facts(): string {
     (c) =>
       `- [serviceId: ${c.id}] ${c.title}: ${c.summary} Includes: ${c.services
         .map((s) => `${s.title}: ${s.summary}${"for" in s ? ` Best for: ${s.for}.` : ""}`)
-        .join(" ")}${"note" in c ? ` ${c.note}` : ""}`
+        .join(" ")}${"note" in c ? ` ${c.note}` : ""}${"addon" in c && c.addon ? ` ${c.addon.label}: ${c.addon.title}. ${c.addon.body} ${c.addon.options.map((o) => `${o.name}: ${o.text}`).join(" ")} ${c.addon.disclaimer}` : ""}`
   );
-  const process = services.process.map((p, i) => `${i + 1}. ${p.step}: ${p.detail}`).join(" ");
+  const process = services.process.map((p, i) => `${i + 1}. ${p.step}: ${fillFaq(p.detail)}`).join(" ");
   const pricing = `PRICING: never quote a price, fee or range. For pricing, point the visitor to ${
-    ESTIMATOR_ON ? "the 2-minute price estimator on the services page (it gives a price range as a PDF), or to " : ""
-  }a free call or Google Meet; every project gets a written proposal within 3-5 days of that call. A paid workflow audit and decision report is available as a first step for businesses not ready to commit.`;
+    ESTIMATOR_ON ? "the 2-minute price estimator on the services page (it gives starting prices as a PDF), or to " : ""
+  }a free call or Google Meet; then free discovery (a visit for businesses in or around Raipur, a screen-share walkthrough for others), and every project gets a written proposal (scope, price, timeline; the detailed design comes after approval) within 5-7 days of the visit or walkthrough; it is free, with no obligation, and valid for ${PRICING.validDays} days. The build starts with a prototype once the proposal is approved and 50% of setup is paid; the other 50% is due at live testing. Websites follow a shorter process: free call, free proposal within 2-3 days, 50% to start, build with a live preview to review, the remaining 50% before launch, and an optional care plan. A paid workflow audit and decision report is available for businesses not ready to commit: a deeper analysis with a written report they keep whether or not they build.`;
   const faq = services.faq.map((f) => `Q: ${f.q} A: ${f.a}`).join("\n");
   const partners = organizations.map((o) => `${o.name}${"role" in o && o.role ? ` (${o.role})` : ""}`).join(", ");
 
@@ -50,7 +53,7 @@ ${projectLines.join("\n")}
 RESEARCH PAPERS:
 ${paperLines.join("\n")}
 
-SERVICES (${services.availability.accepting ? "currently accepting new projects" : "not currently taking new projects"}):
+SERVICES (${AVAILABLE_FOR_WORK ? "currently accepting new projects" : "not currently taking new projects"}):
 ${services.hero.promise} ${services.categoriesIntro}
 ${serviceLines.join("\n")}
 Process: ${process} ${services.nda}

@@ -24,11 +24,11 @@ export default function WorkSection({ id }: { id?: string }) {
             See all projects <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div>
+        <div className="space-y-4 md:space-y-0">
           {ROWS.map((row, r) => (
             <div
               key={r}
-              className={`grid md:min-h-[22rem] ${row.length === 1 ? "" : r % 2 === 0 ? "md:grid-cols-[1.618fr_1fr]" : "md:grid-cols-[1fr_1.618fr]"}`}
+              className={`grid gap-4 md:gap-0 md:min-h-[22rem] ${row.length === 1 ? "" : r % 2 === 0 ? "md:grid-cols-[1.618fr_1fr]" : "md:grid-cols-[1fr_1.618fr]"}`}
             >
               {row.map((project, i) => (
                 <Reveal key={project.id} delay={i * 100}>
