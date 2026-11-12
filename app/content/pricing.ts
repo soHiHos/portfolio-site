@@ -49,7 +49,7 @@ const SERVICES = {
 export const PRICING = {
   services: SERVICES,
 
-  reviewed: false,
+  reviewed: true,
 
   // GST is shown as a separate line on top of every price, never included in it
   gst: 0.18,
