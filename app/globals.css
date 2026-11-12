@@ -40,6 +40,11 @@ html {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--accent); }
+/* Touch screens (phones, tablets): no scrollbar at all; the nav's progress line shows the position instead */
+@media (hover: none) and (pointer: coarse) {
+  html { scrollbar-width: none; }
+  ::-webkit-scrollbar { display: none; }
+}
 
 :root {
   /* Light theme: "Harbor" — misty grey-blue page, near-white cards and panels, warm amber accent for every
