@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import SectionHeading from "../components/section-heading";
 import Reveal from "../components/effects/reveal";
+import PhoneCollapse from "../components/phone-collapse";
 import services from "../content/services.json";
 import { SERVICE_CATEGORY, servicePath } from "../content/service-list";
 
@@ -18,8 +19,9 @@ const ALSO = services.pillarsAlso;
 const ALSO_CATEGORIES = ALSO.categories.map((id) => services.categories.find((c) => c.id === id)!);
 
 // "What I do": the three pillars (digitise, automate, analyse), each with one problem it solves and the services
-// that deliver it, linking to its main service's page. Each card spans five rows of the parent grid (subgrid), so titles,
-// summaries, quotes, lists and links line up across the row whatever the length of the text
+// that deliver it, linking to its main service's page. From sm each card spans five rows of the parent grid (subgrid), so
+// titles, summaries, quotes, lists and links line up across the row whatever the length of the text. Phones skip the
+// subgrid: there the list folds behind a toggle, which would be a sixth row
 export default function PillarsSection({ id }: { id?: string }) {
   return (
     <section id={id}>
@@ -34,12 +36,12 @@ export default function PillarsSection({ id }: { id?: string }) {
 
         <div className="grid gap-4 md:grid-cols-3">
           {services.pillars.map((pillar, i) => (
-            <Reveal key={pillar.id} delay={i * 100} className="row-span-5 grid grid-rows-subgrid">
+            <Reveal key={pillar.id} delay={i * 100} className="grid sm:row-span-5 sm:grid-rows-subgrid">
               {/* Hover or keyboard focus: the border warms, an accent line draws across the top, the marker turns,
                   the list nudges right one item after another and the arrow slides. Reduced motion keeps only the colours.
                   The card opens the pillar's main service (its bottom link stretches over the whole card); each listed
                   service sits above that and opens its own category's page */}
-              <div className="group relative row-span-5 grid grid-rows-subgrid gap-y-4 overflow-hidden border border-line bg-surface p-5 transition-colors duration-300 hover:border-accent/40 sm:p-6">
+              <div className="group relative grid gap-y-4 sm:row-span-5 sm:grid-rows-subgrid overflow-hidden border border-line bg-surface p-5 transition-colors duration-300 hover:border-accent/40 sm:p-6">
                 <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-within:scale-x-100 motion-reduce:transition-none" aria-hidden="true" />
                 {/* Numbered, because the pillars are steps: digitise first, then automate, then analyse */}
                 <div className="flex items-baseline justify-between gap-3">
@@ -55,8 +57,10 @@ export default function PillarsSection({ id }: { id?: string }) {
                 <p className="self-start border-l-2 border-accent pl-3 text-base font-medium leading-snug text-fg">
                   &ldquo;{QUOTES[pillar.problem]}&rdquo;
                 </p>
-                <div className="space-y-3 border-t border-line pt-4">
-                  <p className="text-xs font-medium text-muted">What I set up</p>
+                {/* Phones: the list folds away behind a "What I set up" toggle, so the three cards stay short */}
+                <PhoneCollapse label="What I set up">
+                <div className="space-y-3 border-line sm:border-t sm:pt-4">
+                  <p className="text-xs font-medium text-muted max-sm:hidden">What I set up</p>
                   <ul className="space-y-2">
                     {pillar.services.map((serviceId, j) => (
                       <li
@@ -75,6 +79,7 @@ export default function PillarsSection({ id }: { id?: string }) {
                     ))}
                   </ul>
                 </div>
+                </PhoneCollapse>
                 <Link
                   href={servicePath(pillar.category)}
                   className="inline-flex items-center gap-1.5 self-end text-sm font-medium text-fg after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"

@@ -9,6 +9,7 @@ import BackToTop from "./components/back-to-top";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE_URL } from "./content/contact";
+import { themeScript } from "./components/effects/ist-theme";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -39,10 +40,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Runs before paint: applies the saved theme, or by default the time of day in IST (light 7am-6pm,
-// dark otherwise), with no flash.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':(function(){var h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',hourCycle:'h23'}).format(new Date());return h<7||h>=18})();if(d)document.documentElement.classList.add('dark')}catch(e){}})()`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -55,6 +52,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
+        {/* Runs before paint: the theme for the time of day in IST, or the visitor's unexpired choice, with no flash */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-screen flex flex-col relative px-4 sm:px-12 md:px-24 lg:px-48">

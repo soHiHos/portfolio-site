@@ -33,7 +33,7 @@ export default function WorkSection({ id }: { id?: string }) {
               {row.map((project, i) => (
                 <Reveal key={project.id} delay={i * 100}>
                   <div id={project.id} className="scroll-mt-28 h-full">
-                    <ProjectTile image={project.image} imageMobile={project.imageMobile} video={project.video} title={project.title} href={`/projects/${project.id}`} placeholder={project.placeholder} />
+                    <ProjectTile image={project.image} video={project.video} title={project.title} href={`/projects/${project.id}`} placeholder={project.placeholder} />
                   </div>
                 </Reveal>
               ))}

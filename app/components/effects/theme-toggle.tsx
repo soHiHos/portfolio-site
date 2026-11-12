@@ -1,16 +1,27 @@
 "use client"
 
+import { useEffect } from "react"
 import { flushSync } from "react-dom"
 import { Moon, Sun } from "lucide-react"
+import { istIsDark, savedTheme, saveTheme } from "./ist-theme"
 
-// Toggles the `dark` class on <html> and persists it. Where the View Transitions API
-// is available, the new theme wipes out in a circle from the button.
+// Toggles the `dark` class on <html>. The choice holds until the next 7am/6pm IST switch (ist-theme.ts), and while
+// the page is open the theme follows IST by itself: checked every minute and whenever the tab comes back into view.
+// Where the View Transitions API is available, a manual change wipes out in a circle from the button.
 export default function ThemeToggle() {
+  useEffect(() => {
+    const sync = () => document.documentElement.classList.toggle("dark", savedTheme() ?? istIsDark())
+    const interval = setInterval(sync, 60_000)
+    document.addEventListener("visibilitychange", sync)
+    return () => {
+      clearInterval(interval)
+      document.removeEventListener("visibilitychange", sync)
+    }
+  }, [])
+
   function applyTheme(dark: boolean) {
     document.documentElement.classList.toggle("dark", dark)
-    try {
-      localStorage.setItem("theme", dark ? "dark" : "light")
-    } catch {}
+    saveTheme(dark)
   }
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {

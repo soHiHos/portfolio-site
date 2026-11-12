@@ -38,7 +38,6 @@ function ProjectGrid({ projects }: { projects: Project[] }) {
           <ProjectTile
             phase={project.phase}
             image={project.image}
-            imageMobile={project.imageMobile}
             video={project.video}
             visual={project.visual}
             title={project.title}

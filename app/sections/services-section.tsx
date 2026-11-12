@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SectionHeading from "../components/section-heading";
-import AvailabilityBadge from "../components/availability-badge";
 import Reveal from "../components/effects/reveal";
+import PhoneCollapse from "../components/phone-collapse";
 import { ESTIMATOR_ON } from "../components/estimator/estimate";
 import { AUDIT_OFFER, HOME_PRICES, HOME_TIMELINES, PRICE_NOTE } from "../components/services/category-price";
 import services from "../content/services.json";
 import { pillarLabel, servicePath } from "../content/service-list";
 
 // Compact home-page "Services" strip. "What I do" above already explains each service, so this is about cost and
-// how to start: how the pricing works, the service tiles, the entry audit, then the main button with availability
-// beside it. Everything about price shows only once pricing is reviewed (ESTIMATOR_ON), like the estimator.
+// how to start: how the pricing works, the service tiles, the entry audit, then the main button. Everything about price shows only once pricing is reviewed (ESTIMATOR_ON), like the estimator.
 
 // The four service categories, cheapest first (services.json order): websites, automation, apps, custom software
 const TILES = services.categories
@@ -39,18 +38,20 @@ export default function ServicesSection({ id }: { id?: string }) {
               summary, the three prices side by side (once pricing is reviewed) and the typical timeline. Each
               card spans four rows of the parent grid (subgrid), so they line up across a row whatever the length
               of the text */}
+          {/* The title's link stretches over the whole card. Phones: the prices and timeline fold away behind a toggle,
+              so the four cards stay short */}
           <div className="grid gap-4 sm:grid-cols-2">
             {TILES.map((service) => (
-              <Link
+              <div
                 key={service.id}
-                href={servicePath(service.id)}
-                className="group row-span-4 grid grid-rows-subgrid gap-y-3 border border-line bg-surface p-5 transition-colors hover:border-accent/40 sm:p-6"
+                className="group relative grid gap-y-3 sm:row-span-4 sm:grid-rows-subgrid border border-line bg-surface p-5 transition-colors hover:border-accent/40 sm:p-6"
               >
                 <span className="block self-end space-y-1">
                   {service.pillars.length > 0 && <span className="block text-xs font-medium text-muted">{pillarLabel(service.pillars)}</span>}
-                  <span className="block text-lg font-bold leading-snug text-fg transition-colors group-hover:text-accent-ink">{service.title}</span>
+                  <Link href={servicePath(service.id)} className="block text-lg font-bold leading-snug text-fg transition-colors group-hover:text-accent-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink">{service.title}</Link>
                 </span>
                 <span className="block text-sm leading-relaxed text-muted">{service.summary}</span>
+                <PhoneCollapse label={ESTIMATOR_ON ? "Prices and timeline" : "Typical timeline"}>
                 {ESTIMATOR_ON ? (
                   <dl className="divide-y divide-line self-start border-y border-line sm:grid sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                     {HOME_PRICES[service.id].map((row) => (
@@ -67,7 +68,8 @@ export default function ServicesSection({ id }: { id?: string }) {
                   <span className="text-xs text-muted">Typical timeline</span>
                   <span className="font-semibold tabular-nums text-fg">{HOME_TIMELINES[service.id]}</span>
                 </span>
-              </Link>
+                </PhoneCollapse>
+              </div>
             ))}
           </div>
 
@@ -83,15 +85,12 @@ export default function ServicesSection({ id }: { id?: string }) {
             , and we&apos;ll work out the right first step together.
           </p>
 
-          {/* The main button on the left, availability on the right (alone on the right while the estimator is off) */}
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            {ESTIMATOR_ON && (
-              <Link href="/services#estimate" className="btn btn-primary">
-                Get your estimate in 2 minutes <ArrowRight className="w-4 h-4" />
-              </Link>
-            )}
-            <span className="ml-auto"><AvailabilityBadge /></span>
-          </div>
+          {/* The main button (availability is in the top nav, always on screen) */}
+          {ESTIMATOR_ON && (
+            <Link href="/services#estimate" className="btn btn-primary">
+              Get your estimate in 2 minutes <ArrowRight className="w-4 h-4" />
+            </Link>
+          )}
         </Reveal>
       </div>
     </section>

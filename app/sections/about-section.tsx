@@ -15,10 +15,10 @@ export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
 
         <div className={`grid gap-4 ${short && FEATURED ? "lg:grid-cols-[20rem_1fr]" : "lg:grid-cols-2"}`}>
           {/* Bio */}
-          <Reveal className={`border border-line bg-surface p-6 sm:p-8 space-y-6 ${short && FEATURED ? "lg:flex lg:flex-col lg:justify-center" : ""}`}>
+          <Reveal className={`border border-line bg-surface p-5 sm:p-8 space-y-6 ${short && FEATURED ? "lg:flex lg:flex-col lg:justify-center" : ""}`}>
             {short ? (
               <>
-                <p className="text-lg leading-relaxed text-muted text-left sm:text-justify">
+                <p className="text-base sm:text-lg leading-relaxed text-muted text-left sm:text-justify">
                   I&apos;m Soham. I started in civil and environmental engineering, then taught myself web, mobile and AI. Now I build <strong className="text-fg font-semibold">clear, reliable systems</strong> for businesses, kept <strong className="text-fg font-semibold">simple, practical and easy to grow</strong>. Trained as an engineer, I start from how your business runs and what your numbers say, not from a template.
                 </p>
               </>
@@ -43,10 +43,11 @@ export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
             </div>
           </Reveal>
 
-          {/* Beside the bio: the collage of paintings and drawings on the about page, one featured picture on the left on the home page */}
+          {/* Beside the bio: the collage of paintings and drawings on the about page, one featured picture on the left on the home page
+              (a landscape crop on phones, so it doesn't fill a whole screen) */}
           {short && FEATURED ? (
             <Reveal className="lg:order-first">
-              <figure className="relative aspect-[4/5] max-h-[28rem] w-full overflow-hidden border border-line bg-surface lg:max-h-none">
+              <figure className="relative aspect-[4/3] sm:aspect-[4/5] max-h-[28rem] w-full overflow-hidden border border-line bg-surface lg:max-h-none">
                 <LoadImg src={FEATURED.src} alt={FEATURED.alt} className="h-full w-full object-cover" />
               </figure>
             </Reveal>

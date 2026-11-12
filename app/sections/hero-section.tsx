@@ -70,7 +70,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="space-y-15">
+        <div className="space-y-8 sm:space-y-15">
           <p className="text-[clamp(1.05rem,1.9cqi,1.35rem)] leading-relaxed text-muted">
             I build <strong className="text-fg font-semibold">apps, websites and software</strong> that take your business off paper, automate the routine work and show you{" "}
             <strong className="text-fg font-semibold">clear numbers</strong>.

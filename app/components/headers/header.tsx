@@ -9,7 +9,7 @@ import { CONTACT_WHATSAPP, WhatsAppIcon } from "../ui/menu/contact-menu";
 import ContactCard from "./contact-card";
 import ThemeToggle from "../effects/theme-toggle";
 import { EASTER_EVENT } from "../effects/easter-jet";
-import { AVAILABLE_FOR_WORK } from "../../content/availability";
+import AvailabilityBadge from "../availability-badge";
 import { useActiveSection } from "../use-active-section";
 import ScrollProgress from "./scroll-progress";
 import LogoMark from "../logo-mark";
@@ -36,7 +36,8 @@ type NavProps = { pathname: string; hidden: boolean }
 const isActive = (href: string, pathname: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
 // Floating frosted nav bar: name (accent), page links (the current page sits on an accent block and hovered links
-// fade one in), availability and the theme toggle.
+// fade one in), the accepting-projects pill (from md, so it's always on screen; below md it sits under the floating
+// contact button instead) and the theme toggle.
 function TopNav({ pathname, hidden }: NavProps) {
   const taps = useRef<number[]>([])
 
@@ -86,18 +87,7 @@ function TopNav({ pathname, hidden }: NavProps) {
             )
           })}
         </nav>
-        <span className="hidden md:flex items-center gap-2 text-xs font-medium text-muted whitespace-nowrap">
-          {AVAILABLE_FOR_WORK ? (
-            // Same "live" beat as the Accepting projects badge (globals.css): the dot breathes, a ring ripples out
-            <span className="relative flex w-1.5 h-1.5" aria-hidden="true">
-              <span className="status-ring absolute inset-0 rounded-full border border-emerald-500" />
-              <span className="status-dot relative w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            </span>
-          ) : (
-            <span className="w-1.5 h-1.5 rounded-full bg-fg/30" aria-hidden="true" />
-          )}
-          {AVAILABLE_FOR_WORK ? "Available for work" : "Fully booked"}
-        </span>
+        <span className="hidden md:inline-flex shrink-0 whitespace-nowrap"><AvailabilityBadge /></span>
         <ThemeToggle />
       </div>
       {/* Phones/tablets: page progress line along the bottom edge (desktop has the side nav) */}
@@ -156,12 +146,14 @@ export default function Header() {
 
         {/* Floating contact button: on the home page once scrolled past the hero, on other pages always */}
         {showContact && (
-            <div ref={contactRef} className={`fixed right-4 sm:right-7 z-50 bottom-4 sm:bottom-[calc(1.75rem+var(--footer-lift,0px))] ${isPastHero ? "" : "sm:hidden"}`}>
+            <div ref={contactRef} className={`fixed right-4 sm:right-7 z-50 flex flex-col items-end bottom-4 sm:bottom-[calc(1.75rem+var(--footer-lift,0px))] ${isPastHero ? "" : "sm:hidden"}`}>
                 <ContactCard
                     open={isContactOpen}
+                    onClose={() => setIsContactOpen(false)}
                     className="absolute bottom-full right-0 mb-3 origin-bottom-right"
                 />
 
+                <div className="flex flex-col items-center">
                 {/* WhatsApp chat, just above the contact button; shows once CONTACT_WHATSAPP is set */}
                 {CONTACT_WHATSAPP && (
                     <a
@@ -183,6 +175,10 @@ export default function Header() {
                 >
                     <Mail className="w-6 h-6 sm:w-7 sm:h-7" />
                 </button>
+                </div>
+
+                {/* Phones and small tablets: availability under the contact button, always in view (the nav shows it from md) */}
+                <span className="mt-2 md:hidden"><AvailabilityBadge /></span>
             </div>
         )}
         </>
