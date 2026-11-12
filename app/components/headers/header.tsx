@@ -55,7 +55,7 @@ function TopNav({ pathname, hidden }: NavProps) {
     <header
       aria-hidden={hidden}
       inert={hidden}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] lg:w-[calc(100%-12rem)] border border-line bg-bg/60 backdrop-blur-xl transition-all duration-500 ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] lg:w-[calc(100%-12rem)] border border-line bg-bg/60 backdrop-blur-xl transition-[translate,opacity] duration-500 ${
         hidden ? "-translate-y-[150%] opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
       }`}
     >
@@ -144,9 +144,10 @@ export default function Header() {
         {/* On the home page the nav stays out of the hero and drops in once "What I do" reaches the top */}
         <TopNav pathname={pathname} hidden={pathname === "/" && !pastPillarsTop} />
 
-        {/* Floating contact button: on the home page once scrolled past the hero, on other pages always */}
+        {/* Floating contact button: on the home page once scrolled past the hero, on other pages always. While its sheet
+            is open on phones it sits above the other floating buttons (back-to-top) */}
         {showContact && (
-            <div ref={contactRef} className={`fixed right-4 sm:right-7 z-50 flex flex-col items-end bottom-4 sm:bottom-[calc(1.75rem+var(--footer-lift,0px))] ${isPastHero ? "" : "sm:hidden"}`}>
+            <div ref={contactRef} className={`fixed right-4 sm:right-7 flex flex-col items-end ${isContactOpen ? "z-50 max-sm:z-[60]" : "z-50"} bottom-4 sm:bottom-[calc(1.75rem+var(--footer-lift,0px))] ${isPastHero ? "" : "sm:hidden"}`}>
                 <ContactCard
                     open={isContactOpen}
                     onClose={() => setIsContactOpen(false)}

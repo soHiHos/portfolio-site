@@ -19,6 +19,17 @@ html {
   html { scroll-snap-type: y proximity; }
 }
 
+/* Phones: the page behind the open contact sheet doesn't scroll (header.tsx sets data-contact-open) */
+@media (max-width: 39.99rem) {
+  html[data-contact-open] { overflow: hidden; }
+}
+
+/* Theme switch (theme-toggle.tsx): the view transition's snapshots lose backdrop blur, so frosted chrome (the nav,
+   back-to-top, the price bar) would flash see-through during the wipe. While it runs they take the solid page colour. */
+:root[data-theme-switching] [class*="backdrop-blur"] {
+  background-color: var(--background);
+}
+
 /* Slim themed scrollbar. Standard properties cover Chrome/Edge/Firefox; the ::-webkit-scrollbar
    rules are the fallback for Safari (Chromium ignores them when scrollbar-color is set). */
 html {

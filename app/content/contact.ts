@@ -1,6 +1,7 @@
 // Contact details, shared by client components and server code (the ask route)
-// The live site's address: canonical links, the sitemap and structured data
-export const SITE_URL = "https://sohambuilds.in";
+// The live site's address: canonical links, the sitemap and structured data. It is the www host, where Vercel serves the
+// site (the bare domain redirects there), so link previews and canonicals never point at a redirect
+export const SITE_URL = "https://www.sohambuilds.in";
 export const CONTACT_EMAIL = "sohamkar.work@gmail.com";
 export const CONTACT_LINKEDIN = "https://www.linkedin.com/in/soham-kar-99b15844a/";
 export const CONTACT_GITHUB = "https://github.com/soHiHos";

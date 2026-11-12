@@ -36,12 +36,17 @@ export default function ThemeToggle() {
     const y = e.clientY
     const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
 
-    document.startViewTransition(() => flushSync(() => applyTheme(next))).ready.then(() => {
-      document.documentElement.animate(
+    // Frosted chrome goes solid for the length of the wipe (globals.css), set before the old snapshot is taken
+    const root = document.documentElement
+    root.setAttribute("data-theme-switching", "")
+    const transition = document.startViewTransition(() => flushSync(() => applyTheme(next)))
+    transition.ready.then(() => {
+      root.animate(
         { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
         { duration: 600, easing: "cubic-bezier(0.4, 0, 0.2, 1)", pseudoElement: "::view-transition-new(root)" }
       )
     })
+    transition.finished.finally(() => root.removeAttribute("data-theme-switching"))
   }
 
   return (
