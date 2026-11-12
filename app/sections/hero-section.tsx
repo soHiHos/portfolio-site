@@ -1,17 +1,18 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight, ChartLine, Globe, ScanText, Smartphone, Workflow } from "lucide-react";
 import StaggeredText from "../components/effects/staggered-text";
 import { AVAILABLE_FOR_WORK } from "../content/availability";
 
-// Verb + object pairs, so the rotation covers the three pillars (digitise, automate, analyse) and the apps and sites
+// Verb + object pairs, so the rotation covers the three pillars (digitise, automate, analyse) and the apps and sites,
+// each with an icon that leads the line
 const WORDS = [
-  { verb: "digitise", object: "registers" },
-  { verb: "automate", object: "invoicing" },
-  { verb: "analyse", object: "sales" },
-  { verb: "build", object: "app" },
-  { verb: "launch", object: "website" },
+  { verb: "digitise", object: "registers", icon: ScanText },
+  { verb: "automate", object: "invoicing", icon: Workflow },
+  { verb: "analyse", object: "sales", icon: ChartLine },
+  { verb: "build", object: "app", icon: Smartphone },
+  { verb: "launch", object: "website", icon: Globe },
 ];
 
 export default function HeroSection() {
@@ -22,6 +23,8 @@ export default function HeroSection() {
     const interval = setInterval(() => setWordIndex((i) => (i + 1) % WORDS.length), 4500);
     return () => clearInterval(interval);
   }, [wordIndex]);
+
+  const Icon = WORDS[wordIndex].icon;
 
   return (
     <section>
@@ -41,15 +44,15 @@ export default function HeroSection() {
         </div>
 
         {/* Name + rotating word */}
-        <div className="space-y-[clamp(1rem,2.5cqi,1.75rem)]">
+        <div className="space-y-[clamp(0.25rem,0.75cqi,0.5rem)]">
           {/* Name fills the content column's width at any screen size ("SOHAM KAR" is ~5.15em wide,
               so 19cqi ≈ 98% of the column), aligned with the rest of the hero */}
           <h1 className="text-[19cqi] leading-[0.82] text-[color:var(--name)] font-bold tracking-tighter whitespace-nowrap">
             <StaggeredText text="SOHAM KAR" />
           </h1>
-          <div className="flex flex-wrap items-center gap-x-[clamp(0.75rem,2cqi,1.5rem)] gap-y-3">
+          <div className="flex flex-wrap items-center gap-x-[clamp(0.75rem,2cqi,1.5rem)] gap-y-3 leading-[1.15]">
             <span className="inline-flex items-center gap-[clamp(0.5rem,1.2cqi,0.875rem)] text-[clamp(1.1rem,3.2cqi,2.25rem)] text-fg font-semibold whitespace-nowrap">
-              <span className="w-[0.4em] h-[0.4em] bg-accent" aria-hidden="true" />
+              <Icon key={`icon-${wordIndex}`} className="w-[0.9em] h-[0.9em] shrink-0 text-accent motion-safe:animate-[word-in_500ms_cubic-bezier(0.2,0.7,0.2,1)_both]" strokeWidth={2.25} aria-hidden="true" />
               I <span key={wordIndex} className="inline-block motion-safe:animate-[word-in_500ms_cubic-bezier(0.2,0.7,0.2,1)_both]">{WORDS[wordIndex].verb}</span> your
             </span>
             <span
@@ -62,7 +65,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="space-y-7">
+        <div className="space-y-15">
           <p className="text-[clamp(1.05rem,1.9cqi,1.35rem)] leading-relaxed text-muted">
             I build <strong className="text-fg font-semibold">apps, websites and software</strong> that take your business off paper, automate the routine work and show you{" "}
             <strong className="text-fg font-semibold">clear numbers</strong>.

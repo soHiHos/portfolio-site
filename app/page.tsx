@@ -21,8 +21,9 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(SITE_JSON_LD)} />
       <SideNav />
       <div>
-        {/* The hero absorbs main's top padding so it fills exactly the first screen */}
-        <div className="snap-start min-h-svh -mt-24 sm:-mt-28 md:-mt-35 pt-24 sm:pt-28 md:pt-35 flex flex-col justify-center">
+        {/* The hero absorbs main's top padding so it fills exactly the first screen; equal top and bottom padding
+            (enough to clear the floating header) keep its content centred vertically on the screen */}
+        <div className="snap-start min-h-svh -mt-24 sm:-mt-28 md:-mt-35 py-16 flex flex-col justify-center">
           <HeroSection />
         </div>
         <div className="snap-start"><PillarsSection id="what-i-do" /></div>
