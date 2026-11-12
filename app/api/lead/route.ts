@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { NextResponse } from 'next/server';
-import { CONTACT_EMAIL, CV_PATH } from '../../content/contact';
+import { CONTACT_EMAIL, CONTACT_WHATSAPP, CV_PATH, SITE_URL } from '../../content/contact';
 import { emailConfig, sendEmail as sendMail, type Attachment } from './email';
 import { estimatePdfBuffer } from './estimate-pdf-server';
 import { SERVICE_LIST, TIMELINES } from '../../content/service-list';
@@ -72,8 +72,8 @@ const emailVisitor = (to: string, subject: string, body: string, attachments?: A
   sendEmail(to, subject, body, CONTACT_EMAIL, attachments).catch((err) => (console.error('lead: visitor email error', err), false));
 
 // Services and pricing guides (service-pdfs/, outside public so they only go out by email), by service id.
-// Websites has no guide yet.
 const SERVICE_PDFS: Record<string, string> = {
+  websites: 'Soham-Kar-Websites.pdf',
   'ai-automations': 'Soham-Kar-Automation-and-Analysis.pdf',
   'custom-software': 'Soham-Kar-Custom-Business-Software.pdf',
   'mobile-apps': 'Soham-Kar-Mobile-Apps.pdf',
@@ -93,7 +93,13 @@ async function servicePdfs(services: string[]): Promise<Attachment[]> {
 }
 
 const firstName = (name: string) => name.split(/\s+/)[0] || 'there';
-const SIGN_OFF = `Soham Kar\n${CONTACT_EMAIL}`;
+const SIGN_OFF = [
+  'Soham Kar',
+  'Raipur (C.G.), India',
+  CONTACT_EMAIL,
+  ...(CONTACT_WHATSAPP ? [`WhatsApp: https://wa.me/${CONTACT_WHATSAPP}`] : []),
+  SITE_URL,
+].join('\n');
 
 // A brief from the contact form: needs a message, a way to reply (email or WhatsApp) and consent. Not tied to the
 // estimator, so it works while the estimator is hidden.

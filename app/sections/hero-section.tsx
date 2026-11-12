@@ -33,9 +33,9 @@ export default function HeroSection() {
       <div className="@container text-left py-[clamp(2.5rem,6cqi,4rem)] space-y-[clamp(1.75rem,4cqi,2.75rem)]">
         {/* Kicker */}
         <div className="flex flex-col gap-y-2 text-[clamp(0.8rem,1.4cqi,1rem)] font-medium text-muted">
-          <span>Based in Raipur (C.G.), India</span>
+          <span className="font-bold">Based in Raipur (C.G.), India</span>
           <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
-            <span>Apps · Websites · Digitalisation · Automation · Analysis</span>
+            <span className="font-bold">Apps · Websites · Digitalisation · Automation · Analysis</span>
             <span className="flex items-center gap-2 text-fg">
               <span className={`w-2 h-2 rounded-full ${AVAILABLE_FOR_WORK ? "bg-emerald-500" : "bg-fg/30"}`} aria-hidden="true" />
               {AVAILABLE_FOR_WORK ? "Available for new projects" : "Fully booked right now"}
@@ -52,7 +52,12 @@ export default function HeroSection() {
           </h1>
           <div className="flex flex-wrap items-center gap-x-[clamp(0.75rem,2cqi,1.5rem)] gap-y-3 leading-[1.15]">
             <span className="inline-flex items-center gap-[clamp(0.5rem,1.2cqi,0.875rem)] text-[clamp(1.1rem,3.2cqi,2.25rem)] text-fg font-semibold whitespace-nowrap">
-              <Icon key={`icon-${wordIndex}`} className="w-[0.9em] h-[0.9em] shrink-0 text-accent motion-safe:animate-[word-in_500ms_cubic-bezier(0.2,0.7,0.2,1)_both]" strokeWidth={2.25} aria-hidden="true" />
+              {/* Rhombus badge: a square in the name's colour (navy, orange in dark mode) turned 45° that spins a half turn with each new word, with the
+                  word's icon upright inside it */}
+              <span className="relative mx-[0.2em] inline-flex w-[1.1em] h-[1.1em] shrink-0 items-center justify-center" aria-hidden="true">
+                <span key={`rhombus-${wordIndex}`} className="absolute inset-0 rotate-45 bg-[color:var(--name)] motion-safe:animate-[rhombus-spin_600ms_cubic-bezier(0.2,0.7,0.2,1)_both]" />
+                <Icon key={`icon-${wordIndex}`} className="relative w-[0.62em] h-[0.62em] text-white motion-safe:animate-[word-in_500ms_cubic-bezier(0.2,0.7,0.2,1)_both]" strokeWidth={2.25} />
+              </span>
               I <span key={wordIndex} className="inline-block motion-safe:animate-[word-in_500ms_cubic-bezier(0.2,0.7,0.2,1)_both]">{WORDS[wordIndex].verb}</span> your
             </span>
             <span

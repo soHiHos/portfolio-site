@@ -247,6 +247,12 @@ p {
   to { opacity: 1; transform: none; }
 }
 
+/* Hero rhombus badge: a half turn into its resting 45° each time the word changes */
+@keyframes rhombus-spin {
+  from { rotate: -135deg; }
+  to { rotate: 45deg; }
+}
+
 /* Hero name stagger (components/effects/staggered-text.tsx) */
 @keyframes letter-rise {
   from { opacity: 0; transform: translateY(0.4em); }

@@ -150,7 +150,7 @@ Each map SVG has named layers: `ground`, `parks`, `water`, `waterway`, `streets-
 
 ### Intro (use as written)
 
-> **Software built around your business, run for you every month.**
+> **Apps, websites and software that take your business off paper, automate the routine work and show you clear numbers.**
 > You pay a setup fee and a monthly plan. I host it, fix it and keep it up to date, so your team just uses it. If you ever want to own the code, you can.
 
 ### The four services
