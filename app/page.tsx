@@ -7,9 +7,13 @@ import ServicesSection from "./sections/services-section";
 import ProcessSection from "./sections/process-section";
 import PillarsSection from "./sections/pillars-section";
 import type { Metadata } from "next";
-import { SITE_JSON_LD, jsonLdHtml } from "./content/seo";
+import { OG_IMAGE, SHARE_DESCRIPTION, SITE_JSON_LD, SITE_TITLE, jsonLdHtml } from "./content/seo";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+// The home page's own og:url (a page's openGraph replaces the layout's, so the rest of the preview is restated)
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { title: SITE_TITLE, description: SHARE_DESCRIPTION, url: "/", type: "website", images: OG_IMAGE },
+};
 
 // Only the hero is a full screen. Scrolling snaps (proximity) at two points, the hero and the
 // start of What I do, so leaving the hero lands cleanly on the first section; after that sections keep

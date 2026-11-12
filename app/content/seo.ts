@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, CONTACT_WHATSAPP, SITE_URL } from "./contact";
 
-// Page metadata with its own canonical and its own link preview. Without openGraph/twitter here, a page inherits the
-// layout's, so a shared link to any page would show the home page's title and description. A page that sets its own
-// openGraph loses the root opengraph-image, so the image is named here too.
-const OG_IMAGE = "/opengraph-image";
+// The site's title and descriptions: the layout's defaults and the home page's link preview
+export const SITE_TITLE = "Soham Kar · Apps, websites, digitalisation and automation";
+export const SITE_DESCRIPTION =
+  "Soham Kar builds apps, websites and software for growing businesses in Raipur and across India: digitalisation, automation and analysis that take you off paper and show you clear numbers.";
+export const SHARE_DESCRIPTION = "Apps, websites, digitalisation, automation and analysis for growing businesses in Raipur and across India.";
+
+// Link preview image: a static, small PNG (public/og.png, 1200×630, ~70 KB) so LinkedIn, Instagram, WhatsApp and
+// others fetch it instantly instead of waiting on a generated image. Size and alt are stated so crawlers needn't guess.
+export const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: SITE_TITLE };
+
+// Page metadata with its own canonical and its own link preview (og:url included). Without openGraph/twitter here, a
+// page inherits the layout's, so a shared link to any page would show the home page's title and description.
 
 export function pageMeta(title: string, description: string, path: string): Metadata {
   return {
@@ -52,7 +60,7 @@ export const SITE_JSON_LD = {
       name: "Soham Kar",
       url: SITE_URL,
       description: "Apps, websites and software for growing businesses in Raipur and across India: digitalisation, automation and analysis.",
-      image: `${SITE_URL}/opengraph-image`,
+      image: `${SITE_URL}${OG_IMAGE.url}`,
       address: ADDRESS,
       areaServed: { "@type": "Country", name: "India" },
       email: CONTACT_EMAIL,

@@ -10,6 +10,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE_URL } from "./content/contact";
 import { themeScript } from "./components/effects/ist-theme";
+import { OG_IMAGE, SHARE_DESCRIPTION, SITE_DESCRIPTION, SITE_TITLE } from "./content/seo";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -25,19 +26,10 @@ const inter = Inter({
 // (a canonical in the layout would point every page at the home page)
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Soham Kar · Apps, websites, digitalisation and automation",
-  description:
-    "Soham Kar builds apps, websites and software for growing businesses in Raipur and across India: digitalisation, automation and analysis that take you off paper and show you clear numbers.",
-  openGraph: {
-    title: "Soham Kar · Apps, websites, digitalisation and automation",
-    description: "Apps, websites, digitalisation, automation and analysis for growing businesses in Raipur and across India.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Soham Kar · Apps, websites, digitalisation and automation",
-    description: "Apps, websites, digitalisation, automation and analysis for growing businesses in Raipur and across India.",
-  },
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: { title: SITE_TITLE, description: SHARE_DESCRIPTION, type: "website", images: OG_IMAGE },
+  twitter: { card: "summary_large_image", title: SITE_TITLE, description: SHARE_DESCRIPTION, images: OG_IMAGE },
 };
 
 export default function RootLayout({
