@@ -60,7 +60,7 @@ export default function ProblemPicker({
           <ChevronDown className={`w-4 h-4 shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`} aria-hidden="true" />
         </button>
         {open && (
-          <ul role="listbox" className="absolute inset-x-0 top-full z-20 mt-1 max-h-80 overflow-auto border border-line bg-surface divide-y divide-line">
+          <ul role="listbox" className="absolute inset-x-0 top-full z-20 mt-1 max-h-80 overflow-auto border border-line bg-surface dark:bg-[var(--panel-2)] divide-y divide-line">
             {[...options, { id: "other", label: "Other (describe it yourself)" }].map((o) => {
               const on = o.id === "other" ? other !== undefined : value.includes(o.id)
               return (

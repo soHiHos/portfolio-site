@@ -92,7 +92,12 @@ async function servicePdfs(services: string[]): Promise<Attachment[]> {
   return read.filter((a): a is Attachment => a !== null);
 }
 
-const firstName = (name: string) => name.split(/\s+/)[0] || 'there';
+// Mail to the visitor goes to an address nobody has verified, so it carries no free text they typed: the greeting
+// uses their first name only if it is plain letters (no links), otherwise "there".
+const firstName = (name: string) => {
+  const first = name.split(/\s+/)[0];
+  return /^[\p{L}'-]{1,30}$/u.test(first) ? first : 'there';
+};
 const SIGN_OFF = [
   'Soham Kar',
   'Founder, sohambuilds.in',
@@ -138,11 +143,9 @@ async function handleBrief(body: Record<string, unknown>) {
           ? ['', `I've attached our services and pricing ${guides.length > 1 ? 'guides' : 'guide'}, so you can look through the prices and examples before we talk.`]
           : []),
         '',
-        'What you sent:',
+        'What you picked:',
         `Services: ${serviceNames}`,
         `Timeline: ${timeline || '-'}`,
-        '',
-        message,
         '',
         'If anything is missing, just reply to this email.',
         '',
@@ -236,25 +239,25 @@ export async function POST(req: Request) {
     `Timeline: ${e.timeline}`,
   ];
 
-  // The same PDF the browser downloads, emailed to the visitor and copied to Soham. If it can't be built, both
-  // still get a plain-text email.
+  // The same PDF the browser downloads, copied to Soham. The visitor already has it from the browser, and it prints
+  // their name and business, so their email gets the figures as fixed text instead. If it can't be built, Soham
+  // still gets a plain-text email.
   const pdf = await estimatePdfBuffer(contact, e, answers.payment === 'buyout').catch((err) => (console.error('lead: estimate pdf failed', err), null));
   const attachments = pdf ? [{ filename: `Price estimate - ${contact.business.replace(/[\\/:*?"<>|]/g, '')}.pdf`, content: pdf }] : [];
   const visitorEmail = emailVisitor(
     contact.email,
-    `Your price estimate, ${contact.business}`,
+    'Your price estimate',
     [
       `Hi ${firstName(contact.name)},`,
       '',
-      pdf ? 'Thanks for using the estimator. Your price estimate is attached as a PDF.' : 'Thanks for using the estimator. Here is a summary of your price estimate.',
+      'Thanks for using the estimator. Here is a summary of your price estimate (the PDF downloaded in your browser).',
       '',
       ...estimateLines,
       '',
       'This is an estimate, not a quote. Your proposal comes after a free call: reply to this email with a time that suits you.',
       '',
       SIGN_OFF,
-    ].join('\n'),
-    attachments
+    ].join('\n')
   );
 
   const [, saved, emailed] = await Promise.all([

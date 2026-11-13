@@ -476,3 +476,10 @@ p {
   .btn-link::after { bottom: calc(0.625rem - 3px); }
   input, select, textarea { font-size: 1rem; }
 }
+
+/* Dark theme: the native select's option list gets a solid panel colour so it stands off the card behind it
+   (the select itself is see-through). Chrome, Edge and Firefox honour this; Safari and phones use their own list. */
+.dark select option {
+  background-color: var(--panel-2);
+  color: var(--foreground);
+}
