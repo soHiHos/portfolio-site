@@ -12,8 +12,8 @@ import { CATEGORIES, PROJECTS, type Project } from "../content/projects";
 import { CONTACT_GITHUB } from "../content/contact";
 
 export const metadata: Metadata = pageMeta(
-  "Projects · Soham Kar",
-  "Soham Kar's projects: apps, websites and custom software built for clients, plus his own work in automation, data analysis and hardware.",
+  "Projects · sohambuilds.in",
+  "Projects by sohambuilds.in: apps, websites and custom software built for clients, plus the founder's own work in automation, data analysis and hardware.",
   "/projects",
 );
 
@@ -84,7 +84,7 @@ export default function ProjectsPage() {
             <SectionHeading title="Projects" />
             {/* Sits on the map, so it gets the glass panel like the service pages' descriptions */}
             <p className="glass px-4 py-3 text-base leading-relaxed text-muted">
-              Client work and my own projects: apps, websites and custom software, plus digitalisation, automation and data analysis. Open any project for the details.
+              Client work and our own projects: apps, websites and custom software, plus digitalisation, automation and data analysis. Open any project for the details.
             </p>
           </div>
           <ProjectGrid projects={MAIN} />

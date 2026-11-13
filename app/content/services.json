@@ -5,10 +5,10 @@
   },
   "hero": {
     "title": "Apps, websites and software that take your business off paper, automate the routine work and show you clear numbers",
-    "promise": "I build apps, websites and software that take your business off paper, automate the routine work and show you clear numbers."
+    "promise": "We build apps, websites and software that take your business off paper, automate the routine work and show you clear numbers."
   },
   "problems": {
-    "intro": "Most growing businesses I meet have the same six problems.",
+    "intro": "Most growing businesses we meet have the same six problems.",
     "items": [
       {
         "id": "retyping",
@@ -70,7 +70,7 @@
   ],
   "pillarsAlso": {
     "title": "Apps and websites",
-    "body": "Need just one of these? I build both on their own, and they're how the three steps above reach your team and your customers.",
+    "body": "Need just one of these? We build both on their own, and they're how the three steps above reach your team and your customers.",
     "categories": ["mobile-apps", "websites"]
   },
   "planCovers": {
@@ -78,16 +78,16 @@
       "Hosting, backups and uptime monitoring.",
       "Bug fixes: anything that doesn't work the way the signed scope says. Critical issues (the system is down or blocks work) get a reply within {{replyUrgentDays}} business day, everything else within {{replyOtherDays}} business days, Monday to Friday.",
       "Security and dependency updates.",
-      "For the first {{adjustmentDays}} days after go-live: adjustments to what I built (not new features).",
+      "For the first {{adjustmentDays}} days after go-live: adjustments to what we built (not new features).",
       "After that: small changes up to {{smallChangeHours}} hours a month. Unused hours don't roll over."
     ],
     "notIncluded": [
       "New screens, reports, fields or modules.",
       "Changing how something works when it already works as agreed.",
       "New integrations (WhatsApp, payments, Tally and similar) and new third-party services.",
-      "Anything beyond the {{smallChangeHours}} hours in a month. Bigger changes are quoted before I start."
+      "Anything beyond the {{smallChangeHours}} hours in a month. Bigger changes are quoted before we start."
     ],
-    "test": "If it doesn't work the way we agreed, I fix it free. If it works as agreed and you want it different, that's a change.",
+    "test": "If it doesn't work the way we agreed, we fix it free. If it works as agreed and you want it different, that's a change.",
     "note": "Every third-party service the build uses is named in the signed scope before work starts, with what it's used for. A new one added later counts as a change and is quoted."
   },
   "proof": {
@@ -116,7 +116,7 @@
       "page": {
         "metaTitle": "Website design and development in Raipur, India",
         "metaDescription": "Fast, mobile-friendly business websites and landing pages for businesses in Raipur and across India, with WhatsApp lead capture, SEO basics and hosting set up for you.",
-        "intro": "Your website is often the first thing a customer checks before they call. I build fast, clear sites that work well on a phone, explain what you do in plain words and send every enquiry straight to your WhatsApp or inbox. The site files are yours after final payment, and an optional care plan keeps it hosted and up to date.",
+        "intro": "Your website is often the first thing a customer checks before they call. We build fast, clear sites that work well on a phone, explain what you do in plain words and send every enquiry straight to your WhatsApp or inbox. The site files are yours after final payment, and an optional care plan keeps it hosted and up to date.",
         "forWho": [
           "New businesses that need to look credible online",
           "Shops, studios and service businesses that get most enquiries on WhatsApp",
@@ -128,7 +128,7 @@
           {
             "step": "Fill out the form, then a free call or Google Meet",
             "label": "Form and free call",
-            "blurb": "I reply within 48 hours by email or WhatsApp, and on a free call we go through what the site needs to do, your budget and when you'd like it live."
+            "blurb": "We reply within 48 hours by email or WhatsApp, and on a free call we go through what the site needs to do, your budget and when you'd like it live."
           },
           {
             "step": "A written proposal in 2–3 days",
@@ -138,7 +138,7 @@
           {
             "step": "Build, with a live preview",
             "label": "Build and review",
-            "blurb": "I start building straight away and share a live preview for you to review. Changes within the agreed package are included."
+            "blurb": "We start building straight away and share a live preview for you to review. Changes within the agreed package are included."
           },
           {
             "step": "Final payment, then launch",
@@ -162,11 +162,11 @@
           },
           {
             "q": "Will people find my site on Google?",
-            "a": "Every site gets the SEO basics: fast loading, clear page titles and descriptions, and a sitemap so Google can find every page. Business and Signature also get basic GEO (generative engine optimisation): structured data and clearly written pages, so AI answer tools such as ChatGPT and Google's AI Overviews can understand your business and mention it. Signature adds advanced SEO and speed tuning. Rankings and mentions depend on your market, so I don't promise positions."
+            "a": "Every site gets the SEO basics: fast loading, clear page titles and descriptions, and a sitemap so Google can find every page. Business and Signature also get basic GEO (generative engine optimisation): structured data and clearly written pages, so AI answer tools such as ChatGPT and Google's AI Overviews can understand your business and mention it. Signature adds advanced SEO and speed tuning. Rankings and mentions depend on your market, so we don't promise positions."
           },
           {
             "q": "Do I own the website?",
-            "a": "Yes. The site files are yours after final payment. For the domain, you can buy it yourself and give me access, and I'll guide you if you're not sure how, or I can buy it for you in your business's name at cost. Either way it ends up in your own account, so you always control it."
+            "a": "Yes. The site files are yours after final payment. For the domain, you can buy it yourself and give us access, and we'll guide you if you're not sure how, or we can buy it for you in your business's name at cost. Either way it ends up in your own account, so you always control it."
           }
         ]
       },
@@ -212,7 +212,7 @@
             "text": "Everything in Simple, plus it sends enquiries to your WhatsApp, or to the lead dashboard on Signature, and notifies you of what visitors are asking, so you can see which questions your site doesn't answer yet."
           }
         ],
-        "disclaimer": "AI can make mistakes. The assistant answers from your site's content, but it can occasionally give wrong or made-up answers, so it shows visitors a short notice saying so. I'm not responsible for its answers or for decisions based on them."
+        "disclaimer": "AI can make mistakes. The assistant answers from your site's content, but it can occasionally give wrong or made-up answers, so it shows visitors a short notice saying so. We're not responsible for its answers or for decisions based on them."
       }
     },
     {
@@ -222,7 +222,7 @@
       "page": {
         "metaTitle": "Business automation and MIS reporting for Indian businesses",
         "metaDescription": "Invoice automation, payment reminders, WhatsApp data entry, document capture and automated MIS reports for growing businesses in India. Works with your Excel sheets and billing software exports.",
-        "intro": "Most growing businesses lose hours every week retyping data, chasing payments and building reports by hand. I set up automations that do that routine work for you: invoices drafted from dispatch slips, reminders sent on time, bills read into clean data, and a weekly report on your phone that shows sales, stock and dues. Everything works with the data and tools you already use, and invoices go to customers only after your approval.",
+        "intro": "Most growing businesses lose hours every week retyping data, chasing payments and building reports by hand. We set up automations that do that routine work for you: invoices drafted from dispatch slips, reminders sent on time, bills read into clean data, and a weekly report on your phone that shows sales, stock and dues. Everything works with the data and tools you already use, and invoices go to customers only after your approval.",
         "forWho": [
           "Manufacturers, distributors, warehouses and retailers who still retype dispatch slips, POs and bills",
           "Businesses that run orders and daily updates on WhatsApp",
@@ -238,11 +238,11 @@
         "faq": [
           {
             "q": "Does this work with Tally or our billing software?",
-            "a": "Usually, yes. I work with the exports your billing and accounting software already produces, such as Excel or CSV files, so you keep using what you have."
+            "a": "Usually, yes. We work with the exports your billing and accounting software already produces, such as Excel or CSV files, so you keep using what you have."
           },
           {
             "q": "Will WhatsApp messages come from our own number?",
-            "a": "Yes. I set up a dedicated WhatsApp Business number in your company's name, and reminders and updates go out from it. WhatsApp's message fees are billed at cost."
+            "a": "Yes. We set up a dedicated WhatsApp Business number in your company's name, and reminders and updates go out from it. WhatsApp's message fees are billed at cost."
           },
           {
             "q": "What is Business Pulse?",
@@ -320,7 +320,7 @@
         {
           "id": "paper-to-digital",
           "title": "Paper and documents to data",
-          "summary": "Send photos of registers, job cards and stock books, or forward bills, invoices and POs. I turn them into clean, searchable data in your records."
+          "summary": "Send photos of registers, job cards and stock books, or forward bills, invoices and POs. We turn them into clean, searchable data in your records."
         },
         {
           "id": "daily-entry",
@@ -351,7 +351,7 @@
       "addon": {
         "label": "Add-on",
         "title": "AI, only where it's worth it",
-        "body": "Not every automation needs AI. Most run on plain, predictable rules. During discovery I'll suggest AI only where it saves real time and is worth its running cost for how much you'll use it. Quoted separately; AI usage is billed at cost.",
+        "body": "Not every automation needs AI. Most run on plain, predictable rules. During discovery we'll suggest AI only where it saves real time and is worth its running cost for how much you'll use it. Quoted separately; AI usage is billed at cost.",
         "options": [
           {
             "name": "Reading documents",
@@ -366,7 +366,7 @@
             "text": "Ask about sales, stock or dues in plain language and get an answer from your own data."
           }
         ],
-        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so I build it to suggest and draft, and your team checks before acting on it. I'm not responsible for its output or for decisions based on it."
+        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so we build it to suggest and draft, and your team checks before acting on it. We're not responsible for its output or for decisions based on it."
       }
     },
     {
@@ -376,7 +376,7 @@
       "page": {
         "metaTitle": "Android and iPhone app development in Raipur, India",
         "metaDescription": "Android and iPhone apps for procurement, B2B ordering, payments and team collaboration, built once for both. Every app includes an admin dashboard, secure login and publishing to the Play Store and App Store.",
-        "intro": "An app puts your business in the pocket of your team, your suppliers and your buyers. I build procurement apps for supplier search, requisitions and approvals; B2B ordering apps where buyers browse your catalog, reorder and manage their account; collaboration apps that keep projects and team updates in one place; and payment apps for invoicing, vendor payments and collections. Each app is built once for both Android and iPhone, and comes with an admin dashboard so you stay in control.",
+        "intro": "An app puts your business in the pocket of your team, your suppliers and your buyers. We build procurement apps for supplier search, requisitions and approvals; B2B ordering apps where buyers browse your catalog, reorder and manage their account; collaboration apps that keep projects and team updates in one place; and payment apps for invoicing, vendor payments and collections. Each app is built once for both Android and iPhone, and comes with an admin dashboard so you stay in control.",
         "forWho": [
           "Businesses whose purchase requests and approvals run on calls, chats and paper",
           "Manufacturers and distributors whose B2B buyers order again and again",
@@ -401,11 +401,11 @@
           },
           {
             "q": "Who owns and pays for the app store accounts?",
-            "a": "Your business. The Play Store and App Store accounts are created in your name, and you pay their fees directly to Google and Apple: a one-time fee of about ₹2,400 for Google Play and about ₹9,000 a year for Apple. I guide you through setting them up, then manage them for you, or you add me as a developer."
+            "a": "Your business. The Play Store and App Store accounts are created in your name, and you pay their fees directly to Google and Apple: a one-time fee of about ₹2,400 for Google Play and about ₹9,000 a year for Apple. We guide you through setting them up, then manage them for you, or you add us as a developer."
           },
           {
             "q": "How long do the app stores take to approve the app?",
-            "a": "Typically 7–14 days after I submit it, and sometimes longer. Apple and Google review every new app and every update, and sometimes ask for changes before approving; I handle the submission and anything the reviewers ask for. The store review is built into the timeline in your proposal."
+            "a": "Typically 7–14 days after we submit it, and sometimes longer. Apple and Google review every new app and every update, and sometimes ask for changes before approving; we handle the submission and anything the reviewers ask for. The store review is built into the timeline in your proposal."
           },
           {
             "q": "How do updates reach the people using the app?",
@@ -421,7 +421,7 @@
           },
           {
             "q": "How many users can the app handle?",
-            "a": "I build for business teams, dealers and customers, typically up to 50,000 to 90,000 monthly active users. For a mass-market consumer app, a larger team will serve you better."
+            "a": "We build for business teams, dealers and customers, typically up to 50,000 to 90,000 monthly active users. For a mass-market consumer app, a larger team will serve you better."
           }
         ],
         "includesTitle": "Every app includes",
@@ -447,22 +447,22 @@
           {
             "step": "Fill out the form, then a free call or Google Meet",
             "label": "Form and free call",
-            "blurb": "I reply within 48 hours by email or WhatsApp. On a free call we go through who will use the app, what they need to do on it, your budget and when you'd like to start."
+            "blurb": "We reply within 48 hours by email or WhatsApp. On a free call we go through who will use the app, what they need to do on it, your budget and when you'd like to start."
           },
           {
             "step": "Discovery, then a written proposal in 5–7 days",
             "label": "Discovery and proposal",
-            "blurb": "I see how your team or customers work today, in person around Raipur or on a screen share. Within 5–7 days you get the screens, roles, price and timeline in writing, free and valid for {{validDays}} days."
+            "blurb": "We see how your team or customers work today, in person around Raipur or on a screen share. Within 5–7 days you get the screens, roles, price and timeline in writing, free and valid for {{validDays}} days."
           },
           {
             "step": "A clickable prototype, then built in stages",
             "label": "Prototype and build",
-            "blurb": "Approve the proposal and pay 50% of setup. I design the screens as a clickable prototype for your sign-off, then build in stages, with a test version on your phone at each milestone."
+            "blurb": "Approve the proposal and pay 50% of setup. We design the screens as a clickable prototype for your sign-off, then build in stages, with a test version on your phone at each milestone."
           },
           {
             "step": "Live testing, then store review and launch",
             "label": "Testing and launch",
-            "blurb": "Your team tries it on their own phones; the other 50% is due at live testing. I then submit it to the Play Store and App Store and run a handover session once it's approved."
+            "blurb": "Your team tries it on their own phones; the other 50% is due at live testing. We then submit it to the Play Store and App Store and run a handover session once it's approved."
           },
           {
             "step": "After go-live",
@@ -503,8 +503,8 @@
           }
         ],
         "needFromYou": [
-          "The screens and roles as you imagine them. I turn them into a prototype for sign-off before the full build.",
-          "A Google Play Console and Apple Developer account in your business's name. I can guide you, or you add me as a developer.",
+          "The screens and roles as you imagine them. We turn them into a prototype for sign-off before the full build.",
+          "A Google Play Console and Apple Developer account in your business's name. We can guide you, or you add us as a developer.",
           "Your brand assets (logo, colours), if you have them.",
           "One person who approves each stage."
         ],
@@ -547,7 +547,7 @@
         },
         {
           "title": "Collaboration and companion apps",
-          "summary": "Projects, tasks and team communication in one place, plus companion apps for the systems I build, so your team can use them on the go."
+          "summary": "Projects, tasks and team communication in one place, plus companion apps for the systems we build, so your team can use them on the go."
         },
         {
           "id": "payment-apps",
@@ -559,7 +559,7 @@
       "addon": {
         "label": "Add-on",
         "title": "AI, only where it's worth it",
-        "body": "Not every app needs AI. Most screens work best as plain, fast forms and lists. During discovery I'll suggest AI only where it makes the app easier to use and is worth its running cost for how much it'll be used. Quoted separately; AI usage is billed at cost.",
+        "body": "Not every app needs AI. Most screens work best as plain, fast forms and lists. During discovery we'll suggest AI only where it makes the app easier to use and is worth its running cost for how much it'll be used. Quoted separately; AI usage is billed at cost.",
         "options": [
           {
             "name": "Snap and fill",
@@ -574,7 +574,7 @@
             "text": "Answers common questions from your catalog, policies and order status, any time of day."
           }
         ],
-        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so I build it to suggest and fill in, and people check before it counts. I'm not responsible for its output or for decisions based on it."
+        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so we build it to suggest and fill in, and people check before it counts. We're not responsible for its output or for decisions based on it."
       }
     },
     {
@@ -584,7 +584,7 @@
       "page": {
         "metaTitle": "Custom ERP and CRM software development in India",
         "metaDescription": "Custom ERP, CRM, dealer and distributor platforms and internal tools, built around how your business already runs. No per-user fees, and you can buy the software outright.",
-        "intro": "Off-the-shelf software makes you change how you work, and charges you for every user. I build ERPs, CRMs, dealer and distributor platforms and internal tools around the way your business already runs, so your team actually uses them. Larger systems start with one workflow and grow from there, and you can buy the software outright whenever you want.",
+        "intro": "Off-the-shelf software makes you change how you work, and charges you for every user. We build ERPs, CRMs, dealer and distributor platforms and internal tools around the way your business already runs, so your team actually uses them. Larger systems start with one workflow and grow from there, and you can buy the software outright whenever you want.",
         "forWho": [
           "Businesses that have outgrown Excel sheets and WhatsApp groups",
           "Manufacturers tracking production, stock and dispatch across sheets and registers",
@@ -601,7 +601,7 @@
         "faq": [
           {
             "q": "Why custom software instead of an off-the-shelf product?",
-            "a": "When a product fits your process, I'll tell you to use it. Custom software makes sense when a product forces its own process on you, charges per user, or can't handle your pricing, approvals or reports."
+            "a": "When a product fits your process, we'll tell you to use it. Custom software makes sense when a product forces its own process on you, charges per user, or can't handle your pricing, approvals or reports."
           },
           {
             "q": "Can you move our existing data in?",
@@ -617,11 +617,11 @@
           },
           {
             "q": "How is this different from Zoho, Tally or a ready-made ERP?",
-            "a": "Tally stays your accounting system, and the software I build works alongside it. Ready-made ERPs and CRMs like Zoho suit businesses whose process matches theirs, and charge for every user. A custom system follows your own pricing, approvals and reports, with no per-user fees."
+            "a": "Tally stays your accounting system, and the software we build works alongside it. Ready-made ERPs and CRMs like Zoho suit businesses whose process matches theirs, and charge for every user. A custom system follows your own pricing, approvals and reports, with no per-user fees."
           },
           {
             "q": "Are we locked in to you?",
-            "a": "No. Your data is yours, with a full export if the plan ends. You can buy the source code outright at any time, and if I ever stop offering the service, the code and your data pass to you free of charge."
+            "a": "No. Your data is yours, with a full export if the plan ends. You can buy the source code outright at any time, and if we ever stop offering the service, the code and your data pass to you free of charge."
           }
         ],
         "examples": [
@@ -677,7 +677,7 @@
         "needFromYou": [
           "Exports of the data you already have: Excel or CSV files, or exports from your billing and accounting software. Up to {{dataFiles}} source files are covered by setup, and more are quoted.",
           "One person who owns the project on your side and signs off the prototype.",
-          "The list of modules, price tiers, roles and approvals as they work today. I map these with you before the quote."
+          "The list of modules, price tiers, roles and approvals as they work today. We map these with you before the quote."
         ],
         "thirdParty": [
           {
@@ -731,13 +731,13 @@
         {
           "id": "custom-tools",
           "title": "Custom tools",
-          "summary": "Something specific to your business? I build internal portals, calculators and quoting tools, and admin dashboards around how you already work."
+          "summary": "Something specific to your business? We build internal portals, calculators and quoting tools, and admin dashboards around how you already work."
         }
       ],
       "addon": {
         "label": "Add-on",
         "title": "AI, only where it's worth it",
-        "body": "Not every system needs AI. Your orders, stock, ledgers and approvals run best on plain, predictable software. During discovery I'll suggest AI only where it saves your team real time and is worth its running cost for how much you'll use it. Quoted separately; AI usage is billed at cost.",
+        "body": "Not every system needs AI. Your orders, stock, ledgers and approvals run best on plain, predictable software. During discovery we'll suggest AI only where it saves your team real time and is worth its running cost for how much you'll use it. Quoted separately; AI usage is billed at cost.",
         "options": [
           {
             "name": "Reading documents",
@@ -752,7 +752,7 @@
             "text": "Ask about orders, stock, dealers or customers in plain language and get an answer from your own records."
           }
         ],
-        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so I build it to suggest and draft, and your team checks before acting on it. I'm not responsible for its output or for decisions based on it."
+        "disclaimer": "AI can make mistakes, including wrong or made-up answers, so we build it to suggest and draft, and your team checks before acting on it. We're not responsible for its output or for decisions based on it."
       }
     }
   ],
@@ -760,47 +760,47 @@
     {
       "step": "Fill out the form, then a free call or Google Meet",
       "label": "Form and free call",
-      "blurb": "I reply within 48 hours by email or WhatsApp, and on a free call we go through how you work today.",
-      "detail": "Tell me which services you need. I reply by email or WhatsApp within 48 hours, and we set up a call where you walk me through how things work today, your budget and when you'd like to start. I'll tell you whether you need custom software at all, or whether a free product already does the same job."
+      "blurb": "We reply within 48 hours by email or WhatsApp, and on a free call we go through how you work today.",
+      "detail": "Tell us which services you need. We reply by email or WhatsApp within 48 hours, and we set up a call where you walk us through how things work today, your budget and when you'd like to start. We'll tell you whether you need custom software at all, or whether a free product already does the same job."
     },
     {
       "step": "Discovery, then a written proposal in 5–7 days",
       "label": "Discovery and proposal",
-      "blurb": "I visit if you're in Raipur, or you walk me through on a screen share, and within 5–7 days you get a free, no-obligation proposal with scope, price and timeline.",
-      "detail": "I see how your business runs, with a visit if you're in or around Raipur or a screen share if you're further away, and you work with me personally from here to launch. Within 5–7 days you get a written proposal, free and with no obligation: how I understand your business, what the system will do, and the scope, price, timeline and payment schedule. It stays valid for {{validDays}} days, and the detailed design comes after you approve it. For a deeper analysis before deciding, the paid workflow audit gives you a written report you keep."
+      "blurb": "We visit if you're in Raipur, or you walk us through on a screen share, and within 5–7 days you get a free, no-obligation proposal with scope, price and timeline.",
+      "detail": "We see how your business runs, with a visit if you're in or around Raipur or a screen share if you're further away, and you work directly with Soham, the founder, from here to launch. Within 5–7 days you get a written proposal, free and with no obligation: how we understand your business, what the system will do, and the scope, price, timeline and payment schedule. It stays valid for {{validDays}} days, and the detailed design comes after you approve it. For a deeper analysis before deciding, the paid workflow audit gives you a written report you keep."
     },
     {
       "step": "Prototype, then a build in stages",
       "label": "Prototype and build",
-      "blurb": "Once you approve the proposal and pay 50% of setup, I build a prototype for your sign-off, then demo each milestone. Changes within the agreed scope are included.",
-      "detail": "Once you approve the proposal and pay 50% of the setup fee, I work out the detailed design and build a prototype as the first milestone. Your team signs it off before the full build. For larger systems we start with one workflow and expand. You see a demo at each milestone, and changes within the agreed scope are included; new features are quoted separately. The other 50% is due when it goes to live testing."
+      "blurb": "Once you approve the proposal and pay 50% of setup, we build a prototype for your sign-off, then demo each milestone. Changes within the agreed scope are included.",
+      "detail": "Once you approve the proposal and pay 50% of the setup fee, we work out the detailed design and build a prototype as the first milestone. Your team signs it off before the full build. For larger systems we start with one workflow and expand. You see a demo at each milestone, and changes within the agreed scope are included; new features are quoted separately. The other 50% is due when it goes to live testing."
     },
     {
       "step": "Launch, then training for your team",
       "label": "Launch and training",
-      "blurb": "I set it up and run a handover session, so your team can use it confidently from day one.",
-      "detail": "I set it up and run a handover session so your team knows how to use it. If you need more, such as extra sessions or on-site training, it's quoted in your proposal."
+      "blurb": "We set it up and run a handover session, so your team can use it confidently from day one.",
+      "detail": "We set it up and run a handover session so your team knows how to use it. If you need more, such as extra sessions or on-site training, it's quoted in your proposal."
     },
     {
       "step": "Go-live, then hosting and support",
       "label": "Hosting and support",
-      "blurb": "I keep it hosted, backed up and secure on a monthly plan, or on a maintenance plan if you bought it outright, and we review how it's used at 60–90 days.",
+      "blurb": "We keep it hosted, backed up and secure on a monthly plan, or on a maintenance plan if you bought it outright, and we review how it's used at 60–90 days.",
       "detail": "The monthly plan keeps it hosted, up and secure, with bug fixes. We review how it's being used at 60–90 days. After the first 90 days, small changes up to 3 hours a month are included; bigger changes are quoted. If you bought the code outright, you get 30 days of free bug fixes, then an optional maintenance plan."
     }
   ],
-  "nda": "I'll sign an NDA before we talk if you want one.",
+  "nda": "We'll sign an NDA before we talk if you want one.",
   "faq": [
     {
       "q": "Our team isn't very tech-savvy. Will this work for us?",
-      "a": "Most likely. I keep the screens simple so teams pick them up quickly, and they work on a phone. A handover session is included in setup; extra or on-site training is quoted in your proposal. You'll need one person on your side who owns it day to day."
+      "a": "Most likely. We keep the screens simple so teams pick them up quickly, and they work on a phone. A handover session is included in setup; extra or on-site training is quoted in your proposal. You'll need one person on your side who owns it day to day."
     },
     {
       "q": "Do we have to replace our current software?",
-      "a": "No. I usually work with the data your software already exports, like Excel or CSV files, so you keep what you use today."
+      "a": "No. We usually work with the data your software already exports, like Excel or CSV files, so you keep what you use today."
     },
     {
       "q": "How does the monthly plan work?",
-      "a": "You pay a setup fee to get the software built, then a monthly fee to use it. Think of it as a licence: you use the software for as long as the plan runs, and you can buy it outright whenever you like. The plan covers hosting, backups, uptime monitoring, bug fixes and security updates. For the first {{adjustmentDays}} days after go-live, adjustments to what I built are included. After that, up to {{smallChangeHours}} hours of small changes a month are included. Bigger changes are quoted before I start."
+      "a": "You pay a setup fee to get the software built, then a monthly fee to use it. Think of it as a licence: you use the software for as long as the plan runs, and you can buy it outright whenever you like. The plan covers hosting, backups, uptime monitoring, bug fixes and security updates. For the first {{adjustmentDays}} days after go-live, adjustments to what we built are included. After that, up to {{smallChangeHours}} hours of small changes a month are included. Bigger changes are quoted before we start."
     },
     {
       "q": "Does the monthly fee go up for a bigger project?",
@@ -808,15 +808,15 @@
     },
     {
       "q": "What counts as a change?",
-      "a": "If something doesn't work the way we agreed, it's a bug and I fix it free. If it works as agreed and you'd like it to work differently, or you want something new, that's a change."
+      "a": "If something doesn't work the way we agreed, it's a bug and we fix it free. If it works as agreed and you'd like it to work differently, or you want something new, that's a change."
     },
     {
       "q": "How quickly do you fix problems?",
-      "a": "On working days (Monday to Friday), I reply to anything that stops your work within {{replyUrgentDays}} business day, and to everything else within {{replyOtherDays}} business days."
+      "a": "On working days (Monday to Friday), we reply to anything that stops your work within {{replyUrgentDays}} business day, and to everything else within {{replyOtherDays}} business days."
     },
     {
       "q": "Can we buy the software outright?",
-      "a": "Yes, at any time. You receive the full source code as it stands on the day you buy, and the monthly plan ends. The price is agreed before you commit, and what you've already paid counts toward it: the setup fee, plus {{creditPercent}}% of your monthly fees. The price never drops below {{floorPercent}}% of the agreed outright price. The terms page has a worked example. After buying, you get 30 days of free bug fixes; then you can run hosting yourself or keep me on a maintenance plan that covers bug fixes, security updates and up to {{smallChangeHours}} hours of small changes a month."
+      "a": "Yes, at any time. You receive the full source code as it stands on the day you buy, and the monthly plan ends. The price is agreed before you commit, and what you've already paid counts toward it: the setup fee, plus {{creditPercent}}% of your monthly fees. The price never drops below {{floorPercent}}% of the agreed outright price. The terms page has a worked example. After buying, you get 30 days of free bug fixes; then you can run hosting yourself or keep us on a maintenance plan that covers bug fixes, security updates and up to {{smallChangeHours}} hours of small changes a month."
     },
     {
       "q": "Who owns our data?",
@@ -824,7 +824,7 @@
     },
     {
       "q": "Whose name are the accounts in?",
-      "a": "Yours. App store accounts, your domain, your WhatsApp number and payment gateway are all created in your business's name. For the domain, you can buy it yourself and give me access, or I can buy it for you; either way it sits in your own account. I manage the rest for you, or you add me as a developer."
+      "a": "Yours. App store accounts, your domain, your WhatsApp number and payment gateway are all created in your business's name. For the domain, you can buy it yourself and give us access, or we can buy it for you; either way it sits in your own account. We manage the rest for you, or you add us as a developer."
     },
     {
       "q": "Are there other costs?",
@@ -836,7 +836,7 @@
     },
     {
       "q": "What if you stop working on this?",
-      "a": "If I ever stop offering the service, the code and your data pass to you free of charge, so your business is never stuck."
+      "a": "If we ever stop offering the service, the code and your data pass to you free of charge, so your business is never stuck."
     },
     {
       "q": "How do payments work?",
@@ -844,7 +844,7 @@
     },
     {
       "q": "Is our data safe?",
-      "a": "Access is limited by role, your data is backed up weekly as standard, and I'll sign an NDA if you want one. Daily backups are available as a paid add-on."
+      "a": "Access is limited by role, your data is backed up weekly as standard, and we'll sign an NDA if you want one. Daily backups are available as a paid add-on."
     },
     {
       "q": "How long does it take?",
@@ -852,32 +852,49 @@
     },
     {
       "q": "Which AI do you use, and who pays for it?",
-      "a": "I use the latest models from leading AI providers, picked for each task. AI usage and third-party fees such as WhatsApp aren't included in your monthly fee. They're billed at cost as separate lines on your monthly bill, and each one is named in the scope before we start."
+      "a": "We use the latest models from leading AI providers, picked for each task. AI usage and third-party fees such as WhatsApp aren't included in your monthly fee. They're billed at cost as separate lines on your monthly bill, and each one is named in the scope before we start."
     },
     {
       "q": "Do you visit us in person?",
-      "a": "If you're in or around Raipur, yes. I visit your office, shop or warehouse to see how work gets done and which software, sheets and apps you use. If you're further away, you walk me through it on a screen share. Either way you work with me personally, from the first look to launch, with no salesperson or middleman in between."
+      "a": "If you're in or around Raipur, yes. We visit your office, shop or warehouse to see how work gets done and which software, sheets and apps you use. If you're further away, you walk us through it on a screen share. Either way you work directly with Soham, the founder, from the first look to launch, with no salesperson or middleman in between."
     },
     {
       "q": "Can I see a demo built for my business before committing?",
-      "a": "Yes. I can build a working demo around your own process and data, so you see exactly how it would work for you. It's priced as a small share of the estimated project fee, confirmed once we've discussed the scope of work (SOW)."
+      "a": "Yes. We can build a working demo around your own process and data, so you see exactly how it would work for you. It's priced as a small share of the estimated project fee, confirmed once we've discussed the scope of work (SOW)."
     },
     {
       "q": "Can you build an app for millions of users?",
-      "a": "That's not what I focus on. I build systems for businesses and their teams, dealers and customers, from a handful of users up to typically 50,000 to 90,000 monthly active users. I can also build MVPs designed to grow to that size. I'm a one-person studio, and that focus keeps your costs predictable and lets me give each client proper attention. If you're building a mass-market consumer app, a larger team will serve you better, and I'm happy to point you to one."
+      "a": "That's not what we focus on. We build systems for businesses and their teams, dealers and customers, from a handful of users up to typically 50,000 to 90,000 monthly active users. We can also build MVPs designed to grow to that size. We're a small studio, and that focus keeps your costs predictable and lets us give each client proper attention. If you're building a mass-market consumer app, a larger team will serve you better, and we're happy to point you to one."
     }
   ],
   "cta": {
     "title": "Need a proper estimate?",
     "requirement": {
       "title": "Before you send the form",
-      "body": "Automation only works when your team uses it. Most Indian businesses already work on WhatsApp, so that is the usual choice: I set up a dedicated WhatsApp Business number for your company. Telegram or a simple portal work too, and we can choose according to your use case. Someone on your side runs it day to day."
+      "body": "Automation only works when your team uses it. Most Indian businesses already work on WhatsApp, so that is the usual choice: we set up a dedicated WhatsApp Business number for your company. Telegram or a simple portal work too, and we can choose according to your use case. Someone on your side runs it day to day."
     },
-    "summary": "Tell me which services you need and what's slowing your business down. Fill out the form, and you'll get a reply by email or WhatsApp within 48 hours.",
+    "summary": "Tell us which services you need and what's slowing your business down. Fill out the form, and you'll get a reply by email or WhatsApp within 48 hours.",
     "note": "Need a website as well? Websites with lead capture are available alongside any of the services above."
   },
+  "guarantee": {
+    "title": "No lock-in",
+    "items": [
+      {
+        "title": "Own the code when you're ready",
+        "text": "Buy your software outright at any time and receive the full source code, with what you've already paid counting toward the price. Your data, domain and app store accounts are in your business's name from day one."
+      },
+      {
+        "title": "Standard, widely used tools",
+        "text": "We build with mainstream frameworks such as React, Next.js, Vue, Flutter, Python, Node and PostgreSQL, never proprietary black-box tools, so any capable developer can maintain it later."
+      },
+      {
+        "title": "Led by the founder, start to finish",
+        "text": "Soham personally architects every system, with freelance designers and testers brought in when a project needs them. If we ever stop offering the service, the code and your data pass to you free."
+      }
+    ]
+  },
   "pricingIntro": {
-    "title": "Software built around your business, run for you every month.",
-    "body": "You pay a setup fee and a monthly plan. I host it, fix it and keep it up to date, so your team just uses it. If you'd rather own it, you can buy it outright at any time."
+    "title": "Software built around your business, managed for you every month.",
+    "body": "You pay a setup fee and a simple monthly plan. We handle hosting, security and updates, so your staff can focus on operations. If you'd rather own it, you can buy it outright at any time."
   }
 }

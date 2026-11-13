@@ -153,7 +153,7 @@ export default function Estimator() {
       {!key && status !== "done" && (
         <form onSubmit={submit} className="space-y-4">
           <div className="space-y-1">
-            <h2 className="text-xl sm:text-2xl font-bold text-fg">Where should I send your estimate?</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-fg">Where should we send your estimate?</h2>
             <p className="text-sm text-muted">Your PDF downloads straight away. I&apos;ll also follow up once, to offer a free call.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -193,7 +193,7 @@ export default function Estimator() {
           />
           <label className="flex items-start gap-2 text-sm text-fg">
             <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 accent-accent" />
-            <span>I agree to Soham Kar (sohambuilds.in) storing these details and contacting me about this estimate by phone, WhatsApp or email.</span>
+            <span>I agree to sohambuilds.in storing these details and contacting me about this estimate by phone, WhatsApp or email.</span>
           </label>
           <button type="submit" disabled={status === "sending"} className="btn btn-primary">
             {status === "sending" ? <Loader2 className="w-4 h-4 motion-safe:animate-spin" aria-hidden="true" /> : <Download className="w-4 h-4" />}
@@ -208,7 +208,7 @@ export default function Estimator() {
           <p className="text-sm text-muted">The figures are &ldquo;from&rdquo; prices, not a quote. Your proposal comes after a free call.</p>
           {saveFailed && (
             <p className="border border-accent/60 bg-accent/10 px-4 py-3 text-sm text-fg">
-              Your details didn&apos;t reach me. Please email the PDF to {CONTACT_EMAIL} so I can follow up.
+              Your details didn&apos;t reach us. Please email the PDF to {CONTACT_EMAIL} so we can follow up.
             </p>
           )}
           <div className="flex flex-wrap items-center gap-4">

@@ -8,7 +8,7 @@ import { BUYOUT, PRICING, SETUP_PAYMENT_TEXT } from "../content/pricing";
 import { BUYOUT_EXAMPLE } from "../components/services/category-price";
 
 export const metadata: Metadata = pageMeta(
-  "Terms · Soham Kar",
+  "Terms · sohambuilds.in",
   "How the setup fee, the monthly plan, changes, leaving and buying outright work.",
   "/terms",
 );
@@ -19,21 +19,21 @@ const GST = Math.round(PRICING.gst * 100);
 const example = ` For example, ${BUYOUT_EXAMPLE}`;
 
 const SUMMARY = [
-  "You pay a setup fee and a monthly plan. I host, maintain and support your software.",
+  "You pay a setup fee and a monthly plan. We host, maintain and support your software.",
   "Your data and your accounts are always yours. The code is yours when you buy it.",
   `Monthly plans have a ${T.minMonths}-month minimum, with two ways to leave early.`,
   "Small changes are included each month; bigger ones are quoted first.",
-  "If I ever stop offering the service, the code and your data pass to you free.",
+  "If we ever stop offering the service, the code and your data pass to you free.",
 ];
 
 const TERMS: { title: string; body: string }[] = [
   {
     title: "The service",
-    body: "The monthly plan gives you the right to use the software I build for you for as long as the plan runs. I host and maintain it during that time.",
+    body: "The monthly plan gives you the right to use the software we build for you for as long as the plan runs. We host and maintain it during that time.",
   },
   {
     title: "Scope",
-    body: "Before work starts we agree in writing what I will build, the price, and every third-party service the system uses (for example AI models, WhatsApp Business API, Meta services, payment gateways, SMS and email), with what each is for.",
+    body: "Before work starts we agree in writing what we will build, the price, and every third-party service the system uses (for example AI models, WhatsApp Business API, Meta services, payment gateways, SMS and email), with what each is for.",
   },
   {
     title: "Fees and payment",
@@ -41,11 +41,11 @@ const TERMS: { title: string; body: string }[] = [
   },
   {
     title: "Changes",
-    body: `For ${T.adjustmentDays} days after go-live, adjustments to what I built are included; new features are not. After that, the plan includes up to ${T.smallChangeHours} hours of small changes a month; unused hours do not roll over. Bigger changes, new features, new integrations and new third-party services are quoted before work starts, at a day rate of ${inr(T.dayRate)}.`,
+    body: `For ${T.adjustmentDays} days after go-live, adjustments to what we built are included; new features are not. After that, the plan includes up to ${T.smallChangeHours} hours of small changes a month; unused hours do not roll over. Bigger changes, new features, new integrations and new third-party services are quoted before work starts, at a day rate of ${inr(T.dayRate)}.`,
   },
   {
     title: "Support",
-    body: `On business days (Monday to Friday), I reply within ${T.replyUrgentDays} business day to issues that stop your work, and within ${T.replyOtherDays} business days to everything else. A bug is anything that does not work as the agreed scope describes.`,
+    body: `On business days (Monday to Friday), we reply within ${T.replyUrgentDays} business day to issues that stop your work, and within ${T.replyOtherDays} business days to everything else. A bug is anything that does not work as the agreed scope describes.`,
   },
   {
     title: "Minimum term",
@@ -53,11 +53,11 @@ const TERMS: { title: string; body: string }[] = [
   },
   {
     title: "Ending the plan",
-    body: `Inside the first ${T.minMonths} months, you can end the plan by paying two months' plan fees, or by buying the software outright. After ${T.minMonths} months, you can end it with ${T.noticeDays} days' written notice. In every case, outstanding invoices are settled, setup fees already paid are not refunded, you receive an export of your data within ${T.exportDays} days, and the service then ends. After the export period your data is deleted from my servers.`,
+    body: `Inside the first ${T.minMonths} months, you can end the plan by paying two months' plan fees, or by buying the software outright. After ${T.minMonths} months, you can end it with ${T.noticeDays} days' written notice. In every case, outstanding invoices are settled, setup fees already paid are not refunded, you receive an export of your data within ${T.exportDays} days, and the service then ends. After the export period your data is deleted from our servers.`,
   },
   {
     title: "Late payment",
-    body: `If an invoice is more than ${T.overdueDays} days overdue, I will give ${T.warningDays} days' written notice and then pause the service. Your data is kept for ${T.dataKeepDays} days after a pause so you can pay or take an export. If neither happens, the plan ends as under "Ending the plan".`,
+    body: `If an invoice is more than ${T.overdueDays} days overdue, we will give ${T.warningDays} days' written notice and then pause the service. Your data is kept for ${T.dataKeepDays} days after a pause so you can pay or take an export. If neither happens, the plan ends as under "Ending the plan".`,
   },
   {
     title: "Buying outright",
@@ -65,11 +65,11 @@ const TERMS: { title: string; body: string }[] = [
   },
   {
     title: "Ownership",
-    body: "Until you buy it, the code remains mine. Your data is always yours. App store accounts, domains, WhatsApp numbers, payment gateways and similar accounts are created in your business's name; I manage them or am added as a developer, and I remove my access when the plan ends.",
+    body: "Until you buy it, the code remains ours. Your data is always yours. App store accounts, domains, WhatsApp numbers, payment gateways and similar accounts are created in your business's name; we manage them or are added as a developer, and we remove our access when the plan ends.",
   },
   {
-    title: "If I stop offering the service",
-    body: "If I stop offering the service for any reason, the code and your data pass to you free of charge, as they stand on that day.",
+    title: "If we stop offering the service",
+    body: "If we stop offering the service for any reason, the code and your data pass to you free of charge, as they stand on that day.",
   },
   {
     title: "Websites",
@@ -77,7 +77,7 @@ const TERMS: { title: string; body: string }[] = [
   },
   {
     title: "AI assistants",
-    body: "An AI assistant answers from the content you provide, but AI can make mistakes: it can occasionally give wrong, outdated or made-up answers. The assistant shows visitors a notice saying so. Keeping your content accurate is your responsibility, and I'm not liable for the assistant's answers or for decisions anyone makes based on them.",
+    body: "An AI assistant answers from the content you provide, but AI can make mistakes: it can occasionally give wrong, outdated or made-up answers. The assistant shows visitors a notice saying so. Keeping your content accurate is your responsibility, and we're not liable for the assistant's answers or for decisions anyone makes based on them.",
   },
   {
     title: "Governing law",
@@ -94,6 +94,9 @@ export default function TermsPage() {
         <div className="space-y-3">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-fg">Terms</h1>
           <p className="text-lg leading-relaxed text-muted">How the setup fee, the monthly plan, changes, leaving and buying outright work.</p>
+          <p className="leading-relaxed text-muted">
+            sohambuilds.in is run by Soham Kar as a sole proprietor in Raipur, Chhattisgarh, India. In these terms, &ldquo;we&rdquo; and &ldquo;us&rdquo; mean sohambuilds.in.
+          </p>
         </div>
       </Reveal>
 
@@ -119,7 +122,7 @@ export default function TermsPage() {
         ))}
       </div>
 
-      <p className="text-sm text-muted">Last updated 8 November 2026.</p>
+      <p className="text-sm text-muted">Last updated 13 November 2026.</p>
     </LegalLayout>
   );
 }

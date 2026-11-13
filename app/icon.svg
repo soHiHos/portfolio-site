@@ -9,7 +9,7 @@
   </style>
   <!-- Square tile with the top-right corner cut at 45 degrees -->
   <polygon class="tile" points="0,0 46,0 64,18 64,64 0,64" />
-  <!-- S and K drawn as strokes so no font is needed -->
+  <!-- S and B drawn as strokes so no font is needed -->
   <path class="ink" d="M28 22H12V32H28V42H12" />
-  <path class="ink" d="M38 19.5V44.5M53 20L39 32.5M43.5 30L54 44.5" />
+  <path class="ink" d="M38 22H50V32H38M38 32H54V42H38M38 19.5V44.5" />
 </svg>

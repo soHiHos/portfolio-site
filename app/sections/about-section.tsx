@@ -19,16 +19,16 @@ export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
             {short ? (
               <>
                 <p className="text-base sm:text-lg leading-relaxed text-muted text-left sm:text-justify">
-                  I&apos;m Soham. I started in civil and environmental engineering, then taught myself web, mobile and AI. Now I build <strong className="text-fg font-semibold">clear, reliable systems</strong> for businesses, kept <strong className="text-fg font-semibold">simple, practical and easy to grow</strong>. Trained as an engineer, I start from how your business runs and what your numbers say, not from a template.
+                  <strong className="text-fg font-semibold">Built by engineers, not from templates.</strong> sohambuilds.in was founded by Soham Kar, who started in civil and environmental engineering before moving into web, mobile and AI. So we start from how your business runs and what your numbers say. Soham leads every project directly, with freelance designers and testers brought in when a project needs them. Our focus is one thing: turning messy daily operations into <strong className="text-fg font-semibold">simple, reliable software</strong> that grows with your business.
                 </p>
               </>
             ) : (
               <>
                 <p className="text-lg leading-relaxed text-muted text-left sm:text-justify">
-                  I&apos;m Soham, an engineer working across web, software, AI, hardware and environmental engineering. That mix helps me see a business problem from several angles and build something that fits how the business runs.
+                  <strong className="text-fg font-semibold">Built by engineers, not from templates.</strong> sohambuilds.in was founded by Soham Kar, who started in civil and environmental engineering before moving into web, mobile and AI. So we start from how your business runs and what your numbers say. Soham leads every project directly, with freelance designers and testers brought in when a project needs them. Our focus is one thing: turning messy daily operations into <strong className="text-fg font-semibold">simple, reliable software</strong> that grows with your business.
                 </p>
                 <p className="text-lg leading-relaxed text-muted text-left sm:text-justify">
-                  I help businesses get off paper, automate the routine work and see clear numbers: <strong className="text-fg font-semibold">digitalisation, automation and analysis</strong>, delivered as the apps, websites and custom software they run on every day. I keep them <strong className="text-fg font-semibold">simple, practical and cost-effective</strong>, and easy to hand over and grow.
+                  Soham&apos;s own work spans web, software, AI, hardware and environmental engineering, which helps us see a business problem from several angles. We help businesses get off paper, automate the routine work and see clear numbers: <strong className="text-fg font-semibold">digitalisation, automation and analysis</strong>, delivered as the apps, websites and custom software they run on every day, kept <strong className="text-fg font-semibold">simple, practical and cost-effective</strong>, and easy to hand over and grow.
                 </p>
               </>
             )}
@@ -36,7 +36,7 @@ export function AboutSection({ id, short }: { id?: string; short?: boolean }) {
             <div id="cv" className="flex flex-wrap gap-3 scroll-mt-32">
               {short && (
                 <Link href="/about" className="btn btn-secondary">
-                  More about me <ArrowRight className="w-4 h-4" />
+                  More about the studio <ArrowRight className="w-4 h-4" />
                 </Link>
               )}
               <CvDownload className={`btn btn-secondary ${short ? "" : "btn-lg"}`} iconClassName={short ? "w-4 h-4" : "w-5 h-5"} />

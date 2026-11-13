@@ -20,13 +20,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/projects/[id]">): Promise<Metadata> {
   const { id } = await params;
   const project = PROJECTS.find((p) => p.id === id);
-  return project ? pageMeta(`${project.title} · Soham Kar`, project.tagline, `/projects/${project.id}`) : {};
+  return project ? pageMeta(`${project.title} · sohambuilds.in`, project.tagline, `/projects/${project.id}`) : {};
 }
 
 const CHAPTERS = [
   { key: "problem", label: "The problem" },
-  { key: "approach", label: "The approach" },
-  { key: "outcome", label: "The outcome" },
+  { key: "approach", label: "What we built" },
+  { key: "outcome", label: "The result" },
 ] as const;
 
 // Static class names so Tailwind picks them up (one column needs none)

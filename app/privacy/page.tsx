@@ -5,34 +5,34 @@ import LegalLayout from "../components/legal-layout";
 import { CONTACT_EMAIL } from "../content/contact";
 
 export const metadata: Metadata = pageMeta(
-  "Privacy policy · Soham Kar",
-  "What this site collects, why, who handles it, and how to ask me to delete it.",
+  "Privacy policy · sohambuilds.in",
+  "What this site collects, why, who handles it, and how to ask us to delete it.",
   "/privacy",
 );
 
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
-    title: "What I collect",
+    title: "What we collect",
     body: (
       <>
         <p>
-          Only what you send me. If you use the contact form, that is your name, your WhatsApp number and/or email, the
+          Only what you send us. If you use the contact form, that is your name, your WhatsApp number and/or email, the
           services you are interested in, your timeline and your message. The form has a consent checkbox, and nothing is
           sent until you tick it and press send.
         </p>
         <p>
-          If you download my CV, I ask for your name and email first, with the same kind of consent checkbox, so I know who
+          If you download the founder&apos;s CV, we ask for your name and email first, with the same kind of consent checkbox, so we know who
           took it. The site has no accounts, no payments and no newsletter.
         </p>
       </>
     ),
   },
   {
-    title: "How I use it",
+    title: "How we use it",
     body: (
       <p>
-        To reply to you and scope your project. I don&apos;t sell your details, and I won&apos;t add you to a mailing list
-        without asking. The message, or the name and email from a CV download, is stored in a database and emailed to me, so I can answer by email or WhatsApp.
+        To reply to you and scope your project. We don&apos;t sell your details, and we won&apos;t add you to a mailing list
+        without asking. The message, or the name and email from a CV download, is stored in a database and emailed to us, so we can answer by email or WhatsApp.
       </p>
     ),
   },
@@ -41,7 +41,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     body: (
       <>
         <p>
-          I use two tools to see how the site is used. Google Analytics (loaded through Google Tag Manager) sets cookies
+          We use two tools to see how the site is used. Google Analytics (loaded through Google Tag Manager) sets cookies
           and records things like the pages you view, how long you stay, your device and browser, where you came from and
           your approximate location. Vercel Web Analytics counts page views without cookies.
         </p>
@@ -59,7 +59,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
       <ul className="list-disc space-y-1 pl-5">
         <li>Vercel hosts the site and provides Vercel Web Analytics.</li>
         <li>Supabase stores contact-form messages.</li>
-        <li>Resend delivers the notification email to me.</li>
+        <li>Resend delivers the notification email to us.</li>
         <li>Google provides Tag Manager and Analytics.</li>
       </ul>
     ),
@@ -74,11 +74,11 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: "How long I keep it",
+    title: "How long we keep it",
     body: (
       <p>
         Contact-form messages are kept for as long as needed to reply and, if we work together, to keep a record of the
-        work. Google Analytics data is kept for 14 months. You can ask me to delete your message at any time.
+        work. Google Analytics data is kept for 14 months. You can ask us to delete your message at any time.
       </p>
     ),
   },
@@ -86,11 +86,11 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     title: "Your choices",
     body: (
       <p>
-        You can ask me what I hold about you, ask me to correct it, or ask me to delete it. Write to{" "}
+        You can ask us what we hold about you, ask us to correct it, or ask us to delete it. Write to{" "}
         <a href={`mailto:${CONTACT_EMAIL}?subject=Privacy%20request`} className="text-accent-ink underline underline-offset-4">
           {CONTACT_EMAIL}
         </a>{" "}
-        and I&apos;ll reply as soon as I can.
+        and we&apos;ll reply as soon as we can.
       </p>
     ),
   },
@@ -105,7 +105,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
   },
   {
     title: "Changes",
-    body: <p>If I change what the site collects, I&apos;ll update this page and the date below.</p>,
+    body: <p>If we change what the site collects, we&apos;ll update this page and the date below.</p>,
   },
 ];
 
@@ -117,6 +117,9 @@ export default function PrivacyPage() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-fg">Privacy policy</h1>
           <p className="text-lg leading-relaxed text-muted">
             This site is a portfolio. It collects very little, and this page says exactly what and why.
+          </p>
+          <p className="leading-relaxed text-muted">
+            sohambuilds.in is run by Soham Kar as a sole proprietor in Raipur, Chhattisgarh, India. In this policy, &ldquo;we&rdquo; and &ldquo;us&rdquo; mean sohambuilds.in.
           </p>
         </div>
       </Reveal>
@@ -132,7 +135,7 @@ export default function PrivacyPage() {
         ))}
       </div>
 
-      <p className="text-sm text-muted">Last updated 5 November 2026.</p>
+      <p className="text-sm text-muted">Last updated 13 November 2026.</p>
     </LegalLayout>
   );
 }

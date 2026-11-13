@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 // Only the hero is a full screen. Scrolling snaps (proximity) at two points, the hero and the
-// start of What I do, so leaving the hero lands cleanly on the first section; after that sections keep
+// start of What we do, so leaving the hero lands cleanly on the first section; after that sections keep
 // their natural height and scroll freely.
 export default function Home() {
   return (
@@ -30,7 +30,7 @@ export default function Home() {
         <div className="snap-start min-h-svh -mt-24 sm:-mt-28 md:-mt-35 py-16 flex flex-col justify-center">
           <HeroSection />
         </div>
-        <div className="snap-start"><PillarsSection id="what-i-do" /></div>
+        <div className="snap-start"><PillarsSection id="what-we-do" /></div>
         <WorkSection id="work" />
         <ServicesSection id="services" />
         <ProcessSection id="process" />

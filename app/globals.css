@@ -40,9 +40,11 @@ html {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--accent); }
-/* Touch screens (phones, tablets): no scrollbar at all; the nav's progress line shows the position instead */
-@media (hover: none) and (pointer: coarse) {
-  html { scrollbar-width: none; }
+/* Touch screens (phones, tablets) and phone-width screens: no scrollbar at all; the nav's progress line shows the
+   position instead. Covers every scrolling element too: they inherit scrollbar-color from html, which makes
+   Chromium skip the ::-webkit-scrollbar rule for them. */
+@media (hover: none) and (pointer: coarse), (max-width: 639px) {
+  html, * { scrollbar-width: none; }
   ::-webkit-scrollbar { display: none; }
 }
 

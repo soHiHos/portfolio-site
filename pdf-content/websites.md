@@ -1,6 +1,6 @@
 # Websites: pricing and details for the client PDF
 
-**Written for:** Claude, designing the **Websites** PDF in Penpot for prospective clients of Soham Kar's studio. Read `PRICING-AND-SERVICES-FOR-PENPOT.md` first for the design system, fonts, colours and background images; this file is the content for this one service.
+**Written for:** Claude, designing the **Websites** PDF in Penpot for prospective clients of sohambuilds.in, Soham Kar's software studio. Read `PRICING-AND-SERVICES-FOR-PENPOT.md` first for the design system, fonts, colours and background images; this file is the content for this one service.
 
 Everything below is worked out from `app/content/pricing.ts`, `app/content/services.json` and `app/components/services/category-price.ts`. All prices are **"from" prices, excluding GST**, and are not quotes. Illustrative scenarios are examples, **not real clients or results**. Voice is first person ("I").
 
@@ -269,7 +269,7 @@ This is a plain-English summary, **not a contract**. Do not add signature blocks
 - Page 3: pricing in detail: payment schedule, care plan table, first-year costs, changes after launch, third-party costs.
 - Page 4: examples, how a project runs, what you need to provide, questions, terms in short.
 
-Use the design system, fonts and background layering in `PRICING-AND-SERVICES-FOR-PENPOT.md`. Footer on every page: `Soham Kar · sohamkar.work@gmail.com · sohambuilds.in`, with an empty marked slot for legal name, address, GSTIN and PAN, which do not exist yet.
+Use the design system, fonts and background layering in `PRICING-AND-SERVICES-FOR-PENPOT.md`. Footer on every page: `sohambuilds.in · sohamkar.work@gmail.com`, with an empty marked slot for legal name, address, GSTIN and PAN, which do not exist yet.
 
 ## 9. Checklist
 

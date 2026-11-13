@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { CONTACT_EMAIL, CONTACT_FACEBOOK, CONTACT_GITHUB, CONTACT_INSTAGRAM, CONTACT_LINKEDIN, CONTACT_WHATSAPP, SITE_URL } from "./contact";
 
 // The site's title and descriptions: the layout's defaults and the home page's link preview
-export const SITE_TITLE = "Soham Kar · Apps, websites, digitalisation and automation";
+export const SITE_TITLE = "sohambuilds.in · Software development company in Raipur";
 export const SITE_DESCRIPTION =
-  "Soham Kar builds apps, websites and software for growing businesses in Raipur and across India: digitalisation, automation and analysis that take you off paper and show you clear numbers.";
+  "sohambuilds.in is a software development company in Raipur, building custom apps, websites and business automation for growing businesses across India.";
 export const SHARE_DESCRIPTION = "Apps, websites, digitalisation, automation and analysis for growing businesses in Raipur and across India.";
 
 // Link preview image: a static, small PNG (public/og.png, 1200×630, ~70 KB) so LinkedIn, Instagram, WhatsApp and
@@ -38,17 +38,18 @@ export const SITE_JSON_LD = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: "Soham Kar",
+      name: "sohambuilds.in",
+      alternateName: "Soham Builds",
       inLanguage: "en-IN",
-      publisher: { "@id": PERSON_ID },
+      publisher: { "@id": BUSINESS_ID },
     },
     {
       "@type": "Person",
       "@id": PERSON_ID,
       name: "Soham Kar",
       url: SITE_URL,
-      jobTitle: "Software developer",
-      description: "Engineer in Raipur, India who builds apps, websites and software for digitalisation, automation and analysis.",
+      jobTitle: "Founder",
+      description: "Engineer in Raipur, India and founder of sohambuilds.in, a software studio for digitalisation, automation and analysis.",
       address: ADDRESS,
       email: `mailto:${CONTACT_EMAIL}`,
       sameAs: SAME_AS,
@@ -57,7 +58,8 @@ export const SITE_JSON_LD = {
     {
       "@type": "ProfessionalService",
       "@id": BUSINESS_ID,
-      name: "Soham Kar",
+      name: "sohambuilds.in",
+      alternateName: "Soham Builds",
       url: SITE_URL,
       description: "Apps, websites and software for growing businesses in Raipur and across India: digitalisation, automation and analysis.",
       image: `${SITE_URL}${OG_IMAGE.url}`,

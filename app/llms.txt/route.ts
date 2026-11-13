@@ -8,9 +8,9 @@ export const dynamic = "force-static";
 // /llms.txt: a plain Markdown map of the site for AI answer engines (llmstxt.org), built from the same content
 // files as the pages. /llms-full.txt has the full service pages.
 export function GET() {
-  const body = `# Soham Kar
+  const body = `# sohambuilds.in
 
-> ${services.hero.promise} Based in Raipur, Chhattisgarh, working with growing businesses across India: digitalisation, automation and analysis.
+> ${services.hero.promise} A software development company based in Raipur, Chhattisgarh, building custom apps, websites and business automation for growing businesses across India: digitalisation, automation and analysis.
 
 ## Services
 
@@ -23,7 +23,7 @@ ${PROJECTS.map((p) => `- [${p.title}](${SITE_URL}/projects/${p.id}): ${p.tagline
 
 ## About and contact
 
-- [About Soham Kar](${SITE_URL}/about): background, toolkit and research
+- [About sohambuilds.in](${SITE_URL}/about): the studio, founder Soham Kar's background, toolkit and research
 - Email: ${CONTACT_EMAIL}${CONTACT_WHATSAPP ? `\n- WhatsApp: https://wa.me/${CONTACT_WHATSAPP}` : ""}
 - [Contact form](${SITE_URL}/#contact)
 

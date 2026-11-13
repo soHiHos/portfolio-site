@@ -135,14 +135,14 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
     <section id={id} className={flush ? "scroll-mt-28" : undefined}>
       <div className={`w-full text-left space-y-8 ${flush ? "" : "py-12"}`}>
         <SectionHeading
-          title="Tell me about your project"
+          title="Tell us about your project"
         />
 
         <Reveal className="grid lg:grid-cols-[1fr_1.4fr] border border-line bg-surface">
           {/* Description, availability and icon-only links */}
           <div className="flex flex-col gap-6 p-5 sm:p-8">
             <p className="text-lg leading-relaxed text-muted">
-              Send a short brief (about a minute) and I&apos;ll reply to set up a scoping call, or reach me directly with the links below.
+              Send a short brief (about a minute) and we&apos;ll reply to set up a scoping call, or reach us directly with the links below.
             </p>
             <div className="space-y-1.5 text-sm text-muted">
               <span className="flex items-center gap-2 font-medium text-fg">
@@ -172,7 +172,7 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
                 <span className="flex h-12 w-12 items-center justify-center bg-accent text-on-accent"><Check className="w-6 h-6" /></span>
                 <div className="space-y-1">
                   <div className="text-xl font-semibold text-fg">Got it, thank you.</div>
-                  <p className="text-sm text-muted">I&apos;ll reply by email or WhatsApp within 48 hours.</p>
+                  <p className="text-sm text-muted">We&apos;ll reply by email or WhatsApp within 48 hours.</p>
                 </div>
                 <button type="button" onClick={() => setStatus("idle")} className="btn btn-link">Send another brief</button>
               </div>
@@ -180,7 +180,7 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
               <>
                 <div className="space-y-3">
                   <div className="flex items-baseline justify-between gap-3">
-                    <div className="text-sm font-semibold text-fg">{step === 1 ? "What do you need?" : "Where can I reach you?"}</div>
+                    <div className="text-sm font-semibold text-fg">{step === 1 ? "What do you need?" : "Where can we reach you?"}</div>
                     <span className="text-xs text-muted">Step {step} of 2</span>
                   </div>
                   <div className="grid grid-cols-2 gap-1.5" aria-hidden="true">
@@ -215,7 +215,7 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
                     </label>
                     {choice === OTHER && (
                       <label className="block space-y-1.5">
-                        <span className={labelClasses}>Tell me about it</span>
+                        <span className={labelClasses}>Tell us about it</span>
                         <textarea
                           ref={messageRef}
                           value={message}
@@ -299,7 +299,7 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
                           <button type="button" onClick={handleCopyEmail} className="underline hover:text-fg focus-visible:outline-2 focus-visible:outline-accent-ink cursor-pointer">
                             {copied ? "copied!" : CONTACT_EMAIL}
                           </button>{" "}
-                          and email me from your own inbox.
+                          and email us from your own inbox.
                         </p>
                       )}
                     </div>
@@ -317,7 +317,7 @@ export default function ContactSection({ id, service, flush }: { id?: string; se
                     <p className="text-xs text-muted" aria-live="polite">
                       {status === "fallback"
                         ? "Couldn't send it just now. Your mail app has opened with the brief filled in; send it from there."
-                        : "I reply within 48 hours."}
+                        : "We reply within 48 hours."}
                     </p>
                   </div>
                 </div>

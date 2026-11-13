@@ -17,7 +17,7 @@ import { HOVER_CARD, TopLine, stagger } from "../../components/effects/hover-car
 import services from "../../content/services.json";
 import { PRICING } from "../../content/pricing";
 import { SITE_URL } from "../../content/contact";
-import { PERSON_ID, pageMeta } from "../../content/seo";
+import { BUSINESS_ID, pageMeta } from "../../content/seo";
 import { pillarLabel, servicePath } from "../../content/service-list";
 
 // One page per service category, at /services/<slug> (slugs in services.json). Only those slugs exist; anything
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   if (!category) return {};
   const { metaTitle, metaDescription } = category.page;
   const path = servicePath(category.id);
-  return pageMeta(`${metaTitle} · Soham Kar`, metaDescription, path);
+  return pageMeta(`${metaTitle} · sohambuilds.in`, metaDescription, path);
 }
 
 const PROBLEMS = Object.fromEntries(services.problems.items.map((p) => [p.id, p]));
@@ -83,7 +83,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
     ...(examples.length > 0 ? [{ id: "examples", label: "Examples" }] : []),
     ...(sizes ? [{ id: "plan", label: "Monthly plan" }] : []),
     ...(ESTIMATOR_ON && sizes ? [{ id: "prices", label: "Prices" }] : []),
-    { id: "process", label: "How I work" },
+    { id: "process", label: "How we work" },
     { id: "faq", label: "Questions" },
     { id: "others", label: "Other services" },
     { id: "contact", label: "Contact" },
@@ -102,9 +102,9 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
         url,
         areaServed: { "@type": "Country", name: "India" },
         provider: {
-          "@type": "Person",
-          "@id": PERSON_ID,
-          name: "Soham Kar",
+          "@type": "ProfessionalService",
+          "@id": BUSINESS_ID,
+          name: "sohambuilds.in",
           url: SITE_URL,
           address: { "@type": "PostalAddress", addressLocality: "Raipur", addressRegion: "Chhattisgarh", addressCountry: "IN" },
         },
@@ -192,7 +192,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
                 <p className="text-lg font-semibold text-accent-ink">{price.price}</p>
                 {price.ownFrom && (
                   <p className="text-xs leading-relaxed text-muted">
-                    I host, maintain and support it. {PRICING.terms.minMonths}-month minimum.
+                    We host, maintain and support it. {PRICING.terms.minMonths}-month minimum.
                   </p>
                 )}
               </div>
@@ -497,7 +497,7 @@ export default async function ServiceDetailPage({ params }: PageProps<"/services
         {needFromYou.length > 0 && (
           <Reveal className={`${CARD} space-y-4 p-5 sm:p-6`}>
             <TopLine />
-            <h2 className="text-2xl font-bold text-fg">What I need from you</h2>
+            <h2 className="text-2xl font-bold text-fg">What we need from you</h2>
             <ul className="space-y-2">
               {needFromYou.map(fillFaq).map((line) => (
                 <li key={line} className="flex items-start gap-2 text-sm leading-relaxed text-fg">

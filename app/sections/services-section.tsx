@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import SectionHeading from "../components/section-heading";
 import Reveal from "../components/effects/reveal";
 import PhoneCollapse from "../components/phone-collapse";
@@ -8,7 +8,7 @@ import { AUDIT_OFFER, HOME_PRICES, HOME_TIMELINES, PRICE_NOTE } from "../compone
 import services from "../content/services.json";
 import { pillarLabel, servicePath } from "../content/service-list";
 
-// Compact home-page "Services" strip. "What I do" above already explains each service, so this is about cost and
+// Compact home-page "Services" strip. "What we do" above already explains each service, so this is about cost and
 // how to start: how the pricing works, the service tiles, the entry audit, then the main button. Everything about price shows only once pricing is reviewed (ESTIMATOR_ON), like the estimator.
 
 // The four service categories, cheapest first (services.json order): websites, automation, apps, custom software
@@ -75,13 +75,29 @@ export default function ServicesSection({ id }: { id?: string }) {
 
           {ESTIMATOR_ON && <p className="text-sm text-muted">{PRICE_NOTE}</p>}
 
+          {/* The no lock-in guarantee, right under the tiles: three short promises, each backed by the terms */}
+          <div className="border border-line bg-surface p-5 sm:p-6 space-y-4">
+            <p className="flex items-center gap-2 text-base font-semibold text-fg">
+              <ShieldCheck className="w-5 h-5 text-accent-ink" aria-hidden="true" />
+              {services.guarantee.title}
+            </p>
+            <ul className="grid gap-4 md:grid-cols-3">
+              {services.guarantee.items.map((item) => (
+                <li key={item.title} className="space-y-1 border-l-2 border-accent pl-3">
+                  <p className="text-sm font-semibold text-fg">{item.title}</p>
+                  <p className="text-sm leading-relaxed text-muted">{item.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* For anyone unsure which service they need: the entry audit (it has a price, so only once pricing is
               reviewed), then an invitation to just get in touch, which always shows */}
           <p className="border-l-2 border-accent pl-3 text-sm leading-relaxed text-muted">
             <span className="font-semibold text-fg">Not sure where to start?</span>{" "}
             {ESTIMATOR_ON && <>{AUDIT_OFFER} Still unsure? </>}
             Feel free to{" "}
-            <a href="#contact" className="font-semibold text-accent-ink underline underline-offset-2 hover:no-underline">contact me</a>
+            <a href="#contact" className="font-semibold text-accent-ink underline underline-offset-2 hover:no-underline">contact us</a>
             , and we&apos;ll work out the right first step together.
           </p>
 

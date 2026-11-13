@@ -7,10 +7,10 @@ import { CONTACT_WHATSAPP } from "../content/contact"
 export type NavSection = { id: string; label: string }
 
 const HOME_SECTIONS: NavSection[] = [
-  { id: "what-i-do", label: "What I do" },
+  { id: "what-we-do", label: "What we do" },
   { id: "work", label: "Work" },
   { id: "services", label: "Services" },
-  { id: "process", label: "How I work" },
+  { id: "process", label: "How we work" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ]

@@ -53,7 +53,7 @@ export default function CvDownload({ className = "", iconClassName = "w-4 h-4" }
     <>
       <button type="button" onClick={() => dialogRef.current?.showModal()} className={className}>
         <Download className={iconClassName} />
-        Download CV
+        Founder&apos;s CV
       </button>
 
       <dialog
@@ -65,7 +65,7 @@ export default function CvDownload({ className = "", iconClassName = "w-4 h-4" }
         <form onSubmit={handleSubmit} noValidate className="space-y-5 p-5 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div className="space-y-1">
-              <h2 id="cv-title" className="text-lg font-semibold">{status === "done" ? "Your download has started" : "Get my CV"}</h2>
+              <h2 id="cv-title" className="text-lg font-semibold">{status === "done" ? "Your download has started" : "Get the founder's CV"}</h2>
               <p className="text-sm text-muted">
                 {status === "done" ? "Thanks. If nothing downloaded, use the link below." : "Leave your name and email and the PDF downloads straight away."}
               </p>

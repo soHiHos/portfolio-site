@@ -18,7 +18,7 @@ import { HOVER_CARD, TopLine } from "../components/effects/hover-card";
 import { pillarCategories, servicePath } from "../content/service-list";
 
 export const metadata: Metadata = pageMeta(
-  "Services: digitalisation, automation and analysis · Soham Kar",
+  "Services: digitalisation, automation and analysis · sohambuilds.in",
   `Digitalisation, automation and analysis for growing businesses in India. ${services.hero.title}.${ESTIMATOR_ON ? " Get a price estimate in two minutes." : ""}`,
   "/services",
 );
@@ -30,7 +30,7 @@ const DEMOS = services.proof.demos as { title: string; href: string }[];
 const NAV = [
   { id: "prices", label: ESTIMATOR_ON ? "Prices" : "Services" },
   { id: "problems", label: "Problems" },
-  { id: "process", label: "How I work" },
+  { id: "process", label: "How we work" },
   ...(ESTIMATOR_ON ? [{ id: "estimate", label: "Estimate" }] : []),
   ...(CASE_STUDY || DEMOS.length > 0 ? [{ id: "proof", label: "Work in action" }] : []),
   { id: "faq", label: "Questions" },
@@ -103,7 +103,7 @@ export default function ServicesPage() {
 
         {/* Sound familiar? */}
         <Reveal id="problems" className="space-y-5">
-          <h2 className="text-3xl sm:text-4xl font-bold text-fg">Six problems I solve</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-fg">Six problems we solve</h2>
           <ProblemTiles items={services.problems.items} selectable={ESTIMATOR_ON} />
           <div id="before-you-reach-out" className={`${HOVER_CARD} scroll-mt-28 space-y-4 p-5 sm:p-6`}>
             <TopLine />
@@ -121,7 +121,7 @@ export default function ServicesPage() {
         {/* Process */}
         <Reveal id="process" className={`${HOVER_CARD} space-y-5 p-5 sm:p-6`}>
           <TopLine />
-          <h2 className="text-3xl sm:text-4xl font-bold text-fg">How I work</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-fg">How we work</h2>
           <ProcessSteps steps={services.process.map((s) => ({ step: fillFaq(s.step), detail: fillFaq(s.detail) }))} />
           <p className="border-t border-line pt-4 text-sm text-muted">{services.nda}</p>
         </Reveal>
@@ -158,7 +158,7 @@ export default function ServicesPage() {
                 <p className="text-sm leading-relaxed text-muted"><span className="font-semibold text-fg">The business.</span> {CASE_STUDY.business}</p>
                 <p className="text-sm leading-relaxed text-muted"><span className="font-semibold text-fg">The problem.</span> {CASE_STUDY.problem}</p>
                 <div className="space-y-2">
-                  <p className="text-sm text-muted"><span className="font-semibold text-fg">What I built.</span> {CASE_STUDY.builtIntro}</p>
+                  <p className="text-sm text-muted"><span className="font-semibold text-fg">What we built.</span> {CASE_STUDY.builtIntro}</p>
                   <ul className="space-y-1.5">
                     {CASE_STUDY.built.map((b) => (
                       <li key={b} className="flex items-start gap-2 text-sm text-fg">

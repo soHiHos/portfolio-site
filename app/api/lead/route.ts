@@ -73,10 +73,10 @@ const emailVisitor = (to: string, subject: string, body: string, attachments?: A
 
 // Services and pricing guides (service-pdfs/, outside public so they only go out by email), by service id.
 const SERVICE_PDFS: Record<string, string> = {
-  websites: 'Soham-Kar-Websites.pdf',
-  'ai-automations': 'Soham-Kar-Automation-and-Analysis.pdf',
-  'custom-software': 'Soham-Kar-Custom-Business-Software.pdf',
-  'mobile-apps': 'Soham-Kar-Mobile-Apps.pdf',
+  websites: 'sohambuilds-websites.pdf',
+  'ai-automations': 'sohambuilds-automation-and-analysis.pdf',
+  'custom-software': 'sohambuilds-custom-business-software.pdf',
+  'mobile-apps': 'sohambuilds-mobile-apps.pdf',
 };
 
 // The guides for the chosen services. A file that can't be read is skipped, so the email still goes out.
@@ -95,6 +95,7 @@ async function servicePdfs(services: string[]): Promise<Attachment[]> {
 const firstName = (name: string) => name.split(/\s+/)[0] || 'there';
 const SIGN_OFF = [
   'Soham Kar',
+  'Founder, sohambuilds.in',
   'Raipur (C.G.), India',
   CONTACT_EMAIL,
   ...(CONTACT_WHATSAPP ? [`WhatsApp: https://wa.me/${CONTACT_WHATSAPP}`] : []),
@@ -128,13 +129,13 @@ async function handleBrief(body: Record<string, unknown>) {
   const ack = email
     ? servicePdfs(services).then((guides) => emailVisitor(
       email,
-      'I got your project brief',
+      'We got your project brief',
       [
         `Hi ${firstName(name)},`,
         '',
-        "Thanks for your brief. I've received it and I'll reply personally to set up a scoping call.",
+        "Thanks for your brief. We've received it, and I'll reply personally to set up a scoping call.",
         ...(guides.length
-          ? ['', `I've attached my services and pricing ${guides.length > 1 ? 'guides' : 'guide'}, so you can look through the prices and examples before we talk.`]
+          ? ['', `I've attached our services and pricing ${guides.length > 1 ? 'guides' : 'guide'}, so you can look through the prices and examples before we talk.`]
           : []),
         '',
         'What you sent:',
@@ -178,7 +179,7 @@ async function handleCv(body: Record<string, unknown>) {
       emailVisitor(
         email,
         'My CV',
-        [`Hi ${firstName(name)},`, '', 'Thanks for your interest. My CV is attached.', '', 'If you have a project in mind, reply to this email or send a brief from my site.', '', SIGN_OFF].join('\n'),
+        [`Hi ${firstName(name)},`, '', 'Thanks for your interest. My CV is attached.', '', 'If you have a project in mind, reply to this email or send a brief from our site.', '', SIGN_OFF].join('\n'),
         [{ filename: path.basename(CV_PATH), content }]
       )
     )

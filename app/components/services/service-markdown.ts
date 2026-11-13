@@ -25,7 +25,7 @@ export function serviceMarkdown(category: Category): string {
   const price = CATEGORY_PRICES[category.id];
 
   const sections = [
-    `# ${category.title} · Soham Kar`,
+    `# ${category.title} · sohambuilds.in`,
     `${page.intro}\n\nPage: ${SITE_URL}${servicePath(category.id)}`,
     `## Who it's for\n\n${list(page.forWho)}`,
     `## What it covers\n\n${covers.map((s) => `- **${s.title}.** ${s.summary}${s.for ? ` For: ${s.for}.` : ""}`).join("\n")}` +
@@ -38,10 +38,10 @@ export function serviceMarkdown(category: Category): string {
     ESTIMATOR_ON && `## Prices\n\n${price.price}${price.ownFrom ? `. Or buy outright: ${price.ownFrom}` : ""}\n\n${list(price.rows.map((r) => `**${r.label}.** ${[...(r.points ?? []), r.hint].join(" ")}`))}\n\n${PRICE_NOTE}`,
     page.problems.length > 0 && `## Problems it solves\n\n${list(page.problems.map((id) => `"${PROBLEMS[id].quote}" ${PROBLEMS[id].detail}`))}`,
     page.examples?.length &&
-      `## Examples (illustrations, not client case studies)\n\n${page.examples.map((ex) => `### ${ex.title}\n\n${ex.situation}\n\nWhat I'd build:\n\n${list(ex.build)}\n\nSize: ${ex.sizeNote}`).join("\n\n")}`,
-    `## How I work\n\n${steps.map((s, i) => `${i + 1}. ${s}`).join("\n")}`,
+      `## Examples (illustrations, not client case studies)\n\n${page.examples.map((ex) => `### ${ex.title}\n\n${ex.situation}\n\nWhat we'd build:\n\n${list(ex.build)}\n\nSize: ${ex.sizeNote}`).join("\n\n")}`,
+    `## How we work\n\n${steps.map((s, i) => `${i + 1}. ${s}`).join("\n")}`,
     `## Common questions\n\n${page.faq.map((f) => `**${f.q}**\n${fillFaq(f.a)}`).join("\n\n")}`,
-    `## Contact\n\nSoham Kar, Raipur (C.G.), India. Email ${CONTACT_EMAIL}, or use the form at ${SITE_URL}${servicePath(category.id)}#contact.`,
+    `## Contact\n\nsohambuilds.in, Raipur (C.G.), India. Email ${CONTACT_EMAIL}, or use the form at ${SITE_URL}${servicePath(category.id)}#contact.`,
   ];
   return sections.filter(Boolean).join("\n\n") + "\n";
 }

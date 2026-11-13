@@ -21,8 +21,8 @@ export function GET() {
           {/* Ticket */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 48, borderRight: "4px dashed #2a2e38" }}>
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 18, letterSpacing: 6, color: "#8b8f99" }}>
-              <span>BOARDING PASS · SK AIRWAYS</span>
-              <span style={{ color: "#f97316" }}>CLASS OF ONE</span>
+              <span>BOARDING PASS · SOHAMBUILDS.IN</span>
+              <span style={{ color: "#f97316" }}>SOFTWARE STUDIO</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
               <div style={{ display: "flex", flexDirection: "column" }}>
@@ -33,13 +33,13 @@ export function GET() {
               <span style={{ fontSize: 44, color: "#f97316" }}>✈</span>
               <div style={{ flex: 1, height: 0, borderTop: "4px dashed #3a3f4a" }} />
               <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-                <span style={{ fontSize: 96, fontWeight: 800, color: "#f97316", lineHeight: 1 }}>SK</span>
-                <span style={{ fontSize: 16, letterSpacing: 5, color: "#8b8f99" }}>SOHAM KAR</span>
+                <span style={{ fontSize: 96, fontWeight: 800, color: "#f97316", lineHeight: 1 }}>SB</span>
+                <span style={{ fontSize: 16, letterSpacing: 5, color: "#8b8f99" }}>SOHAMBUILDS.IN</span>
               </div>
             </div>
             <div style={{ display: "flex", gap: 56 }}>
-              {field("PILOT", "SOHAM KAR")}
-              {field("ROLE", "ENGINEER")}
+              {field("STUDIO", "SOHAMBUILDS.IN")}
+              {field("FOUNDER", "SOHAM KAR")}
               {field("BASE", "INDIA")}
               {field("STATUS", "BOARDING", true)}
             </div>
@@ -65,7 +65,7 @@ export function GET() {
     {
       width: 1600,
       height: 560,
-      headers: { "Content-Disposition": 'attachment; filename="soham-kar-boarding-pass.png"' },
+      headers: { "Content-Disposition": 'attachment; filename="soham-builds-boarding-pass.png"' },
     }
   );
 }

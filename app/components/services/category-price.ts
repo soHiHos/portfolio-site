@@ -17,7 +17,7 @@ const T = PRICING.terms
 const weeks = (id: keyof typeof S) => `${PRICING.timeline[id][0]}–${PRICING.timeline[id][1]} weeks`
 const TIMELINE_HINT = "from the day you've sent your data and approvals"
 
-const INCLUDED = `Hosting, backups and uptime monitoring. Bug fixes, with a reply within ${T.replyUrgentDays} business day for anything urgent. Security updates. Adjustments to what I built for the first ${T.adjustmentDays} days after go-live, then up to ${T.smallChangeHours} hours of small changes every month.`
+const INCLUDED = `Hosting, backups and uptime monitoring. Bug fixes, with a reply within ${T.replyUrgentDays} business day for anything urgent. Security updates. Adjustments to what we built for the first ${T.adjustmentDays} days after go-live, then up to ${T.smallChangeHours} hours of small changes every month.`
 
 const service = (id: "automation" | "erp" | "app", moves: string): CategoryPrice => {
   const s = S[id]
@@ -39,7 +39,7 @@ const service = (id: "automation" | "erp" | "app", moves: string): CategoryPrice
 // over after final payment, and the care plan is optional
 export const CATEGORY_PRICES: Record<string, CategoryPrice> = {
   "ai-automations": service("automation", "How many workflows, how many systems they connect, and whether they include AI steps. AI usage and WhatsApp messages are billed at cost on your monthly bill."),
-  "custom-software": service("erp", "Which modules you need, integrations such as Tally or payments, and how much data I move from your old system. No per-user charges; typically built for 50,000 to 90,000 monthly active users."),
+  "custom-software": service("erp", "Which modules you need, integrations such as Tally or payments, and how much data we move from your old system. No per-user charges; typically built for 50,000 to 90,000 monthly active users."),
   "mobile-apps": service("app", "Number of screens and user roles, payments, the admin panel, and integrations with your other systems."),
   websites: {
     price: `Build from ${inr(S.website.setup)} (one time)`,

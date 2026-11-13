@@ -536,7 +536,23 @@ All content is in `app/content/services.json` unless noted. These changes are ma
 
 ---
 
+## 6a. Studio voice and the sohambuilds.in name (13 November 2026)
+
+The website now speaks as a small software studio called **sohambuilds.in**, not as one person. The domain is the brand, always written in lowercase. Every brief and every PDF needs the same change:
+
+- **Name:** "sohambuilds.in" everywhere a brand name appears: cover, headers, footers. Don't write "Soham Builds". The founder is still named: "Soham Kar, Founder, sohambuilds.in" on sign-offs and the contact page.
+- **Descriptor:** "software studio" in display lines; "software development company in Raipur" where the text describes the business. Don't say "founder-led".
+- **Voice:** the seller's lines say "we", "us" and "our", not "I", "me" and "my": "We reply within 48 hours", "We build fast, clear sites", "add us as a developer", "keep us on a maintenance plan".
+- **Leave the client's own words alone.** FAQ questions asked from the client's side stay in the first person: "Do I own the website?", "Can I update the content myself?", "Do I need both Android and iPhone?".
+- **Founder access stays a selling point:** "you work directly with Soham, the founder, from the first look to launch". On the custom-apps FAQ, "I'm a one-person studio" becomes "We're a small studio".
+- **Team:** say "freelance designers and testers brought in when a project needs them". Don't say "our team of designers and QA engineers".
+- **File names:** done 14 November 2026. The PDFs in `service-pdfs/` are now `sohambuilds-*.pdf`, and `SERVICE_PDFS` in `app/api/lead/route.ts` matches. Keep these names when re-exporting.
+
+The exact wording is in `app/content/services.json`, which is already converted. Copy from there.
+
 ## 7. After the briefs are updated
+
+- [x] Studio voice and sohambuilds.in name applied to all four PDFs (6a), exported 13 November 2026
 
 - [ ] Mobile Apps brief updated (1.1–1.11)
 - [ ] Automation & Analysis brief updated (2.1–2.7)

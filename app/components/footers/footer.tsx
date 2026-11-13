@@ -14,11 +14,12 @@ const year = new Date().getFullYear();
 const SHOW_BOARDING_PASS = false;
 
 const FIELDS = [
+  { label: 'STUDIO', value: 'SOHAMBUILDS.IN' },
   { label: 'PASSENGER', value: 'VISITOR' },
-  { label: 'FLIGHT', value: `SK-${year}` },
+  { label: 'FLIGHT', value: `SB-${year}` },
   { label: 'GATE', value: 'CONTACT' },
   { label: 'SEAT', value: '1A' },
-  { label: 'BOARDING', value: 'NOW', accent: true },
+  { label: 'STATUS', value: 'BOARDING NOW', accent: true },
 ];
 
 // Social links as square icon buttons (same look as the contact section): fill with each brand's colours on hover
@@ -80,9 +81,9 @@ export default function Footer() {
           <div className="flex items-center justify-between text-xs font-medium tracking-[0.25em] text-muted">
             <span className="flex items-center gap-2">
               <PlaneTakeoff className="w-4 h-4 text-accent-ink" />
-              FINAL BOARDING PASS
+              FINAL BOARDING PASS · SOFTWARE STUDIO
             </span>
-            <span className="hidden sm:inline">ECONOMY · CLASS OF ONE</span>
+            <span className="hidden lg:inline">DIRECT TO ENGINEER</span>
           </div>
 
           {/* Route */}
@@ -96,16 +97,16 @@ export default function Footer() {
               <Plane className="footer-plane absolute top-1/2 -translate-y-1/2 w-5 h-5 text-accent-ink" />
             </div>
             <div className="text-right">
-              <div className="text-3xl sm:text-4xl font-bold tracking-wider text-accent-ink">SK</div>
-              <div className="text-[10px] tracking-[0.25em] text-muted">SOHAM KAR</div>
+              <div className="text-3xl sm:text-4xl font-bold tracking-wider text-accent-ink">SB</div>
+              <div className="text-[10px] tracking-[0.25em] text-muted">SOHAMBUILDS.IN</div>
             </div>
           </div>
 
-          <dl className="grid grid-cols-3 sm:grid-cols-5 gap-3 text-[10px] tracking-[0.2em] text-muted">
+          <dl className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[10px] tracking-[0.2em] text-muted">
             {FIELDS.map((field) => (
-              <div key={field.label}>
+              <div key={field.label} className="min-w-0">
                 <dt>{field.label}</dt>
-                <dd className={`text-sm font-semibold tracking-wider ${field.accent ? 'text-accent-ink' : 'text-fg'}`}>{field.value}</dd>
+                <dd className={`text-sm font-semibold tracking-wider [overflow-wrap:anywhere] ${field.accent ? 'text-accent-ink' : 'text-fg'}`}>{field.value}</dd>
               </div>
             ))}
           </dl>
@@ -113,7 +114,7 @@ export default function Footer() {
           {/* Boarding pass download + map credit, just above the barcode */}
           <div className="mt-3 sm:mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
             {SHOW_BOARDING_PASS && (
-              <a href="/boarding-pass" download="soham-kar-boarding-pass.png" className={linkClasses}>
+              <a href="/boarding-pass" download="soham-builds-boarding-pass.png" className={linkClasses}>
                 <Ticket className="w-4 h-4" />
                 Download boarding pass
               </a>
@@ -166,7 +167,7 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <p className="text-right text-sm text-fg">&copy; {year} Made by Soham Kar</p>
+            <p className="text-right text-sm text-fg">&copy; {year} sohambuilds.in · Raipur, India</p>
           </div>
         </div>
       </div>

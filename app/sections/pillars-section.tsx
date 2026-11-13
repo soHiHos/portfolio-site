@@ -18,7 +18,7 @@ const QUOTES: Record<string, string> = Object.fromEntries(services.problems.item
 const ALSO = services.pillarsAlso;
 const ALSO_CATEGORIES = ALSO.categories.map((id) => services.categories.find((c) => c.id === id)!);
 
-// "What I do": the three pillars (digitise, automate, analyse), each with one problem it solves and the services
+// "What we do": the three pillars (digitise, automate, analyse), each with one problem it solves and the services
 // that deliver it, linking to its main service's page. From sm each card spans five rows of the parent grid (subgrid), so
 // titles, summaries, quotes, lists and links line up across the row whatever the length of the text. Phones skip the
 // subgrid: there the list folds behind a toggle, which would be a sixth row
@@ -27,9 +27,9 @@ export default function PillarsSection({ id }: { id?: string }) {
     <section id={id}>
       <div className="w-full text-left space-y-8 py-12">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading title="What I do" />
+          <SectionHeading title="What we do" />
           <Link href="/services#problems" className="btn-link text-sm text-fg">
-            The problems I solve
+            The problems we solve
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -57,10 +57,10 @@ export default function PillarsSection({ id }: { id?: string }) {
                 <p className="self-start border-l-2 border-accent pl-3 text-base font-medium leading-snug text-fg">
                   &ldquo;{QUOTES[pillar.problem]}&rdquo;
                 </p>
-                {/* Phones: the list folds away behind a "What I set up" toggle, so the three cards stay short */}
-                <PhoneCollapse label="What I set up">
+                {/* Phones: the list folds away behind a "What we set up" toggle, so the three cards stay short */}
+                <PhoneCollapse label="What we set up">
                 <div className="space-y-3 border-line sm:border-t sm:pt-4">
-                  <p className="text-xs font-medium text-muted max-sm:hidden">What I set up</p>
+                  <p className="text-xs font-medium text-muted max-sm:hidden">What we set up</p>
                   <ul className="space-y-2">
                     {pillar.services.map((serviceId, j) => (
                       <li

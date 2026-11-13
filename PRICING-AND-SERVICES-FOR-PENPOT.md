@@ -2,7 +2,7 @@
 
 Prepared 8 November 2026. Source of truth: `app/content/pricing.ts`, `app/content/services.json`, `app/terms/page.tsx` and `app/globals.css` in the portfolio-site repo. Every figure below is worked out from those files. If a price changes, regenerate this guide.
 
-**Written for:** Claude, working in Penpot, designing client-facing PDFs for Soham Kar's software studio.
+**Written for:** Claude, working in Penpot, designing client-facing PDFs for sohambuilds.in, Soham Kar's software studio.
 
 ---
 
@@ -25,7 +25,7 @@ Rules that apply to all of them:
 
 ## 2. Brand
 
-- **Name:** Soham Kar. A one-person software and AI automation studio in Raipur, Chhattisgarh, India, serving growing businesses (target market: India).
+- **Name:** sohambuilds.in, written in lowercase as the domain (founded and led by Soham Kar). A software studio, written in the studio voice ("we"), with freelance designers and testers brought in per project, in Raipur, Chhattisgarh, India, serving growing businesses (target market: India).
 - **Voice:** first person singular ("I host it", "I'll reply within 48 hours"). Plain, direct, sentence case everywhere ("Explore work", not "EXPLORE WORK"). No hype.
 - **Contact:** sohamkar.work@gmail.com · linkedin.com/in/soham-kar-99b15844a
 - **Positioning:** premium, no discounts, no founding-client offers.
@@ -110,7 +110,7 @@ For a larger guide, scale up in steps: cover title 36 to 44 (Space Grotesk bold)
 
 - A4 portrait, 595 × 842 pt (210 × 297 mm).
 - Margins: 44pt left, right and top; bottom 64pt (footer sits at 28pt from the bottom edge).
-- Footer on every page: 8pt muted text, 1px line above, 6pt padding. Content: `Soham Kar · sohamkar.work@gmail.com · linkedin.com/in/soham-kar-99b15844a · Valid until <date>` (estimate only). When seller details exist, add legal name, address, GSTIN and PAN to this line, separated by ` · `.
+- Footer on every page: 8pt muted text, 1px line above, 6pt padding. Content: `sohambuilds.in · sohamkar.work@gmail.com · linkedin.com/in/soham-kar-99b15844a · Valid until <date>` (estimate only). When seller details exist, add legal name, address, GSTIN and PAN to this line, separated by ` · `.
 
 ---
 

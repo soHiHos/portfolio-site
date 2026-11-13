@@ -6,7 +6,7 @@ import Estimator from "../../components/estimator/estimator";
 import { ESTIMATOR_ON } from "../../components/estimator/estimate";
 
 export const metadata: Metadata = pageMeta(
-  "Price estimate · Soham Kar",
+  "Price estimate · sohambuilds.in",
   "Answer eight quick questions and get starting prices for your software or AI automation as a PDF.",
   "/services/estimate",
 );

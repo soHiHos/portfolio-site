@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Step = { step: string; detail: string };
 
-// "How I work" one step at a time: numbered tabs along the top, the current step below, and Back / Next.
+// "How we work" one step at a time: numbered tabs along the top, the current step below, and Back / Next.
 export default function ProcessSteps({ steps }: { steps: Step[] }) {
   const [[index, direction], setPage] = useState<[number, number]>([0, 1]);
   const reduceMotion = useReducedMotion();

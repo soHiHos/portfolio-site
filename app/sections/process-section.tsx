@@ -5,7 +5,7 @@ import Reveal from "../components/effects/reveal";
 import services from "../content/services.json";
 import { fillFaq } from "../components/services/category-price";
 
-// Compact home-page "How I work": the steps from services.json (short `label` and `blurb`) as a connected timeline,
+// Compact home-page "How we work": the steps from services.json (short `label` and `blurb`) as a connected timeline,
 // across on large screens and down the left on small ones, linking to the full process and FAQ
 // `flush`: no vertical padding, for pages that space their sections with a gap of their own (the service pages)
 // `steps`: a service's own process in place of the shared one (websites); the link to the full process then hides,
@@ -17,7 +17,7 @@ export default function ProcessSection({ id, flush, steps: own }: { id?: string;
     <section id={id}>
       <div className={`w-full text-left space-y-8 ${flush ? "" : "py-12"}`}>
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading title="How I work" />
+          <SectionHeading title="How we work" />
           {!own && (
             <Link href="/services#process" className="btn-link text-sm text-fg">
               Full process and FAQ

@@ -1,6 +1,6 @@
 # Automation & Analysis: pricing and details for the client PDF
 
-**Written for:** Claude, designing the **Automation & Analysis** PDF in Penpot for prospective clients of Soham Kar's studio. Read `PRICING-AND-SERVICES-FOR-PENPOT.md` first for the design system, fonts, colours and background images; this file is the content for this one service.
+**Written for:** Claude, designing the **Automation & Analysis** PDF in Penpot for prospective clients of sohambuilds.in, Soham Kar's software studio. Read `PRICING-AND-SERVICES-FOR-PENPOT.md` first for the design system, fonts, colours and background images; this file is the content for this one service.
 
 Everything below is worked out from `app/content/pricing.ts` and `app/content/services.json`. All prices are **"from" prices, excluding GST**, and are not quotes. Illustrative scenarios are examples, **not real clients or results**. Voice is first person ("I").
 
@@ -389,7 +389,7 @@ This is a plain-English summary, **not a contract**. Do not add signature blocks
 - Page 4: the monthly plan versus own the code (comparison tables), two worked examples.
 - Page 5: scenarios, what you need to provide, timeline, questions and the terms in short.
 
-Use the design system, fonts and background layering in `PRICING-AND-SERVICES-FOR-PENPOT.md`. Footer on every page: `Soham Kar · sohamkar.work@gmail.com · sohambuilds.in`, with an empty marked slot for legal name, address, GSTIN and PAN, which do not exist yet.
+Use the design system, fonts and background layering in `PRICING-AND-SERVICES-FOR-PENPOT.md`. Footer on every page: `sohambuilds.in · sohamkar.work@gmail.com`, with an empty marked slot for legal name, address, GSTIN and PAN, which do not exist yet.
 
 ## 10. Checklist
 

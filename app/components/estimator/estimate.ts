@@ -69,7 +69,7 @@ export const QUESTIONS = {
   },
   payment: {
     title: "How would you prefer to pay?",
-    hint: "The monthly plan means a lower setup fee, then a monthly fee (6-month minimum) while I host and maintain it. With Buy outright you pay once and receive the full source code, with no minimum period.",
+    hint: "The monthly plan means a lower setup fee, then a monthly fee (6-month minimum) while we host and maintain it. With Buy outright you pay once and receive the full source code, with no minimum period.",
     options: [
       { id: "licence", label: "Monthly plan" },
       { id: "buyout", label: "Buy outright" },

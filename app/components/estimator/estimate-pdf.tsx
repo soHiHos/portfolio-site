@@ -61,7 +61,7 @@ export function EstimateDocument({ contact, e, today, preferBuyout }: { contact:
         </View>
       )}
       <Text style={s.muted}>
-        Setup covers the build, onboarding and moving your existing records in (up to {T.dataFiles} source files, then quoted). The monthly plan covers your right to use the software, hosting, uptime, backups, bug fixes and security updates, plus small changes up to {T.smallChangeHours} hours a month after the first {T.adjustmentDays} days; I keep the code. Minimum {T.minMonths} months from go-live, then {T.noticeDays} days&apos; notice. Monthly fees start at go-live, after live testing, which is when real users first start using the software. {`If you leave inside the first ${T.minMonths} months, you can pay two months' plan fees or buy the software outright.`} Your data is always yours and can be exported at any time.
+        Setup covers the build, onboarding and moving your existing records in (up to {T.dataFiles} source files, then quoted). The monthly plan covers your right to use the software, hosting, uptime, backups, bug fixes and security updates, plus small changes up to {T.smallChangeHours} hours a month after the first {T.adjustmentDays} days; we keep the code. Minimum {T.minMonths} months from go-live, then {T.noticeDays} days&apos; notice. Monthly fees start at go-live, after live testing, which is when real users first start using the software. {`If you leave inside the first ${T.minMonths} months, you can pay two months' plan fees or buy the software outright.`} Your data is always yours and can be exported at any time.
       </Text>
     </View>
   )
@@ -108,7 +108,7 @@ export function EstimateDocument({ contact, e, today, preferBuyout }: { contact:
   )
 
   return (
-    <Document title={`Price estimate for ${contact.business}`} author="Soham Kar">
+    <Document title={`Price estimate for ${contact.business}`} author="sohambuilds.in">
       <Page size="A4" style={s.page}>
         <View style={s.bar} />
         <Text style={s.title}>Price estimate</Text>
@@ -117,7 +117,7 @@ export function EstimateDocument({ contact, e, today, preferBuyout }: { contact:
         </Text>
 
         <View style={s.section}>
-          <Text style={s.h2}>What you told me</Text>
+          <Text style={s.h2}>What you told us</Text>
           <Text style={{ marginBottom: 6 }}>You run a {e.business.label.toLowerCase()} business and want to fix:</Text>
           {e.problems.map((p) => (
             <Text key={p} style={s.quote}>&ldquo;{p}&rdquo;</Text>
@@ -173,7 +173,7 @@ export function EstimateDocument({ contact, e, today, preferBuyout }: { contact:
         </View>
 
         <Text style={s.footer} fixed>
-          {[BUSINESS.legalName || "Soham Kar", BUSINESS.address, BUSINESS.gstin && `GSTIN ${BUSINESS.gstin}`, BUSINESS.pan && `PAN ${BUSINESS.pan}`, CONTACT_EMAIL, CONTACT_LINKEDIN.replace("https://www.", ""), `Valid until ${date(e.validUntil)}`].filter(Boolean).join(" · ")}
+          {[BUSINESS.legalName || "sohambuilds.in", BUSINESS.address, BUSINESS.gstin && `GSTIN ${BUSINESS.gstin}`, BUSINESS.pan && `PAN ${BUSINESS.pan}`, CONTACT_EMAIL, CONTACT_LINKEDIN.replace("https://www.", ""), `Valid until ${date(e.validUntil)}`].filter(Boolean).join(" · ")}
         </Text>
       </Page>
     </Document>

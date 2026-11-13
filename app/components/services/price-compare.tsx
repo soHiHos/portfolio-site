@@ -206,7 +206,7 @@ export default function PriceCompare({ service }: { service?: Id }) {
         </div>
         {now.later > now.now && (
           <p className="text-sm leading-relaxed text-muted">
-            Starting monthly and buying outright after {months} months costs about <span className="font-semibold text-fg">{inr(now.later - now.now)}</span> more than buying outright on day one. In return you pay less up front, and I host and support it while you decide.
+            Starting monthly and buying outright after {months} months costs about <span className="font-semibold text-fg">{inr(now.later - now.now)}</span> more than buying outright on day one. In return you pay less up front, and we host and support it while you decide.
           </p>
         )}
         {crossover !== null && (

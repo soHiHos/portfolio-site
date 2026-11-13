@@ -2,7 +2,6 @@
   {
     "id": "local-legends",
     "kind": "client",
-    "caseStudyNote": "Case study coming soon.",
     "category": "work",
     "phase": "deployed",
     "title": "Local Legends",
@@ -13,12 +12,15 @@
     "imageMobile": "/images/mobile/local-legends.webp",
     "video": "/videos/local-legends.mp4",
     "link": "https://locallegends.co.in/home",
-    "stack": []
+    "stack": [],
+    "caseStudy": {
+      "problem": "Grassroots football is hard to coordinate: players need a way to find matches, and teams and organisers need a simple way to run events and stay connected.",
+      "approach": "A community platform that connects local players, teams and organisers, with match discovery, event management and social features that make local football easier to join."
+    }
   },
   {
     "id": "rever-home",
     "kind": "client",
-    "caseStudyNote": "Case study coming soon.",
     "category": "work",
     "phase": "deployed",
     "title": "Rever Life ERP",
@@ -48,7 +50,11 @@
       "Amazon S3",
       "Firebase Auth",
       "MSG91 OTP"
-    ]
+    ],
+    "caseStudy": {
+      "problem": "A wellness business selling through a multi-level distributor network needed one place to run inventory, orders, distributor accounts, payments and ledgers, with the right access for its own team and for each distributor.",
+      "approach": "A full-stack ERP covering inventory, order processing, distributor management, payments and ledgers: admin dashboards for the team, a separate portal for distributors, email and phone OTP sign-in with role-based access and audit trails, all on cost-optimised cloud infrastructure."
+    }
   },
   {
     "id": "frontwave",
@@ -77,7 +83,11 @@
       "PostgreSQL",
       "Razorpay",
       "Vercel"
-    ]
+    ],
+    "caseStudy": {
+      "problem": "A SEBI-registered equity research firm needed to sell its research to paying members, keep members-only reports secure, and let its analysts publish without waiting on a developer.",
+      "approach": "Three connected parts: a public site, a members' Terminal with online plan payments and GST invoices, and a team portal where analysts draft and admins approve research before it goes live. Members-only content is gated on the server, and every sensitive action is logged."
+    }
   },
   {
     "id": "as-metals",
@@ -123,7 +133,11 @@
     "imageMobile": "/images/mobile/co-daftar.webp",
     "video": "/videos/co-daftar.mp4",
     "link": "https://codaftar.com/",
-    "stack": []
+    "stack": [],
+    "caseStudy": {
+      "problem": "A premium coworking space in Raipur needed a website that shows entrepreneurs, freelancers, startups and teams what it offers.",
+      "approach": "A website presenting its workspaces, meeting rooms, high-speed internet and member community."
+    }
   },
   {
     "id": "plinth",

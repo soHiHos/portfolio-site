@@ -29,7 +29,7 @@ function PendingBar() {
   return pending ? <span className="absolute inset-x-1 bottom-0 h-0.5 bg-accent motion-safe:animate-pulse" aria-hidden="true" /> : null
 }
 
-const PILLARS = ["what-i-do"] // module-level so the hook's effect doesn't re-run every render
+const PILLARS = ["what-we-do"] // module-level so the hook's effect doesn't re-run every render
 
 type NavProps = { pathname: string; hidden: boolean }
 
@@ -64,10 +64,10 @@ function TopNav({ pathname, hidden }: NavProps) {
           href="/"
           onClick={handleBadgeClick}
           className="hidden sm:flex items-center gap-2.5 shrink-0 pl-2 text-sm font-semibold text-accent-ink transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-accent-ink"
-          aria-label="Soham Kar, home"
+          aria-label="sohambuilds.in, home"
         >
           <LogoMark />
-          Soham Kar
+          sohambuilds.in
         </Link>
         <nav className="flex items-center gap-0.5 sm:gap-1 flex-1 justify-center">
           {PAGES.map((item) => {
@@ -105,7 +105,7 @@ export default function Header() {
     // Only the home page has a hero to stay out of; every other page shows the contact button from the start
     const isPastHero = pathname !== "/" || activeSection !== null;
     // Phones reach Work only after several screens, so there the contact buttons already show once the hero has
-    // scrolled away ("What I do" at the top); from sm up they keep waiting for Work
+    // scrolled away ("What we do" at the top); from sm up they keep waiting for Work
     const pastPillarsTop = useActiveSection(PILLARS) !== null;
     const showContact = isPastHero || pastPillarsTop;
 
@@ -141,7 +141,7 @@ export default function Header() {
 
     return (
         <>
-        {/* On the home page the nav stays out of the hero and drops in once "What I do" reaches the top */}
+        {/* On the home page the nav stays out of the hero and drops in once "What we do" reaches the top */}
         <TopNav pathname={pathname} hidden={pathname === "/" && !pastPillarsTop} />
 
         {/* Floating contact button: on the home page once scrolled past the hero, on other pages always. While its sheet
@@ -151,7 +151,7 @@ export default function Header() {
                 <ContactCard
                     open={isContactOpen}
                     onClose={() => setIsContactOpen(false)}
-                    className="absolute bottom-full right-0 mb-3 origin-bottom-right"
+                    className="absolute z-10 bottom-full right-0 mb-3 origin-bottom-right"
                 />
 
                 <div className="flex flex-col items-center">
